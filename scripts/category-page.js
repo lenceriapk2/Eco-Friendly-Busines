@@ -291,7 +291,7 @@ function addCategoryResponsiveSections() {
                     <h2>Ready to Go Green with ${categoryName}?</h2>
                     <p>Connect with ${currentCityName}'s top sustainable ${categoryName.toLowerCase()} businesses today</p>
                     <div class="cta-buttons">
-                        <a href="cities/${sanitizeCityName(currentCityName)}.html" class="btn-primary">View All ${currentCityName} Businesses</a>
+                        <a href="${sanitizeCityName(currentCityName)}.html" class="btn-primary">View All ${currentCityName} Businesses</a>
                         <a href="contact-us.html" class="btn-secondary">Get Recommendations</a>
                     </div>
                 </div>
@@ -331,7 +331,7 @@ function populateRelatedCategories() {
         const categoryCard = document.createElement('div');
         categoryCard.className = 'category-card-responsive';
         categoryCard.onclick = () => {
-            window.location.href = `cities/${citySlug}-${category.key}.html`;
+            window.location.href = `${citySlug}-${category.key}.html`;
         };
 
         categoryCard.innerHTML = `
