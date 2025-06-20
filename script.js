@@ -1,3 +1,4 @@
+
 // Sample data for the directory
 const categories = [
     {
@@ -173,7 +174,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 function populateCategories() {
     const categoriesGrid = document.getElementById('categoriesGrid');
     categoriesGrid.innerHTML = '';
-
+    
     categories.forEach(category => {
         const categoryCard = document.createElement('div');
         categoryCard.className = 'category-card';
@@ -192,41 +193,43 @@ function populateCategories() {
     });
 }
 
-// Populate featured cities grid  
-function populateFeaturedCities() {
+// Populate cities
+function populateCities() {
     const citiesGrid = document.getElementById('citiesGrid');
-    if (!citiesGrid) return;
-
-    const featuredCities = [
-        { name: 'London', slug: 'london', businesses: 150, status: 'active', image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=300&fit=crop' },
-        { name: 'Manchester', slug: 'manchester', businesses: 25, status: 'coming-soon', image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&h=300&fit=crop' },
-        { name: 'Birmingham', slug: 'birmingham', businesses: 20, status: 'coming-soon', image: 'https://images.unsplash.com/photo-1605201420725-32c4e61d6f14?w=400&h=300&fit=crop' },
-        { name: 'Edinburgh', slug: 'edinburgh', businesses: 18, status: 'coming-soon', image: 'https://images.unsplash.com/photo-1544380904-c686aad2fc40?w=400&h=300&fit=crop' },
-        { name: 'Bristol', slug: 'bristol', businesses: 15, status: 'coming-soon', image: 'https://images.unsplash.com/photo-1570104996059-1a4ecf6c4b78?w=400&h=300&fit=crop' },
-        { name: 'Glasgow', slug: 'glasgow', businesses: 12, status: 'coming-soon', image: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop' }
-    ];
-
-    citiesGrid.innerHTML = featuredCities.map(city => `
-        <div class="city-card ${city.status}">
-            <div class="city-image" style="background-image: url('${city.image}')">
-                ${city.status === 'coming-soon' ? '<div class="coming-soon-badge">Coming Soon</div>' : ''}
+    citiesGrid.innerHTML = '';
+    
+    cities.forEach(city => {
+        const cityCard = document.createElement('div');
+        cityCard.className = 'city-card';
+        cityCard.innerHTML = `
+            <div class="city-image">
+                <i class="${city.icon}"></i>
             </div>
             <div class="city-info">
                 <h3>${city.name}</h3>
-                <p>${city.businesses}+ eco-friendly businesses</p>
-                <a href="${city.slug}.html" class="btn-primary">
-                    ${city.status === 'active' ? 'Explore ' + city.name : 'View ' + city.name}
-                </a>
+                <p>Discover eco-friendly businesses in ${city.name}</p>
+                <div class="city-stats">
+                    <span>${city.businesses} businesses</span>
+                    <span>${city.population} population</span>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+        cityCard.addEventListener('click', () => {
+            if (city.name.toLowerCase() === 'london') {
+                window.location.href = 'london.html';
+            } else {
+                alert(`${city.name} page coming soon! London page is currently available.`);
+            }
+        });
+        citiesGrid.appendChild(cityCard);
+    });
 }
 
 // Populate top businesses
 function populateTopBusinesses() {
     const businessesGrid = document.getElementById('businessesGrid');
     businessesGrid.innerHTML = '';
-
+    
     topBusinesses.forEach(business => {
         const businessCard = document.createElement('div');
         businessCard.className = 'business-card';
@@ -261,7 +264,7 @@ function populateTopBusinesses() {
 function performSearch() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedCity = cityFilter.value;
-
+    
     if (searchTerm || selectedCity) {
         alert(`Searching for: "${searchTerm}" in ${selectedCity || 'all cities'}`);
     } else {
@@ -293,7 +296,7 @@ contactForm.addEventListener('submit', (e) => {
 // Animation on scroll
 function animateOnScroll() {
     const elements = document.querySelectorAll('.category-card, .city-card, .business-card, .stat-item');
-
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -304,7 +307,7 @@ function animateOnScroll() {
     }, {
         threshold: 0.1
     });
-
+    
     elements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
@@ -316,12 +319,12 @@ function animateOnScroll() {
 // Counter animation for stats
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-item h3');
-
+    
     counters.forEach(counter => {
         const target = parseInt(counter.textContent);
         const increment = target / 100;
         let current = 0;
-
+        
         const updateCounter = () => {
             if (current < target) {
                 current += increment;
@@ -331,7 +334,7 @@ function animateCounters() {
                 counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
             }
         };
-
+        
         // Trigger animation when element is in view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -341,67 +344,15 @@ function animateCounters() {
                 }
             });
         });
-
+        
         observer.observe(counter.parentElement);
     });
-}
-
-// Add city statistics section
-function addCityStats() {
-    const statsSection = document.querySelector('.stats .stats-grid');
-    if (statsSection) {
-        statsSection.innerHTML = `
-            <div class="stat-item">
-                <h3>150+</h3>
-                <p>London Businesses</p>
-            </div>
-            <div class="stat-item">
-                <h3>20+</h3>
-                <p>UK Cities</p>
-            </div>
-            <div class="stat-item">
-                <h3>10</h3>
-                <p>Categories</p>
-            </div>
-            <div class="stat-item">
-                <h3>500+</h3>
-                <p>Coming Soon</p>
-            </div>
-        `;
-    }
-}
-
-// Initialize the application
-async function initializeApp() {
-    try {
-        console.log('Initializing EcoSustainable.co.uk...');
-
-        // Load data from APIs
-        await loadAllBusinessData();
-
-        // Initialize UI components
-        initializeSearch();
-        initializeFilters();
-        populateCategories();
-        populateFeaturedCities();
-        displayTopBusinesses();
-        addCityStats();
-
-        console.log('App initialized successfully');
-    } catch (error) {
-        console.error('Error initializing app:', error);
-        // Fallback to static data if API fails
-        populateCategories();
-        populateFeaturedCities();
-        displayTopBusinesses();
-        addCityStats();
-    }
 }
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     populateCategories();
-    populateFeaturedCities();
+    populateCities();
     populateTopBusinesses();
     animateOnScroll();
     animateCounters();
@@ -419,16 +370,16 @@ function showLoading(element) {
 // Filter businesses by category
 function filterByCategory(categoryName) {
     showLoading(document.getElementById('businessesGrid'));
-
+    
     // Simulate API call
     setTimeout(() => {
         const filteredBusinesses = topBusinesses.filter(business => 
             business.category.toLowerCase().includes(categoryName.toLowerCase())
         );
-
+        
         const businessesGrid = document.getElementById('businessesGrid');
         businessesGrid.innerHTML = '';
-
+        
         if (filteredBusinesses.length > 0) {
             filteredBusinesses.forEach(business => {
                 const businessCard = document.createElement('div');

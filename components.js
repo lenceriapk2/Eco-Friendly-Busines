@@ -13,36 +13,10 @@ function createHeader() {
                     </div>
                     <ul class="nav-menu">
                         <li><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Categories <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="london-home-living.html">Home & Living</a>
-                                <a href="london-fashion-accessories.html">Fashion & Accessories</a>
-                                <a href="london-food-beverage.html">Food & Beverage</a>
-                                <a href="london-health-beauty.html">Health & Beauty</a>
-                                <a href="london-products-retail.html">Products & Retail</a>
-                                <a href="london-transport-travel.html">Transport & Travel</a>
-                                <a href="london-services-professional.html">Services & Professional</a>
-                                <a href="london-energy-utilities.html">Energy & Utilities</a>
-                                <a href="london-recycling-waste.html">Recycling & Waste</a>
-                                <a href="london-education-nonprofits.html">Education & Nonprofits</a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Cities <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="london.html">London</a>
-                                <a href="manchester.html">Manchester</a>
-                                <a href="birmingham.html">Birmingham</a>
-                                <a href="edinburgh.html">Edinburgh</a>
-                                <a href="bristol.html">Bristol</a>
-                                <a href="glasgow.html">Glasgow</a>
-                                <a href="leeds.html">Leeds</a>
-                                <a href="liverpool.html">Liverpool</a>
-                            </div>
-                        </li>
-                        <li><a href="index.html#about" class="nav-link">About</a></li>
-                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                        <li><a href="#categories" class="nav-link">Categories</a></li>
+                        <li><a href="#cities" class="nav-link">Cities</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
                     <div class="hamburger">
                         <span class="bar"></span>
@@ -78,23 +52,12 @@ function createFooter() {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Major Cities</h4>
+                        <h4>Cities</h4>
                         <ul>
                             <li><a href="london.html">London</a></li>
-                            <li><a href="manchester.html">Manchester</a></li>
-                            <li><a href="birmingham.html">Birmingham</a></li>
-                            <li><a href="edinburgh.html">Edinburgh</a></li>
-                            <li><a href="bristol.html">Bristol</a></li>
-                            <li><a href="glasgow.html">Glasgow</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="london-home-living.html">Home & Living</a></li>
-                            <li><a href="london-fashion-accessories.html">Fashion</a></li>
-                            <li><a href="london-food-beverage.html">Food & Beverage</a></li>
-                            <li><a href="london-health-beauty.html">Health & Beauty</a></li>
+                            <li><a href="#">Manchester</a></li>
+                            <li><a href="#">Birmingham</a></li>
+                            <li><a href="#">Edinburgh</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
@@ -145,35 +108,13 @@ function initializeMobileNav() {
         });
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(n => 
+        document.querySelectorAll('.nav-link').forEach(n => 
             n.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             })
         );
     }
-
-    // Handle dropdown menus
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        
-        if (toggle && menu) {
-            toggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            });
-        }
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown')) {
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                dropdown.classList.remove('active');
-            });
-        }
-    });
 }
 
 // Smooth scrolling for navigation links
