@@ -117,5 +117,174 @@
     <div id="footer-component"></div>
 
     <script src="components.js"></script>
+    <script src="places-api.js"></script>
+    <script src="category-page.js"></script>
+    <script>
+        // Initialize category page for this city
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Extract category from filename or use a mapping
+            const categoryKey = 'home-living';
+            const cityName = 'Cambridge';
+
+            try {
+                // Try to load businesses for this category and city
+                let categoryBusinesses = [];
+
+                if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
+                    categoryBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, 10);
+                }
+
+                // If no API data, use fallback
+                if (!categoryBusinesses || categoryBusinesses.length === 0) {
+                    categoryBusinesses = generateCityFallbackData(categoryKey, cityName);
+                }
+
+                displayCityBusinesses(categoryBusinesses, cityName, categoryKey);
+
+            } catch (error) {
+                console.error('Error loading category businesses:', error);
+                const fallbackData = generateCityFallbackData(categoryKey, cityName);
+                displayCityBusinesses(fallbackData, cityName, categoryKey);
+            }
+        });
+
+        function generateCityFallbackData(category, cityName) {
+            const businessTemplates = {
+                'home-living': [
+                    { name: 'GreenSpace Furniture', subcategory: 'Sustainable Furniture', description: 'Premium sustainable furniture crafted from FSC-certified wood and recycled materials.' },
+                    { name: 'EcoHome Decor', subcategory: 'Eco Home Decor', description: 'Beautiful home decor made from recycled and sustainable materials.' },
+                    { name: 'Organic Sleep Co', subcategory: 'Organic Bedding', description: 'Luxury organic bedding and mattresses for healthy sleep.' }
+                ],
+                'fashion-accessories': [
+                    { name: 'EthicalThreads', subcategory: 'Sustainable Clothing', description: 'Contemporary sustainable fashion using organic and recycled materials.' },
+                    { name: 'Green Fashion Co', subcategory: 'Eco Fashion', description: 'Stylish clothing made with environmentally friendly practices.' },
+                    { name: 'Conscious Closet', subcategory: 'Ethical Fashion', description: 'Fashion-forward clothing with ethical production methods.' }
+                ],
+                'food-beverage': [
+                    { name: 'PlantHub Market', subcategory: 'Organic Grocery', description: 'Premium organic grocery store featuring locally sourced produce.' },
+                    { name: 'Green Cafe', subcategory: 'Sustainable Dining', description: 'Farm-to-table restaurant with zero-waste practices.' },
+                    { name: 'Eco Eats', subcategory: 'Plant-Based Restaurant', description: 'Delicious plant-based meals with sustainable ingredients.' }
+                ]
+            };
+
+            const templates = businessTemplates[category] || businessTemplates['home-living'];
+
+            return templates.map((template, index) => ({
+                id: index + 1,
+                name: `${template.name} ${cityName}`,
+                category: category,
+                subcategory: template.subcategory,
+                rating: 4.5 + Math.random() * 0.4,
+                reviewCount: Math.floor(Math.random() * 200) + 50,
+                description: template.description,
+                address: `${(index + 1) * 10} High Street, ${cityName}`,
+                phone: `+44 ${Math.floor(Math.random() * 90) + 10} ${Math.floor(Math.random() * 9000) + 1000} ${Math.floor(Math.random() * 9000) + 1000}`,
+                website: `www.${template.name.toLowerCase().replace(' ', '')}${cityName.toLowerCase()}.co.uk`,
+                features: ['Eco-Friendly', 'Sustainable', 'Local', 'Certified']
+            }));
+        }
+
+        function displayCityBusinesses(businesses, cityName, categoryKey) {
+            const grid = document.getElementById('cityBusinessesGrid');
+            if (!grid || !businesses) return;
+
+            grid.innerHTML = '';
+
+            businesses.forEach((business, index) => {
+                const businessCard = createBusinessCard(business, index + 1, cityName);
+                grid.appendChild(businessCard);
+            });
+
+            // Update business count
+            const businessCount = document.getElementById('businessCount');
+            if (businessCount) {
+                businessCount.textContent = businesses.length + '+';
+            }
+
+            // Update title to include category
+            const categoryName = getCategoryDisplayName(categoryKey);
+            const title = document.querySelector('h1');
+            if (title) {
+                title.textContent = `Top ${categoryName} Businesses in ${cityName}`;
+            }
+        }
+
+        function createBusinessCard(business, rank, cityName) {
+            const card = document.createElement('div');
+            card.className = 'london-business-card';
+
+            card.innerHTML = `
+                <div class="business-card-header">
+                    <div class="business-rank">#${rank}</div>
+                </div>
+
+                <div class="business-content">
+                    <div class="business-main-info">
+                        <h3>${business.name}</h3>
+                        <p class="business-subcategory">${business.subcategory}</p>
+                        <div class="business-rating">
+                            <div class="stars">
+                                ${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5 - Math.floor(business.rating))}
+                            </div>
+                            <span class="rating-text">${business.rating.toFixed(1)} (${business.reviewCount} reviews)</span>
+                        </div>
+                    </div>
+
+                    <div class="business-description">
+                        <p>${business.description}</p>
+                    </div>
+
+                    <div class="business-features">
+                        ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+
+                    <div class="business-contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${business.address}</span>
+                        </div>
+                    </div>
+
+                    <div class="business-actions">
+                        <a href="tel:${business.phone}" class="action-btn call-btn">
+                            <i class="fas fa-phone"></i>
+                            Call
+                        </a>
+                        <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
+                            <i class="fas fa-globe"></i>
+                            Website
+                        </a>
+                        <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
+                            <i class="fas fa-directions"></i>
+                            Directions
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function getCategoryDisplayName(category) {
+            const categoryMap = {
+                'home-living': 'Home & Living',
+                'fashion-accessories': 'Fashion & Accessories',
+                'food-beverage': 'Food & Beverage',
+                'health-beauty': 'Health & Beauty',
+                'products-retail': 'Products & Retail',
+                'transport-travel': 'Transport & Travel',
+                'services-professional': 'Services & Professional',
+                'energy-utilities': 'Energy & Utilities',
+                'recycling-waste': 'Recycling & Waste',
+                'education-nonprofits': 'Education & Nonprofits'
+            };
+            return categoryMap[category] || 'Sustainable';
+        }
+
+        function openDirections(address) {
+            const encodedAddress = encodeURIComponent(address);
+            window.open(`https://www.google.com/maps/search/${encodedAddress}`, '_blank');
+        }
+    </script>
 </body>
 </html>
