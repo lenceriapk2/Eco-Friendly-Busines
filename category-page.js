@@ -1,4 +1,3 @@
-
 // Category Page JavaScript Handler
 
 let categoryBusinesses = [];
@@ -15,7 +14,7 @@ async function initializeCategoryPage(category) {
 async function loadCategoryBusinesses(category) {
     try {
         console.log(`Loading businesses for category: ${category}`);
-        
+
         // Try to load from API first
         if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
             const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(category, 10);
@@ -25,11 +24,11 @@ async function loadCategoryBusinesses(category) {
                 return;
             }
         }
-        
+
         // Fallback to sample data
         categoryBusinesses = generateFallbackData(category);
         console.log(`Using fallback data for ${category}`);
-        
+
     } catch (error) {
         console.error('Error loading category businesses:', error);
         categoryBusinesses = generateFallbackData(category);
@@ -170,7 +169,7 @@ function generateFallbackData(category) {
             }
         ]
     };
-    
+
     return categoryData[category] || [];
 }
 
@@ -178,9 +177,9 @@ function generateFallbackData(category) {
 function displayCategoryBusinesses() {
     const grid = document.getElementById('categoryBusinessesGrid');
     if (!grid) return;
-    
+
     grid.innerHTML = '';
-    
+
     if (categoryBusinesses.length === 0) {
         grid.innerHTML = `
             <div class="no-results">
@@ -191,7 +190,7 @@ function displayCategoryBusinesses() {
         `;
         return;
     }
-    
+
     categoryBusinesses.forEach((business, index) => {
         const businessCard = createCategoryBusinessCard(business, index + 1);
         grid.appendChild(businessCard);
@@ -205,7 +204,7 @@ function displayCategoryBusinesses() {
 function addSEOSections() {
     const categoryName = getCategoryDisplayName(currentCategory);
     const seoContainer = document.getElementById('seoSections');
-    
+
     if (!seoContainer) return;
 
     seoContainer.innerHTML = `
@@ -245,7 +244,7 @@ function addSEOSections() {
                 <div class="criteria-content">
                     <div class="criteria-text">
                         <p>Our rigorous selection process ensures only the most exceptional ${categoryName.toLowerCase()} businesses make it to our top 10 list. We evaluate each business based on multiple criteria including environmental impact, customer satisfaction, innovation in sustainability, and community contribution.</p>
-                        
+
                         <h3>Our Evaluation Criteria:</h3>
                         <ul class="criteria-list">
                             <li><strong>Environmental Impact:</strong> Measurable positive environmental practices and certifications</li>
@@ -330,16 +329,17 @@ function addSEOSections() {
 function createCategoryBusinessCard(business, rank) {
     const card = document.createElement('div');
     card.className = 'london-business-card';
-    
+
     card.innerHTML = `
         <div class="business-card-header">
             <div class="business-image-container">
                 <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop'">
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center&q=80';"
+                         loading="lazy">
             </div>
             <div class="business-rank">#${rank}</div>
         </div>
-        
+
         <div class="business-content">
             <div class="business-main-info">
                 <h3>${business.name}</h3>
@@ -351,22 +351,22 @@ function createCategoryBusinessCard(business, rank) {
                     <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
                 </div>
             </div>
-            
+
             <div class="business-description">
                 <p>${business.description}</p>
             </div>
-            
+
             <div class="business-features">
                 ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
             </div>
-            
+
             <div class="business-contact-info">
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>${business.address}</span>
                 </div>
             </div>
-            
+
             <div class="business-actions">
                 <a href="tel:${business.phone}" class="action-btn call-btn">
                     <i class="fas fa-phone"></i>
@@ -383,7 +383,7 @@ function createCategoryBusinessCard(business, rank) {
             </div>
         </div>
     `;
-    
+
     return card;
 }
 
@@ -481,7 +481,7 @@ function generateFAQs(category) {
     ];
 
     const categoryFAQs = faqs[category] || defaultFAQs;
-    
+
     return categoryFAQs.map(faq => `
         <div class="faq-item">
             <button class="faq-question" onclick="toggleFAQ(this)">
@@ -574,7 +574,7 @@ function generateTips(category) {
 function generateRelatedCategories(category) {
     const allCategories = ['home-living', 'fashion-accessories', 'food-beverage', 'health-beauty', 'products-retail', 'transport-travel'];
     const related = allCategories.filter(cat => cat !== category).slice(0, 4);
-    
+
     return related.map(cat => {
         const displayName = getCategoryDisplayName(cat);
         return `
@@ -591,9 +591,9 @@ function toggleFAQ(button) {
     const faqItem = button.parentNode;
     const answer = faqItem.querySelector('.faq-answer');
     const icon = button.querySelector('i');
-    
+
     faqItem.classList.toggle('active');
-    
+
     if (faqItem.classList.contains('active')) {
         answer.style.maxHeight = answer.scrollHeight + 'px';
         icon.style.transform = 'rotate(180deg)';
