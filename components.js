@@ -1,20 +1,85 @@
 // Reusable Components for EcoSustainable.co.uk
 
-// Header Component
+// Create header component
 function createHeader() {
     return `
         <header class="header">
             <nav class="navbar">
                 <div class="nav-container">
-                    <div class="logo">
-                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk" class="logo-image">
-                    </div>
+                    <a href="index.html" class="logo">
+                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
+                             alt="EcoSustainable.co.uk" 
+                             class="logo-image">
+                    </a>
                     <ul class="nav-menu">
-                        <li><a href="index.html" class="nav-link">Home</a></li>
-                        <li><a href="cities.html" class="nav-link">Cities</a></li>
-                        <li><a href="about-us.html" class="nav-link">About Us</a></li>
-                        <li><a href="contact-us.html" class="nav-link">Contact</a></li>
-                        <li><a href="list-your-business.html" class="nav-link">List Your Business</a></li>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="cities.html" class="nav-link">Cities <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content mega-menu">
+                                <div class="mega-menu-section">
+                                    <h3>Major Cities</h3>
+                                    <a href="london.html">London</a>
+                                    <a href="manchester.html">Manchester</a>
+                                    <a href="birmingham.html">Birmingham</a>
+                                    <a href="edinburgh.html">Edinburgh</a>
+                                    <a href="bristol.html">Bristol</a>
+                                    <a href="glasgow.html">Glasgow</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Scotland</h3>
+                                    <a href="aberdeen.html">Aberdeen</a>
+                                    <a href="dundee.html">Dundee</a>
+                                    <a href="stirling.html">Stirling</a>
+                                    <a href="inverness.html">Inverness</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Wales</h3>
+                                    <a href="cardiff.html">Cardiff</a>
+                                    <a href="swansea.html">Swansea</a>
+                                    <a href="newport.html">Newport</a>
+                                    <a href="wrexham.html">Wrexham</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Northern Ireland</h3>
+                                    <a href="belfast.html">Belfast</a>
+                                    <a href="londonderry.html">Londonderry</a>
+                                    <a href="armagh.html">Armagh</a>
+                                    <a href="bangor.html">Bangor</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="categories.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content mega-menu">
+                                <div class="mega-menu-section">
+                                    <h3>Popular Services</h3>
+                                    <a href="health-beauty-category.html">Health & Beauty</a>
+                                    <a href="products-retail-category.html">Products & Retail</a>
+                                    <a href="transport-travel-category.html">Transport & Travel</a>
+                                    <a href="services-professional-category.html">Professional Services</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Sustainability</h3>
+                                    <a href="energy-utilities-category.html">Energy & Utilities</a>
+                                    <a href="recycling-waste-category.html">Recycling & Waste</a>
+                                    <a href="education-nonprofits-category.html">Education & Nonprofits</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about-us.html" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact-us.html" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="privacy-policy.html" class="nav-link">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="terms-of-service.html" class="nav-link">Terms</a>
+                        </li>
                     </ul>
                     <div class="hamburger">
                         <span class="bar"></span>
@@ -27,84 +92,80 @@ function createHeader() {
     `;
 }
 
-// Footer Component
+// Create footer component
 function createFooter() {
     return `
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
-                    <div class="footer-section">
-                        <div class="logo">
-                            <i class="fas fa-leaf"></i>
-                            <span>EcoSustainable.co.uk</span>
-                        </div>
-                        <p>Connecting conscious consumers with sustainable businesses across the UK.</p>
+                    <div class="footer-section footer-brand">
+                        <a href="index.html" class="footer-logo">
+                            <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
+                                 alt="EcoSustainable.co.uk" 
+                                 class="footer-logo-image">
+                        </a>
+                        <p>Your trusted directory for sustainable businesses across the UK. Connecting you with eco-friendly companies that care about our planet.</p>
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
-
                     <div class="footer-section">
-                        <h4>Company</h4>
+                        <h4>Quick Links</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
+                            <li><a href="cities.html">Browse Cities</a></li>
+                            <li><a href="categories.html">All Services</a></li>
                             <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact Us</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-
                     <div class="footer-section">
-                        <h4>Browse</h4>
-                        <ul>
-                            <li><a href="cities.html">All Cities</a></li>
-                            <li><a href="categories.html">All Categories</a></li>
-                            <li><a href="london.html">London</a></li>
-                            <li><a href="manchester.html">Manchester</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="terms-of-service.html">Terms of Service</a></li>
-                            <li><a href="contact-us.html">Support</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Support</h4>
-                        <ul>
-                            <li><a href="help-center.html">Help Center</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
-                            <li><a href="accessibility.html">Accessibility</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Featured Cities</h4>
+                        <h4>Popular Cities</h4>
                         <ul>
                             <li><a href="london.html">London</a></li>
                             <li><a href="manchester.html">Manchester</a></li>
                             <li><a href="birmingham.html">Birmingham</a></li>
                             <li><a href="edinburgh.html">Edinburgh</a></li>
+                            <li><a href="bristol.html">Bristol</a></li>
                             <li><a href="glasgow.html">Glasgow</a></li>
-                            <li><a href="cities.html">View All Cities</a></li>
                         </ul>
                     </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="health-beauty-category.html">Health & Beauty</a></li>
+                            <li><a href="products-retail-category.html">Products & Retail</a></li>
+                            <li><a href="transport-travel-category.html">Transport & Travel</a></li>
+                            <li><a href="energy-utilities-category.html">Energy & Utilities</a></li>
+                            <li><a href="recycling-waste-category.html">Recycling & Waste</a></li>
+                            <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal & Support</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="contact-us.html">Get Support</a></li>
+                        </ul>
+                        <div class="footer-contact">
+                            <p><i class="fas fa-envelope"></i> info@ecosustainable.co.uk</p>
+                            <p><i class="fas fa-phone"></i> +44 20 1234 5678</p>
+                        </div>
+                    </div>
                 </div>
-
                 <div class="footer-bottom">
-                    <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
-                    <div class="footer-links">
-                        <a href="privacy-policy.html">Privacy Policy</a>
-                        <a href="terms-of-service.html">Terms of Service</a>
-                        <a href="sitemap.html">Sitemap</a>
+                    <div class="footer-bottom-content">
+                        <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
+                        <div class="footer-links">
+                            <a href="privacy-policy.html">Privacy</a>
+                            <a href="terms-of-service.html">Terms</a>
+                            <a href="sitemap.html">Sitemap</a>
+                        </div>
                     </div>
                 </div>
             </div>
