@@ -49,10 +49,7 @@ const headerHTML = `
                             </div>
                         </div>
 
-                        <div class="nav-dropdown">
-                            <a href="cities.html" class="nav-link">Cities</a>
-                        </div>
-
+                        <a href="cities.html" class="nav-link">Cities</a>
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
@@ -73,8 +70,15 @@ const footerHTML = `
                 <div class="footer-content">
                     <div class="footer-section">
                         <div class="footer-logo">
-                            <h3>EcoSustainable<span>.co.uk</span></h3>
-                            <p>Connecting you with sustainable businesses across the UK</p>
+                            <div class="logo-container">
+                                <div class="logo-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="logo-text">
+                                    <h3>Eco<span>Sustainable</span>.co.uk</h3>
+                                </div>
+                            </div>
+                            <p>Connecting you with our sustainable businesses across the UK</p>
                         </div>
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
