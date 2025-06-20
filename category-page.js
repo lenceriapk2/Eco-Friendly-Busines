@@ -336,10 +336,6 @@ function createCategoryBusinessCard(business, rank) {
     
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-image-container">
-                <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop'">
-            </div>
             <div class="business-rank">#${rank}</div>
         </div>
         
