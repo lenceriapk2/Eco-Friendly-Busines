@@ -12,10 +12,40 @@ const businessesGrid = document.getElementById('londonBusinessesGrid');
 const businessesTitle = document.getElementById('businessesTitle');
 const resultsCount = document.getElementById('resultsCount');
 
+
+
+// Add refresh button functionality
+function addRefreshButton() {
+    const refreshButton = document.createElement('button');
+    refreshButton.className = 'refresh-api-btn';
+    refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Real Data';
+    refreshButton.onclick = async () => {
+        refreshButton.disabled = true;
+        refreshButton.innerHTML = '<i class="fas fa-spinner"></i> Loading...';
+        
+        try {
+            await window.LondonData.loadBusinessesFromAPI();
+        } finally {
+            refreshButton.disabled = false;
+            refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Real Data';
+        }
+    };
+    
+    const heroContent = document.querySelector('.city-hero-content');
+    if (heroContent) {
+        heroContent.appendChild(refreshButton);
+    }
+}
+
 // Initialize London page
-function initializeLondonPage() {
+async function initializeLondonPage() {
     populateBusinesses();
     setupEventListeners();
+    
+    // Load real data from Google Places API
+    if (window.PlacesAPI && window.LondonData.loadBusinessesFromAPI) {
+        await window.LondonData.loadBusinessesFromAPI();
+    }
 }
 
 // Setup event listeners
@@ -106,6 +136,8 @@ function populateBusinesses() {
 
 // Display businesses in grid
 function displayBusinesses(businesses) {
+    if (!businessesGrid) return;
+    
     businessesGrid.innerHTML = '';
     
     if (businesses.length === 0) {
@@ -190,4 +222,5 @@ function toggleFavorite(businessId) {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initializeLondonPage();
+    addRefreshButton();
 });

@@ -1,7 +1,9 @@
 
 // London Eco-Friendly Businesses Data
+// This will be populated by the Google Places API
 
-const londonBusinesses = [
+let londonBusinesses = [
+    // Fallback data in case API fails
     {
         id: 1,
         name: "EcoHome London",
@@ -144,7 +146,30 @@ const londonBusinesses = [
     }
 ];
 
-// Export data
+// Load businesses from Google Places API
+async function loadBusinessesFromAPI() {
+    try {
+        console.log('Loading businesses from Google Places API...');
+        const apiBusinesses = await window.PlacesAPI.fetchAllLondonBusinesses();
+        
+        if (apiBusinesses && apiBusinesses.length > 0) {
+            londonBusinesses = apiBusinesses;
+            console.log(`Loaded ${apiBusinesses.length} businesses from API`);
+            
+            // Refresh the display if we're on the London page
+            if (typeof displayBusinesses === 'function') {
+                displayBusinesses(londonBusinesses);
+                updateTitle(londonBusinesses.length);
+            }
+        }
+    } catch (error) {
+        console.error('Error loading businesses from API:', error);
+        console.log('Using fallback data');
+    }
+}
+
+// Export data and functions
 window.LondonData = {
-    londonBusinesses
+    londonBusinesses,
+    loadBusinessesFromAPI
 };

@@ -844,6 +844,36 @@ body {
     border-color: #4caf50;
 }
 
+/* API Refresh Button */
+.refresh-api-btn {
+    background: linear-gradient(45deg, #4caf50, #45a049);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.refresh-api-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.refresh-api-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.refresh-api-btn i {
+    margin-right: 8px;
+}
+
 /* London Businesses Section */
 .london-businesses {
     padding: 40px 0 80px;
