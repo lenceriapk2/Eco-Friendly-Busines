@@ -406,17 +406,17 @@ function createCategoryBusinessCard(business) {
             </div>
             <div class="contact-item">
                 <i class="fas fa-globe"></i>
-                <span>${website}</span>
+                <span class="website-link">${website}</span>
             </div>
         </div>
 
         <div class="business-actions">
-            <a href="#contact" class="btn-primary" onclick="event.preventDefault(); contactBusiness('${name}', '${phone}', '${website}')">
+            <button class="btn-primary" onclick="contactBusiness('${name}', '${phone}', '${website}')" type="button">
                 <i class="fas fa-envelope"></i> Get Quote
-            </a>
-            <a href="tel:${phone}" class="btn-secondary">
+            </button>
+            <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
                 <i class="fas fa-phone"></i> Call Now
-            </a>
+            </button>
         </div>
     `;
 

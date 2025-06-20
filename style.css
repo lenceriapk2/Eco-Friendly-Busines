@@ -1960,6 +1960,9 @@ html {
     height: auto;
     display: flex;
     flex-direction: column;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .business-card:hover, .category-business-card:hover {
@@ -1973,6 +1976,83 @@ html {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
+}
+
+.business-contact {
+    padding: 0 1.5rem 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+.contact-item i {
+    color: #4CAF50;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.website-link {
+    color: #4CAF50;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.business-actions {
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.business-actions .btn-primary,
+.business-actions .btn-secondary {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.business-actions .btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.business-actions .btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.business-actions .btn-secondary {
+    background: #f8f9fa;
+    color: #4CAF50;
+    border: 1px solid #e9ecef;
+}
+
+.business-actions .btn-secondary:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
 }
 
 .business-logo {
