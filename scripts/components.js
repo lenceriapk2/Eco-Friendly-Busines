@@ -13,46 +13,6 @@ const headerHTML = `
                             <a href="index.html" class="nav-link">Home</a>
                         </div>
 
-                        <div class="nav-dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">
-                                Categories <i class="fas fa-chevron-down"></i>
-                            </a>
-                            <div class="dropdown-content mega-menu">
-                                <div class="mega-menu-section">
-                                    <h4>Health & Beauty</h4>
-                                    <a href="health-beauty-category.html">All Health & Beauty</a>
-                                    <a href="london.html">London</a>
-                                    <a href="manchester.html">Manchester</a>
-                                    <a href="birmingham.html">Birmingham</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h4>Products & Retail</h4>
-                                    <a href="products-retail-category.html">All Products & Retail</a>
-                                    <a href="london.html">London</a>
-                                    <a href="manchester.html">Manchester</a>
-                                    <a href="birmingham.html">Birmingham</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h4>Transport & Travel</h4>
-                                    <a href="transport-travel-category.html">All Transport & Travel</a>
-                                    <a href="london.html">London</a>
-                                    <a href="manchester.html">Manchester</a>
-                                    <a href="birmingham.html">Birmingham</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h4>Energy & Utilities</h4>
-                                    <a href="energy-utilities-category.html">All Energy & Utilities</a>
-                                    <a href="london.html">London</a>
-                                    <a href="manchester.html">Manchester</a>
-                                    <a href="birmingham.html">Birmingham</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="nav-dropdown">
-                            <a href="cities.html" class="nav-link">Cities</a>
-                        </div>
-
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
