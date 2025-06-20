@@ -51,8 +51,13 @@ const footerHTML = `
                 <div class="footer-content">
                     <div class="footer-section">
                         <div class="footer-logo">
-                            <h3>EcoSustainable.co.uk</h3>
-                            <p>Connecting you with sustainable businesses across the UK</p>
+                            <div class="footer-logo-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="footer-logo-text">
+                                <h3>EcoSustainable.co.uk</h3>
+                                <p>Connecting you with sustainable businesses across the UK</p>
+                            </div>
                         </div>
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>

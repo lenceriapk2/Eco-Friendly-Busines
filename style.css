@@ -1011,7 +1011,8 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+    box-shadow: ```python
+0 10px 30px rgba(76, 175, 80, 0.4);
     background: linear-gradient(135deg, #1e5f30, #2d8f47);
 }
 
@@ -1222,18 +1223,18 @@ body {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .footer-brand {
         padding-right: 0;
         text-align: center;
     }
-    
+
     .footer-bottom-content {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
     }
-    
+
     .footer-links {
         justify-content: center;
     }
@@ -1698,10 +1699,50 @@ body {
 }
 
 .business-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    display: flex;
+    gap: 0.8rem;
     margin-top: auto;
+    padding-top: 1rem;
+}
+
+.business-actions a,
+.business-actions button {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.business-actions .btn-primary {
+    background: linear-gradient(135deg, #4CAF50, #2d8f47);
+    color: white;
+}
+
+.business-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.business-actions .btn-secondary {
+    background: transparent;
+    color: #2d8f47;
+    border: 2px solid #4CAF50;
+}
+
+.business-actions .btn-secondary:hover {
+    background: #4CAF50;
+    color: white;
+    transform: translateY(-2px);
 }
 
 .action-btn {
@@ -2128,17 +2169,17 @@ html {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .business-card-header {
         padding: 1.25rem 1.25rem 0.75rem;
     }
-    
+
     .business-logo {
         width: 50px;
         height: 50px;
         font-size: 1.25rem;
     }
-    
+
     .business-info h3 {
         font-size: 1.2rem;
     }
@@ -3311,8 +3352,7 @@ html {
     border: none;
     padding: 12px 24px;
     border-radius: 25px;
-    ```text
-font-size: 1rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
@@ -4057,11 +4097,11 @@ font-size: 1rem;
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .contact-form .form-row {
         grid-template-columns: 1fr;
     }
-    
+
     .page-hero h1 {
         font-size: 2rem;
     }

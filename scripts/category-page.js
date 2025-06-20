@@ -411,12 +411,12 @@ function createCategoryBusinessCard(business) {
         </div>
 
         <div class="business-actions">
-            <button class="btn-primary" onclick="openBusinessWebsite('${website}')" type="button">
-                <i class="fas fa-external-link-alt"></i> Visit Website
-            </button>
-            <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
+            <a href="#contact" class="btn-primary" onclick="event.preventDefault(); contactBusiness('${name}', '${phone}', '${website}')">
+                <i class="fas fa-envelope"></i> Get Quote
+            </a>
+            <a href="tel:${phone}" class="btn-secondary">
                 <i class="fas fa-phone"></i> Call Now
-            </button>
+            </a>
         </div>
     `;
 
@@ -524,6 +524,23 @@ function generateWebsite(categoryKey, cityName) {
 
 function callBusiness(phone) {
     window.location.href = `tel:${phone}`;
+}
+
+function contactBusiness(businessName, phone, website) {
+    // Scroll to contact section if it exists, otherwise show alert
+    const contactSection = document.getElementById('contact') || document.querySelector('.cta-section-category');
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+        // Show a temporary message
+        const message = document.createElement('div');
+        message.className = 'contact-message';
+        message.innerHTML = `<p><strong>${businessName}</strong> - Call: ${phone} | Visit: ${website}</p>`;
+        message.style.cssText = 'background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4CAF50;';
+        contactSection.appendChild(message);
+        setTimeout(() => message.remove(), 5000);
+    } else {
+        alert(`Contact ${businessName} at ${phone} or visit ${website}`);
+    }
 }
 
 function openBusinessWebsite(website) {
