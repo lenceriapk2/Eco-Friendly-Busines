@@ -6,13 +6,13 @@
     <title>Top 10 Eco-Friendly Businesses in Manchester | EcoSustainable.co.uk</title>
     <meta name="description" content="Discover Manchester's leading sustainable and environmentally conscious businesses. From zero-waste cafes to renewable energy companies, find the best eco-friendly services in Manchester.">
     <meta name="keywords" content="Manchester eco-friendly businesses, sustainable Manchester, green businesses Manchester, eco Manchester, sustainable directory Manchester">
-
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Top 10 Eco-Friendly Businesses in Manchester">
     <meta property="og:description" content="Discover Manchester's leading sustainable and environmentally conscious businesses across all categories.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ecosustainable.co.uk/manchester.html">
-
+    
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
     {
@@ -44,25 +44,35 @@
             <div class="city-hero-content">
                 <h1>Top 10 Eco-Friendly Businesses in <span class="highlight">Manchester</span></h1>
                 <p>Discover Manchester's leading sustainable and environmentally conscious businesses across all categories. From zero-waste cafes to renewable energy companies, find the best eco-friendly services in Manchester.</p>
-
+                
                 <!-- Category Links Grid -->
                 <div class="category-links-grid">
-                    <a href="../categories/manchester-health-beauty.html" class="category-link">
+                    <a href="manchester-health-beauty.html" class="category-link">
+                        
                         <span>Health & Beauty</span>
                     </a>
-                    <a href="../categories/manchester-products-retail.html" class="category-link">
+                    <a href="manchester-products-retail.html" class="category-link">
+                        
                         <span>Products & Retail</span>
                     </a>
-                    <a href="../categories/manchester-transport-travel.html" class="category-link">
+                    <a href="manchester-transport-travel.html" class="category-link">
+                        
                         <span>Transport & Travel</span>
                     </a>
-                    <a href="../categories/manchester-energy-utilities.html" class="category-link">
+                    <a href="manchester-services-professional.html" class="category-link">
+                        
+                        <span>Services & Professional</span>
+                    </a>
+                    <a href="manchester-energy-utilities.html" class="category-link">
+                        
                         <span>Energy & Utilities</span>
                     </a>
-                    <a href="../categories/manchester-recycling-waste.html" class="category-link">
+                    <a href="manchester-recycling-waste.html" class="category-link">
+                        
                         <span>Recycling & Waste</span>
                     </a>
-                    <a href="../categories/manchester-education-nonprofits.html" class="category-link">
+                    <a href="manchester-education-nonprofits.html" class="category-link">
+                        
                         <span>Education & Nonprofits</span>
                     </a>
                 </div>
@@ -87,7 +97,7 @@
                         <option value="education-nonprofits">Education & Nonprofits</option>
                     </select>
                 </div>
-
+                
                 <div class="filter-group">
                     <label for="sortFilter"><i class="fas fa-sort"></i> Sort by:</label>
                     <select id="sortFilter" onchange="sortBusinesses()">
@@ -96,7 +106,7 @@
                         <option value="name">Name A-Z</option>
                     </select>
                 </div>
-
+                
                 <button class="refresh-btn" onclick="refreshBusinesses()" title="Refresh business data">
                     <i class="fas fa-sync-alt"></i>
                     Refresh Data
@@ -112,7 +122,7 @@
                 <h2 id="businessesTitle">Top Sustainable Businesses in Manchester</h2>
                 <p class="businesses-count" id="businessesCount">Loading businesses...</p>
             </div>
-
+            
             <div class="london-businesses-grid" id="londonBusinessesGrid">
                 <!-- Businesses will be populated by JavaScript -->
             </div>
@@ -165,4 +175,3 @@
     </script>
 </body>
 </html>
-```
