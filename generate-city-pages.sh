@@ -91,22 +91,28 @@ create_city_page() {
                 
                 <!-- Category Links Grid -->
                 <div class="category-links-grid">
-                    <a href="categories/${sanitized_city}-health-beauty.html" class="category-link">
+                    <a href="${sanitized_city}-health-beauty.html" class="category-link">
+                        <div class="category-icon">💄</div>
                         <span>Health & Beauty</span>
                     </a>
-                    <a href="categories/${sanitized_city}-products-retail.html" class="category-link">
+                    <a href="${sanitized_city}-products-retail.html" class="category-link">
+                        <div class="category-icon">🛍️</div>
                         <span>Products & Retail</span>
                     </a>
-                    <a href="categories/${sanitized_city}-transport-travel.html" class="category-link">
+                    <a href="${sanitized_city}-transport-travel.html" class="category-link">
+                        <div class="category-icon">🚗</div>
                         <span>Transport & Travel</span>
                     </a>
-                    <a href="categories/${sanitized_city}-energy-utilities.html" class="category-link">
+                    <a href="${sanitized_city}-energy-utilities.html" class="category-link">
+                        <div class="category-icon">⚡</div>
                         <span>Energy & Utilities</span>
                     </a>
-                    <a href="categories/${sanitized_city}-recycling-waste.html" class="category-link">
+                    <a href="${sanitized_city}-recycling-waste.html" class="category-link">
+                        <div class="category-icon">♻️</div>
                         <span>Recycling & Waste</span>
                     </a>
-                    <a href="categories/${sanitized_city}-education-nonprofits.html" class="category-link">
+                    <a href="${sanitized_city}-education-nonprofits.html" class="category-link">
+                        <div class="category-icon">📚</div>
                         <span>Education & Nonprofits</span>
                     </a>
                 </div>
@@ -198,8 +204,8 @@ create_city_page() {
             <h2>Explore More Sustainable Cities</h2>
             <p>Discover eco-friendly businesses across the UK</p>
             <div class="cta-buttons">
-                <a href="cities.html" class="btn-primary">View All Cities</a>
-                <a href="contact-us.html" class="btn-secondary">Submit a Business</a>
+                <a href="index.html" class="btn-primary">View All Cities</a>
+                <a href="#contact" class="btn-secondary">Submit a Business</a>
             </div>
         </div>
     </section>
