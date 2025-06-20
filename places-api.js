@@ -148,15 +148,16 @@ async function getPlacePhotoUrl(photoName, maxWidth = 400, maxHeight = 300) {
     try {
         if (!photoName) return null;
         
-        const response = await fetch(`${PLACES_API_BASE}/${photoName}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${API_KEY}`, {
-            method: 'GET',
-            redirect: 'follow'
+        // Use the proper Places API photo endpoint
+        const photoUrl = `https://places.googleapis.com/v1/${photoName}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${API_KEY}`;
+        
+        // Test if the photo URL is accessible
+        const response = await fetch(photoUrl, {
+            method: 'HEAD',
+            mode: 'no-cors'
         });
         
-        if (response.ok) {
-            return response.url;
-        }
-        return null;
+        return photoUrl;
     } catch (error) {
         console.error('Error fetching photo:', error);
         return null;
@@ -225,9 +226,13 @@ async function transformPlaceToBusinessFormat(place, category, subcategory) {
     // Try to get real place photo first
     let imageUrl = defaultImage;
     if (place.photos && place.photos.length > 0) {
-        const photoUrl = await getPlacePhotoUrl(place.photos[0].name);
-        if (photoUrl) {
-            imageUrl = photoUrl;
+        try {
+            const photoUrl = await getPlacePhotoUrl(place.photos[0].name);
+            if (photoUrl) {
+                imageUrl = photoUrl;
+            }
+        } catch (error) {
+            console.log('Photo fetch failed, using category image');
         }
     }
 

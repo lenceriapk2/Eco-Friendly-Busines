@@ -165,7 +165,7 @@ function createBusinessCard(business, index) {
             <div class="business-card-header">
                 <div class="business-image-container">
                     <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center&q=80';"
+                         onerror="handleImageError(this, '${business.category}')"
                          loading="lazy">
                 </div>
                 <div class="business-rank">#${index + 1}</div>
@@ -224,6 +224,44 @@ function toggleFavorite(businessId) {
     if (business) {
         alert(`${business.name} has been saved to your favorites!`);
     }
+}
+
+// Handle image loading errors with category-specific fallbacks
+function handleImageError(img, category) {
+    const categoryFallbacks = {
+        'home-living': [
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center&q=80'
+        ],
+        'fashion-accessories': [
+            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop&crop=center&q=80'
+        ],
+        'food-beverage': [
+            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&crop=center&q=80'
+        ],
+        'health-beauty': [
+            'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center&q=80'
+        ],
+        'products-retail': [
+            'https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center&q=80'
+        ],
+        'transport-travel': [
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop&crop=center&q=80'
+        ]
+    };
+
+    const fallbacks = categoryFallbacks[category] || [
+        'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center&q=80'
+    ];
+    
+    const randomIndex = Math.floor(Math.random() * fallbacks.length);
+    img.src = fallbacks[randomIndex];
+    img.onerror = null; // Prevent infinite loop
 }
 
 // Initialize when DOM is loaded
