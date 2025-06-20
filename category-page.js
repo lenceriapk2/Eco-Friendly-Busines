@@ -243,7 +243,7 @@ function createCategoryBusinessCard(business) {
         </div>
 
         <div class="business-actions">
-            <button class="btn-primary" onclick="window.open('https://${website}', '_blank')" type="button">
+            <button class="btn-primary" onclick="openBusinessWebsite('${website}')" type="button">
                 <i class="fas fa-external-link-alt"></i> Visit Website
             </button>
             <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
@@ -356,6 +356,15 @@ function generateWebsite(categoryKey, cityName) {
 
 function callBusiness(phone) {
     window.location.href = `tel:${phone}`;
+}
+
+function openBusinessWebsite(website) {
+    // Ensure the website URL has proper protocol
+    let url = website;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+    }
+    window.open(url, '_blank');
 }
 
 // Export for global access

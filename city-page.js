@@ -268,7 +268,7 @@ function createBusinessCard(business) {
                 <button class="action-btn call-btn" onclick="callBusiness('${phone}')" type="button">
                     <i class="fas fa-phone"></i> Call
                 </button>
-                <button class="action-btn website-btn" onclick="window.open('https://${website}', '_blank')" type="button">
+                <button class="action-btn website-btn" onclick="openBusinessWebsite('${website}')" type="button">
                     <i class="fas fa-globe"></i> Website
                 </button>
             </div>
@@ -369,6 +369,15 @@ function displayFilteredBusinesses(businesses) {
 // Utility functions
 function callBusiness(phone) {
     window.location.href = `tel:${phone}`;
+}
+
+function openBusinessWebsite(website) {
+    // Ensure the website URL has proper protocol
+    let url = website;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+    }
+    window.open(url, '_blank');
 }
 
 // Export for global access
