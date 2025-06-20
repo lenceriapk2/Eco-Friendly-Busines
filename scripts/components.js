@@ -13,12 +13,10 @@ const headerHTML = `
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
-                    <div class="header-actions">
-                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
+                    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
