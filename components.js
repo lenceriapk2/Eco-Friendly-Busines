@@ -12,8 +12,21 @@ function createHeader() {
                     <ul class="nav-menu">
                         <li><a href="index.html" class="nav-link">Home</a></li>
                         <li><a href="cities.html" class="nav-link">Cities</a></li>
+                        <li class="nav-dropdown">
+                            <a href="categories.html" class="nav-link">Categories</a>
+                            <div class="dropdown-content">
+                                <a href="health-beauty-category.html">Health & Beauty</a>
+                                <a href="products-retail-category.html">Products & Retail</a>
+                                <a href="transport-travel-category.html">Transport & Travel</a>
+                                <a href="services-professional-category.html">Services & Professional</a>
+                                <a href="energy-utilities-category.html">Energy & Utilities</a>
+                                <a href="recycling-waste-category.html">Recycling & Waste</a>
+                                <a href="education-nonprofits-category.html">Education & Nonprofits</a>
+                            </div>
+                        </li>
                         <li><a href="about-us.html" class="nav-link">About Us</a></li>
                         <li><a href="contact-us.html" class="nav-link">Contact</a></li>
+                        <li><a href="list-your-business.html" class="nav-link">List Your Business</a></li>
                     </ul>
                     <div class="hamburger">
                         <span class="bar"></span>
@@ -47,27 +60,22 @@ function createFooter() {
                     </div>
 
                     <div class="footer-section">
-                        <h4>Quick Links</h4>
+                        <h4>Company</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="cities.html">Cities</a></li>
                             <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="how-it-works.html">How It Works</a></li>
-                            <li><a href="list-your-business.html">List Your Business</a></li>
+                            <li><a href="contact-us.html">Contact Us</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                        <h4>Categories</h4>
+                        <h4>Browse</h4>
                         <ul>
-                            <li><a href="health-beauty-category.html">Health & Beauty</a></li>
-                            <li><a href="products-retail-category.html">Products & Retail</a></li>
-                            <li><a href="transport-travel-category.html">Transport & Travel</a></li>
-                            <li><a href="services-professional-category.html">Services & Professional</a></li>
-                            <li><a href="energy-utilities-category.html">Energy & Utilities</a></li>
-                            <li><a href="recycling-waste-category.html">Recycling & Waste</a></li>
-                            <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
+                            <li><a href="cities.html">All Cities</a></li>
+                            <li><a href="categories.html">All Categories</a></li>
+                            <li><a href="london.html">London</a></li>
+                            <li><a href="manchester.html">Manchester</a></li>
                         </ul>
                     </div>
 
@@ -76,10 +84,10 @@ function createFooter() {
                         <ul>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="terms-of-service.html">Terms of Service</a></li>
-                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
-                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                            <li><a href="contact-us.html">Support</a></li>
                         </ul>
                     </div>
+
                     <div class="footer-section">
                         <h4>Support</h4>
                         <ul>
