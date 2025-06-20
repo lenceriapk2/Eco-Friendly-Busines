@@ -12,18 +12,6 @@ function createHeader() {
                     <ul class="nav-menu">
                         <li><a href="index.html" class="nav-link">Home</a></li>
                         <li><a href="cities.html" class="nav-link">Cities</a></li>
-                        <li class="nav-dropdown">
-                            <a href="categories.html" class="nav-link">Categories</a>
-                            <div class="dropdown-content">
-                                <a href="health-beauty-category.html">Health & Beauty</a>
-                                <a href="products-retail-category.html">Products & Retail</a>
-                                <a href="transport-travel-category.html">Transport & Travel</a>
-                                <a href="services-professional-category.html">Services & Professional</a>
-                                <a href="energy-utilities-category.html">Energy & Utilities</a>
-                                <a href="recycling-waste-category.html">Recycling & Waste</a>
-                                <a href="education-nonprofits-category.html">Education & Nonprofits</a>
-                            </div>
-                        </li>
                         <li><a href="about-us.html" class="nav-link">About Us</a></li>
                         <li><a href="contact-us.html" class="nav-link">Contact</a></li>
                         <li><a href="list-your-business.html" class="nav-link">List Your Business</a></li>

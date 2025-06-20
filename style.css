@@ -1090,7 +1090,8 @@ body {
 /* City Hero Section */
 .city-hero {
     background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
-    padding: 120px 0 60px;
+    padding: 100px 0 60px;
+    margin-top: 70px;
 }
 
 .city-hero-content {
@@ -1504,29 +1505,33 @@ html {
 .breadcrumb {
     margin-bottom: 2rem;
     text-align: left;
+    padding: 1rem 0;
+    font-size: 0.95rem;
 }
 
 .breadcrumb a {
-    color: rgba(255, 255, 255, 0.8);
+    color: #555;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .breadcrumb a:hover {
-    color: white;
+    color: #2d8f47;
 }
 
 .breadcrumb span {
-    color: white;
+    color: #777;
     font-weight: 500;
 }
 
 /* Category Hero Section */
 .category-hero {
-    background: #f8f9fa; /* Neutral background color */
-    color: #333; /* Dark text for better readability */
-    padding: 80px 0 50px; /* Adjusted padding for spacing */
+    background: #f8f9fa;
+    color: #333;
+    padding: 100px 0 60px;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0; /* Subtle border to separate from content */
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 70px;
 }
 
 .breadcrumb {
