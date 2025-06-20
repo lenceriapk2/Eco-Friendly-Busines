@@ -912,43 +912,9 @@ body {
 
 .london-businesses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
     align-items: start;
-}
-
-@media (max-width: 768px) {
-    .london-businesses-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-    }
-
-    .london-business-card {
-        max-width: 100%;
-    }
-
-    .business-image-container {
-        height: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    .london-businesses-grid {
-        gap: 1rem;
-    }
-
-    .business-image-container {
-        height: 180px;
-    }
-
-    .business-rank {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-        top: 12px;
-        right: 12px;
-    }
 }
 
 /* London Business Card */
@@ -963,7 +929,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-width: 100%;
 }
 
 .london-business-card:hover {
@@ -979,35 +944,17 @@ body {
 
 .business-image-container {
     width: 100%;
-    height: 240px;
+    height: 200px;
     overflow: hidden;
     position: relative;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    background: #f3f4f6;
 }
 
 .business-main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
     transition: transform 0.3s ease;
-    background-color: #f9fafb;
-    background-image: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-    background-size: cover;
-    background-position: center;
-}
-
-.business-main-image[src=""] {
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.business-main-image[src=""]:before {
-    content: "🏢";
-    font-size: 3rem;
-    opacity: 0.3;
 }
 
 .london-business-card:hover .business-main-image {
@@ -1016,21 +963,20 @@ body {
 
 .business-rank {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 12px;
+    right: 12px;
     background: linear-gradient(135deg, #2d8f47, #4caf50);
     color: white;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     z-index: 2;
-    box-shadow: 0 4px 12px rgba(45, 143, 71, 0.4);
-    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.4);
 }
 
 .business-content {
@@ -1119,8 +1065,1072 @@ body {
     align-items: center;
     gap: 0.5rem;
     color: #6b7280;
-    font-size:```text
- 0.85rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item i {
+    color: #4caf50;
+    width: 14px;
+    flex-shrink: 0;
+}
+
+.business-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.action-btn {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.action-btn:nth-child(3) {
+    grid-column: 1 / -1;
+}
+
+/* No Results */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.no-results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading animation for dynamic content */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #4caf50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Business image styles */
+.business-image-container {
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.business-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.london-business-card:hover .business-main-image {
+    transform: scale(1.05);
+}
+
+.business-rank {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #2d8f47, #4caf50);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.3);
+}
+
+/* Category Page Styles */
+.category-hero {
+    background: linear-gradient(135deg, #2d8f47, #4caf50);
+    color: white;
+    padding: 100px 0 60px;
+    text-align: center;
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: white;
+}
+
+.breadcrumb span {
+    color: white;
+    font-weight: 500;
+}
+
+/* Category Hero Section */
+.category-hero {
+    background: #f8f9fa; /* Neutral background color */
+    color: #333; /* Dark text for better readability */
+    padding: 80px 0 50px; /* Adjusted padding for spacing */
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; /* Subtle border to separate from content */
+}
+
+.breadcrumb {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding-left: 20px; /* Add some left padding for alignment */
+}
+
+.breadcrumb a {
+    color: #555; /* Darker breadcrumb links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #2d8f47; /* Highlight on hover */
+}
+
+.breadcrumb span {
+    color: #777; /* Muted current page text */
+    font-weight: 500;
+}
+
+/* Remove Icon */
+/* Category icon */
+.category-hero h1 {
+    font-size: 2.8rem; /* Slightly smaller for better fit */
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    color: #2d8f47; /* Ensure heading is readable */
+    font-weight: 600;
+}
+
+.category-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto 2rem;
+    color: #555; /* Readable description text */
+}
+
+.category-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: #2d8f47; /* Prominent stat number */
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    color: #666; /* Muted label text */
+}
+
+.category-intro {
+    padding: 60px 0 40px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.category-intro h2 {
+    color: #2d8f47;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.category-intro p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-businesses {
+    padding: 40px 0 80px;
+}
+
+.category-businesses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-business-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.category-business-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.business-rank {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #2d8f47;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+.business-image-container {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.business-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.category-business-card:hover .business-image {
+    transform: scale(1.05);
+}
+
+.business-content {
+    padding: 2rem;
+}
+
+.business-header h3 {
+    color: #2d8f47;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.business-subcategory {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.business-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stars {
+    color: #ffc107;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.rating-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.business-description {
+    margin-bottom: 1.5rem;
+}
+
+.business-description p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.business-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+    background: #e8f5e8;
+    color: #2d8f47;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.business-contact-info {
+    margin-bottom: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item i {
+    width: 20px;
+    margin-right: 0.5rem;
+    color: #2d8f47;
+}
+
+.business-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.call-btn {
+    background: #2d8f47;
+    color: white;
+}
+
+.call-btn:hover {
+    background: #246b38;
+}
+
+.website-btn {
+    background: #007bff;
+    color: white;
+}
+
+.website-btn:hover {
+    background: #0056b3;
+}
+
+.directions-btn {
+    background: #ffc107;
+    color: #333;
+}
+
+.directions-btn:hover {
+    background: #e0a800;
+}
+
+/* Responsive Design for Category Pages */
+@media (max-width: 768px) {
+    .category-hero h1 {
+        font-size: 2rem;
+    }
+
+    .category-stats {
+        gap: 1.5rem;
+    }
+
+    .business-actions {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        min-width: auto;
+    }
+}
+
+/* SEO Sections */
+.seo-section {
+    padding: 60px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.seo-section:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.seo-section h2 {
+    color: #2d8f47;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Why Choose Section */
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.why-item {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.why-item:hover {
+    transform: translateY(-5px);
+}
+
+.why-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.why-item h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.why-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Selection Criteria Section */
+.criteria-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.criteria-text p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.criteria-text h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.criteria-list {
+    list-style: none;
+    padding: 0;
+}
+
+.criteria-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #555;
+    line-height: 1.6;
+}
+
+.criteria-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.criteria-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stat-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-box .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d8f47;
+    margin-bottom: 0.5rem;
+}
+
+.stat-box .stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* FAQ Section */
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d8f47;
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background: #f8f9fa;
+}
+
+.faq-question i {
+    transition: transform 0.3s;
+    color: #4caf50;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-answer p {
+    padding: 0 1.5rem 1.5rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+}
+
+/* Local Areas Section */
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.area-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.area-card:hover {
+    transform: translateY(-5px);
+}
+
+.area-card h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.area-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Benefits Section */
+.benefits-content p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.benefits-list li {
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+    color: #555;
+    padding-left: 3rem;
+}
+
+.benefits-list li:before {
+    content: "🌱";
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+}
+
+/* Tips Section */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tip-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+}
+
+.tip-card h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.tip-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Related Categories Section */
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.related-card {
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    padding: 2rem;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #2d8f47;
+    transition: all 0.3s;
+    display: block;
+    text-align: center;
+}
+
+.related-card:hover {
+    background: linear-gradient(135deg, #d4edda, #e8f5e8);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.related-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.related-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Responsive Design for SEO Sections */
+@media (max-width: 768px) {
+    .criteria-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .criteria-stats {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .stat-box {
+        flex: 1;
+        margin: 0 0.5rem;
+    }
+
+    .why-choose-grid,
+    .areas-grid,
+    .tips-grid,
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .benefits-list {
+        grid-template-columns: 1fr;
+    }
+
+    .seo-section {
+        padding: 40px 0;
+    }
+
+    .seo-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Footer Component */
+.footer {
+    background: #2d5a37;
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+/* London categories grid styles */
+.london-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.london-category-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e8f5e8;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #2d8f47;
+    transition: all 0.3s ease;
+    display: block;
+    box-shadow: 0 5px 15px rgba(45, 143, 71, 0.1);
+}
+
+.london-category-card:hover {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(45, 143, 71, 0.2);
+    border-color: #4caf50;
+}
+
+.london-category-card .category-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    filter: grayscale(20%);
+}
+
+.london-category-card h3 {
+    color: #2d8f47;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.london-category-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.london-category-card .category-count {
+    background: #2d8f47;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* API Refresh Button */
+.refresh-api-btn {
+    background: linear-gradient(45deg, #4caf50, #45a049);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.refresh-api-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.refresh-api-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.refresh-api-btn i {
+    margin-right: 8px;
+}
+
+/* London Businesses Section */
+.london-businesses {
+    padding: 40px 0 80px;
+}
+
+.businesses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.businesses-header h2 {
+    color: #2d8f47;
+    font-size: 2rem;
+}
+
+.results-count {
+    color: #666;
+    font-size: 1rem;
+}
+
+.london-businesses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* London Business Card */
+.london-business-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.london-business-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    border-color: #4caf50;
+}
+
+.business-card-header {
+    position: relative;
+    width: 100%;
+}
+
+.business-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: #f3f4f6;
+}
+
+.business-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.london-business-card:hover .business-main-image {
+    transform: scale(1.05);
+}
+
+.business-rank {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #2d8f47, #4caf50);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.4);
+}
+
+.business-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.business-main-info {
+    margin-bottom: 1rem;
+}
+
+.business-main-info h3 {
+    color: #1f2937;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.business-subcategory {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.business-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: #fbbf24;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.rating-text {
+    color: #6b7280;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.business-description {
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.business-description p {
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.business-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+    background: #ecfdf5;
+    color: #059669;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid #a7f3d0;
+}
+
+.business-contact-info {
+    margin-bottom: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
 }
 

@@ -1,3 +1,4 @@
+
 // Category Page JavaScript Handler
 
 let categoryBusinesses = [];
@@ -14,7 +15,7 @@ async function initializeCategoryPage(category) {
 async function loadCategoryBusinesses(category) {
     try {
         console.log(`Loading businesses for category: ${category}`);
-
+        
         // Try to load from API first
         if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
             const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(category, 10);
@@ -24,11 +25,11 @@ async function loadCategoryBusinesses(category) {
                 return;
             }
         }
-
+        
         // Fallback to sample data
         categoryBusinesses = generateFallbackData(category);
         console.log(`Using fallback data for ${category}`);
-
+        
     } catch (error) {
         console.error('Error loading category businesses:', error);
         categoryBusinesses = generateFallbackData(category);
@@ -37,13 +38,16 @@ async function loadCategoryBusinesses(category) {
 
 // Generate fallback data for category
 function generateFallbackData(category) {
-    // High-quality, relevant images for each category
-        const categoryImages = {
+    const categoryImages = {
         'home-living': [
-            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&crop=center&q=80'
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop', 
+            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1615874694520-474822394e73?w=400&h=300&fit=crop'
         ],
         'fashion-accessories': [
             'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=300&fit=crop',
@@ -169,7 +173,7 @@ function generateFallbackData(category) {
             }
         ]
     };
-
+    
     return categoryData[category] || [];
 }
 
@@ -177,9 +181,9 @@ function generateFallbackData(category) {
 function displayCategoryBusinesses() {
     const grid = document.getElementById('categoryBusinessesGrid');
     if (!grid) return;
-
+    
     grid.innerHTML = '';
-
+    
     if (categoryBusinesses.length === 0) {
         grid.innerHTML = `
             <div class="no-results">
@@ -190,7 +194,7 @@ function displayCategoryBusinesses() {
         `;
         return;
     }
-
+    
     categoryBusinesses.forEach((business, index) => {
         const businessCard = createCategoryBusinessCard(business, index + 1);
         grid.appendChild(businessCard);
@@ -204,7 +208,7 @@ function displayCategoryBusinesses() {
 function addSEOSections() {
     const categoryName = getCategoryDisplayName(currentCategory);
     const seoContainer = document.getElementById('seoSections');
-
+    
     if (!seoContainer) return;
 
     seoContainer.innerHTML = `
@@ -244,7 +248,7 @@ function addSEOSections() {
                 <div class="criteria-content">
                     <div class="criteria-text">
                         <p>Our rigorous selection process ensures only the most exceptional ${categoryName.toLowerCase()} businesses make it to our top 10 list. We evaluate each business based on multiple criteria including environmental impact, customer satisfaction, innovation in sustainability, and community contribution.</p>
-
+                        
                         <h3>Our Evaluation Criteria:</h3>
                         <ul class="criteria-list">
                             <li><strong>Environmental Impact:</strong> Measurable positive environmental practices and certifications</li>
@@ -329,17 +333,16 @@ function addSEOSections() {
 function createCategoryBusinessCard(business, rank) {
     const card = document.createElement('div');
     card.className = 'london-business-card';
-
+    
     card.innerHTML = `
         <div class="business-card-header">
             <div class="business-image-container">
                 <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                     onerror="handleCategoryImageError(this, '${business.category}')"
-                         loading="lazy">
+                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop'">
             </div>
             <div class="business-rank">#${rank}</div>
         </div>
-
+        
         <div class="business-content">
             <div class="business-main-info">
                 <h3>${business.name}</h3>
@@ -351,22 +354,22 @@ function createCategoryBusinessCard(business, rank) {
                     <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
                 </div>
             </div>
-
+            
             <div class="business-description">
                 <p>${business.description}</p>
             </div>
-
+            
             <div class="business-features">
                 ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
             </div>
-
+            
             <div class="business-contact-info">
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>${business.address}</span>
                 </div>
             </div>
-
+            
             <div class="business-actions">
                 <a href="tel:${business.phone}" class="action-btn call-btn">
                     <i class="fas fa-phone"></i>
@@ -383,7 +386,7 @@ function createCategoryBusinessCard(business, rank) {
             </div>
         </div>
     `;
-
+    
     return card;
 }
 
@@ -481,7 +484,7 @@ function generateFAQs(category) {
     ];
 
     const categoryFAQs = faqs[category] || defaultFAQs;
-
+    
     return categoryFAQs.map(faq => `
         <div class="faq-item">
             <button class="faq-question" onclick="toggleFAQ(this)">
@@ -574,7 +577,7 @@ function generateTips(category) {
 function generateRelatedCategories(category) {
     const allCategories = ['home-living', 'fashion-accessories', 'food-beverage', 'health-beauty', 'products-retail', 'transport-travel'];
     const related = allCategories.filter(cat => cat !== category).slice(0, 4);
-
+    
     return related.map(cat => {
         const displayName = getCategoryDisplayName(cat);
         return `
@@ -591,9 +594,9 @@ function toggleFAQ(button) {
     const faqItem = button.parentNode;
     const answer = faqItem.querySelector('.faq-answer');
     const icon = button.querySelector('i');
-
+    
     faqItem.classList.toggle('active');
-
+    
     if (faqItem.classList.contains('active')) {
         answer.style.maxHeight = answer.scrollHeight + 'px';
         icon.style.transform = 'rotate(180deg)';
@@ -601,44 +604,6 @@ function toggleFAQ(button) {
         answer.style.maxHeight = '0';
         icon.style.transform = 'rotate(0deg)';
     }
-}
-
-// Handle image loading errors with category-specific fallbacks
-function handleCategoryImageError(img, category) {
-    const categoryFallbacks = {
-        'home-living': [
-            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center&q=80'
-        ],
-        'fashion-accessories': [
-            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop&crop=center&q=80'
-        ],
-        'food-beverage': [
-            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&crop=center&q=80'
-        ],
-        'health-beauty': [
-            'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center&q=80'
-        ],
-        'products-retail': [
-            'https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center&q=80'
-        ],
-        'transport-travel': [
-            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center&q=80',
-            'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop&crop=center&q=80'
-        ]
-    };
-
-    const fallbacks = categoryFallbacks[category] || [
-        'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center&q=80'
-    ];
-    
-    const randomIndex = Math.floor(Math.random() * fallbacks.length);
-    img.src = fallbacks[randomIndex];
-    img.onerror = null; // Prevent infinite loop
 }
 
 // Export functions
