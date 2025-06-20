@@ -3,27 +3,65 @@ const headerHTML = `
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="index.html" class="logo-container">
-                            <div class="logo-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <div class="logo-text">
-                                <h1>EcoSustainable<span>.co.uk</span></h1>
-                            </div>
+                        <a href="index.html">
+                            <h1>EcoSustainable<span>.co.uk</span></h1>
                         </a>
                     </div>
 
                     <nav class="nav-menu">
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="cities.html" class="nav-link">Cities</a>
-                        <a href="about-us.html" class="nav-link">About</a>
+                        <div class="nav-dropdown">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </div>
+
+                        <div class="nav-dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Categories <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="dropdown-content mega-menu">
+                                <div class="mega-menu-section">
+                                    <h4>Health & Beauty</h4>
+                                    <a href="health-beauty-category.html">All Health & Beauty</a>
+                                    <a href="london.html">London</a>
+                                    <a href="manchester.html">Manchester</a>
+                                    <a href="birmingham.html">Birmingham</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h4>Products & Retail</h4>
+                                    <a href="products-retail-category.html">All Products & Retail</a>
+                                    <a href="london.html">London</a>
+                                    <a href="manchester.html">Manchester</a>
+                                    <a href="birmingham.html">Birmingham</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h4>Transport & Travel</h4>
+                                    <a href="transport-travel-category.html">All Transport & Travel</a>
+                                    <a href="london.html">London</a>
+                                    <a href="manchester.html">Manchester</a>
+                                    <a href="birmingham.html">Birmingham</a>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h4>Energy & Utilities</h4>
+                                    <a href="energy-utilities-category.html">All Energy & Utilities</a>
+                                    <a href="london.html">London</a>
+                                    <a href="manchester.html">Manchester</a>
+                                    <a href="birmingham.html">Birmingham</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav-dropdown">
+                            <a href="cities.html" class="nav-link">Cities</a>
+                        </div>
+
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
-                    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div class="header-actions">
+                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -85,44 +123,3 @@ const footerHTML = `
             </div>
         </footer>
     `;
-
-// Create header component
-function createHeader() {
-    const headerElement = document.getElementById('header-component');
-    if (headerElement) {
-        headerElement.innerHTML = headerHTML;
-    }
-}
-
-// Create footer component
-function createFooter() {
-    const footerElement = document.getElementById('footer-component');
-    if (footerElement) {
-        footerElement.innerHTML = footerHTML;
-    }
-}
-
-// Initialize both components
-function initializeComponents() {
-    createHeader();
-    createFooter();
-}
-
-// Mobile menu toggle function
-function toggleMobileMenu() {
-    const nav = document.querySelector('.nav-menu');
-    if (nav) {
-        nav.classList.toggle('active');
-    }
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initializeComponents();
-});
-
-// Make functions globally available
-window.createHeader = createHeader;
-window.createFooter = createFooter;
-window.initializeComponents = initializeComponents;
-window.toggleMobileMenu = toggleMobileMenu;
