@@ -142,7 +142,10 @@
         <div class="container">
             <div class="why-content">
                 <div class="why-text">
-                    <h2>Why Choose EcoSustainable.co.uk?</h2>
+                    <div class="why-header">
+                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk Logo" class="why-logo">
+                        <h2>Why Choose EcoSustainable.co.uk?</h2>
+                    </div>
                     <div class="benefits-list">
                         <div class="benefit">
                             <i class="fas fa-check-circle"></i>
@@ -230,13 +233,46 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="contactName">Full Name *</label>
+                            <input type="text" id="contactName" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="contactEmail">Email Address *</label>
+                            <input type="email" id="contactEmail" name="email" placeholder="your.email@example.com" required>
+                        </div>
                     </div>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="btn-primary">Send Message</button>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="contactPhone">Phone (Optional)</label>
+                            <input type="tel" id="contactPhone" name="phone" placeholder="+44 20 1234 5678">
+                        </div>
+                        <div class="form-field">
+                            <label for="contactSubject">Subject</label>
+                            <select id="contactSubject" name="subject" required>
+                                <option value="">Select a topic</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="business">List My Business</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" name="message" placeholder="Please describe how we can help you..." rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <button type="reset" class="btn-secondary">
+                            <i class="fas fa-undo"></i> Clear Form
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
