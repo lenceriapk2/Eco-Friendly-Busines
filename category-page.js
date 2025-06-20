@@ -3,41 +3,43 @@
 
 let categoryBusinesses = [];
 let currentCategory = '';
+let currentCity = 'London';
 
 // Initialize category page
-async function initializeCategoryPage(category) {
+async function initializeCategoryPage(category, cityName = 'London') {
     currentCategory = category;
-    await loadCategoryBusinesses(category);
+    currentCity = cityName || 'London';
+    await loadCategoryBusinesses(category, currentCity);
     displayCategoryBusinesses();
 }
 
-// Load businesses for specific category
-async function loadCategoryBusinesses(category) {
+// Load businesses for specific category and city
+async function loadCategoryBusinesses(category, city = 'London') {
     try {
-        console.log(`Loading businesses for category: ${category}`);
+        console.log(`Loading businesses for category: ${category} in ${city}`);
         
         // Try to load from API first
         if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
-            const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(category, 10);
+            const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(category, 10, city);
             if (apiBusinesses && apiBusinesses.length > 0) {
                 categoryBusinesses = apiBusinesses;
-                console.log(`Loaded ${apiBusinesses.length} businesses from API`);
+                console.log(`Loaded ${apiBusinesses.length} businesses from API for ${city}`);
                 return;
             }
         }
         
         // Fallback to sample data
-        categoryBusinesses = generateFallbackData(category);
-        console.log(`Using fallback data for ${category}`);
+        categoryBusinesses = generateFallbackData(category, city);
+        console.log(`Using fallback data for ${category} in ${city}`);
         
     } catch (error) {
         console.error('Error loading category businesses:', error);
-        categoryBusinesses = generateFallbackData(category);
+        categoryBusinesses = generateFallbackData(category, city);
     }
 }
 
-// Generate fallback data for category
-function generateFallbackData(category) {
+// Generate fallback data for category and city
+function generateFallbackData(category, city = 'London') {
     const categoryImages = {
         'home-living': [
             'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
@@ -119,7 +121,7 @@ function generateFallbackData(category) {
                 rating: 4.9,
                 reviewCount: 156,
                 description: "Premium sustainable furniture crafted from FSC-certified wood and recycled materials. Specializing in modern, minimalist designs that bring nature into your home.",
-                address: "42 Shoreditch High Street, London E1 6PN",
+                address: `42 High Street, ${city}`,
                 phone: "+44 20 7946 0123",
                 website: "www.greenspace-furniture.co.uk",
                 image: categoryImages['home-living'][0],
