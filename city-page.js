@@ -166,29 +166,42 @@ function generateFeatures(category) {
 
 // Display city businesses
 function displayCityBusinesses() {
-    const grid = document.getElementById('londonBusinessesGrid') || document.getElementById('businessesGrid');
-    if (!grid) return;
+    const grid = document.getElementById('londonBusinessesGrid') || 
+                 document.getElementById('businessesGrid') ||
+                 document.getElementById('cityBusinessesGrid');
+    
+    if (!grid) {
+        console.error('Business grid container not found');
+        return;
+    }
 
     grid.innerHTML = '';
 
-    cityBusinesses.slice(0, 12).forEach(business => {
+    if (cityBusinesses.length === 0) {
+        grid.innerHTML = '<div class="no-results"><p>No businesses found. Please try refreshing the page.</p></div>';
+        return;
+    }
+
+    cityBusinesses.slice(0, 12).forEach((business, index) => {
         const businessCard = createBusinessCard(business);
         grid.appendChild(businessCard);
     });
+
+    console.log(`Displayed ${Math.min(cityBusinesses.length, 12)} businesses in ${currentCityName}`);
 }
 
 // Create business card for city pages
 function createBusinessCard(business) {
     const card = document.createElement('div');
-    card.className = 'business-card';
+    card.className = 'london-business-card';
 
     // Ensure we have required data
     const name = business.name || 'Business Name';
-    const category = business.category || business.subcategory || 'Business';
-    const rating = business.rating || 4.5;
+    const category = business.subcategory || business.category || 'Business';
+    const rating = parseFloat(business.rating) || 4.5;
     const reviewCount = business.reviewCount || Math.floor(Math.random() * 50) + 10;
     const description = business.description || `Professional ${category.toLowerCase()} services with a focus on sustainability and environmental responsibility.`;
-    const tags = business.tags || business.features || ['Eco-Friendly', 'Sustainable', 'Local'];
+    const features = business.features || business.tags || ['Eco-Friendly', 'Sustainable', 'Local'];
     const address = business.address || generateAddress(currentCityName);
     const phone = business.phone || generatePhoneNumber();
     const website = business.website || generateWebsite('business', currentCityName);
@@ -207,51 +220,58 @@ function createBusinessCard(business) {
         'education-nonprofits': 'fas fa-graduation-cap'
     };
 
-    const logoIcon = categoryIcons[business.category] || business.image || 'fas fa-leaf';
+    const logoIcon = categoryIcons[business.category] || 'fas fa-leaf';
 
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-logo">
+            <div class="business-rank">1</div>
+        </div>
+        <div class="business-image-container">
+            <div class="business-main-image" style="background: linear-gradient(135deg, #4caf50, #2d8f47); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
                 <i class="${logoIcon}"></i>
             </div>
-            <div class="business-info">
+        </div>
+        <div class="business-content">
+            <div class="business-main-info">
                 <h3>${name}</h3>
-                <div class="business-category">${category}</div>
+                <div class="business-subcategory">${category}</div>
                 <div class="business-rating">
                     <span class="stars">${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5-Math.floor(rating))}</span>
                     <span class="rating-text">${rating.toFixed(1)} (${reviewCount} reviews)</span>
                 </div>
             </div>
-        </div>
 
-        <div class="business-description">${description}</div>
-
-        <div class="business-features">
-            ${tags.slice(0, 4).map(tag => `<span class="feature-tag">${tag}</span>`).join('')}
-        </div>
-
-        <div class="business-contact">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>${address}</span>
+            <div class="business-description">
+                <p>${description}</p>
             </div>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>${phone}</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-globe"></i>
-                <span>${website}</span>
-            </div>
-        </div>
 
-        <div class="business-actions">
-            <button class="btn-primary" onclick="window.open('https://${website}', '_blank')" type="button">
-                <i class="fas fa-external-link-alt"></i> Visit Website
-            </button>
-            <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
-                <i class="fas fa-phone"></i> Call Now
-            </button>
+            <div class="business-features">
+                ${features.slice(0, 4).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+
+            <div class="business-contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${address}</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>${phone}</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>${website}</span>
+                </div>
+            </div>
+
+            <div class="business-actions">
+                <button class="action-btn call-btn" onclick="callBusiness('${phone}')" type="button">
+                    <i class="fas fa-phone"></i> Call
+                </button>
+                <button class="action-btn website-btn" onclick="window.open('https://${website}', '_blank')" type="button">
+                    <i class="fas fa-globe"></i> Website
+                </button>
+            </div>
         </div>
     `;
 

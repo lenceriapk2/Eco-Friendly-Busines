@@ -154,26 +154,38 @@ function generateCategoryFeatures(categoryKey) {
 
 // Display category businesses
 function displayCategoryBusinesses() {
-    const grid = document.getElementById('categoryBusinessesGrid');
-    if (!grid) return;
+    const grid = document.getElementById('categoryBusinessesGrid') ||
+                 document.getElementById('businessesGrid');
+    
+    if (!grid) {
+        console.error('Category business grid container not found');
+        return;
+    }
 
     grid.innerHTML = '';
 
-    categoryBusinesses.forEach(business => {
+    if (categoryBusinesses.length === 0) {
+        grid.innerHTML = '<div class="no-results"><p>No businesses found. Please try refreshing the page.</p></div>';
+        return;
+    }
+
+    categoryBusinesses.forEach((business, index) => {
         const businessCard = createCategoryBusinessCard(business);
         grid.appendChild(businessCard);
     });
+
+    console.log(`Displayed ${categoryBusinesses.length} businesses for ${currentCategoryKey} in ${currentCityName}`);
 }
 
 // Create business card for category page
 function createCategoryBusinessCard(business) {
     const card = document.createElement('div');
-    card.className = 'category-business-card';
+    card.className = 'business-card';
 
     // Ensure we have required data
     const name = business.name || 'Business Name';
     const category = business.subcategory || business.category || 'Business';
-    const rating = business.rating || 4.5;
+    const rating = parseFloat(business.rating) || 4.5;
     const reviewCount = business.reviewCount || Math.floor(Math.random() * 50) + 10;
     const description = business.description || `Professional ${category.toLowerCase()} services with a focus on sustainability and environmental responsibility.`;
     const features = business.features || ['Eco-Friendly', 'Sustainable', 'Local Business'];
@@ -182,13 +194,23 @@ function createCategoryBusinessCard(business) {
     const website = business.website || generateWebsite(currentCategoryKey, currentCityName);
 
     // Create business logo/icon
-    const logoIcon = business.image && business.image.includes('fa-') ? 
-        `<i class="${business.image}"></i>` : 
-        `<i class="fas fa-leaf"></i>`;
+    const categoryIcons = {
+        'health-beauty': 'fas fa-spa',
+        'products-retail': 'fas fa-shopping-bag',
+        'transport-travel': 'fas fa-car',
+        'services-professional': 'fas fa-briefcase',
+        'energy-utilities': 'fas fa-bolt',
+        'recycling-waste': 'fas fa-recycle',
+        'education-nonprofits': 'fas fa-graduation-cap'
+    };
+
+    const logoIcon = categoryIcons[currentCategoryKey] || 'fas fa-leaf';
 
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-logo">${logoIcon}</div>
+            <div class="business-logo">
+                <i class="${logoIcon}"></i>
+            </div>
             <div class="business-info">
                 <h3>${name}</h3>
                 <div class="business-category">${category}</div>
