@@ -175,174 +175,6 @@ function displayCategoryBusinesses() {
     });
 
     console.log(`Displayed ${categoryBusinesses.length} businesses for ${currentCategoryKey} in ${currentCityName}`);
-    
-    // Add responsive sections after displaying businesses
-    addCategoryResponsiveSections();
-}
-
-// Add responsive sections below category business listings
-function addCategoryResponsiveSections() {
-    const businessesSection = document.querySelector('.category-businesses');
-    if (!businessesSection) return;
-
-    const categoryName = getCategoryDisplayName(currentCategoryKey);
-    
-    const responsiveSection = document.createElement('div');
-    responsiveSection.className = 'category-responsive-sections';
-    
-    responsiveSection.innerHTML = `
-        <!-- Category Benefits -->
-        <section class="category-benefits">
-            <div class="container">
-                <h2>Benefits of Choosing Sustainable ${categoryName} in ${currentCityName}</h2>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🌿</div>
-                        <h3>Eco-Friendly Practices</h3>
-                        <p>All ${categoryName.toLowerCase()} businesses use sustainable methods and materials in their operations.</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🏆</div>
-                        <h3>Certified Quality</h3>
-                        <p>Verified for excellence in both service delivery and environmental responsibility.</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">📍</div>
-                        <h3>Local Impact</h3>
-                        <p>Supporting ${currentCityName}'s economy while reducing carbon footprint through local sourcing.</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">💡</div>
-                        <h3>Innovation</h3>
-                        <p>Leading-edge sustainable solutions and innovative approaches to ${categoryName.toLowerCase()}.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Category Statistics -->
-        <section class="category-stats-section">
-            <div class="container">
-                <h2>${categoryName} in ${currentCityName} - Key Stats</h2>
-                <div class="stats-grid-responsive">
-                    <div class="stat-card">
-                        <div class="stat-number">${categoryBusinesses.length}</div>
-                        <div class="stat-label">Verified Businesses</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4.8★</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Eco Certified</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">350+</div>
-                        <div class="stat-label">Happy Customers</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Related Categories -->
-        <section class="related-categories">
-            <div class="container">
-                <h2>Explore Other Categories in ${currentCityName}</h2>
-                <div class="categories-grid-responsive" id="relatedCategories">
-                    <!-- Related categories will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- How to Choose -->
-        <section class="how-to-choose">
-            <div class="container">
-                <h2>How to Choose the Right ${categoryName} Business</h2>
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <div class="tip-number">1</div>
-                        <h3>Check Certifications</h3>
-                        <p>Look for verified sustainability certifications and eco-friendly credentials.</p>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-number">2</div>
-                        <h3>Read Reviews</h3>
-                        <p>Customer feedback provides valuable insights into service quality and environmental practices.</p>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-number">3</div>
-                        <h3>Compare Services</h3>
-                        <p>Evaluate different businesses to find the best match for your specific needs.</p>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-number">4</div>
-                        <h3>Contact Directly</h3>
-                        <p>Speak with businesses directly to understand their sustainability commitments.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section-category">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Go Green with ${categoryName}?</h2>
-                    <p>Connect with ${currentCityName}'s top sustainable ${categoryName.toLowerCase()} businesses today</p>
-                    <div class="cta-buttons">
-                        <a href="${sanitizeCityName(currentCityName)}.html" class="btn-primary">View All ${currentCityName} Businesses</a>
-                        <a href="contact-us.html" class="btn-secondary">Get Recommendations</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    `;
-
-    // Insert after the businesses section
-    businessesSection.parentNode.insertBefore(responsiveSection, businessesSection.nextSibling);
-    
-    // Populate related categories
-    populateRelatedCategories();
-}
-
-// Populate related categories
-function populateRelatedCategories() {
-    const relatedCategories = document.getElementById('relatedCategories');
-    if (!relatedCategories) return;
-
-    const allCategories = [
-        { key: 'health-beauty', name: 'Health & Beauty', icon: '💄' },
-        { key: 'products-retail', name: 'Products & Retail', icon: '🛍️' },
-        { key: 'transport-travel', name: 'Transport & Travel', icon: '🚗' },
-        { key: 'energy-utilities', name: 'Energy & Utilities', icon: '⚡' },
-        { key: 'recycling-waste', name: 'Recycling & Waste', icon: '♻️' },
-        { key: 'education-nonprofits', name: 'Education & Nonprofits', icon: '📚' }
-    ];
-
-    // Filter out current category and show others
-    const otherCategories = allCategories.filter(cat => cat.key !== currentCategoryKey);
-
-    relatedCategories.innerHTML = '';
-
-    otherCategories.slice(0, 4).forEach(category => {
-        const citySlug = sanitizeCityName(currentCityName);
-        
-        const categoryCard = document.createElement('div');
-        categoryCard.className = 'category-card-responsive';
-        categoryCard.onclick = () => {
-            window.location.href = `${citySlug}-${category.key}.html`;
-        };
-
-        categoryCard.innerHTML = `
-            <div class="category-icon-responsive">${category.icon}</div>
-            <h3>${category.name}</h3>
-            <p>Explore ${category.name.toLowerCase()}</p>
-            <div class="category-arrow">→</div>
-        `;
-
-        relatedCategories.appendChild(categoryCard);
-    });
 }
 
 // Create business card for category page
@@ -406,13 +238,13 @@ function createCategoryBusinessCard(business) {
             </div>
             <div class="contact-item">
                 <i class="fas fa-globe"></i>
-                <span class="website-link">${website}</span>
+                <span>${website}</span>
             </div>
         </div>
 
         <div class="business-actions">
-            <button class="btn-primary" onclick="contactBusiness('${name}', '${phone}', '${website}')" type="button">
-                <i class="fas fa-envelope"></i> Get Quote
+            <button class="btn-primary" onclick="openBusinessWebsite('${website}')" type="button">
+                <i class="fas fa-external-link-alt"></i> Visit Website
             </button>
             <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
                 <i class="fas fa-phone"></i> Call Now
@@ -524,23 +356,6 @@ function generateWebsite(categoryKey, cityName) {
 
 function callBusiness(phone) {
     window.location.href = `tel:${phone}`;
-}
-
-function contactBusiness(businessName, phone, website) {
-    // Scroll to contact section if it exists, otherwise show alert
-    const contactSection = document.getElementById('contact') || document.querySelector('.cta-section-category');
-    if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-        // Show a temporary message
-        const message = document.createElement('div');
-        message.className = 'contact-message';
-        message.innerHTML = `<p><strong>${businessName}</strong> - Call: ${phone} | Visit: ${website}</p>`;
-        message.style.cssText = 'background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4CAF50;';
-        contactSection.appendChild(message);
-        setTimeout(() => message.remove(), 5000);
-    } else {
-        alert(`Contact ${businessName} at ${phone} or visit ${website}`);
-    }
 }
 
 function openBusinessWebsite(website) {

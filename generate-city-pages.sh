@@ -103,6 +103,10 @@ create_city_page() {
                         <div class="category-icon">🚗</div>
                         <span>Transport & Travel</span>
                     </a>
+                    <a href="${sanitized_city}-services-professional.html" class="category-link">
+                        <div class="category-icon">💼</div>
+                        <span>Services & Professional</span>
+                    </a>
                     <a href="${sanitized_city}-energy-utilities.html" class="category-link">
                         <div class="category-icon">⚡</div>
                         <span>Energy & Utilities</span>
