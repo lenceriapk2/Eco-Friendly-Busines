@@ -1120,6 +1120,44 @@ html {
     100% { transform: rotate(360deg); }
 }
 
+/* Business image styles */
+.business-image-container {
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.business-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.london-business-card:hover .business-main-image {
+    transform: scale(1.05);
+}
+
+.business-rank {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #2d8f47, #4caf50);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.3);
+}
+
 /* Category Page Styles */
 .category-hero {
     background: linear-gradient(135deg, #2d8f47, #4caf50);
@@ -1214,8 +1252,9 @@ html {
 
 .category-businesses-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1427,45 +1466,48 @@ html {
 }
 
 .london-category-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e8f5e8;
     border-radius: 15px;
     padding: 1.5rem;
     text-decoration: none;
-    color: white;
+    color: #2d8f47;
     transition: all 0.3s ease;
     display: block;
+    box-shadow: 0 5px 15px rgba(45, 143, 71, 0.1);
 }
 
 .london-category-card:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(45, 143, 71, 0.2);
+    border-color: #4caf50;
 }
 
 .london-category-card .category-icon {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     display: block;
+    filter: grayscale(20%);
 }
 
 .london-category-card h3 {
-    color: white;
+    color: #2d8f47;
     font-size: 1.3rem;
     margin-bottom: 0.8rem;
     font-weight: 600;
 }
 
 .london-category-card p {
-    color: rgba(255, 255, 255, 0.9);
+    color: #666;
     font-size: 0.9rem;
     line-height: 1.4;
     margin-bottom: 1rem;
 }
 
 .london-category-card .category-count {
-    background: rgba(255, 255, 255, 0.2);
+    background: #2d8f47;
+    color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
     font-size: 0.8rem;

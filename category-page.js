@@ -38,6 +38,28 @@ async function loadCategoryBusinesses(category) {
 
 // Generate fallback data for category
 function generateFallbackData(category) {
+    const categoryImages = {
+        'home-living': [
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop&crop=center'
+        ],
+        'fashion-accessories': [
+            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=300&fit=crop&crop=center'
+        ],
+        'food-beverage': [
+            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&crop=center'
+        ]
+    };
+
     const categoryData = {
         'home-living': [
             {
@@ -51,7 +73,7 @@ function generateFallbackData(category) {
                 address: "42 Shoreditch High Street, London E1 6PN",
                 phone: "+44 20 7946 0123",
                 website: "www.greenspace-furniture.co.uk",
-                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+                image: categoryImages['home-living'][0],
                 features: ["FSC Certified", "Zero VOC", "Lifetime Warranty", "Local Craft"]
             },
             {
@@ -65,7 +87,7 @@ function generateFallbackData(category) {
                 address: "78 King's Road, London SW3 4UD",
                 phone: "+44 20 7351 2567",
                 website: "www.organicrest.london",
-                image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop",
+                image: categoryImages['home-living'][1],
                 features: ["GOTS Certified", "Natural Latex", "Hypoallergenic", "Fair Trade"]
             }
         ],
@@ -81,7 +103,7 @@ function generateFallbackData(category) {
                 address: "156 Portobello Road, London W11 2DZ",
                 phone: "+44 20 7792 3456",
                 website: "www.ethicalthreads.london",
-                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
+                image: categoryImages['fashion-accessories'][0],
                 features: ["Organic Cotton", "Fair Trade", "Zero Waste", "Carbon Neutral"]
             }
         ],
@@ -97,7 +119,7 @@ function generateFallbackData(category) {
                 address: "89 Borough Market, London SE1 9AH",
                 phone: "+44 20 7407 8901",
                 website: "www.planthub.london",
-                image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
+                image: categoryImages['food-beverage'][0],
                 features: ["Local Sourcing", "Zero Waste", "Organic Certified", "Bulk Options"]
             }
         ]
@@ -130,18 +152,19 @@ function displayCategoryBusinesses() {
     });
 }
 
-// Create business card for category page
+// Create business card for category page (same structure as London page)
 function createCategoryBusinessCard(business, rank) {
     const card = document.createElement('div');
-    card.className = 'category-business-card';
+    card.className = 'london-business-card';
     
     card.innerHTML = `
         <div class="business-rank">#${rank}</div>
-        <div class="business-image-container">
-            <img src="${business.image}" alt="${business.name}" class="business-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjVGNUY1Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPkJ1c2luZXNzIEltYWdlPC90ZXh0Pgo8L3N2Zz4K'">
-        </div>
-        <div class="business-content">
-            <div class="business-header">
+        <div class="business-card-header">
+            <div class="business-image-container">
+                <img src="${business.image}" alt="${business.name}" class="business-main-image" 
+                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center'">
+            </div>
+            <div class="business-main-info">
                 <h3>${business.name}</h3>
                 <p class="business-subcategory">${business.subcategory}</p>
                 <div class="business-rating">
@@ -151,36 +174,36 @@ function createCategoryBusinessCard(business, rank) {
                     <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
                 </div>
             </div>
-            
-            <div class="business-description">
-                <p>${business.description}</p>
+        </div>
+        
+        <div class="business-description">
+            <p>${business.description}</p>
+        </div>
+        
+        <div class="business-features">
+            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+        </div>
+        
+        <div class="business-contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>${business.address}</span>
             </div>
-            
-            <div class="business-features">
-                ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-            </div>
-            
-            <div class="business-contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>${business.address}</span>
-                </div>
-            </div>
-            
-            <div class="business-actions">
-                <a href="tel:${business.phone}" class="action-btn call-btn">
-                    <i class="fas fa-phone"></i>
-                    Call Now
-                </a>
-                <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
-                    <i class="fas fa-globe"></i>
-                    Visit Website
-                </a>
-                <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
-                    <i class="fas fa-directions"></i>
-                    Directions
-                </button>
-            </div>
+        </div>
+        
+        <div class="business-actions">
+            <a href="tel:${business.phone}" class="action-btn call-btn">
+                <i class="fas fa-phone"></i>
+                Call Now
+            </a>
+            <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
+                <i class="fas fa-globe"></i>
+                Visit Website
+            </a>
+            <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
+                <i class="fas fa-directions"></i>
+                Directions
+            </button>
         </div>
     `;
     

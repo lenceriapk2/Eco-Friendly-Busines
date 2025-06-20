@@ -146,20 +146,62 @@ async function getPlaceDetails(placeId) {
 
 // Transform API data to our business format
 function transformPlaceToBusinessFormat(place, category, subcategory) {
-    const categoryIcons = {
-        'home-living': '🏠',
-        'fashion-accessories': '👗',
-        'food-beverage': '🍽️',
-        'health-beauty': '🌿',
-        'products-retail': '🛠️',
-        'transport-travel': '🚲',
-        'services-professional': '🏢',
-        'energy-utilities': '🔌',
-        'recycling-waste': '♻️',
-        'education-nonprofits': '🌍'
+    const categoryImages = {
+        'home-living': [
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop&crop=center'
+        ],
+        'fashion-accessories': [
+            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=400&h=300&fit=crop&crop=center'
+        ],
+        'food-beverage': [
+            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop&crop=center'
+        ],
+        'health-beauty': [
+            'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop&crop=center'
+        ],
+        'products-retail': [
+            'https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&crop=center'
+        ],
+        'transport-travel': [
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop&crop=center'
+        ],
+        'services-professional': [
+            'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center'
+        ],
+        'energy-utilities': [
+            'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop&crop=center'
+        ],
+        'recycling-waste': [
+            'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center'
+        ],
+        'education-nonprofits': [
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center',
+            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center'
+        ]
     };
 
     const features = generateFeatures(place, category);
+    const randomImageIndex = Math.floor(Math.random() * (categoryImages[category]?.length || 1));
+    const defaultImage = 'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center';
     
     return {
         id: place.id,
@@ -172,7 +214,7 @@ function transformPlaceToBusinessFormat(place, category, subcategory) {
         address: place.formattedAddress || 'London, UK',
         phone: place.nationalPhoneNumber || '+44 20 7946 0000',
         website: cleanWebsiteUrl(place.websiteUri) || 'www.example.co.uk',
-        image: categoryIcons[category] || '🏢',
+        image: categoryImages[category]?.[randomImageIndex] || defaultImage,
         features: features,
         businessStatus: place.businessStatus || 'OPERATIONAL'
     };
