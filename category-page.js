@@ -40,23 +40,72 @@ async function loadCategoryBusinesses(category) {
 function generateFallbackData(category) {
     const categoryImages = {
         'home-living': [
-            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop&crop=center'
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop', 
+            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1615874694520-474822394e73?w=400&h=300&fit=crop'
         ],
         'fashion-accessories': [
-            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=300&fit=crop&crop=center'
+            'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1525562723836-dca67a71d5f1?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=300&fit=crop'
         ],
         'food-beverage': [
-            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=300&fit=crop&crop=center',
-            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&crop=center'
+            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop'
+        ],
+        'health-beauty': [
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop'
+        ],
+        'products-retail': [
+            'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1573855619003-97b4799dcd8b?w=400&h=300&fit=crop'
+        ],
+        'transport-travel': [
+            'https://images.unsplash.com/photo-1558618666-fcd25856cd07?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1502780402662-acc01917fcce?w=400&h=300&fit=crop'
+        ],
+        'services-professional': [
+            'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'
+        ],
+        'energy-utilities': [
+            'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop'
+        ],
+        'recycling-waste': [
+            'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1558618666-fcd25856cd07?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop'
+        ],
+        'education-nonprofits': [
+            'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop'
         ]
     };
 
@@ -286,12 +335,15 @@ function createCategoryBusinessCard(business, rank) {
     card.className = 'london-business-card';
     
     card.innerHTML = `
-        <div class="business-rank">#${rank}</div>
         <div class="business-card-header">
             <div class="business-image-container">
                 <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center'">
+                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop'">
             </div>
+            <div class="business-rank">#${rank}</div>
+        </div>
+        
+        <div class="business-content">
             <div class="business-main-info">
                 <h3>${business.name}</h3>
                 <p class="business-subcategory">${business.subcategory}</p>
@@ -302,36 +354,36 @@ function createCategoryBusinessCard(business, rank) {
                     <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="business-description">
-            <p>${business.description}</p>
-        </div>
-        
-        <div class="business-features">
-            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-        </div>
-        
-        <div class="business-contact-info">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>${business.address}</span>
+            
+            <div class="business-description">
+                <p>${business.description}</p>
             </div>
-        </div>
-        
-        <div class="business-actions">
-            <a href="tel:${business.phone}" class="action-btn call-btn">
-                <i class="fas fa-phone"></i>
-                Call Now
-            </a>
-            <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
-                <i class="fas fa-globe"></i>
-                Visit Website
-            </a>
-            <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
-                <i class="fas fa-directions"></i>
-                Directions
-            </button>
+            
+            <div class="business-features">
+                ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            
+            <div class="business-contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${business.address}</span>
+                </div>
+            </div>
+            
+            <div class="business-actions">
+                <a href="tel:${business.phone}" class="action-btn call-btn">
+                    <i class="fas fa-phone"></i>
+                    Call
+                </a>
+                <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
+                    <i class="fas fa-globe"></i>
+                    Website
+                </a>
+                <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
+                    <i class="fas fa-directions"></i>
+                    Directions
+                </button>
+            </div>
         </div>
     `;
     

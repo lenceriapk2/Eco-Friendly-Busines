@@ -151,66 +151,70 @@ function displayBusinesses(businesses) {
     }
 
     businesses.forEach(business => {
-        const businessCard = createBusinessCard(business);
+        const businessCard = createBusinessCard(business, businesses.indexOf(business));
         businessesGrid.appendChild(businessCard);
     });
 }
 
 // Create business card
-function createBusinessCard(business) {
-    const card = document.createElement('div');
-    card.className = 'london-business-card';
+function createBusinessCard(business, index) {
+    const businessCard = document.createElement('div');
+    businessCard.className = 'london-business-card';
 
-    card.innerHTML = `
-        <div class="business-card-header">
-            <div class="business-image-container">
-                <img src="${business.image}" alt="${business.name}" class="business-main-image" 
-                     onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center'">
+    businessCard.innerHTML = `
+            <div class="business-card-header">
+                <div class="business-image-container">
+                    <img src="${business.image}" alt="${business.name}" class="business-main-image" 
+                         onerror="this.src='https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop'">
+                </div>
+                <div class="business-rank">#${index + 1}</div>
             </div>
-            <div class="business-main-info">
-                <h3>${business.name}</h3>
-                <p class="business-subcategory">${business.subcategory}</p>
-                <div class="business-rating">
-                    <div class="stars">
-                        ${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5 - Math.floor(business.rating))}
+
+            <div class="business-content">
+                <div class="business-main-info">
+                    <h3>${business.name}</h3>
+                    <p class="business-subcategory">${business.subcategory}</p>
+                    <div class="business-rating">
+                        <div class="stars">
+                            ${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5 - Math.floor(business.rating))}
+                        </div>
+                        <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
                     </div>
-                    <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
+                </div>
+
+                <div class="business-description">
+                    <p>${business.description}</p>
+                </div>
+
+                <div class="business-features">
+                    ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                </div>
+
+                <div class="business-contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${business.address}</span>
+                    </div>
+                </div>
+
+                <div class="business-actions">
+                    <a href="tel:${business.phone}" class="action-btn call-btn">
+                        <i class="fas fa-phone"></i>
+                        Call
+                    </a>
+                    <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
+                        <i class="fas fa-globe"></i>
+                        Website
+                    </a>
+                    <button class="action-btn star-btn" onclick="addToFavorites('${business.name}')">
+                        <i class="fas fa-star"></i>
+                        Save
+                    </button>
                 </div>
             </div>
-        </div>
+        `;
 
-        <div class="business-description">
-            <p>${business.description}</p>
-        </div>
-
-        <div class="business-features">
-            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-        </div>
-
-        <div class="business-contact-info">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>${business.address}</span>
-            </div>
-        </div>
-
-        <div class="business-actions">
-            <a href="tel:${business.phone}" class="action-btn call-btn">
-                <i class="fas fa-phone"></i>
-                Call Now
-            </a>
-            <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
-                <i class="fas fa-globe"></i>
-                Visit Website
-            </a>
-            <button class="action-btn star-btn" onclick="toggleFavorite(${business.id})">
-                <i class="fas fa-star"></i>
-                Favorite
-            </button>
-        </div>
-    `;
-
-    return card;
+    return businessCard;
 }
 
 // Toggle favorite business
