@@ -1,0 +1,308 @@
+
+// City Page JavaScript Handler - Generates unique data for each city
+
+let cityBusinesses = [];
+let currentCityName = '';
+
+// Initialize city page with unique data for each city
+async function initializeCityPage(cityName) {
+    currentCityName = cityName;
+    console.log(`Initializing ${cityName} page with unique business data`);
+    
+    await loadCityBusinesses(cityName);
+    displayCityBusinesses();
+    updateCityStats();
+    populateCategories();
+}
+
+// Load unique businesses for the specific city
+async function loadCityBusinesses(cityName) {
+    try {
+        // Try to load from API first
+        if (window.PlacesAPI && window.PlacesAPI.fetchAllBusinessesForCity) {
+            const apiBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName);
+            if (apiBusinesses && apiBusinesses.length > 0) {
+                cityBusinesses = apiBusinesses;
+                console.log(`Loaded ${apiBusinesses.length} businesses from API for ${cityName}`);
+                return;
+            }
+        }
+        
+        // Generate unique fallback data for this city
+        cityBusinesses = generateCityBusinessData(cityName);
+        console.log(`Generated unique data for ${cityName}: ${cityBusinesses.length} businesses`);
+        
+    } catch (error) {
+        console.error(`Error loading businesses for ${cityName}:`, error);
+        cityBusinesses = generateCityBusinessData(cityName);
+    }
+}
+
+// Generate unique business data for each city
+function generateCityBusinessData(cityName) {
+    const businessTypes = [
+        { category: 'health-beauty', name: 'Spa & Wellness', icon: '🧘', services: ['Organic Treatments', 'Eco Spa', 'Natural Beauty'] },
+        { category: 'food-beverage', name: 'Restaurants', icon: '🍽️', services: ['Plant-Based', 'Local Organic', 'Zero Waste'] },
+        { category: 'transport-travel', name: 'Transport', icon: '🚲', services: ['E-Bike Rental', 'Electric Taxi', 'Car Sharing'] },
+        { category: 'services-professional', name: 'Professional Services', icon: '💼', services: ['Green Consulting', 'Eco Design', 'Sustainability Audit'] },
+        { category: 'products-retail', name: 'Retail', icon: '🛍️', services: ['Eco Products', 'Sustainable Fashion', 'Zero Waste Store'] },
+        { category: 'energy-utilities', name: 'Energy', icon: '⚡', services: ['Solar Installation', 'Wind Energy', 'Energy Audit'] },
+        { category: 'recycling-waste', name: 'Recycling', icon: '♻️', services: ['E-Waste', 'Composting', 'Upcycling'] },
+        { category: 'education-nonprofits', name: 'Education', icon: '📚', services: ['Environmental Ed', 'Green Training', 'Sustainability Courses'] }
+    ];
+
+    const businesses = [];
+    let businessId = 1;
+
+    // Generate 10-15 businesses per category for variety
+    businessTypes.forEach(type => {
+        const count = Math.floor(Math.random() * 6) + 10; // 10-15 businesses per category
+        
+        for (let i = 0; i < count; i++) {
+            const business = {
+                id: businessId++,
+                name: generateBusinessName(type.name, cityName, i),
+                category: type.category,
+                subcategory: type.services[Math.floor(Math.random() * type.services.length)],
+                rating: (Math.random() * 1.5 + 3.5).toFixed(1), // 3.5-5.0 rating
+                reviewCount: Math.floor(Math.random() * 200) + 20,
+                description: generateBusinessDescription(type.name, cityName),
+                address: generateAddress(cityName),
+                phone: generatePhoneNumber(),
+                website: generateWebsite(type.name, cityName),
+                image: type.icon,
+                features: generateFeatures(type.category)
+            };
+            businesses.push(business);
+        }
+    });
+
+    return businesses;
+}
+
+// Generate unique business names for each city
+function generateBusinessName(businessType, cityName, index) {
+    const prefixes = ['Green', 'Eco', 'Sustainable', 'Earth', 'Pure', 'Natural', 'Clean', 'Organic'];
+    const suffixes = ['Hub', 'Centre', 'Studio', 'Co', 'Solutions', 'Services', 'Group', 'Collective'];
+    
+    const businessNames = {
+        'Spa & Wellness': ['Wellness', 'Beauty', 'Spa', 'Retreat', 'Sanctuary'],
+        'Restaurants': ['Kitchen', 'Bistro', 'Café', 'Eatery', 'Table'],
+        'Transport': ['Mobility', 'Transport', 'Travel', 'Rides', 'Move'],
+        'Professional Services': ['Consulting', 'Advisors', 'Partners', 'Experts', 'Professionals'],
+        'Retail': ['Store', 'Shop', 'Market', 'Boutique', 'Emporium'],
+        'Energy': ['Energy', 'Power', 'Solar', 'Electric', 'Renewable'],
+        'Recycling': ['Recycling', 'Waste', 'Recovery', 'Circular', 'Reuse'],
+        'Education': ['Academy', 'Institute', 'Learning', 'Education', 'Training']
+    };
+
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const businessWord = businessNames[businessType] ? 
+        businessNames[businessType][Math.floor(Math.random() * businessNames[businessType].length)] :
+        'Solutions';
+    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+    return `${prefix} ${businessWord} ${cityName}`;
+}
+
+// Generate business descriptions
+function generateBusinessDescription(businessType, cityName) {
+    const descriptions = {
+        'Spa & Wellness': `Premier eco-friendly wellness center in ${cityName}, offering organic treatments and sustainable beauty services.`,
+        'Restaurants': `Sustainable dining experience in ${cityName}, featuring locally-sourced ingredients and plant-based options.`,
+        'Transport': `Eco-friendly transportation solutions serving ${cityName} with electric and sustainable mobility options.`,
+        'Professional Services': `Leading sustainability consultancy in ${cityName}, helping businesses reduce their environmental impact.`,
+        'Retail': `Sustainable retail store in ${cityName}, offering eco-friendly products and zero-waste shopping solutions.`,
+        'Energy': `Renewable energy specialists serving ${cityName} with solar, wind, and energy efficiency solutions.`,
+        'Recycling': `Comprehensive recycling and waste management services for ${cityName}, promoting circular economy principles.`,
+        'Education': `Environmental education and sustainability training programs for the ${cityName} community.`
+    };
+
+    return descriptions[businessType] || `Sustainable business serving the ${cityName} community with eco-friendly solutions.`;
+}
+
+// Generate addresses for each city
+function generateAddress(cityName) {
+    const streetNumbers = Math.floor(Math.random() * 200) + 1;
+    const streetNames = ['High Street', 'Main Road', 'Green Lane', 'Park Avenue', 'Church Street', 'Market Square', 'Victoria Road', 'Mill Lane'];
+    const streetName = streetNames[Math.floor(Math.random() * streetNames.length)];
+    
+    return `${streetNumbers} ${streetName}, ${cityName}`;
+}
+
+// Generate phone numbers
+function generatePhoneNumber() {
+    const area = Math.floor(Math.random() * 9000) + 1000;
+    const number = Math.floor(Math.random() * 900000) + 100000;
+    return `+44 ${area.toString().slice(0,2)} ${area.toString().slice(2)} ${number.toString().slice(0,4)}`;
+}
+
+// Generate website URLs
+function generateWebsite(businessType, cityName) {
+    const domain = businessType.toLowerCase().replace(/[^a-z]/g, '') + cityName.toLowerCase().replace(/[^a-z]/g, '');
+    return `www.${domain}.co.uk`;
+}
+
+// Generate business features
+function generateFeatures(category) {
+    const featuresByCategory = {
+        'health-beauty': ['Organic Products', 'Cruelty-Free', 'Natural Ingredients', 'Eco Packaging'],
+        'food-beverage': ['Local Sourcing', 'Organic Certified', 'Zero Waste', 'Plant-Based Options'],
+        'transport-travel': ['Electric Vehicles', 'Carbon Neutral', 'Bike Friendly', 'Public Transport Links'],
+        'services-professional': ['Carbon Footprint Analysis', 'Sustainability Reporting', 'Green Certification', 'Energy Audits'],
+        'products-retail': ['Sustainable Materials', 'Fair Trade', 'Recyclable Packaging', 'Local Products'],
+        'energy-utilities': ['Renewable Energy', 'Energy Efficiency', 'Solar Installation', 'Smart Technology'],
+        'recycling-waste': ['E-Waste Processing', 'Composting Services', 'Circular Economy', 'Waste Reduction'],
+        'education-nonprofits': ['Environmental Education', 'Community Outreach', 'Green Training', 'Sustainability Workshops']
+    };
+
+    const features = featuresByCategory[category] || ['Eco-Friendly', 'Sustainable', 'Environmentally Conscious', 'Green Certified'];
+    return features.slice(0, 4); // Return 4 features
+}
+
+// Display city businesses
+function displayCityBusinesses() {
+    const grid = document.getElementById('londonBusinessesGrid') || document.getElementById('businessesGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    cityBusinesses.slice(0, 12).forEach(business => {
+        const businessCard = createBusinessCard(business);
+        grid.appendChild(businessCard);
+    });
+}
+
+// Create business card element
+function createBusinessCard(business) {
+    const card = document.createElement('div');
+    card.className = 'london-business-card';
+    
+    card.innerHTML = `
+        <div class="business-card-header">
+            <div class="business-logo-large">${business.image}</div>
+            <div class="business-info">
+                <h3>${business.name}</h3>
+                <p class="business-category">${business.subcategory}</p>
+                <div class="business-rating">
+                    <span class="stars">${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5-Math.floor(business.rating))}</span>
+                    <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
+                </div>
+            </div>
+        </div>
+        
+        <p class="business-description">${business.description}</p>
+        
+        <div class="business-features">
+            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+        </div>
+        
+        <div class="business-contact">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>${business.address}</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>${business.phone}</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span>${business.website}</span>
+            </div>
+        </div>
+        
+        <div class="business-actions">
+            <button class="action-btn btn-primary" onclick="window.open('https://${business.website}', '_blank')">
+                <i class="fas fa-external-link-alt"></i> Visit Website
+            </button>
+            <button class="action-btn btn-secondary" onclick="callBusiness('${business.phone}')">
+                <i class="fas fa-phone"></i> Call Now
+            </button>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Update city statistics
+function updateCityStats() {
+    const titleElement = document.querySelector('.city-hero h1');
+    const businessCountElement = document.querySelector('.city-stats .stat-number');
+    
+    if (titleElement) {
+        titleElement.textContent = `Discover Eco-Friendly Businesses in ${currentCityName}`;
+    }
+    
+    if (businessCountElement) {
+        businessCountElement.textContent = `${cityBusinesses.length}+`;
+    }
+}
+
+// Populate categories for the city
+function populateCategories() {
+    const categoriesGrid = document.getElementById('categoriesGrid');
+    if (!categoriesGrid) return;
+
+    const categories = [
+        { key: 'health-beauty', name: 'Health & Beauty', icon: '💄', count: cityBusinesses.filter(b => b.category === 'health-beauty').length },
+        { key: 'food-beverage', name: 'Food & Beverage', icon: '🍽️', count: cityBusinesses.filter(b => b.category === 'food-beverage').length },
+        { key: 'transport-travel', name: 'Transport & Travel', icon: '🚗', count: cityBusinesses.filter(b => b.category === 'transport-travel').length },
+        { key: 'services-professional', name: 'Professional Services', icon: '💼', count: cityBusinesses.filter(b => b.category === 'services-professional').length },
+        { key: 'products-retail', name: 'Products & Retail', icon: '🛍️', count: cityBusinesses.filter(b => b.category === 'products-retail').length },
+        { key: 'energy-utilities', name: 'Energy & Utilities', icon: '⚡', count: cityBusinesses.filter(b => b.category === 'energy-utilities').length },
+        { key: 'recycling-waste', name: 'Recycling & Waste', icon: '♻️', count: cityBusinesses.filter(b => b.category === 'recycling-waste').length },
+        { key: 'education-nonprofits', name: 'Education & Nonprofits', icon: '📚', count: cityBusinesses.filter(b => b.category === 'education-nonprofits').length }
+    ];
+
+    categoriesGrid.innerHTML = '';
+    
+    categories.forEach(category => {
+        const citySlug = currentCityName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        const categoryCard = document.createElement('div');
+        categoryCard.className = 'category-card';
+        categoryCard.onclick = () => window.location.href = `${citySlug}-${category.key}.html`;
+        
+        categoryCard.innerHTML = `
+            <div class="category-icon">${category.icon}</div>
+            <h3>${category.name}</h3>
+            <p>${category.count} businesses</p>
+        `;
+        
+        categoriesGrid.appendChild(categoryCard);
+    });
+}
+
+// Filter businesses by category
+function filterByCategory(category) {
+    const filtered = category === 'all' ? cityBusinesses : cityBusinesses.filter(b => b.category === category);
+    displayFilteredBusinesses(filtered);
+}
+
+// Display filtered businesses
+function displayFilteredBusinesses(businesses) {
+    const grid = document.getElementById('londonBusinessesGrid') || document.getElementById('businessesGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    
+    businesses.forEach(business => {
+        const businessCard = createBusinessCard(business);
+        grid.appendChild(businessCard);
+    });
+}
+
+// Utility functions
+function callBusiness(phone) {
+    window.location.href = `tel:${phone}`;
+}
+
+// Export for global access
+window.CityPage = {
+    initializeCityPage,
+    loadCityBusinesses,
+    displayCityBusinesses,
+    filterByCategory,
+    cityBusinesses: () => cityBusinesses,
+    currentCity: () => currentCityName
+};

@@ -219,14 +219,10 @@ create_city_page() {
 
     <script src="components.js"></script>
     <script src="places-api.js"></script>
-    <script src="london-data.js"></script>
-    <script src="london.js"></script>
+    <script src="city-page.js"></script>
     <script>
-        // Override the city for this page
-        currentCity = '${city_name}';
-        
         document.addEventListener('DOMContentLoaded', () => {
-            initializeLondonPage('${city_name}');
+            initializeCityPage('${city_name}');
         });
     </script>
 </body>
