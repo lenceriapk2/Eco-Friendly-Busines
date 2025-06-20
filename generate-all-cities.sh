@@ -95,23 +95,7 @@ create_city_page() {
             <h1>Top 10 Eco-Friendly Businesses in ${city_name}</h1>
             <p class="hero-description">Discover ${city_name}'s leading sustainable businesses committed to environmental responsibility and ethical practices.</p>
 
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search businesses in ${city_name}...">
-                <select id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <option value="home-living">Home & Living</option>
-                    <option value="fashion-accessories">Fashion & Accessories</option>
-                    <option value="food-beverage">Food & Beverage</option>
-                    <option value="health-beauty">Health & Beauty</option>
-                    <option value="products-retail">Products & Retail</option>
-                    <option value="transport-travel">Transport & Travel</option>
-                    <option value="services-professional">Services & Professional</option>
-                    <option value="energy-utilities">Energy & Utilities</option>
-                    <option value="recycling-waste">Recycling & Waste</option>
-                    <option value="education-nonprofits">Education & Nonprofits</option>
-                </select>
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
+           
         </div>
     </section>
 
@@ -139,37 +123,7 @@ create_city_page() {
         </div>
     </section>
 
-    <!-- Category Filter Section -->
-    <section class="category-filter-section">
-        <div class="container">
-            <div class="category-filter-container">
-                <div class="filter-group">
-                    <label for="sortBy">Sort by:</label>
-                    <select id="sortBy">
-                        <option value="rating">Highest Rated</option>
-                        <option value="reviews">Most Reviewed</option>
-                        <option value="name">Name A-Z</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="categorySelect">Category:</label>
-                    <select id="categorySelect">
-                        <option value="">All Categories</option>
-                        <option value="home-living">Home & Living</option>
-                        <option value="fashion-accessories">Fashion & Accessories</option>
-                        <option value="food-beverage">Food & Beverage</option>
-                        <option value="health-beauty">Health & Beauty</option>
-                        <option value="products-retail">Products & Retail</option>
-                        <option value="transport-travel">Transport & Travel</option>
-                        <option value="services-professional">Services & Professional</option>
-                        <option value="energy-utilities">Energy & Utilities</option>
-                        <option value="recycling-waste">Recycling & Waste</option>
-                        <option value="education-nonprofits">Education & Nonprofits</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Categories Section -->
     <section class="london-categories">
@@ -403,23 +357,7 @@ create_city_category_page() {
             <h1>Top 10 Eco-Friendly Businesses in ${city_name}</h1>
             <p class="hero-description">Discover ${city_name}'s leading sustainable businesses committed to environmental responsibility and ethical practices.</p>
 
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search businesses in ${city_name}...">
-                <select id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <option value="home-living">Home & Living</option>
-                    <option value="fashion-accessories">Fashion & Accessories</option>
-                    <option value="food-beverage">Food & Beverage</option>
-                    <option value="health-beauty">Health & Beauty</option>
-                    <option value="products-retail">Products & Retail</option>
-                    <option value="transport-travel">Transport & Travel</option>
-                    <option value="services-professional">Services & Professional</option>
-                    <option value="energy-utilities">Energy & Utilities</option>
-                    <option value="recycling-waste">Recycling & Waste</option>
-                    <option value="education-nonprofits">Education & Nonprofits</option>
-                </select>
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
+           
         </div>
     </section>
 
@@ -447,37 +385,7 @@ create_city_category_page() {
         </div>
     </section>
 
-    <!-- Category Filter Section -->
-    <section class="category-filter-section">
-        <div class="container">
-            <div class="category-filter-container">
-                <div class="filter-group">
-                    <label for="sortBy">Sort by:</label>
-                    <select id="sortBy">
-                        <option value="rating">Highest Rated</option>
-                        <option value="reviews">Most Reviewed</option>
-                        <option value="name">Name A-Z</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="categorySelect">Category:</label>
-                    <select id="categorySelect">
-                        <option value="">All Categories</option>
-                        <option value="home-living">Home & Living</option>
-                        <option value="fashion-accessories">Fashion & Accessories</option>
-                        <option value="food-beverage">Food & Beverage</option>
-                        <option value="health-beauty">Health & Beauty</option>
-                        <option value="products-retail">Products & Retail</option>
-                        <option value="transport-travel">Transport & Travel</option>
-                        <option value="services-professional">Services & Professional</option>
-                        <option value="energy-utilities">Energy & Utilities</option>
-                        <option value="recycling-waste">Recycling & Waste</option>
-                        <option value="education-nonprofits">Education & Nonprofits</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Top Businesses Section -->
     <section class="london-businesses">
