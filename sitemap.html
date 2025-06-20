@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - EcoSustainable.co.uk</title>
+    <meta name="description" content="Complete sitemap of EcoSustainable.co.uk - Browse all eco-friendly business listings by city and category across the UK.">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Sitemap Hero -->
+    <section class="sitemap-hero">
+        <div class="container">
+            <h1>Site Map</h1>
+            <p>Complete directory of all pages on EcoSustainable.co.uk</p>
+        </div>
+    </section>
+
+    <!-- Sitemap Content -->
+    <section class="sitemap-content">
+        <div class="container">
+            <div class="sitemap-grid">
+                <!-- Main Pages -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-home"></i> Main Pages</h2>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">All Categories</a></li>
+                        <li><a href="cities.html">All Cities</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <!-- Categories -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-tags"></i> Categories</h2>
+                    <ul>
+                        <li><a href="health-beauty-category.html">Health & Beauty</a></li>
+                        <li><a href="products-retail-category.html">Products & Retail</a></li>
+                        <li><a href="transport-travel-category.html">Transport & Travel</a></li>
+                        <li><a href="services-professional-category.html">Services & Professional</a></li>
+                        <li><a href="energy-utilities-category.html">Energy & Utilities</a></li>
+                        <li><a href="recycling-waste-category.html">Recycling & Waste</a></li>
+                        <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
+                    </ul>
+                </div>
+
+                <!-- Featured Cities -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-map-marker-alt"></i> Featured Cities</h2>
+                    <div class="cities-sitemap-grid">
+                        <div class="region-sitemap">
+                            <h3>England</h3>
+                            <div class="cities-list" id="englandSitemapCities"></div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Scotland</h3>
+                            <div class="cities-list" id="scotlandSitemapCities"></div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Wales</h3>
+                            <div class="cities-list" id="walesSitemapCities"></div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Northern Ireland</h3>
+                            <div class="cities-list" id="northernIrelandSitemapCities"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="cities-page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSitemapCities();
+        });
+
+        function populateSitemapCities() {
+            Object.keys(citiesByRegion).forEach(region => {
+                const listElement = document.getElementById(`${region}SitemapCities`);
+                if (listElement) {
+                    const cityLinks = citiesByRegion[region].map(city => 
+                        `<a href="${city.slug}.html">${city.name}</a>`
+                    ).join(', ');
+                    listElement.innerHTML = cityLinks;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1978,3 +1978,319 @@ html {
     gap: 1.5rem;
     align-items: start;
 }
+
+/* Categories Overview Page Styles */
+.categories-hero {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.categories-showcase {
+    padding: 80px 0;
+}
+
+.categories-main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.category-showcase-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.category-showcase-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #4CAF50;
+}
+
+.category-showcase-card .category-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-showcase-card h3 {
+    color: #2E7D32;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.category-showcase-card p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.business-count {
+    background: #E8F5E8;
+    color: #2E7D32;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Cities Overview Page Styles */
+.cities-hero {
+    background: linear-gradient(135deg, #2196F3, #1565C0);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.search-cities {
+    display: flex;
+    max-width: 500px;
+    margin: 30px auto 0;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.search-cities input {
+    flex: 1;
+    padding: 15px 25px;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+}
+
+.search-cities button {
+    background: #4CAF50;
+    border: none;
+    padding: 15px 25px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-cities button:hover {
+    background: #45a049;
+}
+
+.cities-by-region {
+    padding: 80px 0;
+}
+
+.region-section {
+    margin-bottom: 60px;
+}
+
+.region-section h2 {
+    color: #2E7D32;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.flag {
+    font-size: 2.5rem;
+}
+
+.cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.city-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.city-card:hover {
+    transform: translateY(-5px);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.city-card h3 {
+    color: #2E7D32;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.city-card p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.city-arrow {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Sitemap Styles */
+.sitemap-hero {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.sitemap-content {
+    padding: 80px 0;
+}
+
+.sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.sitemap-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sitemap-section h2 {
+    color: #2E7D32;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sitemap-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sitemap-section li {
+    margin-bottom: 10px;
+}
+
+.sitemap-section a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sitemap-section a:hover {
+    color: #4CAF50;
+}
+
+.cities-sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.region-sitemap h3 {
+    color: #2E7D32;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.cities-list a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.cities-list a:hover {
+    color: #4CAF50;
+}
+
+/* Navigation Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background:white;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.nav-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background: #f8f9fa;
+    color: #4CAF50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .categories-main-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .region-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .flag {
+        font-size: 2rem;
+    }
+
+    .sitemap-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .cities-sitemap-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .nav-dropdown:hover .dropdown-content {
+        display: none;
+    }
+}

@@ -1,4 +1,3 @@
-
 // Reusable Components for EcoSustainable.co.uk
 
 // Header Component
@@ -8,13 +7,26 @@ function createHeader() {
             <nav class="navbar">
                 <div class="nav-container">
                     <div class="logo">
-                        <i class="fas fa-leaf"></i>
-                        <span>EcoSustainable.co.uk</span>
+                        <a href="index.html">
+                            <i class="fas fa-leaf"></i>
+                            <span>EcoSustainable.co.uk</span>
+                        </a>
                     </div>
                     <ul class="nav-menu">
                         <li><a href="index.html" class="nav-link">Home</a></li>
-                        <li><a href="#categories" class="nav-link">Categories</a></li>
-                        <li><a href="#cities" class="nav-link">Cities</a></li>
+                        <li class="nav-dropdown">
+                            <a href="categories.html" class="nav-link">Categories <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="health-beauty-category.html">Health & Beauty</a>
+                                <a href="products-retail-category.html">Products & Retail</a>
+                                <a href="transport-travel-category.html">Transport & Travel</a>
+                                <a href="services-professional-category.html">Services & Professional</a>
+                                <a href="energy-utilities-category.html">Energy & Utilities</a>
+                                <a href="recycling-waste-category.html">Recycling & Waste</a>
+                                <a href="education-nonprofits-category.html">Education & Nonprofits</a>
+                            </div>
+                        </li>
+                        <li><a href="cities.html" class="nav-link">Cities</a></li>
                         <li><a href="#about" class="nav-link">About</a></li>
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
@@ -41,37 +53,59 @@ function createFooter() {
                             <span>EcoSustainable.co.uk</span>
                         </div>
                         <p>Connecting conscious consumers with sustainable businesses across the UK.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
+
                     <div class="footer-section">
                         <h4>Quick Links</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="#categories">Categories</a></li>
-                            <li><a href="#cities">Cities</a></li>
-                            <li><a href="#about">About</a></li>
+                            <li><a href="categories.html">All Categories</a></li>
+                            <li><a href="cities.html">All Cities</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
+
                     <div class="footer-section">
-                        <h4>Cities</h4>
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="health-beauty-category.html">Health & Beauty</a></li>
+                            <li><a href="products-retail-category.html">Products & Retail</a></li>
+                            <li><a href="transport-travel-category.html">Transport & Travel</a></li>
+                            <li><a href="services-professional-category.html">Services & Professional</a></li>
+                            <li><a href="energy-utilities-category.html">Energy & Utilities</a></li>
+                            <li><a href="recycling-waste-category.html">Recycling & Waste</a></li>
+                            <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Featured Cities</h4>
                         <ul>
                             <li><a href="london.html">London</a></li>
-                            <li><a href="#">Manchester</a></li>
-                            <li><a href="#">Birmingham</a></li>
-                            <li><a href="#">Edinburgh</a></li>
+                            <li><a href="manchester.html">Manchester</a></li>
+                            <li><a href="birmingham.html">Birmingham</a></li>
+                            <li><a href="edinburgh.html">Edinburgh</a></li>
+                            <li><a href="glasgow.html">Glasgow</a></li>
+                            <li><a href="cities.html">View All Cities</a></li>
                         </ul>
                     </div>
-                    <div class="footer-section">
-                        <h4>Follow Us</h4>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
                 </div>
+
                 <div class="footer-bottom">
                     <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#privacy">Privacy Policy</a>
+                        <a href="#terms">Terms of Service</a>
+                        <a href="sitemap.html">Sitemap</a>
+                    </div>
                 </div>
             </div>
         </footer>
