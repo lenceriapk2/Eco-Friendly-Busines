@@ -70,7 +70,7 @@ function createFooter() {
                             <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-section">
                         <h4>Legal</h4>
                         <ul>

@@ -3264,3 +3264,136 @@ font-size: 1rem;
 .category-icon {
     display: none;
 }
+
+/* New Page Styles */
+.page-hero {
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-main h2 {
+    color: #2E7D32;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.content-main h3 {
+    color: #2E7D32;
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.value-item {
+    padding: 1.5rem;
+    border: 2px solid #E8F5E8;
+    border-radius: 12px;
+}
+
+.value-item h4 {
+    color: #2E7D32;
+    margin-bottom: 0.5rem;
+}
+
+.contact-page {
+    padding: 80px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-method i {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+}
+
+.contact-form-section {
+    background: #F8F9FA;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.legal-content {
+    padding: 80px 0;
+}
+
+.legal-text {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.legal-text h2 {
+    color: #2E7D32;
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+}
+
+.primary-cta {
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    font-weight: 600;
+    padding: 15px 30px !important;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+}
