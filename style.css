@@ -661,6 +661,7 @@ body {
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0,0,0,0.05);
         padding: 2rem 0;
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -670,6 +671,7 @@ body {
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
     
     .hero-content h1 {
@@ -704,6 +706,62 @@ body {
     .businesses-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* London Page Mobile */
+    .city-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .category-filter-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .businesses-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .businesses-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .london-businesses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .london-business-card {
+        padding: 1.5rem;
+    }
+    
+    .business-card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .business-logo-large {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin: 0 auto;
+    }
+    
+    .business-actions {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        min-width: auto;
+        padding: 12px 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -718,6 +776,279 @@ body {
     .container {
         padding: 0 15px;
     }
+}
+
+/* City Hero Section */
+.city-hero {
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    padding: 120px 0 60px;
+}
+
+.city-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.city-hero h1 {
+    font-size: 3rem;
+    color: #2d8f47;
+    margin-bottom: 1.5rem;
+}
+
+.city-hero p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+/* Category Filter Container */
+.category-filter-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #2d8f47;
+    font-size: 0.9rem;
+}
+
+.category-dropdown {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.category-dropdown:focus {
+    border-color: #4caf50;
+}
+
+/* London Businesses Section */
+.london-businesses {
+    padding: 40px 0 80px;
+}
+
+.businesses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.businesses-header h2 {
+    color: #2d8f47;
+    font-size: 2rem;
+}
+
+.results-count {
+    color: #666;
+    font-size: 1rem;
+}
+
+.london-businesses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* London Business Card */
+.london-business-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #f0f0f0;
+}
+
+.london-business-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.business-card-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.business-logo-large {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #4caf50, #8bc34a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.business-main-info {
+    flex: 1;
+}
+
+.business-main-info h3 {
+    color: #2d8f47;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.business-subcategory {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.business-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stars {
+    color: #ffc107;
+    font-size: 1.1rem;
+}
+
+.rating-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.business-description {
+    margin-bottom: 1.5rem;
+}
+
+.business-description p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.business-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+    background: #e8f5e8;
+    color: #2d8f47;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.business-contact-info {
+    margin-bottom: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.contact-item i {
+    color: #4caf50;
+    width: 16px;
+}
+
+.business-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.call-btn {
+    background: #4caf50;
+    color: white;
+}
+
+.call-btn:hover {
+    background: #2d8f47;
+}
+
+.website-btn {
+    background: #2196f3;
+    color: white;
+}
+
+.website-btn:hover {
+    background: #1976d2;
+}
+
+.star-btn {
+    background: #ff9800;
+    color: white;
+}
+
+.star-btn:hover {
+    background: #f57c00;
+}
+
+/* No Results */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.no-results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    color: #2d8f47;
+    margin-bottom: 1rem;
 }
 
 /* Smooth scrolling */

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Eco-Friendly Businesses in London | EcoSustainable.co.uk</title>
+    <meta name="description" content="Discover the best eco-friendly and sustainable businesses in London. Browse by category and find top-rated green companies in the capital.">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- London Hero Section -->
+    <section class="city-hero">
+        <div class="container">
+            <div class="city-hero-content">
+                <h1>Top 10 Eco-Friendly Businesses in <span class="highlight">London</span></h1>
+                <p>Discover London's leading sustainable and environmentally conscious businesses across all categories. From zero-waste cafes to renewable energy companies, find the best eco-friendly services in the capital.</p>
+                
+                <!-- Category Filter Dropdown -->
+                <div class="category-filter-container">
+                    <div class="filter-group">
+                        <label for="categorySelect">Filter by Category:</label>
+                        <select id="categorySelect" class="category-dropdown">
+                            <option value="">All Categories</option>
+                            <option value="home-living">🏠 Home & Living</option>
+                            <option value="fashion-accessories">👗 Fashion & Accessories</option>
+                            <option value="food-beverage">🍽️ Food & Beverage</option>
+                            <option value="health-beauty">🌿 Health & Beauty</option>
+                            <option value="products-retail">🛠️ Products & Retail</option>
+                            <option value="transport-travel">🚲 Transport & Travel</option>
+                            <option value="services-professional">🏢 Services & Professional</option>
+                            <option value="energy-utilities">🔌 Energy & Utilities</option>
+                            <option value="recycling-waste">♻️ Recycling & Waste Management</option>
+                            <option value="education-nonprofits">🌍 Education & Nonprofits</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Subcategory Filter -->
+                    <div class="filter-group" id="subcategoryGroup" style="display: none;">
+                        <label for="subcategorySelect">Subcategory:</label>
+                        <select id="subcategorySelect" class="category-dropdown">
+                            <option value="">All Subcategories</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- London Businesses Grid -->
+    <section class="london-businesses">
+        <div class="container">
+            <div class="businesses-header">
+                <h2 id="businessesTitle">All Top Businesses in London</h2>
+                <div class="results-count">
+                    <span id="resultsCount">Showing 10 businesses</span>
+                </div>
+            </div>
+            
+            <div class="london-businesses-grid" id="londonBusinessesGrid">
+                <!-- London businesses will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="london-data.js"></script>
+    <script src="london.js"></script>
+</body>
+</html>

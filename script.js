@@ -154,17 +154,7 @@ const searchInput = document.getElementById('searchInput');
 const cityFilter = document.getElementById('cityFilter');
 const searchBtn = document.querySelector('.search-btn');
 
-// Mobile Navigation
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
+// Mobile Navigation (handled in components.js)
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -225,7 +215,11 @@ function populateCities() {
             </div>
         `;
         cityCard.addEventListener('click', () => {
-            alert(`Exploring eco-friendly businesses in ${city.name}`);
+            if (city.name.toLowerCase() === 'london') {
+                window.location.href = 'london.html';
+            } else {
+                alert(`${city.name} page coming soon! London page is currently available.`);
+            }
         });
         citiesGrid.appendChild(cityCard);
     });
