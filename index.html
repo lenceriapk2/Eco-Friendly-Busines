@@ -1,16 +1,223 @@
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory</title>
+    <meta name="description" content="Discover top eco-friendly businesses across UK cities. Find sustainable services, green products, and environmentally conscious companies near you.">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>EcoSustainable.co.uk</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#categories" class="nav-link">Categories</a></li>
+                    <li><a href="#cities" class="nav-link">Cities</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Discover UK's Leading <span class="highlight">Eco-Friendly Businesses</span></h1>
+            <p>Your comprehensive directory for sustainable and environmentally conscious businesses across the United Kingdom</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for eco-friendly businesses...">
+                <select id="cityFilter">
+                    <option value="">All Cities</option>
+                    <option value="london">London</option>
+                    <option value="manchester">Manchester</option>
+                    <option value="birmingham">Birmingham</option>
+                    <option value="edinburgh">Edinburgh</option>
+                    <option value="bristol">Bristol</option>
+                </select>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="green-circle"></div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Eco Businesses</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>UK Cities</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15</h3>
+                    <p>Categories</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2>Eco-Friendly Business Categories</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cities -->
+    <section id="cities" class="cities">
+        <div class="container">
+            <h2>Featured UK Cities</h2>
+            <div class="cities-grid" id="citiesGrid">
+                <!-- Cities will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Businesses Preview -->
+    <section class="top-businesses">
+        <div class="container">
+            <h2>Top Rated Eco-Friendly Businesses</h2>
+            <div class="businesses-grid" id="businessesGrid">
+                <!-- Top businesses will be populated by JavaScript -->
+            </div>
+            <div class="view-all">
+                <button class="btn-secondary" onclick="showAllBusinesses()">View All Businesses</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About EcoSustainable.co.uk</h2>
+                    <p>We are the UK's premier directory for eco-friendly and sustainable businesses. Our mission is to make it easier for conscious consumers to find and support businesses that prioritize environmental responsibility.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verified eco-friendly businesses</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Comprehensive reviews and ratings</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Easy search and filtering</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="eco-illustration"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@ecosustainable.co.uk</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+44 20 1234 5678</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>London, United Kingdom</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>EcoSustainable.co.uk</span>
+                    </div>
+                    <p>Connecting conscious consumers with sustainable businesses across the UK.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#cities">Cities</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Renewable Energy</a></li>
+                        <li><a href="#">Organic Food</a></li>
+                        <li><a href="#">Eco Fashion</a></li>
+                        <li><a href="#">Green Transport</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
