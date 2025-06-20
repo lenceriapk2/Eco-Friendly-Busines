@@ -80,6 +80,11 @@ function generateCityBusinessData(cityName) {
     return businesses;
 }
 
+// Sanitize city names for consistent filename generation
+function sanitizeCityName(cityName) {
+    return cityName.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/--+/g, '-').replace(/^-|-$/g, '');
+}
+
 // Generate unique business names for each city
 function generateBusinessName(businessType, cityName, index) {
     const prefixes = ['Green', 'Eco', 'Sustainable', 'Earth', 'Pure', 'Natural', 'Clean', 'Organic'];
@@ -258,10 +263,12 @@ function populateCategories() {
     categoriesGrid.innerHTML = '';
     
     categories.forEach(category => {
-        const citySlug = currentCityName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        const citySlug = sanitizeCityName(currentCityName);
         const categoryCard = document.createElement('div');
         categoryCard.className = 'category-card';
-        categoryCard.onclick = () => window.location.href = `${citySlug}-${category.key}.html`;
+        categoryCard.onclick = () => {
+            window.location.href = `${citySlug}-${category.key}.html`;
+        };
         
         categoryCard.innerHTML = `
             <div class="category-icon">${category.icon}</div>
