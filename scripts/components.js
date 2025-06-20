@@ -9,10 +9,7 @@ const headerHTML = `
                     </div>
 
                     <nav class="nav-menu">
-                        <div class="nav-dropdown">
-                            <a href="index.html" class="nav-link">Home</a>
-                        </div>
-
+                        <a href="index.html" class="nav-link">Home</a>
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
