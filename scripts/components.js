@@ -78,3 +78,44 @@ const footerHTML = `
             </div>
         </footer>
     `;
+
+// Create header component
+function createHeader() {
+    const headerElement = document.getElementById('header-component');
+    if (headerElement) {
+        headerElement.innerHTML = headerHTML;
+    }
+}
+
+// Create footer component
+function createFooter() {
+    const footerElement = document.getElementById('footer-component');
+    if (footerElement) {
+        footerElement.innerHTML = footerHTML;
+    }
+}
+
+// Initialize both components
+function initializeComponents() {
+    createHeader();
+    createFooter();
+}
+
+// Mobile menu toggle function
+function toggleMobileMenu() {
+    const nav = document.querySelector('.nav-menu');
+    if (nav) {
+        nav.classList.toggle('active');
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initializeComponents();
+});
+
+// Make functions globally available
+window.createHeader = createHeader;
+window.createFooter = createFooter;
+window.initializeComponents = initializeComponents;
+window.toggleMobileMenu = toggleMobileMenu;
