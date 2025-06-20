@@ -493,6 +493,7 @@ body {
 /* Categories Section */
 .categories {
     padding: 80px 0;
+    background: #f8f9fa;
 }
 
 .categories h2 {
@@ -504,48 +505,54 @@ body {
 
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .category-card {
     background: white;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .category-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
-
-.category-icon {
-    font-size: 3rem;
-    color: #4caf50;
-    margin-bottom: 1rem;
+    border-color: #4caf50;
 }
 
 .category-card h3 {
     color: #2d8f47;
     margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .category-card p {
     color: #666;
     margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .business-count {
     background: #e8f5e8;
     color: #2d8f47;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
     font-weight: 600;
     display: inline-block;
+    font-size: 0.9rem;
 }
 
 /* Cities Section */
@@ -570,45 +577,63 @@ body {
 .city-card {
     background: white;
     border-radius: 15px;
-    overflow: hidden;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    overflow: hidden;
 }
 
 .city-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #4caf50;
 }
 
 .city-image {
-    height: 200px;
-    background: linear-gradient(45deg, #4caf50, #8bc34a);
+    height: 150px;
+    background: linear-gradient(135deg, #4caf50, #2d8f47);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
     color: white;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .city-info {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 .city-info h3 {
     color: #2d8f47;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .city-info p {
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
 .city-stats {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #888;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+}
+
+.city-stats span {
+    display: block;
+    font-weight: 500;
 }
 
 /* Top Businesses Section */
@@ -625,9 +650,11 @@ body {
 
 .businesses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
 }
 
 .business-card {
@@ -635,67 +662,70 @@ body {
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .business-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #4caf50;
 }
 
 .business-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.business-logo {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #4caf50, #8bc34a);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .business-info h4 {
     color: #2d8f47;
     margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .business-category {
     color: #888;
     font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .business-rating {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
 }
 
 .stars {
     color: #ffc107;
-    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.rating-text {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .business-description {
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
 }
 
 .business-location {
     color: #888;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-}
-
-.business-location i {
-    margin-right: 0.5rem;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto;
 }
 
 .view-all {
@@ -2214,11 +2244,10 @@ html {
     border-color: #4caf50;
 }
 
-.london-category-card .category-icon {
-    font-size: 2.5rem;
+.london-category-card .category-header {
     margin-bottom: 1rem;
-    display: block;
-    filter: grayscale(20%);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e8f5e8;
 }
 
 .london-category-card h3 {
@@ -2341,13 +2370,17 @@ html {
     border-color: #4CAF50;
 }
 
-.category-showcase-card .category-icon {
-    font-size: 4rem;
+.category-showcase-card .category-header {
     margin-bottom: 20px;
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2d8f47;
 }
 
 .category-showcase-card h3 {

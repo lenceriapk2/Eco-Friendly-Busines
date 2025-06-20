@@ -1,4 +1,3 @@
-
 // Sample data for the directory
 const categories = [
     {
@@ -173,98 +172,189 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Populate categories
 function populateCategories() {
     const categoriesGrid = document.getElementById('categoriesGrid');
-    categoriesGrid.innerHTML = '';
-    
-    categories.forEach(category => {
-        const categoryCard = document.createElement('div');
-        categoryCard.className = 'category-card';
-        categoryCard.innerHTML = `
-            <div class="category-icon">
-                <i class="${category.icon}"></i>
-            </div>
+    if (!categoriesGrid) return;
+
+    const categories = [
+        { 
+            name: 'Health & Beauty', 
+            description: 'Natural beauty products, organic skincare, wellness centers',
+            count: '45+ businesses',
+            link: 'health-beauty-category.html'
+        },
+        { 
+            name: 'Products & Retail', 
+            description: 'Sustainable products, eco-friendly retail stores',
+            count: '38+ businesses',
+            link: 'products-retail-category.html'
+        },
+        { 
+            name: 'Transport & Travel', 
+            description: 'Electric vehicles, green travel, sustainable transport',
+            count: '28+ businesses',
+            link: 'transport-travel-category.html'
+        },
+        { 
+            name: 'Services & Professional', 
+            description: 'Green consulting, eco-friendly professional services',
+            count: '35+ businesses',
+            link: 'services-professional-category.html'
+        },
+        { 
+            name: 'Energy & Utilities', 
+            description: 'Renewable energy, solar power, green utilities',
+            count: '22+ businesses',
+            link: 'energy-utilities-category.html'
+        },
+        { 
+            name: 'Recycling & Waste', 
+            description: 'Waste management, recycling services, circular economy',
+            count: '31+ businesses',
+            link: 'recycling-waste-category.html'
+        }
+    ];
+
+    categoriesGrid.innerHTML = categories.map(category => `
+        <a href="${category.link}" class="category-card">
+            <div class="category-header">${category.name}</div>
             <h3>${category.name}</h3>
             <p>${category.description}</p>
-            <span class="business-count">${category.businessCount} businesses</span>
-        `;
-        categoryCard.addEventListener('click', () => {
-            alert(`Showing businesses in ${category.name} category`);
-        });
-        categoriesGrid.appendChild(categoryCard);
-    });
+            <span class="business-count">${category.count}</span>
+        </a>
+    `).join('');
 }
 
 // Populate cities
 function populateCities() {
     const citiesGrid = document.getElementById('citiesGrid');
-    citiesGrid.innerHTML = '';
-    
-    cities.forEach(city => {
-        const cityCard = document.createElement('div');
-        cityCard.className = 'city-card';
-        cityCard.innerHTML = `
+    if (!citiesGrid) return;
+
+    const cities = [
+        { 
+            name: 'London', 
+            description: 'Capital city with the most eco-friendly businesses',
+            businesses: '150+ businesses',
+            categories: '10 categories',
+            link: 'london.html'
+        },
+        { 
+            name: 'Manchester', 
+            description: 'Northern powerhouse of sustainable business',
+            businesses: '85+ businesses',
+            categories: '8 categories',
+            link: 'manchester.html'
+        },
+        { 
+            name: 'Birmingham', 
+            description: 'Industrial city embracing green transformation',
+            businesses: '72+ businesses',
+            categories: '7 categories',
+            link: 'birmingham.html'
+        },
+        { 
+            name: 'Edinburgh', 
+            description: 'Scotland\'s sustainable capital',
+            businesses: '68+ businesses',
+            categories: '8 categories',
+            link: 'edinburgh.html'
+        },
+        { 
+            name: 'Bristol', 
+            description: 'Leading the way in environmental innovation',
+            businesses: '64+ businesses',
+            categories: '9 categories',
+            link: 'bristol.html'
+        },
+        { 
+            name: 'Glasgow', 
+            description: 'Scotland\'s largest city going green',
+            businesses: '58+ businesses',
+            categories: '7 categories',
+            link: 'glasgow.html'
+        }
+    ];
+
+    citiesGrid.innerHTML = cities.map(city => `
+        <a href="${city.link}" class="city-card">
             <div class="city-image">
-                <i class="${city.icon}"></i>
+                ${city.name}
             </div>
             <div class="city-info">
                 <h3>${city.name}</h3>
-                <p>Discover eco-friendly businesses in ${city.name}</p>
+                <p>${city.description}</p>
                 <div class="city-stats">
-                    <span>${city.businesses} businesses</span>
-                    <span>${city.population} population</span>
+                    <span>${city.businesses}</span>
+                    <span>${city.categories}</span>
                 </div>
             </div>
-        `;
-        cityCard.addEventListener('click', () => {
-            if (city.name.toLowerCase() === 'london') {
-                window.location.href = 'london.html';
-            } else {
-                alert(`${city.name} page coming soon! London page is currently available.`);
-            }
-        });
-        citiesGrid.appendChild(cityCard);
-    });
+        </a>
+    `).join('');
 }
 
 // Populate top businesses
 function populateTopBusinesses() {
     const businessesGrid = document.getElementById('businessesGrid');
-    businessesGrid.innerHTML = '';
-    
-    topBusinesses.forEach(business => {
-        const businessCard = document.createElement('div');
-        businessCard.className = 'business-card';
-        businessCard.innerHTML = `
+    if (!businessesGrid) return;
+
+    const businesses = [
+        {
+            name: 'EcoLife Wellness',
+            category: 'Health & Beauty',
+            rating: 4.8,
+            reviews: 127,
+            description: 'Organic spa treatments and natural wellness products with zero-waste packaging.',
+            location: 'London, UK'
+        },
+        {
+            name: 'Green Threads',
+            category: 'Fashion & Retail',
+            rating: 4.9,
+            reviews: 89,
+            description: 'Sustainable fashion made from recycled materials and ethical manufacturing.',
+            location: 'Manchester, UK'
+        },
+        {
+            name: 'Solar Solutions UK',
+            category: 'Energy & Utilities',
+            rating: 4.7,
+            reviews: 156,
+            description: 'Professional solar panel installation and renewable energy consulting.',
+            location: 'Birmingham, UK'
+        },
+        {
+            name: 'ZeroWaste Grocers',
+            category: 'Food & Beverage',
+            rating: 4.6,
+            reviews: 203,
+            description: 'Package-free grocery store with locally sourced organic products.',
+            location: 'Bristol, UK'
+        }
+    ];
+
+    businessesGrid.innerHTML = businesses.map(business => `
+        <div class="business-card">
             <div class="business-header">
-                <div class="business-logo">${business.logo}</div>
                 <div class="business-info">
                     <h4>${business.name}</h4>
                     <span class="business-category">${business.category}</span>
                 </div>
             </div>
             <div class="business-rating">
-                <div class="stars">
-                    ${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5 - Math.floor(business.rating))}
-                </div>
-                <span>${business.rating}</span>
+                <div class="stars">${'★'.repeat(Math.floor(business.rating))}</div>
+                <span class="rating-text">${business.rating} (${business.reviews} reviews)</span>
             </div>
             <p class="business-description">${business.description}</p>
             <div class="business-location">
-                <i class="fas fa-map-marker-alt"></i>
                 <span>${business.location}</span>
             </div>
-        `;
-        businessCard.addEventListener('click', () => {
-            alert(`View details for ${business.name}`);
-        });
-        businessesGrid.appendChild(businessCard);
-    });
+        </div>
+    `).join('');
 }
 
 // Search functionality
 function performSearch() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedCity = cityFilter.value;
-    
+
     if (searchTerm || selectedCity) {
         alert(`Searching for: "${searchTerm}" in ${selectedCity || 'all cities'}`);
     } else {
@@ -296,7 +386,7 @@ contactForm.addEventListener('submit', (e) => {
 // Animation on scroll
 function animateOnScroll() {
     const elements = document.querySelectorAll('.category-card, .city-card, .business-card, .stat-item');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -307,7 +397,7 @@ function animateOnScroll() {
     }, {
         threshold: 0.1
     });
-    
+
     elements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
@@ -319,12 +409,12 @@ function animateOnScroll() {
 // Counter animation for stats
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-item h3');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.textContent);
         const increment = target / 100;
         let current = 0;
-        
+
         const updateCounter = () => {
             if (current < target) {
                 current += increment;
@@ -334,7 +424,7 @@ function animateCounters() {
                 counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
             }
         };
-        
+
         // Trigger animation when element is in view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -344,7 +434,7 @@ function animateCounters() {
                 }
             });
         });
-        
+
         observer.observe(counter.parentElement);
     });
 }
@@ -370,16 +460,16 @@ function showLoading(element) {
 // Filter businesses by category
 function filterByCategory(categoryName) {
     showLoading(document.getElementById('businessesGrid'));
-    
+
     // Simulate API call
     setTimeout(() => {
         const filteredBusinesses = topBusinesses.filter(business => 
             business.category.toLowerCase().includes(categoryName.toLowerCase())
         );
-        
+
         const businessesGrid = document.getElementById('businessesGrid');
         businessesGrid.innerHTML = '';
-        
+
         if (filteredBusinesses.length > 0) {
             filteredBusinesses.forEach(business => {
                 const businessCard = document.createElement('div');
