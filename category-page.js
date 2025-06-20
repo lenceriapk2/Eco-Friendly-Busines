@@ -38,16 +38,13 @@ async function loadCategoryBusinesses(category) {
 
 // Generate fallback data for category
 function generateFallbackData(category) {
-    const categoryImages = {
+    // High-quality, relevant images for each category
+        const categoryImages = {
         'home-living': [
-            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop', 
-            'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1615874694520-474822394e73?w=400&h=300&fit=crop'
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop&crop=center&q=80',
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&crop=center&q=80'
         ],
         'fashion-accessories': [
             'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=300&fit=crop',

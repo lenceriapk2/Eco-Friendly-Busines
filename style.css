@@ -912,9 +912,43 @@ body {
 
 .london-businesses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
     align-items: start;
+}
+
+@media (max-width: 768px) {
+    .london-businesses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .london-business-card {
+        max-width: 100%;
+    }
+
+    .business-image-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .london-businesses-grid {
+        gap: 1rem;
+    }
+
+    .business-image-container {
+        height: 180px;
+    }
+
+    .business-rank {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+        top: 12px;
+        right: 12px;
+    }
 }
 
 /* London Business Card */
@@ -929,6 +963,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    max-width: 100%;
 }
 
 .london-business-card:hover {
@@ -944,17 +979,33 @@ body {
 
 .business-image-container {
     width: 100%;
-    height: 200px;
+    height: 240px;
     overflow: hidden;
     position: relative;
-    background: #f3f4f6;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
 }
 
 .business-main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+    background-color: #f9fafb;
+    loading: lazy;
+}
+
+.business-main-image[src=""] {
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.business-main-image[src=""]:before {
+    content: "🏢";
+    font-size: 3rem;
+    opacity: 0.3;
 }
 
 .london-business-card:hover .business-main-image {
@@ -963,20 +1014,21 @@ body {
 
 .business-rank {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 16px;
+    right: 16px;
     background: linear-gradient(135deg, #2d8f47, #4caf50);
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 1rem;
     z-index: 2;
-    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.4);
+    box-shadow: 0 4px 12px rgba(45, 143, 71, 0.4);
+    backdrop-filter: blur(4px);
 }
 
 .business-content {
@@ -1977,9 +2029,43 @@ html {
 
 .london-businesses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
     align-items: start;
+}
+
+@media (max-width: 768px) {
+    .london-businesses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .london-business-card {
+        max-width: 100%;
+    }
+
+    .business-image-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .london-businesses-grid {
+        gap: 1rem;
+    }
+
+    .business-image-container {
+        height: 180px;
+    }
+
+    .business-rank {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+        top: 12px;
+        right: 12px;
+    }
 }
 
 /* London Business Card */
@@ -1994,6 +2080,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 100%;
+    max-width: 100%;
 }
 
 .london-business-card:hover {
@@ -2009,17 +2096,33 @@ html {
 
 .business-image-container {
     width: 100%;
-    height: 200px;
+    height: 240px;
     overflow: hidden;
     position: relative;
-    background: #f3f4f6;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
 }
 
 .business-main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+    background-color: #f9fafb;
+    loading: lazy;
+}
+
+.business-main-image[src=""] {
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.business-main-image[src=""]:before {
+    content: "🏢";
+    font-size: 3rem;
+    opacity: 0.3;
 }
 
 .london-business-card:hover .business-main-image {
@@ -2028,20 +2131,21 @@ html {
 
 .business-rank {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 16px;
+    right: 16px;
     background: linear-gradient(135deg, #2d8f47, #4caf50);
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 1rem;
     z-index: 2;
-    box-shadow: 0 2px 8px rgba(45, 143, 71, 0.4);
+    box-shadow: 0 4px 12px rgba(45, 143, 71, 0.4);
+    backdrop-filter: blur(4px);
 }
 
 .business-content {

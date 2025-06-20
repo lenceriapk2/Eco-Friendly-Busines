@@ -1,4 +1,3 @@
-
 // Google Places API Service
 
 const API_KEY = 'AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE';
@@ -202,7 +201,7 @@ function transformPlaceToBusinessFormat(place, category, subcategory) {
     const features = generateFeatures(place, category);
     const randomImageIndex = Math.floor(Math.random() * (categoryImages[category]?.length || 1));
     const defaultImage = 'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center';
-    
+
     return {
         id: place.id,
         name: place.displayName?.text || 'Business Name',
@@ -272,14 +271,14 @@ async function fetchBusinessesForCategory(category, limit = 10) {
         if (businesses.length >= limit) break;
 
         const places = await searchPlaces(query);
-        
+
         for (const place of places) {
             if (businesses.length >= limit) break;
             if (seenIds.has(place.id)) continue;
             if (place.businessStatus !== 'OPERATIONAL') continue;
 
             seenIds.add(place.id);
-            
+
             const subcategory = window.EcoComponents.businessCategories[category]?.subcategories?.[0] || 'General';
             const business = transformPlaceToBusinessFormat(place, category, subcategory);
             businesses.push(business);
@@ -301,7 +300,7 @@ async function fetchAllLondonBusinesses() {
         console.log(`Fetching businesses for ${category}...`);
         const businesses = await fetchBusinessesForCategory(category, 10);
         allBusinesses.push(...businesses);
-        
+
         // Add delay between categories
         await new Promise(resolve => setTimeout(resolve, 200));
     }
