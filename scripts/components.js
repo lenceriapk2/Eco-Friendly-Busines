@@ -3,13 +3,20 @@ const headerHTML = `
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="index.html">
-                            <h1>EcoSustainable<span>.co.uk</span></h1>
+                        <a href="index.html" class="logo-container">
+                            <div class="logo-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="logo-text">
+                                <h1>EcoSustainable<span>.co.uk</span></h1>
+                            </div>
                         </a>
                     </div>
 
                     <nav class="nav-menu">
                         <a href="index.html" class="nav-link">Home</a>
+                        <a href="cities.html" class="nav-link">Cities</a>
+                        <a href="about-us.html" class="nav-link">About</a>
                         <a href="contact-us.html" class="nav-link">Contact</a>
                     </nav>
 
