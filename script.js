@@ -149,9 +149,6 @@ const topBusinesses = [
 // DOM Elements
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
-const searchInput = document.getElementById('searchInput');
-const cityFilter = document.getElementById('cityFilter');
-const searchBtn = document.querySelector('.search-btn');
 
 // Mobile Navigation (handled in components.js)
 
@@ -439,11 +436,66 @@ function animateCounters() {
     });
 }
 
-// Initialize everything when DOM is loaded
+// Main JavaScript for EcoSustainable.co.uk
+
+let isLoading = false;
+const debounceCache = new Map();
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Intersection Observer for lazy loading
+const observerOptions = {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+};
+
+const lazyLoadObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !isLoading) {
+            const target = entry.target;
+            if (target.id === 'businessesGrid' && !target.dataset.loaded) {
+                populateTopBusinesses();
+                target.dataset.loaded = 'true';
+            } else if (target.id === 'categoriesGrid' && !target.dataset.loaded) {
+                populateCategories();
+                target.dataset.loaded = 'true';
+            } else if (target.id === 'citiesGrid' && !target.dataset.loaded) {
+                populateCities();
+                target.dataset.loaded = 'true';
+            }
+            lazyLoadObserver.unobserve(target);
+        }
+    });
+}, observerOptions);
+
 document.addEventListener('DOMContentLoaded', () => {
-    populateCategories();
-    populateCities();
-    populateTopBusinesses();
+    // Register service worker for caching
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => console.log('SW registered'))
+            .catch(error => console.log('SW registration failed'));
+    }
+
+    // Lazy load sections when they come into view
+    const sections = ['businessesGrid', 'categoriesGrid', 'citiesGrid'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            lazyLoadObserver.observe(element);
+        }
+    });
+
     animateOnScroll();
     animateCounters();
 });
