@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Food & Beverage Eco-Friendly Businesses in London | EcoSustainable.co.uk</title>
+    <meta name="description" content="Discover the top 10 organic grocery stores, vegan restaurants, and zero-waste cafes in London.">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <a href="london.html">London</a> > <span>Food & Beverage</span>
+            </div>
+            <div class="category-hero-content">
+                <div class="category-icon">🍽️</div>
+                <h1>Top 10 Food & Beverage Eco-Friendly Businesses in <span class="highlight">London</span></h1>
+                <p class="category-description">
+                    Savor the flavors of sustainability with London's leading eco-conscious food and beverage establishments. 
+                    From farm-to-table restaurants that champion local sourcing to zero-waste cafes pioneering plastic-free dining, 
+                    these businesses are transforming how we think about food consumption. Each establishment on our list demonstrates 
+                    exceptional commitment to environmental stewardship through organic ingredients, sustainable packaging, and 
+                    innovative waste reduction practices. Whether you're seeking plant-based culinary adventures, organic grocery 
+                    options, or eco-friendly packaging solutions for your business, these London pioneers prove that delicious 
+                    food and environmental responsibility go hand in hand.
+                </p>
+                <div class="category-stats">
+                    <div class="stat">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Top Businesses</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.8</span>
+                        <span class="stat-label">Avg Rating</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Organic Sourced</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Introduction -->
+    <section class="category-intro">
+        <div class="container">
+            <h2>Here are the top 10 Food & Beverage businesses in London</h2>
+            <p>These exceptional food and beverage establishments are setting new standards for sustainable dining and grocery shopping in London.</p>
+        </div>
+    </section>
+
+    <!-- Businesses Grid -->
+    <section class="category-businesses">
+        <div class="container">
+            <div class="category-businesses-grid" id="categoryBusinessesGrid">
+                <!-- Businesses will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="places-api.js"></script>
+    <script src="category-page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCategoryPage('food-beverage');
+        });
+    </script>
+</body>
+</html>

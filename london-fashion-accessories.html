@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Fashion & Accessories Eco-Friendly Businesses in London | EcoSustainable.co.uk</title>
+    <meta name="description" content="Discover the top 10 sustainable clothing brands, ethical footwear, and vegan accessories businesses in London.">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <a href="london.html">London</a> > <span>Fashion & Accessories</span>
+            </div>
+            <div class="category-hero-content">
+                <div class="category-icon">👗</div>
+                <h1>Top 10 Fashion & Accessories Eco-Friendly Businesses in <span class="highlight">London</span></h1>
+                <p class="category-description">
+                    Step into the world of conscious fashion with London's most innovative sustainable clothing brands and accessory designers. 
+                    These pioneering businesses are redefining style by proving that ethical fashion doesn't mean compromising on aesthetics. 
+                    From organic cotton apparel that feels luxurious against your skin to upcycled fashion pieces that tell unique stories, 
+                    these London-based companies are leading the charge towards a more sustainable fashion industry. Discover brands that 
+                    prioritize fair trade practices, use innovative eco-friendly materials, and create timeless pieces designed to last, 
+                    not just for a season but for years to come.
+                </p>
+                <div class="category-stats">
+                    <div class="stat">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Top Businesses</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.7</span>
+                        <span class="stat-label">Avg Rating</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Ethical Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Introduction -->
+    <section class="category-intro">
+        <div class="container">
+            <h2>Here are the top 10 Fashion & Accessories businesses in London</h2>
+            <p>These carefully curated fashion businesses represent the pinnacle of sustainable style in London, offering ethically-made clothing and accessories that make a positive impact.</p>
+        </div>
+    </section>
+
+    <!-- Businesses Grid -->
+    <section class="category-businesses">
+        <div class="container">
+            <div class="category-businesses-grid" id="categoryBusinessesGrid">
+                <!-- Businesses will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="places-api.js"></script>
+    <script src="category-page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCategoryPage('fashion-accessories');
+        });
+    </script>
+</body>
+</html>
