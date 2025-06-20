@@ -2360,181 +2360,74 @@ html {
 
 /* Cities Overview Page Styles */
 .cities-hero {
-    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 25%, #45B7D1 50%, #96CEB4 75%, #FFEAA7 100%);
+    background: linear-gradient(135deg, #2196F3, #1565C0);
     color: white;
-    padding: 100px 0;
+    padding: 80px 0;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
-.cities-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
 
-.cities-hero .container {
-    position: relative;
-    z-index: 2;
-}
-
-.cities-hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-weight: 700;
-}
-
-.cities-hero p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
 
 .cities-by-region {
     padding: 80px 0;
-    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .region-section {
-    margin-bottom: 80px;
-    padding: 60px;
-    border-radius: 25px;
-    position: relative;
-    overflow: hidden;
-}
-
-.region-section:nth-child(1) {
-    background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
-    color: white;
-}
-
-.region-section:nth-child(2) {
-    background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%);
-    color: #2c3e50;
-}
-
-.region-section:nth-child(3) {
-    background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%);
-    color: #2c3e50;
-}
-
-.region-section:nth-child(4) {
-    background: linear-gradient(135deg, #C3ECE0 0%, #B8E6B8 100%);
-    color: #2c3e50;
-}
-
-.region-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 1;
-}
-
-.region-section > * {
-    position: relative;
-    z-index: 2;
+    margin-bottom: 60px;
 }
 
 .region-section h2 {
-    margin-bottom: 20px;
-    font-size: 2.5rem;
+    color: #2E7D32;
+    margin-bottom: 30px;
+    font-size: 2rem;
     display: flex;
     align-items: center;
-    gap: 20px;
-    font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.region-description {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    line-height: 1.6;
-    opacity: 0.9;
-    font-style: italic;
+    gap: 15px;
 }
 
 .flag {
-    font-size: 3rem;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+    font-size: 2.5rem;
 }
 
 .cities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
 .city-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 35px 25px;
+    background: white;
+    border-radius: 10px;
+    padding: 25px 20px;
     text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.4s ease;
-    border: 3px solid transparent;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-}
-
-.city-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.city-card:hover::before {
-    left: 100%;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .city-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: #FF6B6B;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .city-card h3 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    font-weight: 600;
+    color: #2E7D32;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 .city-card p {
-    color: #5a6c7d;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.5;
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
 }
 
 .city-arrow {
-    color: #FF6B6B;
-    font-size: 2rem;
+    color: #4CAF50;
+    font-size: 1.5rem;
     font-weight: bold;
-    transition: transform 0.3s ease;
-}
-
-.city-card:hover .city-arrow {
-    transform: translateX(10px);
 }
 
 /* Sitemap Styles */
