@@ -170,46 +170,62 @@ function createCategoryBusinessCard(business) {
     const card = document.createElement('div');
     card.className = 'category-business-card';
 
+    // Ensure we have required data
+    const name = business.name || 'Business Name';
+    const category = business.subcategory || business.category || 'Business';
+    const rating = business.rating || 4.5;
+    const reviewCount = business.reviewCount || Math.floor(Math.random() * 50) + 10;
+    const description = business.description || `Professional ${category.toLowerCase()} services with a focus on sustainability and environmental responsibility.`;
+    const features = business.features || ['Eco-Friendly', 'Sustainable', 'Local Business'];
+    const address = business.address || generateAddress(currentCityName);
+    const phone = business.phone || generatePhoneNumber();
+    const website = business.website || generateWebsite(currentCategoryKey, currentCityName);
+
+    // Create business logo/icon
+    const logoIcon = business.image && business.image.includes('fa-') ? 
+        `<i class="${business.image}"></i>` : 
+        `<i class="fas fa-leaf"></i>`;
+
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-logo">${business.image}</div>
+            <div class="business-logo">${logoIcon}</div>
             <div class="business-info">
-                <h3>${business.name}</h3>
-                <p class="business-category">${business.subcategory}</p>
+                <h3>${name}</h3>
+                <div class="business-category">${category}</div>
                 <div class="business-rating">
-                    <span class="stars">${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5-Math.floor(business.rating))}</span>
-                    <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
+                    <span class="stars">${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5-Math.floor(rating))}</span>
+                    <span class="rating-text">${rating.toFixed(1)} (${reviewCount} reviews)</span>
                 </div>
             </div>
         </div>
 
-        <p class="business-description">${business.description}</p>
+        <div class="business-description">${description}</div>
 
         <div class="business-features">
-            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            ${features.slice(0, 4).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
         </div>
 
         <div class="business-contact">
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <span>${business.address}</span>
+                <span>${address}</span>
             </div>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <span>${business.phone}</span>
+                <span>${phone}</span>
             </div>
             <div class="contact-item">
                 <i class="fas fa-globe"></i>
-                <span>${business.website}</span>
+                <span>${website}</span>
             </div>
         </div>
 
         <div class="business-actions">
-            <button class="btn-primary" onclick="window.open('https://${business.website}', '_blank')">
-                Visit Website
+            <button class="btn-primary" onclick="window.open('https://${website}', '_blank')" type="button">
+                <i class="fas fa-external-link-alt"></i> Visit Website
             </button>
-            <button class="btn-secondary" onclick="callBusiness('${business.phone}')">
-                Call Now
+            <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
+                <i class="fas fa-phone"></i> Call Now
             </button>
         </div>
     `;

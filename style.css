@@ -1624,95 +1624,200 @@ html {
     margin: 0 auto;
 }
 
-.category-business-card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+/* Business Cards - Unified styling for both city and category pages */
+.business-card, .category-business-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     position: relative;
+    border: 1px solid #f0f0f0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.category-business-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+.business-card:hover, .category-business-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: #e8f5e8;
 }
 
-.business-rank {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: #2d8f47;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.business-card-header {
+    padding: 1.5rem 1.5rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.business-logo {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2d8f47, #4caf50);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-    z-index: 2;
-}
-
-.business-image-container {
-    height: 250px;
-    overflow: hidden;
-    position: relative;
-}
-
-.business-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.category-business-card:hover .business-image {
-    transform: scale(1.05);
-}
-
-.business-content {
-    padding: 2rem;
-}
-
-.business-header h3 {
-    color: #2d8f47;
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    flex-shrink: 0;
 }
 
-.business-subcategory {
+.business-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.business-info h3 {
+    color: #2d8f47;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.business-category {
     color: #666;
     font-size: 0.9rem;
-    margin-bottom: 1rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
 .business-rating {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
 }
 
 .stars {
     color: #ffc107;
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    letter-spacing: 1px;
 }
 
 .rating-text {
-    color: #666;
-    font-size: 0.9rem;
+    color: #777;
+    font-size: 0.85rem;
 }
 
 .business-description {
+    padding: 0 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.business-features {
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.feature-tag {
+    background: #e8f5e8;
+    color: #2d8f47;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.business-contact {
+    padding: 0 1.5rem;
     margin-bottom: 1.5rem;
 }
 
-.business-description p {
-    color: #555;
-    line-height: 1.6;
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.contact-item i {
+    color: #2d8f47;
+    width: 16px;
+    text-align: center;
+}
+
+.business-actions {
+    padding: 0 1.5rem 1.5rem;
+    margin-top: auto;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.business-actions .btn-primary {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: #2d8f47;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.business-actions .btn-primary:hover {
+    background: #1e5f30;
+}
+
+.business-actions .btn-secondary {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    color: #2d8f47;
+    border: 2px solid #2d8f47;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.business-actions .btn-secondary:hover {
+    background: #2d8f47;
+    color: white;
+}
+
+/* Grid layouts */
+.businesses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .businesses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .business-card-header {
+        padding: 1.25rem 1.25rem 0.75rem;
+    }
+    
+    .business-logo {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    .business-info h3 {
+        font-size: 1.2rem;
+    }
 }
 
 .business-features {

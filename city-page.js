@@ -1,4 +1,3 @@
-
 // City Page JavaScript Handler - Generates unique data for each city
 
 let cityBusinesses = [];
@@ -8,7 +7,7 @@ let currentCityName = '';
 async function initializeCityPage(cityName) {
     currentCityName = cityName;
     console.log(`Initializing ${cityName} page with unique business data`);
-    
+
     await loadCityBusinesses(cityName);
     displayCityBusinesses();
     updateCityStats();
@@ -27,11 +26,11 @@ async function loadCityBusinesses(cityName) {
                 return;
             }
         }
-        
+
         // Generate unique fallback data for this city
         cityBusinesses = generateCityBusinessData(cityName);
         console.log(`Generated unique data for ${cityName}: ${cityBusinesses.length} businesses`);
-        
+
     } catch (error) {
         console.error(`Error loading businesses for ${cityName}:`, error);
         cityBusinesses = generateCityBusinessData(cityName);
@@ -57,7 +56,7 @@ function generateCityBusinessData(cityName) {
     // Generate 10-15 businesses per category for variety
     businessTypes.forEach(type => {
         const count = Math.floor(Math.random() * 6) + 10; // 10-15 businesses per category
-        
+
         for (let i = 0; i < count; i++) {
             const business = {
                 id: businessId++,
@@ -89,7 +88,7 @@ function sanitizeCityName(cityName) {
 function generateBusinessName(businessType, cityName, index) {
     const prefixes = ['Green', 'Eco', 'Sustainable', 'Earth', 'Pure', 'Natural', 'Clean', 'Organic'];
     const suffixes = ['Hub', 'Centre', 'Studio', 'Co', 'Solutions', 'Services', 'Group', 'Collective'];
-    
+
     const businessNames = {
         'Spa & Wellness': ['Wellness', 'Beauty', 'Spa', 'Retreat', 'Sanctuary'],
         'Restaurants': ['Kitchen', 'Bistro', 'Café', 'Eatery', 'Table'],
@@ -115,7 +114,7 @@ function generateBusinessDescription(businessType, cityName) {
     const descriptions = {
         'Spa & Wellness': `Premier eco-friendly wellness center in ${cityName}, offering organic treatments and sustainable beauty services.`,
         'Restaurants': `Sustainable dining experience in ${cityName}, featuring locally-sourced ingredients and plant-based options.`,
-        'Transport': `Eco-friendly transportation solutions serving ${cityName} with electric and sustainable mobility options.`,
+        'Transport': `Eco-friendly transportation solutions serving ${cityName} with electric and sustainable mobility options serving ${cityName}.`,
         'Professional Services': `Leading sustainability consultancy in ${cityName}, helping businesses reduce their environmental impact.`,
         'Retail': `Sustainable retail store in ${cityName}, offering eco-friendly products and zero-waste shopping solutions.`,
         'Energy': `Renewable energy specialists serving ${cityName} with solar, wind, and energy efficiency solutions.`,
@@ -131,7 +130,7 @@ function generateAddress(cityName) {
     const streetNumbers = Math.floor(Math.random() * 200) + 1;
     const streetNames = ['High Street', 'Main Road', 'Green Lane', 'Park Avenue', 'Church Street', 'Market Square', 'Victoria Road', 'Mill Lane'];
     const streetName = streetNames[Math.floor(Math.random() * streetNames.length)];
-    
+
     return `${streetNumbers} ${streetName}, ${cityName}`;
 }
 
@@ -178,67 +177,115 @@ function displayCityBusinesses() {
     });
 }
 
-// Create business card element
+// Create business card for city pages
 function createBusinessCard(business) {
     const card = document.createElement('div');
-    card.className = 'london-business-card';
-    
+    card.className = 'business-card';
+
+    // Ensure we have required data
+    const name = business.name || 'Business Name';
+    const category = business.category || business.subcategory || 'Business';
+    const rating = business.rating || 4.5;
+    const reviewCount = business.reviewCount || Math.floor(Math.random() * 50) + 10;
+    const description = business.description || `Professional ${category.toLowerCase()} services with a focus on sustainability and environmental responsibility.`;
+    const tags = business.tags || business.features || ['Eco-Friendly', 'Sustainable', 'Local'];
+    const address = business.address || generateAddress(currentCityName);
+    const phone = business.phone || generatePhoneNumber();
+    const website = business.website || generateWebsite('business', currentCityName);
+
+    // Create business logo/icon based on category
+    const categoryIcons = {
+        'home-living': 'fas fa-home',
+        'fashion-accessories': 'fas fa-tshirt',
+        'food-beverage': 'fas fa-utensils',
+        'health-beauty': 'fas fa-spa',
+        'products-retail': 'fas fa-shopping-bag',
+        'transport-travel': 'fas fa-car',
+        'services-professional': 'fas fa-briefcase',
+        'energy-utilities': 'fas fa-bolt',
+        'recycling-waste': 'fas fa-recycle',
+        'education-nonprofits': 'fas fa-graduation-cap'
+    };
+
+    const logoIcon = categoryIcons[business.category] || business.image || 'fas fa-leaf';
+
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-logo-large">${business.image}</div>
+            <div class="business-logo">
+                <i class="${logoIcon}"></i>
+            </div>
             <div class="business-info">
-                <h3>${business.name}</h3>
-                <p class="business-category">${business.subcategory}</p>
+                <h3>${name}</h3>
+                <div class="business-category">${category}</div>
                 <div class="business-rating">
-                    <span class="stars">${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5-Math.floor(business.rating))}</span>
-                    <span class="rating-text">${business.rating} (${business.reviewCount} reviews)</span>
+                    <span class="stars">${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5-Math.floor(rating))}</span>
+                    <span class="rating-text">${rating.toFixed(1)} (${reviewCount} reviews)</span>
                 </div>
             </div>
         </div>
-        
-        <p class="business-description">${business.description}</p>
-        
+
+        <div class="business-description">${description}</div>
+
         <div class="business-features">
-            ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            ${tags.slice(0, 4).map(tag => `<span class="feature-tag">${tag}</span>`).join('')}
         </div>
-        
+
         <div class="business-contact">
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <span>${business.address}</span>
+                <span>${address}</span>
             </div>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <span>${business.phone}</span>
+                <span>${phone}</span>
             </div>
             <div class="contact-item">
                 <i class="fas fa-globe"></i>
-                <span>${business.website}</span>
+                <span>${website}</span>
             </div>
         </div>
-        
+
         <div class="business-actions">
-            <button class="action-btn btn-primary" onclick="window.open('https://${business.website}', '_blank')">
+            <button class="btn-primary" onclick="window.open('https://${website}', '_blank')" type="button">
                 <i class="fas fa-external-link-alt"></i> Visit Website
             </button>
-            <button class="action-btn btn-secondary" onclick="callBusiness('${business.phone}')">
+            <button class="btn-secondary" onclick="callBusiness('${phone}')" type="button">
                 <i class="fas fa-phone"></i> Call Now
             </button>
         </div>
     `;
-    
+
     return card;
+}
+
+// Helper functions for generating business data
+function generateAddress(cityName) {
+    const streetNumbers = Math.floor(Math.random() * 200) + 1;
+    const streetNames = ['High Street', 'Main Road', 'Green Lane', 'Park Avenue', 'Church Street', 'Market Square'];
+    const streetName = streetNames[Math.floor(Math.random() * streetNames.length)];
+    return `${streetNumbers} ${streetName}, ${cityName}`;
+}
+
+function generatePhoneNumber() {
+    const area = Math.floor(Math.random() * 9000) + 1000;
+    const number = Math.floor(Math.random() * 900000) + 100000;
+    return `+44 ${area.toString().slice(0,2)} ${area.toString().slice(2)} ${number.toString().slice(0,4)}`;
+}
+
+function generateWebsite(categoryKey, cityName) {
+    const domain = (categoryKey + cityName).toLowerCase().replace(/[^a-z]/g, '').slice(0, 15);
+    return `www.${domain}.co.uk`;
 }
 
 // Update city statistics
 function updateCityStats() {
     const titleElement = document.querySelector('.city-hero h1');
     const businessCountElement = document.querySelector('.city-stats .stat-number');
-    
+
     if (titleElement) {
         titleElement.textContent = `Discover Eco-Friendly Businesses in ${currentCityName}`;
     }
-    
+
     if (businessCountElement) {
         businessCountElement.textContent = `${cityBusinesses.length}+`;
     }
@@ -261,7 +308,7 @@ function populateCategories() {
     ];
 
     categoriesGrid.innerHTML = '';
-    
+
     categories.forEach(category => {
         const citySlug = sanitizeCityName(currentCityName);
         const categoryCard = document.createElement('div');
@@ -269,13 +316,13 @@ function populateCategories() {
         categoryCard.onclick = () => {
             window.location.href = `${citySlug}-${category.key}.html`;
         };
-        
+
         categoryCard.innerHTML = `
             <div class="category-icon">${category.icon}</div>
             <h3>${category.name}</h3>
             <p>${category.count} businesses</p>
         `;
-        
+
         categoriesGrid.appendChild(categoryCard);
     });
 }
@@ -292,7 +339,7 @@ function displayFilteredBusinesses(businesses) {
     if (!grid) return;
 
     grid.innerHTML = '';
-    
+
     businesses.forEach(business => {
         const businessCard = createBusinessCard(business);
         grid.appendChild(businessCard);
