@@ -8,7 +8,6 @@ function createHeader() {
                 <div class="nav-container">
                     <div class="logo">
                         <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk" class="logo-image">
-                        EcoSustainable.co.uk
                     </div>
                     <ul class="nav-menu">
                         <li><a href="index.html" class="nav-link">Home</a></li>
