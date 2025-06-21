@@ -396,7 +396,7 @@ function addComprehensiveDirectorySection() {
         <p>Looking for the top 10 eco friendly businesses UK? Our curated eco friendly businesses UK list features the best eco friendly businesses UK across all major cities and industries.</p>
         <p>From our extensive database of top 100 sustainable companies UK, we showcase the top 10 ethical companies UK that are leading the way in environmental responsibility. Browse sustainable companies examples from health & beauty to energy & utilities.</p>
         <p>Whether you're seeking local green services or researching top eco friendly businesses UK for partnerships, our verified directory connects you with companies that share your environmental values.</p>
-        
+
         <h3>Featured in Our Directory</h3>
         <ul>
             <li>✓ Zero Waste Stores</li>

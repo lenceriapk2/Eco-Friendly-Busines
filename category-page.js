@@ -729,7 +729,7 @@ function addComprehensiveDirectorySection() {
 
                     <p>From our extensive database of <strong>top 100 sustainable companies UK</strong>, we showcase the <strong>top 10 ethical companies UK</strong> that are leading the way in environmental responsibility. Browse <strong>sustainable companies examples</strong> from health & beauty to energy & utilities.</p>
 
-                    <p>Whether you're seeking local green services or researching <strong>top eco friendly businesses UK</strong> for partnerships, our verified directory connects you with companies that share your environmental values.</p>
+                    <p>Whether you're seeking local green services or researching <strong>top eco friendly businesses UK</strong> for partnerships, our verified directory connects you with companies that share your environmentalvalues.</p>
 
                     <div class="featured-services">
                         <h3>Featured in Our Directory</h3>
