@@ -1,13 +1,374 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK Cities - Eco-Friendly Business Directory | EcoSustainable.co.uk</title>
-    <meta name="description" content="Browse eco-friendly businesses by city across the UK. Find sustainable companies in London, Manchester, Birmingham, Edinburgh, and 75+ other UK cities.">
+    <title>Browse Cities | EcoSustainable.co.uk</title>
+    <meta name="description" content="Find sustainable businesses in cities across England, Scotland, Wales, and Northern Ireland. Discover eco-friendly companies in your area.">
+    <meta name="keywords" content="sustainable businesses by city, eco-friendly companies UK, green businesses cities">
+    
     <link href="style.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="canonical" href="https://ecosustainable.co.uk/cities.html">
+    
+    <style>
+        .cities-hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4CAF50 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cities-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,200 L0,200 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat-x;
+            background-size: 1000px 200px;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1000px); }
+        }
+        
+        .cities-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cities-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border-radius: 45px;
+            outline: none;
+            color: #333;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 45px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-btn:hover {
+            background: linear-gradient(135deg, #45a049, #1B5E20);
+            transform: scale(1.05);
+        }
+        
+        .stats-banner {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .region-section {
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .region-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .region-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 2.8rem;
+            color: #2E7D32;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .flag {
+            font-size: 3rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .region-description {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .city-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .city-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(46, 125, 50, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(76, 175, 80, 0.25);
+            border-color: #4CAF50;
+        }
+        
+        .city-card:hover::before {
+            opacity: 1;
+        }
+        
+        .city-image {
+            height: 180px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .city-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.2)"/><circle cx="60" cy="80" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="30" cy="70" r="1.2" fill="rgba(255,255,255,0.3)"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .city-icon {
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .city-info {
+            padding: 30px 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .city-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2E7D32;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .city-arrow {
+            color: #4CAF50;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .city-card:hover .city-arrow {
+            transform: translateX(5px);
+        }
+        
+        .city-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .city-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .city-stat {
+            text-align: center;
+        }
+        
+        .city-stat-number {
+            display: block;
+            font-weight: 700;
+            color: #4CAF50;
+            font-size: 1.1rem;
+        }
+        
+        .city-stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatAround 20s linear infinite;
+        }
+        
+        @keyframes floatAround {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .floating-element:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+        
+        .floating-element:nth-child(2) {
+            left: 50%;
+            animation-delay: 5s;
+            animation-duration: 30s;
+        }
+        
+        .floating-element:nth-child(3) {
+            left: 80%;
+            animation-delay: 10s;
+            animation-duration: 20s;
+        }
+        
+        @media (max-width: 768px) {
+            .cities-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-banner {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .region-title {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .cities-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Component -->
@@ -15,11 +376,40 @@
 
     <!-- Cities Hero Section -->
     <section class="cities-hero">
+        <div class="floating-elements">
+            <div class="floating-element">🌱</div>
+            <div class="floating-element">🏢</div>
+            <div class="floating-element">♻️</div>
+        </div>
+        
         <div class="container">
             <h1>Browse by <span class="highlight">City</span></h1>
-            <p>Find sustainable businesses in cities across England, Scotland, Wales, and Northern Ireland.</p>
-
+            <p>Find sustainable businesses in cities across England, Scotland, Wales, and Northern Ireland. Discover eco-friendly companies making a difference in your community.</p>
             
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search for a city..." id="citySearch">
+                    <button class="search-btn" onclick="searchCities()">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+            <div class="stats-banner">
+                <div class="stat-item">
+                    <span class="stat-number">70+</span>
+                    <span class="stat-label">Cities</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Businesses</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -28,7 +418,13 @@
         <div class="container">
             <!-- England -->
             <div class="region-section">
-                <h2><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> England</h2>
+                <div class="region-header">
+                    <h2 class="region-title">
+                        <span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> 
+                        England
+                    </h2>
+                    <p class="region-description">Discover sustainable businesses across England's vibrant cities</p>
+                </div>
                 <div class="cities-grid" id="englandCities">
                     <!-- England cities will be populated by JavaScript -->
                 </div>
@@ -36,7 +432,13 @@
 
             <!-- Scotland -->
             <div class="region-section">
-                <h2><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> Scotland</h2>
+                <div class="region-header">
+                    <h2 class="region-title">
+                        <span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> 
+                        Scotland
+                    </h2>
+                    <p class="region-description">Explore eco-friendly companies in Scotland's historic cities</p>
+                </div>
                 <div class="cities-grid" id="scotlandCities">
                     <!-- Scotland cities will be populated by JavaScript -->
                 </div>
@@ -44,7 +446,13 @@
 
             <!-- Wales -->
             <div class="region-section">
-                <h2><span class="flag">🏴󠁧󠁢󠁷󠁬󠁳󠁿</span> Wales</h2>
+                <div class="region-header">
+                    <h2 class="region-title">
+                        <span class="flag">🏴󠁧󠁢󠁷󠁬󠁳󠁿</span> 
+                        Wales
+                    </h2>
+                    <p class="region-description">Find sustainable businesses in Wales' beautiful cities</p>
+                </div>
                 <div class="cities-grid" id="walesCities">
                     <!-- Wales cities will be populated by JavaScript -->
                 </div>
@@ -52,7 +460,13 @@
 
             <!-- Northern Ireland -->
             <div class="region-section">
-                <h2><span class="flag">🇬🇧</span> Northern Ireland</h2>
+                <div class="region-header">
+                    <h2 class="region-title">
+                        <span class="flag">🇬🇧</span> 
+                        Northern Ireland
+                    </h2>
+                    <p class="region-description">Support green businesses across Northern Ireland</p>
+                </div>
                 <div class="cities-grid" id="northernIrelandCities">
                     <!-- Northern Ireland cities will be populated by JavaScript -->
                 </div>
@@ -65,7 +479,133 @@
 
     <script src="components.js"></script>
     <script src="canonical-urls.js"></script>
-    <script src="canonical-urls.js"></script>
-    <script src="cities-page.js"></script>
+    <script src="places-api.js"></script>
+    <script>
+        // City data organized by region
+        const cityData = {
+            england: [
+                { name: 'London', icon: 'fas fa-city', businesses: '150+', population: '9M+', description: 'Capital city with the most eco-friendly businesses' },
+                { name: 'Birmingham', icon: 'fas fa-industry', businesses: '72+', population: '2.9M+', description: 'Industrial city embracing green transformation' },
+                { name: 'Manchester', icon: 'fas fa-building', businesses: '89+', population: '2.7M+', description: 'Northern powerhouse of sustainable business' },
+                { name: 'Liverpool', icon: 'fas fa-ship', businesses: '64+', population: '1.4M+', description: 'Maritime city going green' },
+                { name: 'Bristol', icon: 'fas fa-bridge', businesses: '58+', population: '700K+', description: 'Leading the way in environmental innovation' },
+                { name: 'Leeds', icon: 'fas fa-university', businesses: '52+', population: '1.9M+', description: 'Yorkshire\'s sustainable hub' },
+                { name: 'Sheffield', icon: 'fas fa-mountain', businesses: '45+', population: '1.4M+', description: 'Steel city with green heart' },
+                { name: 'Newcastle', icon: 'fas fa-bridge', businesses: '42+', population: '1.6M+', description: 'Tyneside\'s eco-friendly businesses' },
+                { name: 'Nottingham', icon: 'fas fa-tree', businesses: '38+', population: '1.2M+', description: 'Robin Hood\'s sustainable city' },
+                { name: 'Brighton & Hove', icon: 'fas fa-umbrella-beach', businesses: '55+', population: '600K+', description: 'Seaside sustainability champion' },
+                { name: 'Bath', icon: 'fas fa-monument', businesses: '35+', population: '200K+', description: 'Historic city with modern green values' },
+                { name: 'Cambridge', icon: 'fas fa-graduation-cap', businesses: '42+', population: '400K+', description: 'Academic excellence meets sustainability' },
+                { name: 'Canterbury', icon: 'fas fa-church', businesses: '28+', population: '170K+', description: 'Cathedral city embracing green future' },
+                { name: 'Bradford', icon: 'fas fa-fabric', businesses: '33+', population: '1.2M+', description: 'Textile heritage, sustainable future' }
+            ],
+            scotland: [
+                { name: 'Edinburgh', icon: 'fas fa-castle', businesses: '64+', population: '1.3M+', description: 'Scotland\'s sustainable capital' },
+                { name: 'Glasgow', icon: 'fas fa-ship', businesses: '47+', population: '1.8M+', description: 'Scotland\'s largest city going green' },
+                { name: 'Aberdeen', icon: 'fas fa-oil-well', businesses: '35+', population: '650K+', description: 'Energy city transitioning to renewables' },
+                { name: 'Dundee', icon: 'fas fa-water', businesses: '28+', population: '380K+', description: 'City of discovery and sustainability' },
+                { name: 'Stirling', icon: 'fas fa-crown', businesses: '22+', population: '120K+', description: 'Historic city with green ambitions' }
+            ],
+            wales: [
+                { name: 'Cardiff', icon: 'fas fa-dragon', businesses: '48+', population: '1.1M+', description: 'Welsh capital leading sustainability' },
+                { name: 'Swansea', icon: 'fas fa-waves', businesses: '32+', population: '630K+', description: 'Coastal city embracing green energy' },
+                { name: 'Newport', icon: 'fas fa-bridge', businesses: '25+', population: '380K+', description: 'Gateway city going sustainable' },
+                { name: 'Bangor', icon: 'fas fa-mountain', businesses: '18+', population: '85K+', description: 'University city with eco focus' },
+                { name: 'Wrexham', icon: 'fas fa-industry', businesses: '22+', population: '200K+', description: 'Industrial heritage, green future' }
+            ],
+            northernIreland: [
+                { name: 'Belfast', icon: 'fas fa-ship', businesses: '42+', population: '630K+', description: 'Capital city embracing sustainability' },
+                { name: 'Londonderry', icon: 'fas fa-fort-awesome', businesses: '25+', population: '230K+', description: 'Walled city with green vision' },
+                { name: 'Lisburn', icon: 'fas fa-leaf', businesses: '18+', population: '180K+', description: 'Garden city growing greener' },
+                { name: 'Armagh', icon: 'fas fa-church', businesses: '15+', population: '75K+', description: 'Ecclesiastical capital going eco' },
+                { name: 'Newry', icon: 'fas fa-mountain', businesses: '16+', population: '90K+', description: 'Border city with sustainable focus' }
+            ]
+        };
+
+        function createCityCard(city) {
+            return `
+                <a href="${city.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}.html" class="city-card">
+                    <div class="city-image">
+                        <i class="${city.icon} city-icon"></i>
+                    </div>
+                    <div class="city-info">
+                        <h3 class="city-name">
+                            ${city.name}
+                            <i class="fas fa-arrow-right city-arrow"></i>
+                        </h3>
+                        <p class="city-description">${city.description}</p>
+                        <div class="city-stats">
+                            <div class="city-stat">
+                                <span class="city-stat-number">${city.businesses}</span>
+                                <span class="city-stat-label">Businesses</span>
+                            </div>
+                            <div class="city-stat">
+                                <span class="city-stat-number">${city.population}</span>
+                                <span class="city-stat-label">Population</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `;
+        }
+
+        function populateCities() {
+            // Populate England cities
+            const englandGrid = document.getElementById('englandCities');
+            if (englandGrid) {
+                englandGrid.innerHTML = cityData.england.map(createCityCard).join('');
+            }
+
+            // Populate Scotland cities
+            const scotlandGrid = document.getElementById('scotlandCities');
+            if (scotlandGrid) {
+                scotlandGrid.innerHTML = cityData.scotland.map(createCityCard).join('');
+            }
+
+            // Populate Wales cities
+            const walesGrid = document.getElementById('walesCities');
+            if (walesGrid) {
+                walesGrid.innerHTML = cityData.wales.map(createCityCard).join('');
+            }
+
+            // Populate Northern Ireland cities
+            const northernIrelandGrid = document.getElementById('northernIrelandCities');
+            if (northernIrelandGrid) {
+                northernIrelandGrid.innerHTML = cityData.northernIreland.map(createCityCard).join('');
+            }
+        }
+
+        function searchCities() {
+            const searchTerm = document.getElementById('citySearch').value.toLowerCase();
+            if (!searchTerm) return;
+
+            // Find matching city
+            const allCities = [...cityData.england, ...cityData.scotland, ...cityData.wales, ...cityData.northernIreland];
+            const matchingCity = allCities.find(city => 
+                city.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (matchingCity) {
+                const cityUrl = matchingCity.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-') + '.html';
+                window.location.href = cityUrl;
+            } else {
+                alert('City not found. Please try another search term.');
+            }
+        }
+
+        // Add enter key support for search
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCities();
+            
+            const searchInput = document.getElementById('citySearch');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchCities();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
