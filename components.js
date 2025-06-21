@@ -191,8 +191,7 @@ window.EcoComponents = {
     createFooter,
     initializeComponents,
     initializeMobileNav,
-    initializeSmoothScroll,
-		businessCategories
+    initializeSmoothScroll
 };
 
 // Initialize components when DOM is loaded

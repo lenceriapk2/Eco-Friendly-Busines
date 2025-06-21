@@ -169,7 +169,14 @@
     <script src="city-page.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initializeCityPage('Belfast');
+            // Ensure components are initialized first
+            if (window.EcoComponents) {
+                window.EcoComponents.initializeComponents();
+            }
+            // Then initialize city page
+            if (typeof initializeCityPage !== 'undefined') {
+                initializeCityPage('Belfast');
+            }
         });
     </script>
 </body>
