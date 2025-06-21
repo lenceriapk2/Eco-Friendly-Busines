@@ -33,12 +33,15 @@ const CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES;
 
 // Function to determine canonical URL for current page
 function getCanonicalUrl() {
-    let currentPath = window.location.pathname.split('/').pop();
+    let currentPath = window.location.pathname;
     
     // Handle root path
-    if (!currentPath || currentPath === '') {
+    if (!currentPath || currentPath === '/' || currentPath === '/index.html') {
         return 'https://ecosustainable.co.uk/';
     }
+    
+    // Remove leading slash and get the actual file name
+    currentPath = currentPath.split('/').pop();
 
     // Check each strategy
     for (const [strategyName, strategy] of Object.entries(CANONICAL_STRATEGIES)) {
