@@ -780,6 +780,117 @@ function addComprehensiveDirectorySection() {
     }
 }
 
+// Add missing helper functions
+function getCategorySearchTerm(categorySlug) {
+    const searchTerms = {
+        'health-beauty': 'organic beauty spa wellness salon',
+        'energy-utilities': 'solar energy renewable electricity utility',
+        'education-nonprofits': 'education nonprofit environmental training',
+        'transport-travel': 'transport travel taxi bike delivery',
+        'services-professional': 'consulting professional business services',
+        'recycling-waste': 'recycling waste management environmental',
+        'products-retail': 'retail shop store eco products'
+    };
+    return searchTerms[categorySlug] || 'sustainable eco friendly business';
+}
+
+function getCategoryDisplayName(categorySlug) {
+    const categoryNames = {
+        'health-beauty': 'Health & Beauty',
+        'energy-utilities': 'Energy & Utilities',
+        'education-nonprofits': 'Education & Nonprofits',
+        'transport-travel': 'Transport & Travel',
+        'services-professional': 'Services & Professional',
+        'recycling-waste': 'Recycling & Waste',
+        'products-retail': 'Products & Retail'
+    };
+    return categoryNames[categorySlug] || 'Business';
+}
+
+function generateMockBusinesses(categorySlug, cityName) {
+    const businesses = [];
+    const cityCode = generateCityCode(cityName);
+    const categoryCode = generateCategoryCode(categorySlug);
+
+    // Business name templates based on category
+    const businessNameTemplates = {
+        'health-beauty': [
+            'Natural Glow', 'Pure Beauty', 'Organic Wellness', 'Green Spa', 'Eco Beauty',
+            'Natural Elements', 'Pure Radiance', 'Green Garden', 'Eco Essence', 'Natural Care',
+            'Organic Touch', 'Pure Nature'
+        ],
+        'energy-utilities': [
+            'Solar Solutions', 'Green Energy', 'Renewable Power', 'Eco Energy', 'Solar Tech',
+            'Clean Power', 'Green Grid', 'Renewable Solutions', 'Eco Power', 'Solar Systems',
+            'Green Utilities', 'Clean Energy'
+        ],
+        'education-nonprofits': [
+            'Green Learning', 'Eco Education', 'Sustainable Future', 'Environmental Trust', 'Green Foundation',
+            'Eco Academy', 'Climate Action', 'Green Initiative', 'Sustainable Society', 'Environmental Care',
+            'Green Community', 'Eco Alliance'
+        ],
+        'transport-travel': [
+            'Green Travel', 'Eco Transport', 'Sustainable Journeys', 'Clean Rides', 'Green Routes',
+            'Eco Mobility', 'Green Fleet', 'Sustainable Transport', 'Clean Travel', 'Eco Tours',
+            'Green Adventures', 'Sustainable Rides'
+        ],
+        'services-professional': [
+            'Green Solutions', 'Eco Services', 'Sustainable Consulting', 'Green Professional', 'Eco Experts',
+            'Green Advisors', 'Sustainable Services', 'Eco Solutions', 'Green Consulting', 'Environmental Services',
+            'Green Tech', 'Eco Professional'
+        ],
+        'recycling-waste': [
+            'Recycle Plus', 'Waste Solutions', 'Green Recycling', 'Eco Waste', 'Clean Solutions',
+            'Green Disposal', 'Eco Recycling', 'Waste Wise', 'Green Waste', 'Recycling Solutions',
+            'Eco Management', 'Green Recovery'
+        ],
+        'products-retail': [
+            'Green Store', 'Eco Products', 'Sustainable Goods', 'Green Market', 'Eco Shop',
+            'Natural Products', 'Green Retail', 'Eco Essentials', 'Sustainable Store', 'Green Goods',
+            'Eco Marketplace', 'Natural Store'
+        ]
+    };
+
+    const templates = businessNameTemplates[categorySlug] || businessNameTemplates['services-professional'];
+
+    for (let i = 0; i < 12; i++) {
+        const templateIndex = i % templates.length;
+        const nameVariation = i < templates.length ? '' : ` ${Math.floor(i / templates.length) + 1}`;
+
+        businesses.push({
+            id: `${categoryCode}_${cityCode}_${i + 1}`,
+            name: `${templates[templateIndex]}${nameVariation}`,
+            category: categorySlug,
+            subcategory: getCategorySubcategory(categorySlug),
+            rating: 4.0 + (Math.random() * 1.0),
+            reviewCount: Math.floor(Math.random() * 150) + 25,
+            description: generateBusinessDescription(categorySlug, cityName),
+            address: generateAddress(cityName),
+            phone: generatePhoneNumber(),
+            website: generateWebsite(templates[templateIndex].toLowerCase().replace(/\s+/g, '')),
+            image: getCategoryImage(categorySlug, i),
+            features: getCategoryFeatures(categorySlug),
+            businessStatus: 'OPERATIONAL'
+        });
+    }
+
+    return businesses;
+}
+
+function updatePageMetadata(categorySlug, cityName) {
+    const categoryName = getCategoryDisplayName(categorySlug);
+    document.title = `Top 10 ${categoryName} Businesses in ${cityName} | EcoSustainable.co.uk`;
+    
+    // Update meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = `Discover the best ${categoryName.toLowerCase()} businesses in ${cityName}. Verified sustainable companies with excellent ratings and eco-friendly practices.`;
+}
+
 // Initialize category page
 async function initializeCategoryPage(categorySlug, cityName) {
     try {
@@ -894,7 +1005,9 @@ function displayCategoryBusinesses(businesses, categorySlug, cityName) {
 
     // Display businesses
     businesses.slice(0, 12).forEach((business, index) => {
-        const businessCard = createBusinessCard(business, index + 1);
-        grid.appendChild(businessCard);
+        const businessCard = document.createElement('div');
+        businessCard.innerHTML = createBusinessCard(business);
+        businessCard.className = 'business-card';
+        grid.appendChild(businessCard.firstElementChild);
     });
 }
