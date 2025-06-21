@@ -69,16 +69,7 @@ function createFooter() {
                     </div>
 
                     <div class="footer-section">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="/categories/food-beverage">Food & Beverage</a></li>
-                            <li><a href="/categories/health-beauty">Health & Beauty</a></li>
-                            <li><a href="/categories/home-living">Home & Living</a></li>
-                            <li><a href="/categories/fashion-accessories">Fashion & Accessories</a></li>
-                            <li><a href="/categories/services-professional">Services & Professional</a></li>
-                        </ul>
-                    </div>
-
+                      
                     <div class="footer-section">
                         <h4>Support</h4>
                         <ul>
