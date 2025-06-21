@@ -80,40 +80,6 @@
         </div>
     </section>
 
-    <!-- Category Filter Section -->
-    <section class="category-filter">
-        <div class="container">
-            <div class="category-filter-container">
-                <div class="filter-group">
-                    <label for="categoryFilter"><i class="fas fa-filter"></i> Filter by Category:</label>
-                    <select id="categoryFilter" onchange="filterByCategory()">
-                        <option value="">All Categories</option>
-                        <option value="health-beauty">Health & Beauty</option>
-                        <option value="products-retail">Products & Retail</option>
-                        <option value="transport-travel">Transport & Travel</option>
-                        <option value="services-professional">Services & Professional</option>
-                        <option value="energy-utilities">Energy & Utilities</option>
-                        <option value="recycling-waste">Recycling & Waste Management</option>
-                        <option value="education-nonprofits">Education & Nonprofits</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label for="sortFilter"><i class="fas fa-sort"></i> Sort by:</label>
-                    <select id="sortFilter" onchange="sortBusinesses()">
-                        <option value="rating">Highest Rated</option>
-                        <option value="reviews">Most Reviews</option>
-                        <option value="name">Name A-Z</option>
-                    </select>
-                </div>
-                
-                <button class="refresh-btn" onclick="refreshBusinesses()" title="Refresh business data">
-                    <i class="fas fa-sync-alt"></i>
-                    Refresh Data
-                </button>
-            </div>
-        </div>
-    </section>
 
     <!-- Newry Businesses Section -->
     <section class="london-businesses">
