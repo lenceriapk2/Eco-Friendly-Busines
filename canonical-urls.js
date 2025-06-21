@@ -1,7 +1,7 @@
 // Canonical URL Management System for EcoSustainable.co.uk
 // Manages SEO-friendly URL structure and canonical links
 
-// Check if CANONICAL_STRATEGIES is already defined to prevent redeclaration
+// Check if CANONICAL_STRATEGIES is already defined to prevent duplicate declarations
 if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
     window.CANONICAL_STRATEGIES = {
         // City pages - canonical to main city page

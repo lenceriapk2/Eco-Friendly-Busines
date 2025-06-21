@@ -349,7 +349,7 @@ function populateTopBusinesses() {
 
 // Search functionality
 function performSearch() {
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchInput = searchInput.value.toLowerCase();
     const selectedCity = cityFilter.value;
 
     if (searchTerm || selectedCity) {
@@ -479,12 +479,21 @@ const lazyLoadObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Register service worker for caching
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => console.log('SW registered'))
-            .catch(error => console.log('SW registration failed'));
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize search functionality
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
+    }
+
+    // Handle search function
+    function handleSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput && searchInput.value.trim()) {
+            // Redirect to search results or handle search
+            window.location.href = `cities.html?search=${encodeURIComponent(searchInput.value)}`;
+        }
     }
 
     // Lazy load sections when they come into view

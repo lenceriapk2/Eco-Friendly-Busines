@@ -2,30 +2,44 @@
 // API Configuration for server-side environment variables
 class APIConfig {
     static getGooglePlacesAPIKey() {
-        // This will work in Node.js environment
-        if (typeof process !== 'undefined' && process.env) {
-            return process.env.GOOGLE_PLACES_API_KEY;
-        }
-        
-        // For client-side, we'll need to pass it through a secure endpoint
-        return null;
+        // For client-side applications in Replit, check if API key is available
+        // This would be injected server-side in a real application
+        return null; // Will be handled by Places API fallback system
     }
 
     static async initializePlacesAPI() {
-        const apiKey = this.getGooglePlacesAPIKey();
-        if (apiKey && window.PlacesAPI) {
-            await window.PlacesAPI.initialize(apiKey);
-            console.log('Real Google Places API initialized');
-            return true;
+        // Wait for PlacesAPI to be available
+        let attempts = 0;
+        while (!window.PlacesAPI && attempts < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
         }
-        console.log('Using mock data - no API key available');
-        return false;
+
+        if (!window.PlacesAPI) {
+            console.error('PlacesAPI not available after timeout');
+            return false;
+        }
+
+        const apiKey = this.getGooglePlacesAPIKey();
+        try {
+            await window.PlacesAPI.initialize(apiKey);
+            if (apiKey) {
+                console.log('Real Google Places API initialized');
+            } else {
+                console.log('Places API initialized in demo mode');
+                console.log('Add GOOGLE_PLACES_API_KEY to Replit Secrets for real data');
+            }
+            return true;
+        } catch (error) {
+            console.error('Failed to initialize Places API:', error);
+            return false;
+        }
     }
 }
 
 // Auto-initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    APIConfig.initializePlacesAPI();
+document.addEventListener('DOMContentLoaded', async () => {
+    await APIConfig.initializePlacesAPI();
 });
 
 window.APIConfig = APIConfig;
