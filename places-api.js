@@ -616,11 +616,23 @@ placesAPI.initialize('AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE').then(() => {
     window.PlacesAPI.initialized = true;
     window.PlacesAPI.isInitialized = true;
     
+    // Dispatch event to notify pages that API is ready
+    const apiReadyEvent = new CustomEvent('placesAPIReady', { 
+        detail: { apiReady: true, hasRealKey: true } 
+    });
+    document.dispatchEvent(apiReadyEvent);
+    
     console.log('✅ API initialization complete - ready to load real data');
 }).catch(error => {
     console.error('❌ Places API initialization failed:', error);
     placesAPI.initialized = false;
     placesAPI.isInitialized = false;
+    
+    // Dispatch event even on failure so pages don't wait indefinitely
+    const apiReadyEvent = new CustomEvent('placesAPIReady', { 
+        detail: { apiReady: false, hasRealKey: false } 
+    });
+    document.dispatchEvent(apiReadyEvent);
 });
 
 // Export individual methods for backwards compatibility

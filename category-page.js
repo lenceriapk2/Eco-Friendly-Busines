@@ -38,17 +38,25 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
     try {
         console.log(`🔍 Loading businesses from Google Places API for ${categoryKey} in ${cityName}`);
 
-        // Check if API is properly initialized
-        if (window.PlacesAPI && window.PlacesAPI.initialized && window.PlacesAPI.apiKey) {
+        // Check if API is properly initialized and available
+        if (window.PlacesAPI && 
+            (window.PlacesAPI.initialized === true || window.PlacesAPI.isInitialized === true) &&
+            typeof window.PlacesAPI.fetchBusinessesForCategory === 'function') {
+            
             console.log(`✅ Using Google Places API with real data`);
             
             let apiBusinesses = null;
 
             // Try category-specific API first
             try {
+                console.log(`🌐 Calling fetchBusinessesForCategory for ${categoryKey} in ${cityName}`);
                 apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName);
+                
                 if (apiBusinesses && apiBusinesses.length > 0) {
-                    console.log(`✅ Found ${apiBusinesses.length} businesses from category-specific API call`);
+                    console.log(`✅ Found ${apiBusinesses.length} REAL businesses from category-specific API call`);
+                    categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
+                    console.log(`✅ Using ${categoryBusinesses.length} real businesses from Google Places API`);
+                    return;
                 }
             } catch (categoryError) {
                 console.warn(`Category-specific API call failed:`, categoryError.message);
@@ -58,28 +66,36 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
             if (!apiBusinesses || apiBusinesses.length === 0) {
                 console.log(`🔄 Trying general city search for ${cityName}...`);
                 try {
-                    const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName);
-                    if (allBusinesses && allBusinesses.length > 0) {
-                        console.log(`Found ${allBusinesses.length} total businesses in ${cityName}, filtering by category...`);
-                        // Filter by category keywords
-                        apiBusinesses = filterBusinessesByCategory(allBusinesses, categoryKey);
-                        console.log(`✅ Filtered to ${apiBusinesses.length} businesses for ${categoryKey}`);
+                    if (typeof window.PlacesAPI.fetchAllBusinessesForCity === 'function') {
+                        const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName);
+                        if (allBusinesses && allBusinesses.length > 0) {
+                            console.log(`Found ${allBusinesses.length} total businesses in ${cityName}, filtering by category...`);
+                            // Filter by category keywords
+                            apiBusinesses = filterBusinessesByCategory(allBusinesses, categoryKey);
+                            console.log(`✅ Filtered to ${apiBusinesses.length} businesses for ${categoryKey}`);
+                            
+                            if (apiBusinesses && apiBusinesses.length > 0) {
+                                categoryBusinesses = apiBusinesses.slice(0, 12);
+                                console.log(`✅ Using ${categoryBusinesses.length} filtered real businesses`);
+                                return;
+                            }
+                        }
                     }
                 } catch (cityError) {
                     console.warn(`City-wide API call failed:`, cityError.message);
                 }
             }
 
-            // If we have API data, use it
-            if (apiBusinesses && apiBusinesses.length > 0) {
-                categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
-                console.log(`✅ Using ${categoryBusinesses.length} real businesses from Google Places API`);
-                return;
-            } else {
-                console.log(`⚠️ No businesses found via API, generating fallback data`);
-            }
+            console.log(`⚠️ No businesses found via API, generating fallback data`);
         } else {
-            console.log(`⚠️ Places API not properly initialized, using fallback data`);
+            console.log(`⚠️ Places API not properly initialized or missing functions, using fallback data`);
+            console.log(`API state:`, {
+                exists: !!window.PlacesAPI,
+                initialized: window.PlacesAPI?.initialized,
+                isInitialized: window.PlacesAPI?.isInitialized,
+                hasCategoryFunction: typeof window.PlacesAPI?.fetchBusinessesForCategory,
+                hasCityFunction: typeof window.PlacesAPI?.fetchAllBusinessesForCity
+            });
         }
 
         // If API fails or returns no results, generate unique fallback data
@@ -744,21 +760,23 @@ async function initializeCategoryPage(categoryKey, cityName) {
     // Show loading state immediately
     showLoadingState();
 
-    // Wait for API to be ready and properly initialized
+    // Wait for API to be ready with better detection
     let apiReady = false;
     let attempts = 0;
-    const maxAttempts = 200; // Increased timeout
+    const maxAttempts = 100;
 
     while (!apiReady && attempts < maxAttempts) {
-        if (window.PlacesAPI && window.PlacesAPI.initialized === true) {
+        if (window.PlacesAPI && 
+            (window.PlacesAPI.initialized === true || window.PlacesAPI.isInitialized === true) &&
+            typeof window.PlacesAPI.fetchBusinessesForCategory === 'function') {
             apiReady = true;
             console.log('✅ Places API is ready, loading real business data...');
             break;
         }
-        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(resolve => setTimeout(resolve, 100));
         attempts++;
         
-        if (attempts % 20 === 0) {
+        if (attempts % 10 === 0) {
             console.log(`⏳ Waiting for API... attempt ${attempts}/${maxAttempts}`);
         }
     }
