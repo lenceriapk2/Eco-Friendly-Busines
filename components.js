@@ -106,7 +106,7 @@ function createFooter() {
                     </div>
 
                     <div class="footer-section">
-                        <h4>Legal & Policies</h4>
+                        <h4>Legal</h4>
                         <ul>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="terms-of-service.html">Terms of Service</a></li>
