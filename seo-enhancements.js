@@ -13,138 +13,6 @@ class SEOEnhancer {
         this.handleInternalLinks();
         this.addBreadcrumbs();
         this.trackPagePerformance();
-        this.addMetaTags();
-        this.optimizeUrls();
-    }
-
-    // Add comprehensive meta tags for all pages
-    addMetaTags() {
-        const path = window.location.pathname;
-        const pageName = this.getPageName(path);
-        
-        // Update title if needed
-        if (!document.title.includes('EcoSustainable.co.uk')) {
-            document.title = `${pageName} | EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory`;
-        }
-
-        // Add missing meta tags
-        this.addMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large');
-        this.addMetaTag('language', 'English');
-        this.addMetaTag('author', 'EcoSustainable.co.uk');
-        this.addMetaTag('theme-color', '#4a7c59');
-        this.addMetaTag('msapplication-navbutton-color', '#4a7c59');
-        this.addMetaTag('apple-mobile-web-app-status-bar-style', 'default');
-        
-        // Add Open Graph tags if missing
-        this.addOpenGraphTags(pageName);
-        
-        // Add Twitter Card tags
-        this.addTwitterTags(pageName);
-    }
-
-    addMetaTag(name, content) {
-        if (!document.querySelector(`meta[name="${name}"]`)) {
-            const meta = document.createElement('meta');
-            meta.name = name;
-            meta.content = content;
-            document.head.appendChild(meta);
-        }
-    }
-
-    addOpenGraphTags(pageName) {
-        const tags = [
-            ['og:site_name', 'EcoSustainable.co.uk'],
-            ['og:locale', 'en_GB'],
-            ['og:type', 'website'],
-            ['og:url', window.location.href],
-            ['og:title', `${pageName} | EcoSustainable.co.uk`],
-            ['og:description', this.getPageDescription()],
-            ['og:image', 'https://ecosustainable.co.uk/attached_assets/Screenshot_23.png']
-        ];
-
-        tags.forEach(([property, content]) => {
-            if (!document.querySelector(`meta[property="${property}"]`)) {
-                const meta = document.createElement('meta');
-                meta.setAttribute('property', property);
-                meta.content = content;
-                document.head.appendChild(meta);
-            }
-        });
-    }
-
-    addTwitterTags(pageName) {
-        const tags = [
-            ['twitter:card', 'summary_large_image'],
-            ['twitter:title', `${pageName} | EcoSustainable.co.uk`],
-            ['twitter:description', this.getPageDescription()],
-            ['twitter:image', 'https://ecosustainable.co.uk/attached_assets/Screenshot_23.png']
-        ];
-
-        tags.forEach(([name, content]) => {
-            if (!document.querySelector(`meta[name="${name}"]`)) {
-                const meta = document.createElement('meta');
-                meta.name = name;
-                meta.content = content;
-                document.head.appendChild(meta);
-            }
-        });
-    }
-
-    getPageName() {
-        const path = window.location.pathname;
-        
-        if (path === '/' || path === '/index.html') return 'Home';
-        if (path.includes('sitemap')) return 'Sitemap';
-        if (path.includes('about')) return 'About Us';
-        if (path.includes('contact')) return 'Contact Us';
-        if (path.includes('categories')) return 'All Categories';
-        if (path.includes('cities')) return 'All Cities';
-        
-        // Extract city and category from URL
-        const match = path.match(/\/([^-]+)-([^.]+)/);
-        if (match) {
-            const [, city, category] = match;
-            return `${this.formatName(category)} in ${this.formatName(city)}`;
-        }
-        
-        // Single city page
-        const cityMatch = path.match(/\/([^.]+)/);
-        if (cityMatch) {
-            return `Eco-Friendly Businesses in ${this.formatName(cityMatch[1])}`;
-        }
-        
-        return 'Eco-Friendly Business Directory';
-    }
-
-    getPageDescription() {
-        const path = window.location.pathname;
-        
-        if (path === '/' || path === '/index.html') {
-            return 'Discover top eco-friendly businesses across UK cities. Find sustainable services, green products, and environmentally conscious companies near you. Over 500+ verified sustainable businesses.';
-        }
-        
-        if (path.includes('sitemap')) {
-            return 'Complete sitemap of EcoSustainable.co.uk featuring all eco-friendly business categories, UK cities, and important pages for easy navigation.';
-        }
-        
-        const match = path.match(/\/([^-]+)-([^.]+)/);
-        if (match) {
-            const [, city, category] = match;
-            return `Find top sustainable ${this.formatName(category).toLowerCase()} businesses in ${this.formatName(city)}. Verified eco-friendly companies committed to environmental responsibility.`;
-        }
-        
-        const cityMatch = path.match(/\/([^.]+)/);
-        if (cityMatch) {
-            return `Discover eco-friendly businesses in ${this.formatName(cityMatch[1])}. Find sustainable services, green products, and environmentally conscious companies.`;
-        }
-        
-        return 'UK\'s premier directory of eco-friendly and sustainable businesses across all major cities.';
-    }
-
-    formatName(str) {
-        return str.replace(/-/g, ' ')
-                 .replace(/\b\w/g, l => l.toUpperCase())
-                 .replace(/\bAnd\b/g, '&');
     }
 
     // Add dynamic structured data based on page content
@@ -161,58 +29,35 @@ class SEOEnhancer {
             // City page
             const city = path.replace('.html', '').replace('/', '');
             this.addCityPageStructuredData(city);
-        } else if (path === '/' || path === '/index.html') {
-            this.addHomePageStructuredData();
         }
     }
 
-    addHomePageStructuredData() {
-        const structuredData = {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "EcoSustainable.co.uk",
-            "alternateName": "Eco Sustainable UK",
-            "url": "https://ecosustainable.co.uk",
-            "description": "UK's premier directory of eco-friendly and sustainable businesses across all major cities",
-            "publisher": {
-                "@type": "Organization",
-                "name": "EcoSustainable.co.uk",
-                "url": "https://ecosustainable.co.uk",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://ecosustainable.co.uk/attached_assets/Screenshot_23.png"
-                }
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                    "@type": "EntryPoint",
-                    "urlTemplate": "https://ecosustainable.co.uk/search?q={search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-            }
-        };
-
-        this.injectStructuredData(structuredData);
+    extractCityCategory(path) {
+        const match = path.match(/\/([^-]+)-([^.]+)\.html/);
+        return match ? [match[1], match[2]] : [null, null];
     }
 
     addCategoryPageStructuredData(city, category) {
+        const categoryNames = {
+            'health-beauty': 'Health & Beauty',
+            'energy-utilities': 'Energy & Utilities',
+            'education-nonprofits': 'Education & Nonprofits',
+            'transport-travel': 'Transport & Travel',
+            'services-professional': 'Services & Professional',
+            'recycling-waste': 'Recycling & Waste',
+            'products-retail': 'Products & Retail'
+        };
+
         const structuredData = {
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": `${this.getCategoryDisplayName(category)} in ${this.formatName(city)}`,
-            "description": `Find sustainable ${this.getCategoryDisplayName(category).toLowerCase()} businesses in ${this.formatName(city)}`,
+            "@type": "CollectionPage",
+            "name": `${categoryNames[category] || category} in ${city}`,
+            "description": `Directory of sustainable ${categoryNames[category] || category} businesses in ${city}`,
             "url": window.location.href,
-            "isPartOf": {
-                "@type": "WebSite",
-                "name": "EcoSustainable.co.uk",
-                "url": "https://ecosustainable.co.uk"
-            },
             "mainEntity": {
                 "@type": "ItemList",
-                "name": `${this.getCategoryDisplayName(category)} Businesses`,
-                "description": `Directory of eco-friendly ${this.getCategoryDisplayName(category).toLowerCase()} businesses`,
-                "numberOfItems": 10
+                "name": `${categoryNames[category] || category} Businesses`,
+                "description": `Eco-friendly ${categoryNames[category] || category} services in ${city}`
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -221,157 +66,196 @@ class SEOEnhancer {
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://ecosustainable.co.uk"
+                        "item": "https://ecosustainable.co.uk/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
-                        "name": this.formatName(city),
-                        "item": `https://ecosustainable.co.uk/${city}`
+                        "name": "Cities",
+                        "item": "https://ecosustainable.co.uk/cities.html"
                     },
                     {
                         "@type": "ListItem",
                         "position": 3,
-                        "name": this.getCategoryDisplayName(category),
+                        "name": city,
+                        "item": `https://ecosustainable.co.uk/${city}.html`
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": categoryNames[category] || category,
                         "item": window.location.href
                     }
                 ]
             }
         };
 
-        this.injectStructuredData(structuredData);
+        this.insertStructuredData(structuredData);
     }
 
     addCityPageStructuredData(city) {
         const structuredData = {
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": `Eco-Friendly Businesses in ${this.formatName(city)}`,
-            "description": `Discover sustainable businesses and green companies in ${this.formatName(city)}`,
+            "@type": "CollectionPage",
+            "name": `Eco-Friendly Businesses in ${city}`,
+            "description": `Directory of sustainable and eco-friendly businesses in ${city}, UK`,
             "url": window.location.href,
-            "isPartOf": {
-                "@type": "WebSite",
-                "name": "EcoSustainable.co.uk",
-                "url": "https://ecosustainable.co.uk"
+            "mainEntity": {
+                "@type": "ItemList",
+                "name": `${city} Business Directory`,
+                "description": `Comprehensive list of eco-friendly businesses in ${city}`
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://ecosustainable.co.uk/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Cities",
+                        "item": "https://ecosustainable.co.uk/cities.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": city,
+                        "item": window.location.href
+                    }
+                ]
             }
         };
 
-        this.injectStructuredData(structuredData);
+        this.insertStructuredData(structuredData);
     }
 
-    injectStructuredData(data) {
+    insertStructuredData(data) {
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify(data);
         document.head.appendChild(script);
     }
 
-    extractCityCategory(path) {
-        const match = path.match(/\/([^-]+)-([^.]+)\.html/);
-        return match ? [match[1], match[2]] : [null, null];
-    }
-
-    getCategoryDisplayName(categoryKey) {
-        const names = {
-            'health-beauty': 'Health & Beauty',
-            'products-retail': 'Products & Retail',
-            'transport-travel': 'Transport & Travel',
-            'services-professional': 'Services & Professional',
-            'energy-utilities': 'Energy & Utilities',
-            'recycling-waste': 'Recycling & Waste Management',
-            'education-nonprofits': 'Education & Nonprofits'
-        };
-        return names[categoryKey] || 'Business Services';
-    }
-
     // Optimize images for SEO
     optimizeImages() {
-        const images = document.querySelectorAll('img:not([alt])');
-        images.forEach((img, index) => {
-            if (!img.alt) {
-                img.alt = `Eco-friendly business image ${index + 1}`;
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            // Add loading="lazy" for performance
+            if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+            }
+            
+            // Ensure alt text exists
+            if (!img.hasAttribute('alt') || img.alt === '') {
+                const altText = this.generateAltText(img);
+                img.setAttribute('alt', altText);
             }
         });
+    }
 
-        // Add loading="lazy" to images below the fold
-        const imagesLazy = document.querySelectorAll('img');
-        imagesLazy.forEach((img, index) => {
-            if (index > 2) { // First 3 images load normally
-                img.loading = 'lazy';
-            }
-        });
+    generateAltText(img) {
+        const src = img.src || '';
+        const className = img.className || '';
+        
+        if (src.includes('logo')) return 'EcoSustainable.co.uk Logo';
+        if (className.includes('business')) return 'Eco-friendly business image';
+        if (className.includes('city')) return 'City view image';
+        
+        return 'EcoSustainable business directory image';
     }
 
     // Optimize internal links
     handleInternalLinks() {
-        const links = document.querySelectorAll('a[href^="/"]');
+        const links = document.querySelectorAll('a[href]');
         links.forEach(link => {
-            // Add title attribute if missing
-            if (!link.title) {
-                link.title = link.textContent.trim();
+            const href = link.getAttribute('href');
+            
+            // Add rel attributes for external links
+            if (href.startsWith('http') && !href.includes('ecosustainable.co.uk')) {
+                link.setAttribute('rel', 'noopener noreferrer');
+                link.setAttribute('target', '_blank');
+            }
+            
+            // Ensure internal links have proper title attributes
+            if (href.startsWith('/') || href.includes('ecosustainable.co.uk')) {
+                if (!link.hasAttribute('title') && link.textContent.trim()) {
+                    link.setAttribute('title', link.textContent.trim());
+                }
             }
         });
     }
 
-    // Add breadcrumbs
+    // Add breadcrumbs to pages
     addBreadcrumbs() {
         const path = window.location.pathname;
-        if (path === '/' || path === '/index.html') return;
-
-        const breadcrumbContainer = document.createElement('nav');
-        breadcrumbContainer.className = 'breadcrumb-nav';
-        breadcrumbContainer.setAttribute('aria-label', 'Breadcrumb');
-
-        const breadcrumbs = this.generateBreadcrumbs(path);
-        breadcrumbContainer.innerHTML = breadcrumbs;
-
-        // Insert after header
-        const header = document.getElementById('header-component');
-        if (header && header.nextSibling) {
-            header.parentNode.insertBefore(breadcrumbContainer, header.nextSibling);
+        const breadcrumbContainer = document.querySelector('.breadcrumb-container');
+        
+        if (!breadcrumbContainer) {
+            const breadcrumbs = this.generateBreadcrumbs(path);
+            if (breadcrumbs.length > 1) {
+                this.insertBreadcrumbs(breadcrumbs);
+            }
         }
     }
 
     generateBreadcrumbs(path) {
-        const parts = path.split('/').filter(Boolean);
-        let breadcrumbs = '<ol class="breadcrumb-list">';
+        const breadcrumbs = [{ name: 'Home', url: '/' }];
         
-        breadcrumbs += '<li class="breadcrumb-item"><a href="/">Home</a></li>';
-        
-        let currentPath = '';
-        parts.forEach((part, index) => {
-            currentPath += '/' + part;
-            const isLast = index === parts.length - 1;
-            const name = this.formatBreadcrumbName(part);
-            
-            if (isLast) {
-                breadcrumbs += `<li class="breadcrumb-item active" aria-current="page">${name}</li>`;
-            } else {
-                breadcrumbs += `<li class="breadcrumb-item"><a href="${currentPath}">${name}</a></li>`;
+        if (path.includes('-') && path.includes('.html')) {
+            // Category page
+            const [city, category] = this.extractCityCategory(path);
+            if (city && category) {
+                breadcrumbs.push({ name: 'Cities', url: '/cities.html' });
+                breadcrumbs.push({ name: city, url: `/${city}.html` });
+                breadcrumbs.push({ name: this.formatCategoryName(category), url: path });
             }
-        });
+        } else if (path.endsWith('.html') && path !== '/index.html') {
+            // City page
+            const city = path.replace('.html', '').replace('/', '');
+            breadcrumbs.push({ name: 'Cities', url: '/cities.html' });
+            breadcrumbs.push({ name: city, url: path });
+        }
         
-        breadcrumbs += '</ol>';
         return breadcrumbs;
     }
 
-    formatBreadcrumbName(part) {
-        if (part.includes('-')) {
-            const [city, category] = part.split('-');
-            if (category) {
-                return this.getCategoryDisplayName(`${city}-${category}`);
-            }
-        }
-        return this.formatName(part);
+    formatCategoryName(category) {
+        const names = {
+            'health-beauty': 'Health & Beauty',
+            'energy-utilities': 'Energy & Utilities',
+            'education-nonprofits': 'Education & Nonprofits',
+            'transport-travel': 'Transport & Travel',
+            'services-professional': 'Services & Professional',
+            'recycling-waste': 'Recycling & Waste',
+            'products-retail': 'Products & Retail'
+        };
+        return names[category] || category;
     }
 
-    // Optimize URLs
-    optimizeUrls() {
-        // Remove .html from URLs in links
-        const links = document.querySelectorAll('a[href$=".html"]');
-        links.forEach(link => {
-            link.href = link.href.replace('.html', '');
-        });
+    insertBreadcrumbs(breadcrumbs) {
+        const breadcrumbHTML = `
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    ${breadcrumbs.map((crumb, index) => `
+                        <li class="breadcrumb-item ${index === breadcrumbs.length - 1 ? 'active' : ''}">
+                            ${index === breadcrumbs.length - 1 
+                                ? `<span aria-current="page">${crumb.name}</span>`
+                                : `<a href="${crumb.url}">${crumb.name}</a>`
+                            }
+                        </li>
+                    `).join('')}
+                </ol>
+            </nav>
+        `;
+        
+        const header = document.querySelector('header') || document.querySelector('.hero');
+        if (header) {
+            header.insertAdjacentHTML('afterend', breadcrumbHTML);
+        }
     }
 
     // Track page performance for SEO insights
@@ -391,78 +275,11 @@ class SEOEnhancer {
                     
                     // Log performance metrics (can be sent to analytics)
                     console.log('Page Performance Metrics:', metrics);
-                    
-                    // Add performance hints
-                    if (metrics.loadTime > 3000) {
-                        console.warn('Page load time is slow. Consider optimizing images and scripts.');
-                    }
                 }, 1000);
             });
         }
     }
 }
-
-// Add breadcrumb CSS
-const breadcrumbCSS = `
-.breadcrumb-nav {
-    background: #f8f9fa;
-    padding: 10px 0;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.breadcrumb-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.breadcrumb-item {
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb-item:not(:last-child)::after {
-    content: '›';
-    margin: 0 8px;
-    color: #6c757d;
-    font-weight: bold;
-}
-
-.breadcrumb-item a {
-    color: #4a7c59;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.breadcrumb-item a:hover {
-    text-decoration: underline;
-}
-
-.breadcrumb-item.active {
-    color: #6c757d;
-    font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-    .breadcrumb-list {
-        padding: 0 15px;
-    }
-    
-    .breadcrumb-item {
-        font-size: 0.8rem;
-    }
-}
-`;
-
-// Inject breadcrumb CSS
-const style = document.createElement('style');
-style.textContent = breadcrumbCSS;
-document.head.appendChild(style);
 
 // Initialize SEO enhancements when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
