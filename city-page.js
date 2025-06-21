@@ -12,6 +12,7 @@ async function initializeCityPage(cityName) {
     displayCityBusinesses();
     updateCityStats();
     populateCategories();
+    addComprehensiveDirectorySection();
 }
 
 // Load unique businesses for the specific city
@@ -169,7 +170,7 @@ function displayCityBusinesses() {
     const grid = document.getElementById('londonBusinessesGrid') || 
                  document.getElementById('businessesGrid') ||
                  document.getElementById('cityBusinessesGrid');
-    
+
     if (!grid) {
         console.error('Business grid container not found');
         return;
@@ -378,6 +379,38 @@ function openBusinessWebsite(website) {
         url = 'https://' + url;
     }
     window.open(url, '_blank');
+}
+
+// Comprehensive Directory Section
+function addComprehensiveDirectorySection() {
+    const container = document.querySelector('.city-page-content') || document.querySelector('.home-page-content') || document.querySelector('.category-page-content');
+    if (!container) {
+        console.error('Content container not found');
+        return;
+    }
+
+    const directorySection = document.createElement('section');
+    directorySection.id = 'comprehensiveDirectory';
+    directorySection.innerHTML = `
+        <h2>The UK's Most Comprehensive Eco-Friendly Business Directory</h2>
+        <p>Looking for the top 10 eco friendly businesses UK? Our curated eco friendly businesses UK list features the best eco friendly businesses UK across all major cities and industries.</p>
+        <p>From our extensive database of top 100 sustainable companies UK, we showcase the top 10 ethical companies UK that are leading the way in environmental responsibility. Browse sustainable companies examples from health & beauty to energy & utilities.</p>
+        <p>Whether you're seeking local green services or researching top eco friendly businesses UK for partnerships, our verified directory connects you with companies that share your environmental values.</p>
+        
+        <h3>Featured in Our Directory</h3>
+        <ul>
+            <li>✓ Zero Waste Stores</li>
+            <li>✓ Renewable Energy</li>
+            <li>✓ Organic Beauty</li>
+            <li>✓ Sustainable Fashion</li>
+            <li>✓ Green Transport</li>
+            <li>✓ Eco Consultants</li>
+            <li>✓ Solar Installers</li>
+            <li>✓ Recycling Services</li>
+        </ul>
+    `;
+
+    container.appendChild(directorySection);
 }
 
 // Export for global access
