@@ -593,8 +593,25 @@ const placesAPI = new PlacesAPI();
 
 // Auto-initialize with API key
 placesAPI.initialize('AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE').then(() => {
-    console.log('Places API initialized successfully with real Google Places API');
-    console.log('Now fetching real business data from Google Maps');
+    console.log('✅ Places API initialized successfully with real Google Places API');
+    console.log('🗺️ Now fetching real business data from Google Maps');
+    
+    // Add searchBusinesses method for backwards compatibility
+    if (!placesAPI.searchBusinesses) {
+        placesAPI.searchBusinesses = async function(query, limit = 12) {
+            try {
+                console.log(`🔍 Searching with query: ${query}`);
+                const results = await this.performTextSearch(query);
+                return results ? results.slice(0, limit) : [];
+            } catch (error) {
+                console.warn('❌ Search failed:', error);
+                return [];
+            }
+        };
+    }
+    
+    // Ensure isInitialized is available
+    placesAPI.isInitialized = () => placesAPI.initialized;
 });
 
 // Export for global use

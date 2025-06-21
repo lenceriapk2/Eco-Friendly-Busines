@@ -8,14 +8,21 @@ let currentCityName = '';
 async function initializeCategoryPage(categoryKey, cityName) {
     currentCategoryKey = categoryKey;
     currentCityName = cityName;
-    console.log(`Initializing category page for: ${categoryKey} in ${cityName}`);
+    console.log(`🚀 Initializing category page for: ${categoryKey} in ${cityName}`);
 
     // Show loading state
     showLoadingState();
 
     try {
+        // Ensure Places API is properly initialized
+        if (window.APIConfig) {
+            console.log('Initializing Places API...');
+            await window.APIConfig.initializePlacesAPI();
+        }
+        
         // Wait for API to be ready
-        await waitForAPI();
+        const apiReady = await waitForAPI();
+        console.log('API Ready Status:', apiReady);
         
         // Load businesses from Google Places API
         await loadCategoryBusinesses(categoryKey, cityName);
@@ -29,9 +36,9 @@ async function initializeCategoryPage(categoryKey, cityName) {
         // Generate SEO content
         generateSEOContent();
         
-        console.log(`Successfully initialized category page for ${categoryKey} in ${cityName}`);
+        console.log(`✅ Successfully initialized category page for ${categoryKey} in ${cityName}`);
     } catch (error) {
-        console.error('Error initializing category page:', error);
+        console.error('❌ Error initializing category page:', error);
         // Show fallback content if API fails
         showFallbackContent(categoryKey, cityName);
     }
@@ -54,54 +61,88 @@ function showLoadingState() {
 // Load businesses for the specific category and city from Google Places API
 async function loadCategoryBusinesses(categoryKey, cityName) {
     try {
-        console.log(`Loading businesses for ${categoryKey} in ${cityName}`);
+        console.log(`🔍 Loading businesses for ${categoryKey} in ${cityName}`);
 
         // Check if PlacesAPI is available and properly initialized
-        if (window.PlacesAPI && window.PlacesAPI.isInitialized()) {
-            console.log('PlacesAPI is available and initialized');
+        if (window.PlacesAPI) {
+            console.log('PlacesAPI is available');
+            
+            // Check if initialized
+            const isInitialized = window.PlacesAPI.isInitialized;
+            console.log('API Initialized:', typeof isInitialized === 'function' ? isInitialized() : isInitialized);
             
             // First try the category-specific API method
             if (window.PlacesAPI.fetchBusinessesForCategory) {
-                console.log('Using category-specific API method');
-                const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName);
-                
-                if (apiBusinesses && apiBusinesses.length > 0) {
-                    categoryBusinesses = apiBusinesses.slice(0, 12);
-                    console.log(`Successfully loaded ${categoryBusinesses.length} real businesses from category API`);
-                    return categoryBusinesses;
+                console.log('📱 Using category-specific API method');
+                try {
+                    const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName);
+                    
+                    if (apiBusinesses && apiBusinesses.length > 0) {
+                        categoryBusinesses = apiBusinesses.slice(0, 12);
+                        console.log(`✅ Successfully loaded ${categoryBusinesses.length} real businesses from category API`);
+                        return categoryBusinesses;
+                    } else {
+                        console.log('⚠️ Category API returned no results');
+                    }
+                } catch (apiError) {
+                    console.warn('❌ Category API call failed:', apiError);
                 }
             }
 
-            // Fallback to general search
+            // Fallback to general search using searchBusinesses if available
             if (window.PlacesAPI.searchBusinesses) {
-                const searchTerm = getCategorySearchTerm(categoryKey);
-                const query = `${searchTerm} in ${cityName} UK`;
-                console.log(`Searching with query: ${query}`);
-                
-                const apiBusinesses = await window.PlacesAPI.searchBusinesses(query, 12);
-                console.log(`General search returned ${apiBusinesses ? apiBusinesses.length : 0} businesses`);
-                
-                if (apiBusinesses && apiBusinesses.length > 0) {
-                    // Filter results by category relevance
-                    const filteredBusinesses = filterBusinessesByCategory(apiBusinesses, categoryKey);
-                    categoryBusinesses = filteredBusinesses.slice(0, 12);
-                    console.log(`Successfully loaded ${categoryBusinesses.length} real businesses from search API`);
-                    return categoryBusinesses;
+                console.log('🔍 Trying general search method');
+                try {
+                    const searchTerm = getCategorySearchTerm(categoryKey);
+                    const query = `${searchTerm} in ${cityName} UK`;
+                    console.log(`🔎 Searching with query: ${query}`);
+                    
+                    const apiBusinesses = await window.PlacesAPI.searchBusinesses(query, 12);
+                    console.log(`🔍 General search returned ${apiBusinesses ? apiBusinesses.length : 0} businesses`);
+                    
+                    if (apiBusinesses && apiBusinesses.length > 0) {
+                        // Filter results by category relevance
+                        const filteredBusinesses = filterBusinessesByCategory(apiBusinesses, categoryKey);
+                        categoryBusinesses = filteredBusinesses.slice(0, 12);
+                        console.log(`✅ Successfully loaded ${categoryBusinesses.length} real businesses from search API`);
+                        return categoryBusinesses;
+                    }
+                } catch (searchError) {
+                    console.warn('❌ Search API call failed:', searchError);
                 }
             }
 
-            console.log('No real businesses found via API, falling back to mock data');
+            // Try direct API call using performTextSearch if available
+            if (window.PlacesAPI.performTextSearch) {
+                console.log('🎯 Trying direct text search');
+                try {
+                    const searchTerm = getCategorySearchTerm(categoryKey);
+                    const query = `${searchTerm} in ${cityName} UK`;
+                    const apiBusinesses = await window.PlacesAPI.performTextSearch(query);
+                    
+                    if (apiBusinesses && apiBusinesses.length > 0) {
+                        const filteredBusinesses = filterBusinessesByCategory(apiBusinesses, categoryKey);
+                        categoryBusinesses = filteredBusinesses.slice(0, 12);
+                        console.log(`✅ Successfully loaded ${categoryBusinesses.length} real businesses from direct API`);
+                        return categoryBusinesses;
+                    }
+                } catch (directError) {
+                    console.warn('❌ Direct API call failed:', directError);
+                }
+            }
+
+            console.log('⚠️ No real businesses found via any API method, falling back to mock data');
         } else {
-            console.log('PlacesAPI not available or not initialized, using mock data');
+            console.log('❌ PlacesAPI not available, using mock data');
         }
 
         // Fallback to mock data
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
-        console.log(`Generated ${categoryBusinesses.length} mock businesses for ${categoryKey} in ${cityName}`);
+        console.log(`📝 Generated ${categoryBusinesses.length} mock businesses for ${categoryKey} in ${cityName}`);
         return categoryBusinesses;
 
     } catch (error) {
-        console.error(`Error loading businesses for ${categoryKey} in ${cityName}:`, error);
+        console.error(`❌ Error loading businesses for ${categoryKey} in ${cityName}:`, error);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
         return categoryBusinesses;
     }
@@ -768,37 +809,53 @@ window.toggleFAQ = function(index) {
     }
 };
 
+// Add searchBusinesses method for backwards compatibility
+if (window.PlacesAPI && !window.PlacesAPI.searchBusinesses && window.PlacesAPI.performTextSearch) {
+    window.PlacesAPI.searchBusinesses = async function(query, limit = 12) {
+        try {
+            console.log(`🔍 Searching businesses with query: ${query}`);
+            const results = await this.performTextSearch(query);
+            return results ? results.slice(0, limit) : [];
+        } catch (error) {
+            console.warn('Search businesses failed:', error);
+            return [];
+        }
+    };
+}
+
 // Helper function to wait for API to be ready
 async function waitForAPI() {
-    console.log('Waiting for PlacesAPI to be ready...');
+    console.log('⏳ Waiting for PlacesAPI to be ready...');
     let attempts = 0;
-    const maxAttempts = 100; // Increased timeout
+    const maxAttempts = 50; // Reasonable timeout
     
     while (attempts < maxAttempts) {
         if (window.PlacesAPI) {
+            console.log('✅ PlacesAPI object found');
+            
             // Check if isInitialized is a function or boolean
             if (typeof window.PlacesAPI.isInitialized === 'function') {
                 if (window.PlacesAPI.isInitialized()) {
-                    console.log('PlacesAPI is ready (function check)');
+                    console.log('✅ PlacesAPI is ready (function check)');
                     return true;
                 }
             } else if (window.PlacesAPI.isInitialized === true) {
-                console.log('PlacesAPI is ready (boolean check)');
+                console.log('✅ PlacesAPI is ready (boolean check)');
                 return true;
             }
             
             // Also check if the API has the required methods
-            if (window.PlacesAPI.searchBusinesses || window.PlacesAPI.fetchBusinessesForCategory) {
-                console.log('PlacesAPI methods available');
+            if (window.PlacesAPI.fetchBusinessesForCategory || window.PlacesAPI.performTextSearch) {
+                console.log('✅ PlacesAPI methods available');
                 return true;
             }
         }
         
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 100));
         attempts++;
     }
     
-    console.warn('PlacesAPI not ready after timeout, proceeding with mock data');
+    console.warn('⚠️ PlacesAPI not ready after timeout, proceeding with mock data');
     return false;
 }
 
@@ -867,16 +924,19 @@ function addComprehensiveDirectorySection() {
 // Get search terms for each category to find relevant businesses
 function getCategorySearchTerm(categorySlug) {
     const searchTerms = {
-        'health-beauty': 'organic beauty salon spa wellness natural skincare',
-        'energy-utilities': 'solar panel installation renewable energy utility company',
-        'education-nonprofits': 'environmental education nonprofit charity foundation',
-        'transport-travel': 'electric vehicle taxi sustainable transport travel',
-        'services-professional': 'environmental consulting green business services',
-        'recycling-waste': 'recycling center waste management environmental services',
-        'products-retail': 'organic shop eco products sustainable retail store'
+        'health-beauty': 'organic beauty salon spa wellness natural skincare massage therapy',
+        'energy-utilities': 'solar panel installation renewable energy utility company electric',
+        'education-nonprofits': 'environmental education nonprofit charity foundation school',
+        'transport-travel': 'electric vehicle taxi sustainable transport travel bike car rental',
+        'services-professional': 'environmental consulting green business services professional',
+        'recycling-waste': 'recycling center waste management environmental services disposal',
+        'products-retail': 'organic shop eco products sustainable retail store market'
     };
-    return searchTerms[categorySlug] || 'sustainable eco friendly business';
+    return searchTerms[categorySlug] || 'sustainable eco friendly business services';
 }
+
+// Make search term function globally available
+window.getCategorySearchTerm = getCategorySearchTerm;
 
 function getCategoryDisplayName(categorySlug) {
     const categoryNames = {
