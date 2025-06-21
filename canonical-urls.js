@@ -6,7 +6,7 @@ window.CANONICAL_STRATEGIES = {
     // City pages - canonical to main city page
     cityPages: {
         pattern: /^([a-z-]+)\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
+        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
     },
 
     // Category pages - canonical to category overview
@@ -15,14 +15,14 @@ window.CANONICAL_STRATEGIES = {
         getCanonical: (match) => {
             const [, city, category] = match;
             // For category pages, canonical points to the main category page
-            return `https://ecosustainable.co.uk/${category}-category.html`;
+            return `https://ecosustainable.co.uk/${category}-category`;
         }
     },
 
     // Main category overview pages
     categoryOverview: {
         pattern: /^([a-z-]+)-category\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
+        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
     }
 }
 

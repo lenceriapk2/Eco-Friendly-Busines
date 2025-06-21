@@ -7,7 +7,7 @@ function createHeader() {
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="/" class="logo">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="logo-image">
@@ -148,7 +148,7 @@ function toggleMobileMenu() {
 
     if (hamburger && navMenu) {
         const isActive = hamburger.classList.contains('active');
-        
+
         if (isActive) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
