@@ -122,6 +122,15 @@ if (!window.CanonicalSystemInitialized) {
             console.error('Error initializing canonical system:', error);
         }
     });
+
+    // Add defensive code for common undefined variables
+    window.addEventListener('error', function(e) {
+        if (e.message.includes('searchBtn is not defined')) {
+            console.warn('Search button not found - this is normal for pages without search functionality');
+            e.preventDefault();
+            return true;
+        }
+    });
 }
 
 // Export functions for global use
