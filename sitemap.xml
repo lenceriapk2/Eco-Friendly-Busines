@@ -1,8 +1,5 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Main Pages -->
     <url>
         <loc>https://ecosustainable.co.uk/</loc>
@@ -10,42 +7,42 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/cities.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/categories.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/about.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/contact.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/sitemap.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
-    
+
     <!-- Major City Pages -->
     <url>
         <loc>https://ecosustainable.co.uk/london.html</loc>
@@ -53,168 +50,126 @@
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/manchester.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/birmingham.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/leeds.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/glasgow.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/liverpool.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/edinburgh.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/bristol.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/cardiff.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/newcastle.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/sheffield.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/bradford.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/coventry.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/leicester.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/nottingham.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/aberdeen.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/dundee.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/stirling.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/perth.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/inverness.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/swansea.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/newport.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/bangor.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/belfast.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <!-- Category Pages for Major Cities -->
     <url>
         <loc>https://ecosustainable.co.uk/london-health-beauty.html</loc>
@@ -222,105 +177,105 @@
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-energy-utilities.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-products-retail.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-transport-travel.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-services-professional.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-recycling-waste.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/london-education-nonprofits.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/manchester-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/manchester-energy-utilities.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/birmingham-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/birmingham-energy-utilities.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/glasgow-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/edinburgh-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/cardiff-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/belfast-health-beauty.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-    
+
     <!-- Legal and Support Pages -->
     <url>
         <loc>https://ecosustainable.co.uk/privacy-policy.html</loc>
@@ -328,26 +283,25 @@
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/terms-of-service.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/cookie-policy.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-    
+
     <url>
         <loc>https://ecosustainable.co.uk/disclaimer.html</loc>
         <lastmod>2024-01-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-    
 </urlset>
