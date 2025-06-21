@@ -22,10 +22,10 @@ class APIConfig {
         const apiKey = this.getGooglePlacesAPIKey();
         try {
             await window.PlacesAPI.initialize(apiKey);
-            if (apiKey) {
-                console.log('Real Google Places API initialized');
+            if (apiKey && apiKey !== '' && !apiKey.startsWith('YOUR_')) {
+                console.log('Real Google Places API initialized with key:', apiKey.substring(0, 10) + '...');
             } else {
-                console.log('Places API initialized in demo mode');
+                console.log('Places API initialized in demo mode - no valid API key');
                 console.log('Add GOOGLE_PLACES_API_KEY to Replit Secrets for real data');
             }
             return true;
