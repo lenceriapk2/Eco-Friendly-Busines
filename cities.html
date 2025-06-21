@@ -14,10 +14,8 @@
 
     <style>
         .cities-hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4CAF50 100%);
-            color: white;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
             padding: 120px 0 80px;
-            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -29,110 +27,132 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,200 L0,200 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat-x;
-            background-size: 1000px 200px;
-            animation: wave 20s linear infinite;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%234CAF50" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%234CAF50" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%234CAF50" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="%234CAF50" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            animation: float-bg 20s ease-in-out infinite;
         }
 
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-1000px); }
+        @keyframes float-bg {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(10px); }
         }
 
-        .cities-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
+        .cities-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
             position: relative;
             z-index: 2;
+        }
+
+        .cities-hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2d8f47;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .cities-hero-text p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cities-hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .green-circle {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.3);
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .green-circle::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.2));
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .green-circle i {
+            font-size: 4rem;
+            color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .cities-hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
-            opacity: 0.95;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            position: relative;
-            z-index: 2;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.3; }
         }
 
-        .search-box {
-            display: flex;
-            background: white;
-            border-radius: 50px;
-            padding: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .search-box:focus-within {
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            transform: translateY(-2px);
+        .quick-actions {
+            margin-top: 2rem;
         }
 
-        .search-input {
-            flex: 1;
-            border: none;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            border-radius: 45px;
-            outline: none;
-            color: #333;
-        }
-
-        .search-btn {
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 45px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+        .primary-cta {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 18px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .search-btn:hover {
-            background: linear-gradient(135deg, #45a049, #1B5E20);
-            transform: scale(1.05);
-        }
-
-        .stats-banner {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat-item {
-            text-align: center;
+        .primary-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
             color: white;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
+        .primary-cta i {
+            font-size: 1.2rem;
         }
 
         .region-section {
@@ -368,48 +388,39 @@
             }
         }
 
-        .cities-hero-content h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #1a1a1a;
+        .highlight {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
         }
 
-        .cities-hero-content p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        @media (max-width: 768px) {
+            .cities-hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
 
-        .hero-stats .stat {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(76, 175, 80, 0.1);
-            border-radius: 15px;
-            border: 2px solid rgba(76, 175, 80, 0.2);
-        }
+            .cities-hero-text h1 {
+                font-size: 2.5rem;
+            }
 
-        .hero-stats .stat strong {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2E7D32;
-            margin-bottom: 0.5rem;
-        }
+            .green-circle {
+                width: 200px;
+                height: 200px;
+            }
 
-        .hero-stats .stat span {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
+            .green-circle i {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
@@ -419,31 +430,51 @@
 
     <!-- Cities Hero Section -->
     <section class="cities-hero">
-        <div class="floating-elements">
-            <div class="floating-element">🌱</div>
-            <div class="floating-element">🏢</div>
-            <div class="floating-element">♻️</div>
+        <div class="cities-hero-content">
+            <div class="cities-hero-text">
+                <h1>Discover Amazing <span class="highlight">Eco Friendly Businesses</span> Across the UK</h1>
+                <p>★ Find the most sustainable companies across 79 UK cities ★ Browse our curated list of top 100 CSR companies UK, small sustainable businesses UK, and top environmental companies. Connect with sustainable companies examples and eco-friendly businesses making a positive environmental impact.</p>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="#cities-grid" class="primary-cta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Browse Cities Below
+                    </a>
+                </div>
+            </div>
+
+            <div class="cities-hero-image">
+                <div class="green-circle">
+                    <i class="fas fa-city"></i>
+                </div>
+            </div>
         </div>
+    </section>
 
+    <!-- Key Stats -->
+    <section class="stats">
         <div class="container">
-            <div class="cities-hero-content">
-                <h1>Top 10 Best <span class="highlight">Eco Friendly Businesses in UK</span> | Most Sustainable Companies 2025</h1>
-                <p>★ Discover the most sustainable companies across major UK cities ★ Browse our curated list of top 100 CSR companies UK, small sustainable businesses UK, and top environmental companies. Find sustainable companies examples and sustainable companies London making a positive environmental impact.</p>
-
-                <!-- Quick Stats -->
-                <div class="hero-stats">
-                    <div class="stat">
-                        <strong>100+</strong>
-                        <span>Top Environmental Companies UK</span>
-                    </div>
-                    <div class="stat">
-                        <strong>79</strong>
-                        <span>Cities Covered</span>
-                    </div>
-                    <div class="stat">
-                        <strong>500+</strong>
-                        <span>Small Sustainable Businesses UK</span>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    <h3>500+</h3>
+                    <p>Eco-Friendly Businesses</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-map"></i></div>
+                    <h3>79</h3>
+                    <p>UK Cities Covered</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <h3>100+</h3>
+                    <p>Top CSR Companies</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Verified</h3>
+                    <p>Sustainable Practices</p>
                 </div>
             </div>
         </div>
