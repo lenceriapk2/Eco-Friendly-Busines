@@ -35,8 +35,40 @@
     <link rel="canonical" href="https://ecosustainable.co.uk/aberdeen-energy-utilities.html">
 </head>
 <body>
-    <!-- Header Component -->
-    <div id="header-component"></div>
+    <!-- Global Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk">
+                        <span>EcoSustainable.co.uk</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cities.html">Cities</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search businesses...">
+                        <button type="button" id="globalSearchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <a href="list-business.html" class="btn-primary">List Your Business</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- Category Hero Section -->
     <section class="category-hero">
@@ -93,7 +125,6 @@
     <!-- Footer Component -->
     <div id="footer-component"></div>
 
-    <script src="components.js"></script>
     <script src="canonical-urls.js"></script>
     <script src="places-api.js"></script>
     <script src="category-page.js"></script>
