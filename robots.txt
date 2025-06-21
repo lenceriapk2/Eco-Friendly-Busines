@@ -16,3 +16,22 @@ Disallow: /attached_assets/
 
 # Crawl delay
 Crawl-delay: 1
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /config/
+Disallow: /logs/
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://ecosustainable.co.uk/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
