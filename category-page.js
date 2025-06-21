@@ -781,120 +781,15 @@ function addComprehensiveDirectorySection() {
 }
 
 // Initialize category page
-async function initializeCategoryPage(categorySlug, cityName) {
-    try {
-        console.log('Initializing category page:', categorySlug, cityName);
+function initializeCategoryPage(categoryKey, cityName) {
+    currentCategoryKey = categoryKey;
+    currentCityName = cityName;
 
-        // Show loading state
-        const grid = document.getElementById('categoryBusinessesGrid');
-        const title = document.getElementById('businessesTitle');
-        if (grid) {
-            grid.innerHTML = '<div class="loading-state">Loading businesses...</div>';
-        }
-
-        // Wait for API to be ready
-        await waitForAPI();
-
-        // Load businesses for this category and city
-        const businesses = await loadCategoryBusinesses(categorySlug, cityName);
-        console.log('Loaded businesses:', businesses.length);
-
-        // Display businesses
-        displayCategoryBusinesses(businesses, categorySlug, cityName);
-
-        // Generate SEO content
-        generateSEOContent(categorySlug, cityName);
-
-        // Update page title and description
-        updatePageMetadata(categorySlug, cityName);
-
-    } catch (error) {
-        console.error('Error initializing category page:', error);
-        // Show fallback content
-        showFallbackContent(categorySlug, cityName);
-    }
-}
-// Helper functions
-async function waitForAPI() {
-    // Wait for PlacesAPI to be available
-    let attempts = 0;
-    while (!window.PlacesAPI && attempts < 50) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        attempts++;
-    }
-
-    if (!window.PlacesAPI) {
-        console.warn('PlacesAPI not available, using mock data');
-        return false;
-    }
-    return true;
-}
-
-function showFallbackContent(categorySlug, cityName) {
-    const grid = document.getElementById('categoryBusinessesGrid');
-    if (grid) {
-        // Generate mock businesses as fallback
-        const mockBusinesses = generateMockBusinesses(categorySlug, cityName);
-        displayCategoryBusinesses(mockBusinesses, categorySlug, cityName);
-    }
-}
-// Load businesses for category
-async function loadCategoryBusinesses(categorySlug, cityName) {
-    try {
-        console.log('Loading businesses for:', categorySlug, cityName);
-
-        if (window.PlacesAPI && window.PlacesAPI.isInitialized()) {
-            // Try to get real data from Google Places API
-            const query = `${getCategorySearchTerm(categorySlug)} in ${cityName} UK`;
-            console.log('Searching with query:', query);
-            const results = await window.PlacesAPI.searchBusinesses(query, 12);
-
-            if (results && results.length > 0) {
-                console.log('Found real businesses:', results.length);
-                return results.map(business => ({
-                    ...business,
-                    category: categorySlug,
-                    subcategory: getCategorySubcategory(categorySlug)
-                }));
-            }
-        }
-    } catch (error) {
-        console.warn('Error loading real business data:', error);
-    }
-
-    // Fallback to mock data
-    console.log('Using mock data for:', categorySlug, cityName);
-    return generateMockBusinesses(categorySlug, cityName);
-}
-// Display businesses in grid
-function displayCategoryBusinesses(businesses, categorySlug, cityName) {
-    const grid = document.getElementById('categoryBusinessesGrid');
-    const title = document.getElementById('businessesTitle');
-
-    if (!grid) {
-        console.error('categoryBusinessesGrid element not found');
-        return;
-    }
-
-    // Update title
-    if (title) {
-        const categoryName = getCategoryDisplayName(categorySlug);
-        title.textContent = `Top ${categoryName} Businesses in ${cityName}`;
-    }
-
-    // Clear grid
-    grid.innerHTML = '';
-
-    if (!businesses || businesses.length === 0) {
-        grid.innerHTML = '<div class="no-results">No businesses found for this category.</div>';
-        return;
-    }
-
-    console.log('Displaying', businesses.length, 'businesses');
-
-    // Display businesses
-    businesses.slice(0, 12).forEach((business, index) => {
-        const businessCard = createBusinessCard(business, index + 1);
-        grid.appendChild(businessCard);
-    });
+    console.log(`Loading businesses for category: ${categoryKey} in ${cityName}`);
+    showLoadingState();
+    loadCategoryBusinesses(categoryKey, cityName);
+    displayCategoryBusinesses();
+    updatePageContent();
+    generateSEOContent();
+    addComprehensiveDirectorySection();
 }
