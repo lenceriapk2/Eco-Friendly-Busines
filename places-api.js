@@ -373,16 +373,16 @@ class PlacesAPI {
     // Generate a single mock business (fallback)
     generateMockBusiness(categoryKey, cityName, index) {
         const businessNames = this.getBusinessNames(categoryKey);
-
+        
         // Create unique seed based on city and category for consistent but different data
         const seed = this.generateSeed(cityName, categoryKey, index);
         const seededRandom = this.seededRandom(seed);
-
+        
         // Use seeded random for consistent but unique data per location
         const nameIndex = Math.floor(seededRandom() * businessNames.length);
         const baseName = businessNames[nameIndex];
         const uniqueSuffix = this.generateUniqueSuffix(cityName, seededRandom);
-
+        
         return {
             id: `mock_${categoryKey}_${cityName.toLowerCase().replace(/\s+/g, '_')}_${index}`,
             name: `${baseName} ${uniqueSuffix}`,
@@ -451,7 +451,7 @@ class PlacesAPI {
             'Leeds': '0113',
             'Newcastle': '0191'
         };
-
+        
         const areaCode = areaCodes[cityName] || '01' + Math.floor(seededRandom() * 900 + 100);
         const number = Math.floor(seededRandom() * 9000000 + 1000000);
         return `${areaCode} ${number}`;
