@@ -16,15 +16,15 @@ function createHeader() {
 
                     <nav class="nav-menu" id="navMenu">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="cities.html">Browse Cities</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="cities.html" class="nav-link">Browse Cities</a></li>
+                            <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                            <li><a href="contact-us.html" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>
 
                     <div class="header-actions">
-                        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <button class="mobile-menu-toggle hamburger" id="mobileMenuToggle" aria-label="Toggle mobile menu">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -100,42 +100,51 @@ function createFooter() {
     `;
 }
 
-// Initialize components when DOM is loaded
-function initializeComponents() {
-    // Load header
-    const headerElement = document.getElementById('header-component');
-    if (headerElement) {
-        headerElement.innerHTML = createHeader();
-    }
-
-    // Load footer
-    const footerElement = document.getElementById('footer-component');
-    if (footerElement) {
-        footerElement.innerHTML = createFooter();
-    }
-
-    // Initialize mobile navigation after header is loaded
-    initializeMobileNav();
-}
-
 // Mobile Navigation Handler
 function initializeMobileNav() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+        // Remove any existing event listeners
+        hamburger.removeEventListener('click', toggleMobileMenu);
+
+        // Add new event listener
+        hamburger.addEventListener('click', toggleMobileMenu);
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(n => 
-            n.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.removeEventListener('click', closeMobileMenu);
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
-            })
-        );
+            }
+        });
+    }
+}
+
+function toggleMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (hamburger && navMenu) {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    }
+}
+
+function closeMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
     }
 }
 
@@ -153,6 +162,27 @@ function initializeSmoothScroll() {
             }
         });
     });
+}
+
+// Initialize components when DOM is loaded
+function initializeComponents() {
+    // Load header
+    const headerElement = document.getElementById('header-component');
+    if (headerElement) {
+        headerElement.innerHTML = createHeader();
+    }
+
+    // Load footer
+    const footerElement = document.getElementById('footer-component');
+    if (footerElement) {
+        footerElement.innerHTML = createFooter();
+    }
+
+    // Initialize mobile navigation after header is loaded
+    setTimeout(() => {
+        initializeMobileNav();
+        initializeSmoothScroll();
+    }, 100);
 }
 
 // Business Categories Data
@@ -274,38 +304,17 @@ const businessCategories = {
     }
 };
 
-// Export functions and data for use in other files
+// Export functions for use in other files
 window.EcoComponents = {
     createHeader,
     createFooter,
     initializeComponents,
+    initializeMobileNav,
     initializeSmoothScroll,
-    businessCategories
+		businessCategories
 };
 
 // Initialize components when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Load header
-    const headerComponent = document.getElementById('header-component');
-    if (headerComponent) {
-        headerComponent.innerHTML = createHeader();
-    }
-
-    // Load footer
-    const footerComponent = document.getElementById('footer-component');
-    if (footerComponent) {
-        footerComponent.innerHTML = createFooter();
-    }
-
-    // Initialize mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    if (mobileMenuToggle && navMenu) {
-        mobileMenuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active');
-        });
-    }
-    initializeSmoothScroll();
+    initializeComponents();
 });
