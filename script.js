@@ -348,22 +348,34 @@ function populateTopBusinesses() {
 }
 
 // Search functionality
-function performSearch() {
-    const searchInput = searchInput.value.toLowerCase();
-    const selectedCity = cityFilter.value;
-
-    if (searchTerm || selectedCity) {
-        alert(`Searching for: "${searchTerm}" in ${selectedCity || 'all cities'}`);
+function performSearchBasic() {
+    if (searchInput && searchInput.value) {
+        const searchTerm = searchInput.value.toLowerCase();
+        alert(`Searching for: "${searchTerm}"`);
+        // You can implement actual search logic here
     } else {
-        alert('Please enter a search term or select a city');
+        alert('Please enter a search term');
     }
 }
 
-searchBtn.addEventListener('click', performSearch);
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        performSearch();
-    }
+// Initialize search event listeners after DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        const searchBtnElement = document.getElementById('searchBtn') || document.querySelector('.search-btn');
+        const searchInputElement = document.getElementById('searchInput') || document.querySelector('.search-input');
+        
+        if (searchBtnElement && searchInputElement) {
+            searchBtn = searchBtnElement;
+            searchInput = searchInputElement;
+            
+            searchBtn.addEventListener('click', performSearchBasic);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearchBasic();
+                }
+            });
+        }
+    }, 1500);
 });
 
 // Show all businesses function
@@ -485,6 +497,7 @@ let currentCategory = '';
 let currentBusinesses = [];
 let filteredBusinesses = [];
 let searchBtn = null;
+let searchInput = null;
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -531,20 +544,23 @@ function initializeApp() {
 }
 
 function initializeSearch() {
-    const searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
-    const searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
+    // Wait for DOM to be fully loaded
+    setTimeout(() => {
+        searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
+        searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
 
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', function() {
-            performSearch(searchInput.value);
-        });
-
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', function() {
                 performSearch(searchInput.value);
-            }
-        });
-    }
+            });
+
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+        }
+    }, 1000);
 }
 
 function performSearch(query) {

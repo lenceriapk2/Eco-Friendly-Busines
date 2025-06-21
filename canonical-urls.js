@@ -2,17 +2,15 @@
 // Canonical URL Management for EcoSustainable.co.uk
 // Ensures proper URL structure for SEO optimization
 
-// Check if CANONICAL_STRATEGIES is already defined to prevent conflicts
-if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
-    window.CANONICAL_STRATEGIES = {
-        homePage: () => 'https://ecosustainable.co.uk/',
-        cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
-        categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
-        aboutPage: () => 'https://ecosustainable.co.uk/about',
-        categoriesPage: () => 'https://ecosustainable.co.uk/categories',
-        citiesPage: () => 'https://ecosustainable.co.uk/cities'
-    };
-}
+// Initialize CANONICAL_STRATEGIES only once
+window.CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES || {
+    homePage: () => 'https://ecosustainable.co.uk/',
+    cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
+    categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
+    aboutPage: () => 'https://ecosustainable.co.uk/about',
+    categoriesPage: () => 'https://ecosustainable.co.uk/categories',
+    citiesPage: () => 'https://ecosustainable.co.uk/cities'
+};
 
 class CanonicalManager {
     constructor() {
