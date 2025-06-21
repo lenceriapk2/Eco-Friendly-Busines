@@ -80,6 +80,7 @@ function createFooter() {
                             <li><a href="cities.html">Browse Cities</a></li>
                             <li><a href="about-us.html">About Us</a></li>
                             <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="how-it-works.html">How It Works</a></li>
                         </ul>
                     </div>
 
@@ -96,18 +97,10 @@ function createFooter() {
                     </div>
 
                     <div class="footer-section">
-                        <h4>Sustainability</h4>
+                        <h4>Environmental</h4>
                         <ul>
                             <li><a href="environmental-policy.html">Environmental Policy</a></li>
                             <li><a href="sustainability-report.html">Sustainability Report</a></li>
-                            <li><a href="how-it-works.html">How It Works</a></li>
-                            <li><a href="about-us.html">Our Mission</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Legal</h4>
-                        <ul>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="terms-of-service.html">Terms of Service</a></li>
                             <li><a href="cookie-policy.html">Cookie Policy</a></li>
