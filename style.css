@@ -2923,6 +2923,7 @@ html {
     .business-card,
     .category-business-card {
         margin: 0 0.5rem;
+        overflow: hidden;
     }
     
     .business-card-header {
@@ -2934,32 +2935,59 @@ html {
         width: 50px;
         height: 50px;
         font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+    
+    .business-info {
+        flex: 1;
+        min-width: 0;
     }
     
     .business-info h3 {
         font-size: 1.1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.3;
     }
     
     .business-category {
         font-size: 0.75rem;
         padding: 0.25rem 0.7rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
     }
     
     .business-description {
         padding: 0 1rem;
         font-size: 0.85rem;
         margin-bottom: 1rem;
+        display: -webkit-box;
         -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
     
     .business-features {
         padding: 0 1rem;
         margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
     }
     
     .feature-tag {
         font-size: 0.7rem;
         padding: 0.2rem 0.6rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(50% - 0.2rem);
     }
     
     .business-contact {
@@ -2970,20 +2998,28 @@ html {
     .contact-item {
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .business-actions {
         padding: 0 1rem 1rem;
         gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
     }
     
     .action-btn {
         padding: 0.6rem 0.75rem;
         font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .directions-btn {
-        grid-column: 1 / -1;
         margin-top: 0.25rem;
     }
 }
@@ -3008,14 +3044,21 @@ html {
         width: 45px;
         height: 45px;
         font-size: 1.1rem;
+        flex-shrink: 0;
     }
     
     .business-info h3 {
         font-size: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
     
     .business-description {
         padding: 0 0.75rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
     
     .business-features {
@@ -3029,13 +3072,139 @@ html {
     
     .business-actions {
         padding: 0 0.75rem 0.75rem;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 0.5rem;
     }
     
     .directions-btn {
-        grid-column: 1;
         margin-top: 0;
+    }
+}
+
+/* Selection Criteria Section Responsive Styles */
+.selection-criteria {
+    padding: 3rem 0;
+    background: #f8fffe;
+}
+
+.selection-criteria .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.selection-criteria h2 {
+    text-align: center;
+    color: #2d8f47;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.criteria-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.criteria-item h3 {
+    color: #2d8f47;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.criteria-item p {
+    color: #666;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+@media (max-width: 768px) {
+    .selection-criteria {
+        padding: 2rem 0;
+    }
+    
+    .selection-criteria .container {
+        padding: 0 0.75rem;
+    }
+    
+    .selection-criteria h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .criteria-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .criteria-item {
+        padding: 1.25rem;
+        text-align: left;
+    }
+    
+    .criteria-item h3 {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+    
+    .criteria-item p {
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+}
+
+@media (max-width: 480px) {
+    .selection-criteria {
+        padding: 1.5rem 0;
+    }
+    
+    .selection-criteria .container {
+        padding: 0 0.5rem;
+    }
+    
+    .selection-criteria h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+    }
+    
+    .criteria-grid {
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .criteria-item {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+    
+    .criteria-item h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .criteria-item p {
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 }
 
