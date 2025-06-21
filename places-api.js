@@ -87,33 +87,43 @@ class PlacesAPI {
     async fetchBusinessesForCategory(categoryKey, cityName) {
         try {
             const cacheKey = `category_${categoryKey}_${cityName.toLowerCase()}`;
+            console.log(`🔍 Fetching businesses for category: ${categoryKey} in ${cityName}`);
 
             // Check cache first
             if (this.cache.has(cacheKey)) {
-                console.log(`Returning cached category data for ${categoryKey} in ${cityName}`);
-                return this.cache.get(cacheKey);
+                const cachedData = this.cache.get(cacheKey);
+                console.log(`💾 Returning ${cachedData.length} cached businesses for ${categoryKey} in ${cityName}`);
+                return cachedData;
             }
 
             // If we have a real API key, make real API calls
             if (this.apiKey) {
+                console.log(`🌐 Making real Google Places API call for ${categoryKey} in ${cityName}`);
                 this.checkRateLimit();
+                
                 const businesses = await this.makeRealCategoryAPICall(categoryKey, cityName);
                 if (businesses && businesses.length > 0) {
                     this.cache.set(cacheKey, businesses);
-                    console.log(`Loaded ${businesses.length} real businesses from Google Places API for ${categoryKey} in ${cityName}`);
+                    console.log(`✅ Loaded ${businesses.length} REAL businesses from Google Places API for ${categoryKey} in ${cityName}`);
                     return businesses;
+                } else {
+                    console.log(`⚠️ No real businesses found via API for ${categoryKey} in ${cityName}`);
                 }
+            } else {
+                console.log(`⚠️ No API key available for real data - using mock data`);
             }
 
             // Fallback to mock data
             const mockBusinesses = this.generateMockCategoryBusinesses(categoryKey, cityName);
             this.cache.set(cacheKey, mockBusinesses);
-            console.log(`Generated ${mockBusinesses.length} mock businesses for ${categoryKey} in ${cityName}`);
+            console.log(`📝 Generated ${mockBusinesses.length} mock businesses for ${categoryKey} in ${cityName}`);
             return mockBusinesses;
 
         } catch (error) {
-            console.error(`Error fetching ${categoryKey} businesses for ${cityName}:`, error);
-            return this.generateMockCategoryBusinesses(categoryKey, cityName);
+            console.error(`❌ Error fetching ${categoryKey} businesses for ${cityName}:`, error);
+            const fallbackBusinesses = this.generateMockCategoryBusinesses(categoryKey, cityName);
+            console.log(`🔄 Using ${fallbackBusinesses.length} fallback businesses due to error`);
+            return fallbackBusinesses;
         }
     }
 
@@ -592,18 +602,26 @@ class PlacesAPI {
 // Initialize and export the Places API
 const placesAPI = new PlacesAPI();
 
+// Export for global use first
+window.PlacesAPI = placesAPI;
+
 // Auto-initialize with API key
 placesAPI.initialize('AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE').then(() => {
-    console.log('Places API initialized successfully with real Google Places API');
-    console.log('Now fetching real business data from Google Maps');
+    console.log('🚀 Places API initialized successfully with real Google Places API key');
+    console.log('🌐 Now fetching real business data from Google Maps');
     
     // Make sure initialization status is properly set
+    placesAPI.initialized = true;
     placesAPI.isInitialized = true;
+    window.PlacesAPI.initialized = true;
     window.PlacesAPI.isInitialized = true;
+    
+    console.log('✅ API initialization complete - ready to load real data');
+}).catch(error => {
+    console.error('❌ Places API initialization failed:', error);
+    placesAPI.initialized = false;
+    placesAPI.isInitialized = false;
 });
-
-// Export for global use
-window.PlacesAPI = placesAPI;
 
 // Export individual methods for backwards compatibility
 window.PlacesAPI.fetchAllBusinessesForCity = placesAPI.fetchAllBusinessesForCity.bind(placesAPI);

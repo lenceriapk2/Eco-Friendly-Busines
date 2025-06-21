@@ -36,44 +36,61 @@ function showLoadingState() {
 // Load unique businesses for the specific category and city
 async function loadCategoryBusinesses(categoryKey, cityName) {
     try {
-        console.log(`Attempting to load businesses from API for ${categoryKey} in ${cityName}`);
+        console.log(`🔍 Loading businesses from Google Places API for ${categoryKey} in ${cityName}`);
 
-        // Try multiple API methods to get real data
-        if (window.PlacesAPI) {
+        // Check if API is properly initialized
+        if (window.PlacesAPI && window.PlacesAPI.initialized && window.PlacesAPI.apiKey) {
+            console.log(`✅ Using Google Places API with real data`);
+            
             let apiBusinesses = null;
 
             // Try category-specific API first
-            if (window.PlacesAPI.fetchBusinessesForCategory) {
-                apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName.toLowerCase());
+            try {
+                apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName);
+                if (apiBusinesses && apiBusinesses.length > 0) {
+                    console.log(`✅ Found ${apiBusinesses.length} businesses from category-specific API call`);
+                }
+            } catch (categoryError) {
+                console.warn(`Category-specific API call failed:`, categoryError.message);
             }
 
-            // If no results, try general city search and filter
+            // If no results from category search, try general city search and filter
             if (!apiBusinesses || apiBusinesses.length === 0) {
-                if (window.PlacesAPI.fetchAllBusinessesForCity) {
-                    const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName.toLowerCase());
+                console.log(`🔄 Trying general city search for ${cityName}...`);
+                try {
+                    const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName);
                     if (allBusinesses && allBusinesses.length > 0) {
+                        console.log(`Found ${allBusinesses.length} total businesses in ${cityName}, filtering by category...`);
                         // Filter by category keywords
                         apiBusinesses = filterBusinessesByCategory(allBusinesses, categoryKey);
+                        console.log(`✅ Filtered to ${apiBusinesses.length} businesses for ${categoryKey}`);
                     }
+                } catch (cityError) {
+                    console.warn(`City-wide API call failed:`, cityError.message);
                 }
             }
 
             // If we have API data, use it
             if (apiBusinesses && apiBusinesses.length > 0) {
                 categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
-                console.log(`Loaded ${categoryBusinesses.length} businesses from API for ${categoryKey} in ${cityName}`);
+                console.log(`✅ Using ${categoryBusinesses.length} real businesses from Google Places API`);
                 return;
+            } else {
+                console.log(`⚠️ No businesses found via API, generating fallback data`);
             }
+        } else {
+            console.log(`⚠️ Places API not properly initialized, using fallback data`);
         }
 
         // If API fails or returns no results, generate unique fallback data
-        console.log(`API failed or returned no results, generating fallback data for ${categoryKey} in ${cityName}`);
+        console.log(`📝 Generating high-quality fallback data for ${categoryKey} in ${cityName}`);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
-        console.log(`Generated unique data for ${categoryKey} in ${cityName}: ${categoryBusinesses.length} businesses`);
+        console.log(`✅ Generated ${categoryBusinesses.length} fallback businesses for ${categoryKey} in ${cityName}`);
 
     } catch (error) {
-        console.error(`Error loading businesses for ${categoryKey} in ${cityName}:`, error);
+        console.error(`❌ Error loading businesses for ${categoryKey} in ${cityName}:`, error);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
+        console.log(`✅ Using fallback data due to error: ${categoryBusinesses.length} businesses`);
     }
 }
 
@@ -730,19 +747,24 @@ async function initializeCategoryPage(categoryKey, cityName) {
     // Wait for API to be ready and properly initialized
     let apiReady = false;
     let attempts = 0;
+    const maxAttempts = 200; // Increased timeout
 
-    while (!apiReady && attempts < 150) { // Increased timeout
-        if (window.PlacesAPI && (window.PlacesAPI.isInitialized || window.PlacesAPI.initialized)) {
+    while (!apiReady && attempts < maxAttempts) {
+        if (window.PlacesAPI && window.PlacesAPI.initialized === true) {
             apiReady = true;
-            console.log('✅ API is ready, loading businesses...');
-        } else {
-            await new Promise(resolve => setTimeout(resolve, 100));
-            attempts++;
+            console.log('✅ Places API is ready, loading real business data...');
+            break;
+        }
+        await new Promise(resolve => setTimeout(resolve, 50));
+        attempts++;
+        
+        if (attempts % 20 === 0) {
+            console.log(`⏳ Waiting for API... attempt ${attempts}/${maxAttempts}`);
         }
     }
 
     if (!apiReady) {
-        console.warn('⚠️ API not ready after timeout, proceeding with fallback data');
+        console.warn('⚠️ Places API not ready after timeout, proceeding with fallback data');
     }
 
     try {
@@ -750,7 +772,7 @@ async function initializeCategoryPage(categoryKey, cityName) {
         displayCategoryBusinesses();
         updatePageContent();
         generateSEOContent();
-        console.log(`✅ Category page initialized successfully: ${categoryKey} in ${cityName}`);
+        console.log(`✅ Category page initialized successfully: ${categoryKey} in ${cityName} with ${categoryBusinesses.length} businesses`);
     } catch (error) {
         console.error(`❌ Error initializing category page:`, error);
         // Try with fallback data
