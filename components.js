@@ -7,7 +7,7 @@ function createHeader() {
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="/" class="logo">
+                        <a href="index.html">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="logo-image">
@@ -16,10 +16,10 @@ function createHeader() {
 
                     <nav class="nav-menu" id="navMenu">
                         <ul>
-                            <li><a href="/" class="nav-link">Home</a></li>
-                            <li><a href="/cities" class="nav-link">Browse Cities</a></li>
-                            <li><a href="/about-us" class="nav-link">About Us</a></li>
-                            <li><a href="/contact-us" class="nav-link">Contact</a></li>
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="cities.html" class="nav-link">Browse Cities</a></li>
+                            <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                            <li><a href="contact-us.html" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>
 
@@ -43,7 +43,7 @@ function createFooter() {
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section footer-brand">
-                        <a href="/" class="footer-logo">
+                        <a href="index.html" class="footer-logo">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="footer-logo-image">
@@ -60,22 +60,22 @@ function createFooter() {
                     <div class="footer-section">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/cities">Browse Cities</a></li>
-                            <li><a href="/about-us">About Us</a></li>
-                            <li><a href="/contact-us">Contact</a></li>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="cities.html">Browse Cities</a></li>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
                         <h4>Popular Cities</h4>
                         <ul>
-                            <li><a href="/london">London</a></li>
-                            <li><a href="/manchester">Manchester</a></li>
-                            <li><a href="/birmingham">Birmingham</a></li>
-                            <li><a href="/edinburgh">Edinburgh</a></li>
-                            <li><a href="/bristol">Bristol</a></li>
-                            <li><a href="/glasgow">Glasgow</a></li>
+                            <li><a href="london.html">London</a></li>
+                            <li><a href="manchester.html">Manchester</a></li>
+                            <li><a href="birmingham.html">Birmingham</a></li>
+                            <li><a href="edinburgh.html">Edinburgh</a></li>
+                            <li><a href="bristol.html">Bristol</a></li>
+                            <li><a href="glasgow.html">Glasgow</a></li>
                         </ul>
                     </div>
 
@@ -148,7 +148,7 @@ function toggleMobileMenu() {
 
     if (hamburger && navMenu) {
         const isActive = hamburger.classList.contains('active');
-
+        
         if (isActive) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
@@ -222,30 +222,4 @@ window.EcoComponents = {
 // Initialize components when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeComponents();
-});
-
-// Initialize search functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Wait for components to load
-    setTimeout(() => {
-        const searchForm = document.getElementById('searchForm');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-
-        if (searchForm && searchInput) {
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const query = searchInput.value.trim();
-                if (query) {
-                    // Simple search redirect - could be enhanced
-                    window.location.href = `/?search=${encodeURIComponent(query)}`;
-                }
-            });
-        }
-
-        // Make searchBtn available globally to prevent errors
-        if (searchBtn) {
-            window.searchBtn = searchBtn;
-        }
-    }, 100);
 });

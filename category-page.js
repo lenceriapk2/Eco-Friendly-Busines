@@ -1,3 +1,4 @@
+
 // Category Page JavaScript Handler - Generates unique data for each category in each city
 
 let categoryBusinesses = [];
@@ -37,16 +38,16 @@ function showLoadingState() {
 async function loadCategoryBusinesses(categoryKey, cityName) {
     try {
         console.log(`Attempting to load businesses from API for ${categoryKey} in ${cityName}`);
-
+        
         // Try multiple API methods to get real data
         if (window.PlacesAPI) {
             let apiBusinesses = null;
-
+            
             // Try category-specific API first
             if (window.PlacesAPI.fetchBusinessesForCategory) {
                 apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName.toLowerCase());
             }
-
+            
             // If no results, try general city search and filter
             if (!apiBusinesses || apiBusinesses.length === 0) {
                 if (window.PlacesAPI.fetchAllBusinessesForCity) {
@@ -57,7 +58,7 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
                     }
                 }
             }
-
+            
             // If we have API data, use it
             if (apiBusinesses && apiBusinesses.length > 0) {
                 categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
@@ -70,7 +71,7 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
         console.log(`API failed or returned no results, generating fallback data for ${categoryKey} in ${cityName}`);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
         console.log(`Generated unique data for ${categoryKey} in ${cityName}: ${categoryBusinesses.length} businesses`);
-
+        
     } catch (error) {
         console.error(`Error loading businesses for ${categoryKey} in ${cityName}:`, error);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
@@ -88,9 +89,9 @@ function filterBusinessesByCategory(businesses, categoryKey) {
         'recycling-waste': ['recycling', 'waste', 'disposal', 'cleaning', 'environmental'],
         'products-retail': ['shop', 'store', 'retail', 'market', 'products', 'goods']
     };
-
+    
     const keywords = categoryKeywords[categoryKey] || [];
-
+    
     return businesses.filter(business => {
         const searchText = `${business.name} ${business.description || ''} ${business.category || ''}`.toLowerCase();
         return keywords.some(keyword => searchText.includes(keyword));
@@ -115,7 +116,7 @@ function generateCategoryBusinessData(categoryKey, cityName) {
     const businesses = [];
     const cityCode = generateCityCode(cityName);
     const categoryCode = generateCategoryCode(categoryKey);
-
+    
     // Business name templates based on category
     const businessNameTemplates = {
         'health-beauty': [
@@ -156,11 +157,11 @@ function generateCategoryBusinessData(categoryKey, cityName) {
     };
 
     const templates = businessNameTemplates[categoryKey] || businessNameTemplates['services-professional'];
-
+    
     for (let i = 0; i < 12; i++) {
         const templateIndex = i % templates.length;
         const nameVariation = i < templates.length ? '' : ` ${Math.floor(i / templates.length) + 1}`;
-
+        
         businesses.push({
             id: `${categoryCode}_${cityCode}_${i + 1}`,
             name: `${templates[templateIndex]}${nameVariation}`,
@@ -177,7 +178,7 @@ function generateCategoryBusinessData(categoryKey, cityName) {
             businessStatus: 'OPERATIONAL'
         });
     }
-
+    
     return businesses;
 }
 
@@ -290,7 +291,7 @@ function displayCategoryBusinesses() {
 
     const businessCards = categoryBusinesses.map(business => createBusinessCard(business)).join('');
     grid.innerHTML = businessCards;
-
+    
     console.log(`Displayed ${categoryBusinesses.length} businesses for ${currentCategoryKey} in ${currentCityName}`);
 }
 
@@ -311,13 +312,13 @@ function createBusinessCard(business) {
                     </div>
                 </div>
             </div>
-
+            
             <p class="business-description">${business.description}</p>
-
+            
             <div class="business-features">
                 ${business.features.slice(0, 4).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
             </div>
-
+            
             <div class="business-contact">
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -332,7 +333,7 @@ function createBusinessCard(business) {
                     <span title="${business.website}">${business.website}</span>
                 </div>
             </div>
-
+            
             <div class="business-actions">
                 <button class="action-btn call-btn" onclick="callBusiness('${business.phone}')" type="button">
                     <i class="fas fa-phone"></i> Call Now
@@ -384,21 +385,21 @@ function generateStars(rating) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
+    
     let starsHTML = '';
-
+    
     for (let i = 0; i < fullStars; i++) {
         starsHTML += '<i class="fas fa-star"></i>';
     }
-
+    
     if (hasHalfStar) {
         starsHTML += '<i class="fas fa-star-half-alt"></i>';
     }
-
+    
     for (let i = 0; i < emptyStars; i++) {
         starsHTML += '<i class="far fa-star"></i>';
     }
-
+    
     return starsHTML;
 }
 
@@ -413,15 +414,15 @@ function updatePageContent() {
         'recycling-waste': 'Recycling & Waste',
         'products-retail': 'Products & Retail'
     };
-
+    
     const categoryName = categoryNames[currentCategoryKey] || 'Business';
-
+    
     // Update title if element exists
     const titleElement = document.getElementById('businessesTitle');
     if (titleElement) {
         titleElement.textContent = `Top ${categoryName} Businesses in ${currentCityName}`;
     }
-
+    
     // Update page title
     document.title = `Top 10 ${categoryName} Businesses in ${currentCityName} | EcoSustainable.co.uk`;
 }
@@ -437,10 +438,10 @@ function generateSEOContent() {
         'recycling-waste': 'Recycling & Waste',
         'products-retail': 'Products & Retail'
     };
-
+    
     const categoryName = categoryNames[currentCategoryKey] || 'Business';
     const seoSection = document.getElementById('seoSections');
-
+    
     if (seoSection) {
         seoSection.innerHTML = `
             <!-- Why Choose Section -->
@@ -460,12 +461,12 @@ function generateSEOContent() {
                     <div class="criteria-content">
                         <div class="criteria-text">
                             <p>We carefully evaluate each ${categoryName.toLowerCase()} business in ${currentCityName} based on strict sustainability and quality criteria. Our selection process ensures you connect with the most environmentally responsible and reliable service providers.</p>
-
+                            
                             <h3>What We Look For:</h3>
                             <ul class="criteria-list">
                                 ${generateCriteriaList(currentCategoryKey)}
                             </ul>
-
+                            
                             <p>Every business listed in our ${currentCityName} ${categoryName.toLowerCase()} directory has been personally reviewed and meets our high standards for environmental responsibility, customer service, and business integrity.</p>
                         </div>
                         <div class="criteria-stats">
@@ -512,7 +513,7 @@ function generateSEOContent() {
                     <h2>Benefits of Choosing Sustainable ${categoryName} Businesses</h2>
                     <div class="benefits-content">
                         <p>Choosing eco-friendly ${categoryName.toLowerCase()} businesses in ${currentCityName} provides numerous advantages for both consumers and the environment. These forward-thinking companies prioritize sustainability while delivering exceptional service quality.</p>
-
+                        
                         <ul class="benefits-list">
                             ${generateBenefitsList(currentCategoryKey)}
                         </ul>
@@ -565,7 +566,7 @@ function generateWhyChooseItems(categoryKey, cityName) {
             { icon: 'fa-award', title: 'Certified Programs', text: 'Accredited courses and recognized qualifications' }
         ]
     };
-
+    
     const categoryItems = items[categoryKey] || items['energy-utilities'];
     return categoryItems.map(item => `
         <div class="why-item">
@@ -602,7 +603,7 @@ function generateCriteriaList(categoryKey) {
             'Transparent financial reporting'
         ]
     };
-
+    
     const categoryList = criteria[categoryKey] || criteria['energy-utilities'];
     return categoryList.map(item => `<li>${item}</li>`).join('');
 }
@@ -626,7 +627,7 @@ function generateFAQItems(categoryKey, cityName) {
             answer: `Our directory is updated monthly with new businesses, reviews, and verification status to ensure accuracy and relevance.`
         }
     ];
-
+    
     return faqs.map((faq, index) => `
         <div class="faq-item" data-index="${index}">
             <button class="faq-question" onclick="toggleFAQ(${index})">
@@ -649,7 +650,7 @@ function generateLocalAreas(cityName) {
         `West ${cityName}`,
         `Greater ${cityName} Area`
     ];
-
+    
     return areas.map(area => `
         <div class="area-card">
             <h3>${area}</h3>
@@ -667,7 +668,7 @@ function generateBenefitsList(categoryKey) {
         'Joining a community of environmentally conscious consumers',
         'Supporting businesses that prioritize social responsibility'
     ];
-
+    
     return benefits.map(benefit => `<li>${benefit}</li>`).join('');
 }
 
@@ -678,7 +679,7 @@ function generateTipsCards(categoryKey) {
         { title: 'Ask Questions', text: 'Inquire about their sustainability practices and environmental policies' },
         { title: 'Compare Options', text: 'Compare multiple businesses to find the best sustainable solution' }
     ];
-
+    
     return tips.map(tip => `
         <div class="tip-card">
             <h3>${tip.title}</h3>
@@ -694,7 +695,7 @@ function generateRelatedCategories(categoryKey, cityName) {
         { key: 'transport-travel', name: 'Transport & Travel', desc: 'Sustainable transport options' },
         { key: 'services-professional', name: 'Professional Services', desc: 'Green business consulting' }
     ];
-
+    
     return categories.filter(cat => cat.key !== categoryKey).slice(0, 3).map(cat => `
         <a href="${cityName.toLowerCase()}-${cat.key}.html" class="related-card">
             <h3>${cat.name}</h3>
@@ -708,7 +709,7 @@ window.toggleFAQ = function(index) {
     const answer = document.getElementById(`faq-${index}`);
     const question = answer.previousElementSibling;
     const icon = question.querySelector('i');
-
+    
     if (answer.style.maxHeight) {
         answer.style.maxHeight = null;
         icon.style.transform = 'rotate(0deg)';
@@ -717,14 +718,3 @@ window.toggleFAQ = function(index) {
         icon.style.transform = 'rotate(180deg)';
     }
 };
-
-// Add comprehensive directory content to category pages
-function addComprehensiveDirectorySection() {
-    const comprehensiveSection = `
-        <section class="comprehensive-directory">
-            <div class="container">
-                <div class="directory-content">
-                    <h2>The UK's Most Comprehensive Eco-Friendly Business Directory</h2>
-                    <p>Looking for the <strong>top 10 eco friendly businesses UK</strong>? Our curated eco friendly businesses UK list features the <strong>best eco friendly businesses UK</strong> across all major cities and industries.</p>
-
-                    <p>From our extensive database of <strong>top 100 sustainable companies UK</strong>, we showcase the <strong>top 10 ethical companies UK</strong> that are leading the way in environmental responsibility. Browse <strong>sustainable companies examples</strong> from health & beauty to energy & utilities.</p>
