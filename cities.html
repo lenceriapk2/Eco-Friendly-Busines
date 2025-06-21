@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Cities | EcoSustainable.co.uk</title>
-    <meta name="description" content="Find sustainable businesses in cities across England, Scotland, Wales, and Northern Ireland. Discover eco-friendly companies in your area.">
+    <title>Top 10 Best Eco Friendly Businesses in UK | Most Sustainable Companies 2024 | Top 100 CSR Companies UK</title>
+    <meta name="description" content="★ UK's #1 Directory ★ Top 10 best eco friendly businesses in UK | Most sustainable companies 2024 | Top 100 CSR companies UK | Small sustainable businesses UK | Top environmental companies UK across 79 cities. Find sustainable companies examples near you.">
     <meta name="keywords" content="sustainable businesses by city, eco-friendly companies UK, green businesses cities">
-    
+
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="canonical" href="https://ecosustainable.co.uk/cities.html">
-    
+
     <style>
         .cities-hero {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4CAF50 100%);
@@ -22,7 +21,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .cities-hero::before {
             content: '';
             position: absolute;
@@ -34,12 +33,12 @@
             background-size: 1000px 200px;
             animation: wave 20s linear infinite;
         }
-        
+
         @keyframes wave {
             0% { transform: translateX(0); }
             100% { transform: translateX(-1000px); }
         }
-        
+
         .cities-hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
@@ -48,7 +47,7 @@
             z-index: 2;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         .cities-hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
@@ -59,14 +58,14 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .search-container {
             max-width: 600px;
             margin: 0 auto 3rem;
             position: relative;
             z-index: 2;
         }
-        
+
         .search-box {
             display: flex;
             background: white;
@@ -75,12 +74,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
-        
+
         .search-box:focus-within {
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             transform: translateY(-2px);
         }
-        
+
         .search-input {
             flex: 1;
             border: none;
@@ -90,7 +89,7 @@
             outline: none;
             color: #333;
         }
-        
+
         .search-btn {
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
             border: none;
@@ -104,12 +103,12 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .search-btn:hover {
             background: linear-gradient(135deg, #45a049, #1B5E20);
             transform: scale(1.05);
         }
-        
+
         .stats-banner {
             display: flex;
             justify-content: center;
@@ -118,34 +117,34 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .stat-item {
             text-align: center;
             color: white;
         }
-        
+
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
             display: block;
             margin-bottom: 0.5rem;
         }
-        
+
         .stat-label {
             font-size: 1rem;
             opacity: 0.9;
         }
-        
+
         .region-section {
             margin-bottom: 80px;
             position: relative;
         }
-        
+
         .region-header {
             text-align: center;
             margin-bottom: 50px;
         }
-        
+
         .region-title {
             display: inline-flex;
             align-items: center;
@@ -155,19 +154,19 @@
             margin-bottom: 1rem;
             font-weight: 700;
         }
-        
+
         .flag {
             font-size: 3rem;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
         }
-        
+
         .region-description {
             font-size: 1.2rem;
             color: #666;
             max-width: 500px;
             margin: 0 auto;
         }
-        
+
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -175,7 +174,7 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .city-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 20px;
@@ -189,7 +188,7 @@
             color: inherit;
             display: block;
         }
-        
+
         .city-card::before {
             content: '';
             position: absolute;
@@ -201,17 +200,17 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .city-card:hover {
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 25px 60px rgba(76, 175, 80, 0.25);
             border-color: #4CAF50;
         }
-        
+
         .city-card:hover::before {
             opacity: 1;
         }
-        
+
         .city-image {
             height: 180px;
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
@@ -221,7 +220,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .city-image::before {
             content: '';
             position: absolute;
@@ -232,12 +231,12 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.2)"/><circle cx="60" cy="80" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="30" cy="70" r="1.2" fill="rgba(255,255,255,0.3)"/></svg>');
             animation: float 6s ease-in-out infinite;
         }
-        
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         .city-icon {
             font-size: 3rem;
             color: white;
@@ -245,13 +244,13 @@
             z-index: 2;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         .city-info {
             padding: 30px 25px;
             position: relative;
             z-index: 2;
         }
-        
+
         .city-name {
             font-size: 1.5rem;
             font-weight: 700;
@@ -261,48 +260,48 @@
             align-items: center;
             justify-content: space-between;
         }
-        
+
         .city-arrow {
             color: #4CAF50;
             font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
-        
+
         .city-card:hover .city-arrow {
             transform: translateX(5px);
         }
-        
+
         .city-description {
             color: #666;
             margin-bottom: 20px;
             line-height: 1.6;
             font-size: 0.95rem;
         }
-        
+
         .city-stats {
             display: flex;
             justify-content: space-between;
             padding-top: 20px;
             border-top: 1px solid #f0f0f0;
         }
-        
+
         .city-stat {
             text-align: center;
         }
-        
+
         .city-stat-number {
             display: block;
             font-weight: 700;
             color: #4CAF50;
             font-size: 1.1rem;
         }
-        
+
         .city-stat-label {
             font-size: 0.85rem;
             color: #888;
             margin-top: 4px;
         }
-        
+
         .floating-elements {
             position: absolute;
             top: 0;
@@ -312,61 +311,105 @@
             pointer-events: none;
             overflow: hidden;
         }
-        
+
         .floating-element {
             position: absolute;
             opacity: 0.1;
             animation: floatAround 20s linear infinite;
         }
-        
+
         @keyframes floatAround {
             0% { transform: translateY(100vh) rotate(0deg); }
             100% { transform: translateY(-100px) rotate(360deg); }
         }
-        
+
         .floating-element:nth-child(1) {
             left: 10%;
             animation-delay: 0s;
             animation-duration: 25s;
         }
-        
+
         .floating-element:nth-child(2) {
             left: 50%;
             animation-delay: 5s;
             animation-duration: 30s;
         }
-        
+
         .floating-element:nth-child(3) {
             left: 80%;
             animation-delay: 10s;
             animation-duration: 20s;
         }
-        
+
         @media (max-width: 768px) {
             .cities-hero h1 {
                 font-size: 2.5rem;
             }
-            
+
             .stats-banner {
                 flex-direction: column;
                 gap: 30px;
             }
-            
+
             .region-title {
                 font-size: 2.2rem;
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .cities-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .search-box {
                 flex-direction: column;
                 gap: 10px;
             }
+        }
+
+        .cities-hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .cities-hero-content p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-stats .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .hero-stats .stat strong {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2E7D32;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stats .stat span {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -381,33 +424,26 @@
             <div class="floating-element">🏢</div>
             <div class="floating-element">♻️</div>
         </div>
-        
+
         <div class="container">
-            <h1>Browse by <span class="highlight">City</span></h1>
-            <p>Find sustainable businesses in cities across England, Scotland, Wales, and Northern Ireland. Discover eco-friendly companies making a difference in your community.</p>
-            
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search for a city..." id="citySearch">
-                    <button class="search-btn" id="searchBtn" onclick="searchCities()">
-                        <i class="fas fa-search"></i>
-                        Search
-                    </button>
-                </div>
-            </div>
-            
-            <div class="stats-banner">
-                <div class="stat-item">
-                    <span class="stat-number">70+</span>
-                    <span class="stat-label">Cities</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Countries</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">1000+</span>
-                    <span class="stat-label">Businesses</span>
+            <div class="cities-hero-content">
+                <h1>Top 10 Best <span class="highlight">Eco Friendly Businesses in UK</span> | Most Sustainable Companies 2024</h1>
+                <p>★ Discover the most sustainable companies across major UK cities ★ Browse our curated list of top 100 CSR companies UK, small sustainable businesses UK, and top environmental companies. Find sustainable companies examples and sustainable companies London making a positive environmental impact.</p>
+
+                <!-- Quick Stats -->
+                <div class="hero-stats">
+                    <div class="stat">
+                        <strong>100+</strong>
+                        <span>Top Environmental Companies UK</span>
+                    </div>
+                    <div class="stat">
+                        <strong>79</strong>
+                        <span>Cities Covered</span>
+                    </div>
+                    <div class="stat">
+                        <strong>500+</strong>
+                        <span>Small Sustainable Businesses UK</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -470,6 +506,96 @@
                 <div class="cities-grid" id="northernIrelandCities">
                     <!-- Northern Ireland cities will be populated by JavaScript -->
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="seo-content-section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%); padding: 80px 0;">
+        <div class="container">
+            <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                <div>
+                    <h2 style="color: #2E7D32; margin-bottom: 30px; font-size: 2.2rem;">Top 10 Best Eco Friendly Businesses in UK | Most Sustainable Companies 2024</h2>
+                    <p style="line-height: 1.8; margin-bottom: 20px; font-size: 1.1rem;">
+                        Discover the <strong>most sustainable companies</strong> across the UK with our comprehensive directory of <strong>top environmental companies UK</strong>. 
+                        From <strong>sustainable companies London</strong> to <strong>small sustainable businesses UK</strong> in every corner of the country.
+                    </p>
+                    <p style="line-height: 1.8; margin-bottom: 20px;">
+                        Our curated list features the <strong>top 100 CSR companies UK</strong> that are leading the way in environmental responsibility. 
+                        These <strong>sustainable companies examples</strong> demonstrate how businesses can thrive while prioritizing planet-friendly practices.
+                    </p>
+
+                    <h3 style="color: #2E7D32; margin: 30px 0 20px 0;">Why Choose Our Featured Sustainable Companies?</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                            <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 2px; color: #4CAF50;"></i>
+                            <strong>Verified Environmental Practices:</strong> All our <strong>top environmental companies UK</strong> are thoroughly vetted
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                            <i class="fas fa-star" style="position: absolute; left: 0; top: 2px; color: #4CAF50;"></i>
+                            <strong>Award-Winning Sustainability:</strong> Featured among the <strong>most sustainable companies 2024</strong>
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                            <i class="fas fa-leaf" style="position: absolute; left: 0; top: 2px; color: #4CAF50;"></i>
+                            <strong>Supporting Local Communities:</strong> <strong>Small sustainable businesses UK</strong> making big impacts
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                            <i class="fas fa-globe" style="position: absolute; left: 0; top: 2px; color: #4CAF50;"></i>
+                            <strong>National Coverage:</strong> From <strong>sustainable companies London</strong> to Scotland and Wales
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                        <h3 style="margin-bottom: 25px; font-size: 1.6rem; text-align: center;">🏆 Top 100 CSR Companies UK Categories</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.95rem;">
+                            <div>
+                                <p><strong>✓ Renewable Energy Leaders</strong></p>
+                                <p><strong>✓ Zero Waste Champions</strong></p>
+                                <p><strong>✓ Sustainable Fashion Brands</strong></p>
+                                <p><strong>✓ Green Technology Innovators</strong></p>
+                                <p><strong>✓ Organic Food & Beverage</strong></p>
+                            </div>
+                            <div>
+                                <p><strong>✓ Eco-Friendly Transportation</strong></p>
+                                <p><strong>✓ Green Building & Construction</strong></p>
+                                <p><strong>✓ Sustainable Beauty & Wellness</strong></p>
+                                <p><strong>✓ Environmental Consultancy</strong></p>
+                                <p><strong>✓ Carbon-Neutral Services</strong></p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+                            <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>🌍 Covering 79 UK Cities</strong></p>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">London • Manchester • Birmingham • Edinburgh • Cardiff • And 74 More Cities</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+                        <h4 style="color: #2E7D32; margin-bottom: 20px; text-align: center;">🔍 Find Most Sustainable Companies Near You</h4>
+                        <p style="text-align: center; margin-bottom: 20px; color: #666;">Search by city to discover top environmental companies UK in your area</p>
+                        <div style="text-align: center;">
+                            <a href="#cities-grid" style="background: #4CAF50; color: white; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: 600; display: inline-block; transition: all 0.3s;">Browse Cities →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>Stay Updated with Most Sustainable Companies 2024</h2>
+                    <p>Get weekly updates on new top environmental companies UK, sustainable business tips, and CSR company spotlights</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
             </div>
         </div>
     </section>
@@ -552,11 +678,11 @@
         async function populateCities() {
             // Show loading state
             showLoadingState();
-            
+
             try {
                 // Load business data for each region to get accurate counts
                 await loadCityBusinessData();
-                
+
                 // Populate England cities
                 const englandGrid = document.getElementById('englandCities');
                 if (englandGrid) {
@@ -601,10 +727,10 @@
             // Use PlacesAPI to get business counts for major cities
             if (window.PlacesAPI && window.PlacesAPI.fetchAllBusinessesForCity) {
                 const promises = [];
-                
+
                 // Get all cities from all regions
                 const allCities = [...cityData.england, ...cityData.scotland, ...cityData.wales, ...cityData.northernIreland];
-                
+
                 // Load business data for each city
                 for (const cityObj of allCities) {
                     promises.push(
@@ -621,21 +747,21 @@
                             }))
                     );
                 }
-                
+
                 const results = await Promise.all(promises);
-                
+
                 // Update city data with actual business counts
                 results.forEach(result => {
                     updateCityBusinessCount(result.city, result.count);
                 });
-                
+
                 console.log(`Loaded business data for ${results.length} cities`);
             }
         }
 
         function updateCityBusinessCount(cityName, count) {
             const allRegions = [cityData.england, cityData.scotland, cityData.wales, cityData.northernIreland];
-            
+
             for (const region of allRegions) {
                 const city = region.find(c => c.name === cityName);
                 if (city) {
@@ -689,7 +815,7 @@
         // Add enter key support for search
         document.addEventListener('DOMContentLoaded', async function() {
             await populateCities();
-            
+
             const searchInput = document.getElementById('citySearch');
             if (searchInput) {
                 searchInput.addEventListener('keypress', function(e) {
