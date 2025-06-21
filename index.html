@@ -10,124 +10,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Global Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk">
-                        <span>EcoSustainable.co.uk</span>
-                    </a>
-                </div>
-                
-                <div class="header-actions">
-                    <div class="search-box">
-                        <input type="text" id="globalSearch" placeholder="Search businesses...">
-                        <button type="button" id="globalSearchBtn"><i class="fas fa-search"></i></button>
-                    </div>
-                    <a href="list-business.html" class="btn-primary">List Your Business</a>
-                </div>
-                <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- Header Component -->
+    <div id="header-component"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-text">
-                <h1>Find <span class="highlight">Eco-Friendly Businesses</span> Across the UK</h1>
-                <p>Your trusted directory connecting you with sustainable, environmentally conscious businesses in every UK city</p>
-
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <a href="cities.html" class="quick-action-btn primary-cta">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Find Eco Businesses Near You
-                    </a>
-                </div>
+            <h1>Discover UK's Leading <span class="highlight">Eco-Friendly Businesses</span></h1>
+            <p>Your comprehensive directory for sustainable and environmentally conscious businesses across the United Kingdom</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for eco-friendly businesses...">
+                <select id="cityFilter">
+                    <option value="">All Cities</option>
+                    <option value="london">London</option>
+                    <option value="manchester">Manchester</option>
+                    <option value="birmingham">Birmingham</option>
+                    <option value="edinburgh">Edinburgh</option>
+                    <option value="bristol">Bristol</option>
+                    <option value="glasgow">Glasgow</option>
+                </select>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
-
-            <div class="hero-image">
-                <div class="green-circle">
-                    <i class="fas fa-leaf"></i>
-                </div>
-            </div>
+        </div>
+        <div class="hero-image">
+            <div class="green-circle"></div>
         </div>
     </section>
 
-    <!-- Key Stats -->
+    <!-- Stats Section -->
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-icon"><i class="fas fa-store"></i></div>
                     <h3>500+</h3>
-                    <p>Verified Eco Businesses</p>
+                    <p>Eco Businesses</p>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon"><i class="fas fa-map"></i></div>
-                    <h3>79</h3>
-                    <p>UK Cities Covered</p>
+                    <h3>50+</h3>
+                    <p>UK Cities</p>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon"><i class="fas fa-tags"></i></div>
-                    <h3>10</h3>
-                    <p>Business Categories</p>
+                    <h3>15</h3>
+                    <p>Categories</p>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon"><i class="fas fa-heart"></i></div>
                     <h3>98%</h3>
-                    <p>Customer Satisfaction</p>
+                    <p>Satisfaction Rate</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2>How EcoSustainable Works</h2>
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon"><i class="fas fa-search"></i></div>
-                    <h3>Search & Discover</h3>
-                    <p>Find eco-friendly businesses by location or category</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Verified Quality</h3>
-                    <p>All businesses are verified for sustainability practices</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Connect & Support</h3>
-                    <p>Connect directly with businesses that share your values</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Browse by Category -->
+    <!-- Categories Section -->
     <section id="categories" class="categories">
         <div class="container">
-            <div class="section-header">
-                <h2>Browse Eco-Friendly Categories</h2>
-                <p>Discover sustainable businesses across different sectors</p>
-            </div>
+            <h2>Eco-Friendly Business Categories</h2>
             <div class="categories-grid" id="categoriesGrid">
                 <!-- Categories will be populated by JavaScript -->
-            </div>
-            <div class="view-all-center">
-                <a href="categories.html" class="btn-secondary">View All Categories</a>
             </div>
         </div>
     </section>
@@ -135,93 +74,51 @@
     <!-- Featured Cities -->
     <section id="cities" class="cities">
         <div class="container">
-            <div class="section-header">
-                <h2>Explore UK Cities</h2>
-                <p>Find eco-friendly businesses in major UK cities</p>
-            </div>
+            <h2>Featured UK Cities</h2>
             <div class="cities-grid" id="citiesGrid">
                 <!-- Cities will be populated by JavaScript -->
             </div>
-            <div class="view-all-center">
-                <a href="cities.html" class="btn-secondary">View All 79 Cities</a>
-            </div>
         </div>
     </section>
 
-    <!-- Featured Businesses -->
-    <section class="featured-businesses">
+    <!-- Top Businesses Preview -->
+    <section class="top-businesses">
         <div class="container">
-            <div class="section-header">
-                <h2>Featured Eco-Friendly Businesses</h2>
-                <p>Highly rated sustainable businesses from across the UK</p>
-            </div>
+            <h2>Top Rated Eco-Friendly Businesses</h2>
             <div class="businesses-grid" id="businessesGrid">
-                <!-- Featured businesses will be populated by JavaScript -->
+                <!-- Top businesses will be populated by JavaScript -->
+            </div>
+            <div class="view-all">
+                <button class="btn-secondary" onclick="showAllBusinesses()">View All Businesses</button>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-choose">
+    <!-- About Section -->
+    <section id="about" class="about">
         <div class="container">
-            <div class="why-content">
-                <div class="why-text">
-                    <div class="why-header">
-                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" alt="EcoSustainable.co.uk Logo" class="why-logo">
-                        <h2>Why Choose EcoSustainable.co.uk?</h2>
-                    </div>
-                    <div class="benefits-list">
-                        <div class="benefit">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About EcoSustainable.co.uk</h2>
+                    <p>We are the UK's premier directory for eco-friendly and sustainable businesses. Our mission is to make it easier for conscious consumers to find and support businesses that prioritize environmental responsibility.</p>
+                    <div class="features">
+                        <div class="feature">
                             <i class="fas fa-check-circle"></i>
-                            <div>
-                                <h4>Verified & Trusted</h4>
-                                <p>Every business is thoroughly vetted for genuine sustainability practices</p>
-                            </div>
+                            <span>Verified eco-friendly businesses</span>
                         </div>
-                        <div class="benefit">
-                            <i class="fas fa-star"></i>
-                            <div>
-                                <h4>Quality Ratings</h4>
-                                <p>Real customer reviews and ratings to help you choose</p>
-                            </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Comprehensive reviews and ratings</span>
                         </div>
-                        <div class="benefit">
-                            <i class="fas fa-leaf"></i>
-                            <div>
-                                <h4>Environmental Impact</h4>
-                                <p>Support businesses making a positive difference to our planet</p>
-                            </div>
-                        </div>
-                        <div class="benefit">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Local & Nationwide</h4>
-                                <p>Find sustainable options in your area or anywhere in the UK</p>
-                            </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Easy search and filtering</span>
                         </div>
                     </div>
                 </div>
-                <div class="why-image">
-                    <div class="eco-illustration">
-                        <i class="fas fa-globe-europe"></i>
-                    </div>
+                <div class="about-image">
+                    <div class="eco-illustration"></div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <div class="newsletter-text">
-                    <h2>Stay Updated</h2>
-                    <p>Get weekly updates on new eco-friendly businesses and sustainability tips</p>
-                </div>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn-primary">Subscribe</button>
-                </form>
             </div>
         </div>
     </section>
@@ -229,74 +126,27 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <p>Have a question or want to list your eco-friendly business?</p>
-            </div>
+            <h2>Get In Touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email Us</h4>
-                            <span>info@ecosustainable.co.uk</span>
-                        </div>
+                        <span>info@ecosustainable.co.uk</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Call Us</h4>
-                            <span>+44 20 1234 5678</span>
-                        </div>
+                        <span>+44 20 1234 5678</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <span>London, United Kingdom</span>
-                        </div>
+                        <span>London, United Kingdom</span>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="contactName">Full Name *</label>
-                            <input type="text" id="contactName" name="name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="contactEmail">Email Address *</label>
-                            <input type="email" id="contactEmail" name="email" placeholder="your.email@example.com" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="contactPhone">Phone (Optional)</label>
-                            <input type="tel" id="contactPhone" name="phone" placeholder="+44 20 1234 5678">
-                        </div>
-                        <div class="form-field">
-                            <label for="contactSubject">Subject</label>
-                            <select id="contactSubject" name="subject" required>
-                                <option value="">Select a topic</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="business">List My Business</option>
-                                <option value="partnership">Partnership</option>
-                                <option value="support">Technical Support</option>
-                                <option value="feedback">Feedback</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <label for="contactMessage">Message *</label>
-                        <textarea id="contactMessage" name="message" placeholder="Please describe how we can help you..." rows="5" required></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                        <button type="reset" class="btn-secondary">
-                            <i class="fas fa-undo"></i> Clear Form
-                        </button>
-                    </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
@@ -305,7 +155,7 @@
     <!-- Footer Component -->
     <div id="footer-component"></div>
 
-    <script src="canonical-urls.js"></script>
+    <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

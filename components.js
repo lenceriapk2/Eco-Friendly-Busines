@@ -1,32 +1,48 @@
+
 // Reusable Components for EcoSustainable.co.uk
 
-// Create header component
+// Header Component
 function createHeader() {
     return `
         <header class="header">
             <nav class="navbar">
                 <div class="nav-container">
-                    <a href="index.html" class="logo">
-                        <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
-                             alt="EcoSustainable.co.uk" 
-                             class="logo-image">
-                    </a>
+                    <div class="logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>EcoSustainable.co.uk</span>
+                    </div>
                     <ul class="nav-menu">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Home</a>
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Categories <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="london-home-living.html">Home & Living</a>
+                                <a href="london-fashion-accessories.html">Fashion & Accessories</a>
+                                <a href="london-food-beverage.html">Food & Beverage</a>
+                                <a href="london-health-beauty.html">Health & Beauty</a>
+                                <a href="london-products-retail.html">Products & Retail</a>
+                                <a href="london-transport-travel.html">Transport & Travel</a>
+                                <a href="london-services-professional.html">Services & Professional</a>
+                                <a href="london-energy-utilities.html">Energy & Utilities</a>
+                                <a href="london-recycling-waste.html">Recycling & Waste</a>
+                                <a href="london-education-nonprofits.html">Education & Nonprofits</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a href="about-us.html" class="nav-link">About</a>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Cities <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="london.html">London</a>
+                                <a href="manchester.html">Manchester</a>
+                                <a href="birmingham.html">Birmingham</a>
+                                <a href="edinburgh.html">Edinburgh</a>
+                                <a href="bristol.html">Bristol</a>
+                                <a href="glasgow.html">Glasgow</a>
+                                <a href="leeds.html">Leeds</a>
+                                <a href="liverpool.html">Liverpool</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a href="contact-us.html" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="privacy-policy.html" class="nav-link">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="terms-of-service.html" class="nav-link">Terms</a>
-                        </li>
+                        <li><a href="index.html#about" class="nav-link">About</a></li>
+                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                     </ul>
                     <div class="hamburger">
                         <span class="bar"></span>
@@ -39,38 +55,30 @@ function createHeader() {
     `;
 }
 
-// Create footer component
+// Footer Component
 function createFooter() {
     return `
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
-                    <div class="footer-section footer-brand">
-                        <a href="index.html" class="footer-logo">
-                            <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
-                                 alt="EcoSustainable.co.uk" 
-                                 class="footer-logo-image">
-                        </a>
-                        <p>Your trusted directory for sustainable businesses across the UK. Connecting you with eco-friendly companies that care about our planet.</p>
-                        <div class="social-links">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <div class="footer-section">
+                        <div class="logo">
+                            <i class="fas fa-leaf"></i>
+                            <span>EcoSustainable.co.uk</span>
                         </div>
+                        <p>Connecting conscious consumers with sustainable businesses across the UK.</p>
                     </div>
                     <div class="footer-section">
                         <h4>Quick Links</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="cities.html">Browse Cities</a></li>
-                            <li><a href="categories.html">All Categories</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="#categories">Categories</a></li>
+                            <li><a href="#cities">Cities</a></li>
+                            <li><a href="#about">About</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Popular Cities</h4>
+                        <h4>Major Cities</h4>
                         <ul>
                             <li><a href="london.html">London</a></li>
                             <li><a href="manchester.html">Manchester</a></li>
@@ -81,18 +89,26 @@ function createFooter() {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Legal & Support</h4>
+                        <h4>Categories</h4>
                         <ul>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="terms-of-service.html">Terms of Service</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
-                            <li><a href="contact-us.html">Get Support</a></li>
+                            <li><a href="london-home-living.html">Home & Living</a></li>
+                            <li><a href="london-fashion-accessories.html">Fashion</a></li>
+                            <li><a href="london-food-beverage.html">Food & Beverage</a></li>
+                            <li><a href="london-health-beauty.html">Health & Beauty</a></li>
                         </ul>
-                        <div class="footer-contact">
-                            <p><i class="fas fa-envelope"></i> info@ecosustainable.co.uk</p>
-                            <p><i class="fas fa-phone"></i> +44 20 1234 5678</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Follow Us</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
                 </div>
             </div>
         </footer>
@@ -129,13 +145,35 @@ function initializeMobileNav() {
         });
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(n => 
+        document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(n => 
             n.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             })
         );
     }
+
+    // Handle dropdown menus
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
 }
 
 // Smooth scrolling for navigation links
