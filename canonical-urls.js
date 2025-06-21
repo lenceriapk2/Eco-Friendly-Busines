@@ -5,23 +5,23 @@
 window.CANONICAL_STRATEGIES = {
     // City pages - canonical to main city page
     cityPages: {
-        pattern: /^([a-z-]+)\.html$/,
+        pattern: /^([a-z-]+)(?:\.html)?$/,
         getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
     },
 
     // Category pages - canonical to category overview
     categoryPages: {
-        pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
+        pattern: /^([a-z-]+)-([a-z-]+)(?:\.html)?$/,
         getCanonical: (match) => {
             const [, city, category] = match;
             // For category pages, canonical points to the main category page
-            return `https://ecosustainable.co.uk/${category}-category`;
+            return `https://ecosustainable.co.uk/${city}-${category}`;
         }
     },
 
     // Main category overview pages
     categoryOverview: {
-        pattern: /^([a-z-]+)-category\.html$/,
+        pattern: /^([a-z-]+)-category(?:\.html)?$/,
         getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
     }
 }
@@ -31,7 +31,12 @@ const CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES;
 
 // Function to determine canonical URL for current page
 function getCanonicalUrl() {
-    const currentPath = window.location.pathname.split('/').pop();
+    let currentPath = window.location.pathname.split('/').pop();
+    
+    // Handle root path
+    if (!currentPath || currentPath === '') {
+        return 'https://ecosustainable.co.uk/';
+    }
 
     // Check each strategy
     for (const [strategyName, strategy] of Object.entries(CANONICAL_STRATEGIES)) {
@@ -41,8 +46,9 @@ function getCanonicalUrl() {
         }
     }
 
-    // Default to current URL if no strategy matches
-    return window.location.href;
+    // Default to clean URL without .html extension
+    const cleanPath = currentPath.replace(/\.html$/, '');
+    return `https://ecosustainable.co.uk/${cleanPath}`;
 }
 
 // Function to set canonical URL
