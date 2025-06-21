@@ -54,4 +54,17 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
     RewriteRule ^([^.]+)/?$ $1.html [L]
+    
+    # Handle 404 errors gracefully
+    ErrorDocument 404 /index.html
+</IfModule>
+
+# Additional reliability settings
+<IfModule mod_headers.c>
+    # Prevent caching of HTML files to ensure updates are seen
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
 </IfModule>

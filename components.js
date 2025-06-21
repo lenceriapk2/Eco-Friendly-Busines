@@ -223,3 +223,30 @@ window.EcoComponents = {
 document.addEventListener('DOMContentLoaded', function() {
     initializeComponents();
 });
+
+// Initialize search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for components to load
+    setTimeout(() => {
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', function() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                }
+            });
+
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+        }
+    }, 100);
+});

@@ -1,28 +1,30 @@
 // Canonical URL Management System for EcoSustainable.co.uk
 // Manages SEO-friendly URL structure and canonical links
 
-// Define CANONICAL_STRATEGIES only once
-window.CANONICAL_STRATEGIES = {
-    // City pages - canonical to main city page
-    cityPages: {
-        pattern: /^([a-z-]+)(?:\.html)?$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
-    },
+// Define CANONICAL_STRATEGIES only once if not already defined
+if (!window.CANONICAL_STRATEGIES) {
+    window.CANONICAL_STRATEGIES = {
+        // City pages - canonical to main city page
+        cityPages: {
+            pattern: /^([a-z-]+)(?:\.html)?$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
+        },
 
-    // Category pages - canonical to category overview
-    categoryPages: {
-        pattern: /^([a-z-]+)-([a-z-]+)(?:\.html)?$/,
-        getCanonical: (match) => {
-            const [, city, category] = match;
-            // For category pages, canonical points to the main category page
-            return `https://ecosustainable.co.uk/${city}-${category}`;
+        // Category pages - canonical to category overview
+        categoryPages: {
+            pattern: /^([a-z-]+)-([a-z-]+)(?:\.html)?$/,
+            getCanonical: (match) => {
+                const [, city, category] = match;
+                // For category pages, canonical points to the main category page
+                return `https://ecosustainable.co.uk/${city}-${category}`;
+            }
+        },
+
+        // Main category overview pages
+        categoryOverview: {
+            pattern: /^([a-z-]+)-category(?:\.html)?$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
         }
-    },
-
-    // Main category overview pages
-    categoryOverview: {
-        pattern: /^([a-z-]+)-category(?:\.html)?$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
     }
 }
 
