@@ -1,134 +1,292 @@
-// Canonical URL Management System for EcoSustainable.co.uk
-// Manages SEO-friendly URL structure and canonical links
 
-// Define CANONICAL_STRATEGIES only once if not already defined
-if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
-    window.CANONICAL_STRATEGIES = {
-        // City pages - canonical to main city page
-        cityPages: {
-            pattern: /^([a-z-]+)(?:\.html)?$/,
-            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
-        },
+// Canonical URL Management for EcoSustainable.co.uk
+// Ensures proper URL structure for SEO optimization
 
-        // Category pages - canonical to category overview
-        categoryPages: {
-            pattern: /^([a-z-]+)-([a-z-]+)(?:\.html)?$/,
-            getCanonical: (match) => {
-                const [, city, category] = match;
-                // For category pages, canonical points to the main category page
-                return `https://ecosustainable.co.uk/${city}-${category}`;
-            }
-        },
+const CANONICAL_STRATEGIES = {
+    homePage: () => 'https://ecosustainable.co.uk/',
+    cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
+    categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
+    aboutPage: () => 'https://ecosustainable.co.uk/about',
+    categoriesPage: () => 'https://ecosustainable.co.uk/categories',
+    citiesPage: () => 'https://ecosustainable.co.uk/cities'
+};
 
-        // Main category overview pages
-        categoryOverview: {
-            pattern: /^([a-z-]+)-category(?:\.html)?$/,
-            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
+class CanonicalManager {
+    constructor() {
+        this.baseUrl = 'https://ecosustainable.co.uk';
+        this.init();
+    }
+
+    init() {
+        this.setCanonicalUrl();
+        this.addAlternateLanguages();
+        this.optimizeOpenGraph();
+        this.enhanceTwitterCards();
+        this.addStructuredData();
+    }
+
+    setCanonicalUrl() {
+        const currentPath = window.location.pathname;
+        let canonicalUrl = this.baseUrl;
+
+        // Remove .html extension from canonical URLs
+        if (currentPath.includes('.html')) {
+            canonicalUrl = this.baseUrl + currentPath.replace('.html', '');
+        } else {
+            canonicalUrl = this.baseUrl + currentPath;
+        }
+
+        // Ensure canonical URL doesn't end with slash (except root)
+        if (canonicalUrl !== this.baseUrl && canonicalUrl.endsWith('/')) {
+            canonicalUrl = canonicalUrl.slice(0, -1);
+        }
+
+        this.updateCanonicalTag(canonicalUrl);
+        this.updateOpenGraphUrl(canonicalUrl);
+        this.updateTwitterUrl(canonicalUrl);
+    }
+
+    updateCanonicalTag(url) {
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.rel = 'canonical';
+            document.head.appendChild(canonical);
+        }
+        canonical.href = url;
+    }
+
+    updateOpenGraphUrl(url) {
+        let ogUrl = document.querySelector('meta[property="og:url"]');
+        if (!ogUrl) {
+            ogUrl = document.createElement('meta');
+            ogUrl.setAttribute('property', 'og:url');
+            document.head.appendChild(ogUrl);
+        }
+        ogUrl.content = url;
+    }
+
+    updateTwitterUrl(url) {
+        let twitterUrl = document.querySelector('meta[property="twitter:url"]');
+        if (!twitterUrl) {
+            twitterUrl = document.createElement('meta');
+            twitterUrl.setAttribute('property', 'twitter:url');
+            document.head.appendChild(twitterUrl);
+        }
+        twitterUrl.content = url;
+    }
+
+    addAlternateLanguages() {
+        // Add hreflang for UK English
+        let hreflang = document.querySelector('link[hreflang="en-GB"]');
+        if (!hreflang) {
+            hreflang = document.createElement('link');
+            hreflang.rel = 'alternate';
+            hreflang.hreflang = 'en-GB';
+            hreflang.href = window.location.href;
+            document.head.appendChild(hreflang);
         }
     }
-}
 
-// Access CANONICAL_STRATEGIES from window object
-const CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES;
-
-// Function to determine canonical URL for current page
-function getCanonicalUrl() {
-    let currentPath = window.location.pathname;
-    
-    // Handle root path
-    if (!currentPath || currentPath === '/' || currentPath === '/index.html') {
-        return 'https://ecosustainable.co.uk/';
+    optimizeOpenGraph() {
+        const path = window.location.pathname;
+        
+        // Enhance Open Graph tags based on page type
+        if (path.includes('-')) {
+            this.enhanceOGForCategoryPage();
+        } else if (path !== '/' && path !== '/index.html') {
+            this.enhanceOGForCityPage();
+        }
     }
-    
-    // Remove leading slash and get the actual file name
-    currentPath = currentPath.split('/').pop();
 
-    // Check each strategy
-    for (const [strategyName, strategy] of Object.entries(CANONICAL_STRATEGIES)) {
-        const match = currentPath.match(strategy.pattern);
+    enhanceOGForCategoryPage() {
+        const path = window.location.pathname;
+        const match = path.match(/\/([^-]+)-([^.]+)/);
         if (match) {
-            return strategy.getCanonical(match);
+            const [, city, category] = match;
+            const categoryName = this.formatCategoryName(category);
+            
+            this.updateOGTag('og:type', 'website');
+            this.updateOGTag('og:locale', 'en_GB');
+            this.updateOGTag('og:site_name', 'EcoSustainable.co.uk');
         }
     }
 
-    // Default to clean URL without .html extension
-    const cleanPath = currentPath.replace(/\.html$/, '');
-    return `https://ecosustainable.co.uk/${cleanPath}`;
-}
-
-// Function to set canonical URL
-function setCanonicalUrl() {
-    const canonicalUrl = getCanonicalUrl();
-
-    // Remove existing canonical tag if present
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) {
-        existingCanonical.remove();
+    enhanceOGForCityPage() {
+        const path = window.location.pathname;
+        const city = path.replace('/', '').replace('.html', '');
+        
+        this.updateOGTag('og:type', 'website');
+        this.updateOGTag('og:locale', 'en_GB');
+        this.updateOGTag('og:site_name', 'EcoSustainable.co.uk');
     }
 
-    // Add new canonical tag
-    const canonicalTag = document.createElement('link');
-    canonicalTag.rel = 'canonical';
-    canonicalTag.href = canonicalUrl;
-    document.head.appendChild(canonicalTag);
-}
+    updateOGTag(property, content) {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('property', property);
+            document.head.appendChild(tag);
+        }
+        tag.content = content;
+    }
 
-// Function to add structured data for better SEO
-function addStructuredData() {
-    const currentPath = window.location.pathname.split('/').pop();
+    enhanceTwitterCards() {
+        this.updateTwitterTag('twitter:card', 'summary_large_image');
+        this.updateTwitterTag('twitter:site', '@EcoSustainableUK');
+        this.updateTwitterTag('twitter:creator', '@EcoSustainableUK');
+    }
 
-    // Check if it's a category page
-    const categoryMatch = currentPath.match(/^([a-z-]+)-([a-z-]+)\.html$/);
-    if (categoryMatch) {
-        const [, city, category] = categoryMatch;
+    updateTwitterTag(name, content) {
+        let tag = document.querySelector(`meta[name="${name}"], meta[property="${name}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('property', name);
+            document.head.appendChild(tag);
+        }
+        tag.content = content;
+    }
+
+    addStructuredData() {
+        const path = window.location.pathname;
+        
+        if (path === '/' || path === '/index.html') {
+            this.addHomepageStructuredData();
+        } else if (path.includes('-')) {
+            this.addCategoryPageStructuredData();
+        } else {
+            this.addCityPageStructuredData();
+        }
+    }
+
+    addHomepageStructuredData() {
         const structuredData = {
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": `${getCategoryDisplayName(category)} in ${city.charAt(0).toUpperCase() + city.slice(1)}`,
-            "description": `Find sustainable ${getCategoryDisplayName(category).toLowerCase()} businesses in ${city.charAt(0).toUpperCase() + city.slice(1)}`,
-            "url": window.location.href,
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://ecosustainable.co.uk/#organization",
+                    "name": "EcoSustainable.co.uk",
+                    "url": "https://ecosustainable.co.uk",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://ecosustainable.co.uk/images/logo.png"
+                    },
+                    "sameAs": [
+                        "https://twitter.com/EcoSustainableUK",
+                        "https://facebook.com/EcoSustainableUK"
+                    ]
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://ecosustainable.co.uk/#website",
+                    "url": "https://ecosustainable.co.uk",
+                    "name": "EcoSustainable.co.uk",
+                    "description": "UK's premier directory of eco-friendly and sustainable businesses",
+                    "publisher": {
+                        "@id": "https://ecosustainable.co.uk/#organization"
+                    },
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": {
+                            "@type": "EntryPoint",
+                            "urlTemplate": "https://ecosustainable.co.uk/search?q={search_term_string}"
+                        },
+                        "query-input": "required name=search_term_string"
+                    }
+                }
+            ]
+        };
+        
+        this.insertStructuredData('homepage-schema', structuredData);
+    }
+
+    addCategoryPageStructuredData() {
+        const path = window.location.pathname;
+        const match = path.match(/\/([^-]+)-([^.]+)/);
+        if (match) {
+            const [, city, category] = match;
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                "name": `${this.formatCategoryName(category)} Businesses in ${this.formatCityName(city)}`,
+                "description": `Discover sustainable ${category.replace('-', ' & ')} businesses in ${this.formatCityName(city)}`,
+                "url": `https://ecosustainable.co.uk/${city}-${category}`,
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "EcoSustainable.co.uk",
+                    "url": "https://ecosustainable.co.uk"
+                },
+                "about": {
+                    "@type": "Place",
+                    "name": this.formatCityName(city),
+                    "addressLocality": this.formatCityName(city),
+                    "addressCountry": "UK"
+                }
+            };
+            
+            this.insertStructuredData('category-page-schema', structuredData);
+        }
+    }
+
+    addCityPageStructuredData() {
+        const path = window.location.pathname;
+        const city = path.replace('/', '').replace('.html', '');
+        
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": `Eco-Friendly Businesses in ${this.formatCityName(city)}`,
+            "description": `Directory of sustainable and eco-friendly businesses in ${this.formatCityName(city)}`,
+            "url": `https://ecosustainable.co.uk/${city}`,
             "isPartOf": {
                 "@type": "WebSite",
                 "name": "EcoSustainable.co.uk",
                 "url": "https://ecosustainable.co.uk"
             },
-            "mainEntity": {
-                "@type": "ItemList",
-                "name": `${getCategoryDisplayName(category)} Businesses`,
-                "description": `Directory of eco-friendly ${getCategoryDisplayName(category).toLowerCase()} businesses`
+            "about": {
+                "@type": "Place",
+                "name": this.formatCityName(city),
+                "addressLocality": this.formatCityName(city),
+                "addressCountry": "UK"
             }
         };
+        
+        this.insertStructuredData('city-page-schema', structuredData);
+    }
 
-        const script = document.createElement('script');
-        script.type = 'application/ld+json';
-        script.textContent = JSON.stringify(structuredData);
-        document.head.appendChild(script);
+    insertStructuredData(id, data) {
+        let script = document.getElementById(id);
+        if (!script) {
+            script = document.createElement('script');
+            script.id = id;
+            script.type = 'application/ld+json';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(data);
+    }
+
+    formatCityName(city) {
+        return city.split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    formatCategoryName(category) {
+        const categoryNames = {
+            'health-beauty': 'Health & Beauty',
+            'energy-utilities': 'Energy & Utilities',
+            'education-nonprofits': 'Education & Nonprofits',
+            'transport-travel': 'Transport & Travel',
+            'services-professional': 'Services & Professional',
+            'recycling-waste': 'Recycling & Waste',
+            'products-retail': 'Products & Retail'
+        };
+        return categoryNames[category] || category.replace('-', ' & ');
     }
 }
 
-// Helper function to get category display name
-function getCategoryDisplayName(categoryKey) {
-    const names = {
-        'health-beauty': 'Health & Beauty',
-        'products-retail': 'Products & Retail',
-        'transport-travel': 'Transport & Travel',
-        'services-professional': 'Services & Professional',
-        'energy-utilities': 'Energy & Utilities',
-        'recycling-waste': 'Recycling & Waste Management',
-        'education-nonprofits': 'Education & Nonprofits'
-    };
-    return names[categoryKey] || 'Business Services';
-}
-
-// Initialize canonical URL system
-document.addEventListener('DOMContentLoaded', function() {
-    setCanonicalUrl();
-    addStructuredData();
+// Initialize canonical management when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new CanonicalManager();
 });
-
-// Export functions for global use
-window.CanonicalSystem = {
-    setCanonicalUrl,
-    getCanonicalUrl,
-    addStructuredData
-};

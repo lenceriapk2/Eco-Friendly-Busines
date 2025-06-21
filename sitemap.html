@@ -1,24 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitemap - EcoSustainable.co.uk | Complete Directory Navigation</title>
-    <meta name="description" content="Complete sitemap of EcoSustainable.co.uk featuring all eco-friendly business categories, UK cities, and important pages for easy navigation.">
-    <meta name="keywords" content="sitemap, eco-friendly businesses UK, sustainable companies directory, green business navigation">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Sitemap - EcoSustainable.co.uk">
-    <meta property="og:description" content="Complete navigation directory of all eco-friendly businesses and sustainable companies across the UK.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ecosustainable.co.uk/sitemap">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/attached_assets/Screenshot_23.png">
-    <link rel="canonical" href="https://ecosustainable.co.uk/sitemap">
-
-    <!-- Stylesheets -->
+    <title>Sitemap - EcoSustainable.co.uk</title>
+    <meta name="description" content="Complete sitemap of EcoSustainable.co.uk - Browse all eco-friendly business listings by city and category across the UK.">
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -30,8 +17,8 @@
     <!-- Sitemap Hero -->
     <section class="sitemap-hero">
         <div class="container">
-            <h1><i class="fas fa-sitemap"></i> Complete Site Directory</h1>
-            <p>Navigate through all pages and categories on EcoSustainable.co.uk</p>
+            <h1>Site Map</h1>
+            <p>Complete directory of all pages on EcoSustainable.co.uk</p>
         </div>
     </section>
 
@@ -42,20 +29,20 @@
                 <!-- Main Pages -->
                 <div class="sitemap-section">
                     <h2><i class="fas fa-home"></i> Main Pages</h2>
-                    <ul class="sitemap-links">
+                    <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/about-us">About Us</a></li>
-                        <li><a href="/contact-us">Contact Us</a></li>
                         <li><a href="/categories">All Categories</a></li>
                         <li><a href="/cities">All Cities</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
                         <li><a href="/sitemap">Sitemap</a></li>
                     </ul>
                 </div>
 
-                <!-- Business Categories -->
+                <!-- Categories -->
                 <div class="sitemap-section">
-                    <h2><i class="fas fa-tags"></i> Business Categories</h2>
-                    <ul class="sitemap-links">
+                    <h2><i class="fas fa-tags"></i> Categories</h2>
+                    <ul>
                         <li><a href="/health-beauty-category">Health & Beauty</a></li>
                         <li><a href="/products-retail-category">Products & Retail</a></li>
                         <li><a href="/transport-travel-category">Transport & Travel</a></li>
@@ -66,87 +53,27 @@
                     </ul>
                 </div>
 
-                <!-- Major UK Cities -->
+                <!-- Featured Cities -->
                 <div class="sitemap-section">
-                    <h2><i class="fas fa-map-marker-alt"></i> Major UK Cities</h2>
-                    <div class="cities-columns">
-                        <div class="city-column">
+                    <h2><i class="fas fa-map-marker-alt"></i> Featured Cities</h2>
+                    <div class="cities-sitemap-grid">
+                        <div class="region-sitemap">
                             <h3>England</h3>
-                            <ul class="sitemap-links">
-                                <li><a href="/london">London</a></li>
-                                <li><a href="/birmingham">Birmingham</a></li>
-                                <li><a href="/manchester">Manchester</a></li>
-                                <li><a href="/liverpool">Liverpool</a></li>
-                                <li><a href="/leeds">Leeds</a></li>
-                                <li><a href="/sheffield">Sheffield</a></li>
-                                <li><a href="/bristol">Bristol</a></li>
-                                <li><a href="/newcastle">Newcastle</a></li>
-                                <li><a href="/nottingham">Nottingham</a></li>
-                                <li><a href="/brighton-hove">Brighton & Hove</a></li>
-                            </ul>
+                            <div class="cities-list" id="englandSitemapCities"></div>
                         </div>
-                        <div class="city-column">
+                        <div class="region-sitemap">
                             <h3>Scotland</h3>
-                            <ul class="sitemap-links">
-                                <li><a href="/glasgow">Glasgow</a></li>
-                                <li><a href="/edinburgh">Edinburgh</a></li>
-                                <li><a href="/aberdeen">Aberdeen</a></li>
-                                <li><a href="/dundee">Dundee</a></li>
-                                <li><a href="/stirling">Stirling</a></li>
-                            </ul>
+                            <div class="cities-list" id="scotlandSitemapCities"></div>
                         </div>
-                        <div class="city-column">
+                        <div class="region-sitemap">
                             <h3>Wales</h3>
-                            <ul class="sitemap-links">
-                                <li><a href="/cardiff">Cardiff</a></li>
-                                <li><a href="/swansea">Swansea</a></li>
-                                <li><a href="/newport">Newport</a></li>
-                                <li><a href="/wrexham">Wrexham</a></li>
-                            </ul>
+                            <div class="cities-list" id="walesSitemapCities"></div>
                         </div>
-                        <div class="city-column">
+                        <div class="region-sitemap">
                             <h3>Northern Ireland</h3>
-                            <ul class="sitemap-links">
-                                <li><a href="/belfast">Belfast</a></li>
-                                <li><a href="/derry">Derry</a></li>
-                                <li><a href="/armagh">Armagh</a></li>
-                                <li><a href="/bangor">Bangor</a></li>
-                            </ul>
+                            <div class="cities-list" id="northernIrelandSitemapCities"></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Category Pages by City (Sample) -->
-                <div class="sitemap-section">
-                    <h2><i class="fas fa-building"></i> Category Pages by City</h2>
-                    <div class="category-city-grid">
-                        <div class="category-group">
-                            <h3>London Categories</h3>
-                            <ul class="sitemap-links compact">
-                                <li><a href="/london-health-beauty">Health & Beauty</a></li>
-                                <li><a href="/london-products-retail">Products & Retail</a></li>
-                                <li><a href="/london-transport-travel">Transport & Travel</a></li>
-                                <li><a href="/london-services-professional">Services & Professional</a></li>
-                                <li><a href="/london-energy-utilities">Energy & Utilities</a></li>
-                                <li><a href="/london-recycling-waste">Recycling & Waste</a></li>
-                                <li><a href="/london-education-nonprofits">Education & Nonprofits</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="category-group">
-                            <h3>Manchester Categories</h3>
-                            <ul class="sitemap-links compact">
-                                <li><a href="/manchester-health-beauty">Health & Beauty</a></li>
-                                <li><a href="/manchester-products-retail">Products & Retail</a></li>
-                                <li><a href="/manchester-transport-travel">Transport & Travel</a></li>
-                                <li><a href="/manchester-services-professional">Services & Professional</a></li>
-                                <li><a href="/manchester-energy-utilities">Energy & Utilities</a></li>
-                                <li><a href="/manchester-recycling-waste">Recycling & Waste</a></li>
-                                <li><a href="/manchester-education-nonprofits">Education & Nonprofits</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <p class="note"><i class="fas fa-info-circle"></i> Similar category pages available for all 79 UK cities</p>
                 </div>
             </div>
         </div>
@@ -157,6 +84,265 @@
 
     <script src="components.js"></script>
     <script src="canonical-urls.js"></script>
-    <script src="seo-enhancements.js"></script>
+    <script src="cities-page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSitemapCities();
+        });
+
+        function populateSitemapCities() {
+            Object.keys(citiesByRegion).forEach(region => {
+                const listElement = document.getElementById(`${region}SitemapCities`);
+                if (listElement) {
+                    const cityLinks = citiesByRegion[region].map(city => 
+                        `<a href="${city.slug}.html">${city.name}</a>`
+                    ).join(', ');
+                    listElement.innerHTML = cityLinks;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - EcoSustainable.co.uk</title>
+    <meta name="description" content="Complete sitemap of EcoSustainable.co.uk - find all pages including city directories, business categories, and support pages.">
+    <meta name="robots" content="index, follow">
+    
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="canonical" href="https://ecosustainable.co.uk/sitemap.html">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Sitemap Hero Section -->
+    <section class="sitemap-hero">
+        <div class="container">
+            <h1><i class="fas fa-sitemap"></i> Sitemap</h1>
+            <p>Find all pages and content on EcoSustainable.co.uk</p>
+        </div>
+    </section>
+
+    <!-- Sitemap Content -->
+    <section class="sitemap-content">
+        <div class="container">
+            <div class="sitemap-grid">
+                <!-- Main Pages -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-home"></i> Main Pages</h2>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about-us">About Us</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li><a href="/how-it-works">How It Works</a></li>
+                        <li><a href="/list-your-business">List Your Business</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cities -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-map-marker-alt"></i> Cities</h2>
+                    <ul>
+                        <li><a href="/cities">All Cities</a></li>
+                    </ul>
+                    <div class="cities-sitemap-grid">
+                        <div class="region-sitemap">
+                            <h3>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</h3>
+                            <div class="cities-list">
+                                <a href="/london">London</a>
+                                <a href="/birmingham">Birmingham</a>
+                                <a href="/manchester">Manchester</a>
+                                <a href="/liverpool">Liverpool</a>
+                                <a href="/leeds">Leeds</a>
+                                <a href="/sheffield">Sheffield</a>
+                                <a href="/bristol">Bristol</a>
+                                <a href="/newcastle">Newcastle</a>
+                                <a href="/nottingham">Nottingham</a>
+                                <a href="/brighton-hove">Brighton & Hove</a>
+                                <a href="/cambridge">Cambridge</a>
+                                <a href="/oxford">Oxford</a>
+                                <a href="/bath">Bath</a>
+                                <a href="/canterbury">Canterbury</a>
+                                <a href="/chester">Chester</a>
+                                <a href="/durham">Durham</a>
+                                <a href="/exeter">Exeter</a>
+                                <a href="/gloucester">Gloucester</a>
+                                <a href="/lancaster">Lancaster</a>
+                                <a href="/leicester">Leicester</a>
+                                <a href="/lincoln">Lincoln</a>
+                                <a href="/norwich">Norwich</a>
+                                <a href="/plymouth">Plymouth</a>
+                                <a href="/portsmouth">Portsmouth</a>
+                                <a href="/preston">Preston</a>
+                                <a href="/reading">Reading</a>
+                                <a href="/salford">Salford</a>
+                                <a href="/southampton">Southampton</a>
+                                <a href="/stoke-on-trent">Stoke-on-Trent</a>
+                                <a href="/sunderland">Sunderland</a>
+                                <a href="/winchester">Winchester</a>
+                                <a href="/wolverhampton">Wolverhampton</a>
+                                <a href="/york">York</a>
+                            </div>
+                        </div>
+                        
+                        <div class="region-sitemap">
+                            <h3>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</h3>
+                            <div class="cities-list">
+                                <a href="/edinburgh">Edinburgh</a>
+                                <a href="/glasgow">Glasgow</a>
+                                <a href="/aberdeen">Aberdeen</a>
+                                <a href="/dundee">Dundee</a>
+                                <a href="/stirling">Stirling</a>
+                                <a href="/perth">Perth</a>
+                                <a href="/inverness">Inverness</a>
+                            </div>
+                        </div>
+                        
+                        <div class="region-sitemap">
+                            <h3>🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales</h3>
+                            <div class="cities-list">
+                                <a href="/cardiff">Cardiff</a>
+                                <a href="/swansea">Swansea</a>
+                                <a href="/newport">Newport</a>
+                                <a href="/bangor">Bangor</a>
+                                <a href="/st-davids">St. Davids</a>
+                            </div>
+                        </div>
+                        
+                        <div class="region-sitemap">
+                            <h3>Ireland</h3>
+                            <div class="cities-list">
+                                <a href="/belfast">Belfast</a>
+                                <a href="/lisburn">Lisburn</a>
+                                <a href="/newry">Newry</a>
+                                <a href="/armagh">Armagh</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Pages -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-gavel"></i> Legal</h2>
+                    <ul>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service">Terms of Service</a></li>
+                        <li><a href="/cookie-policy">Cookie Policy</a></li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Pages -->
+                <div class="sitemap-section">
+                    <h2><i class="fas fa-life-ring"></i> Support</h2>
+                    <ul>
+                        <li><a href="/help-center">Help Center</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="canonical-urls.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - EcoSustainable.co.uk | All Pages</title>
+    <meta name="description" content="Complete sitemap of EcoSustainable.co.uk showing all cities, categories, and pages for easy navigation.">
+    <link rel="canonical" href="https://ecosustainable.co.uk/sitemap.html">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Sitemap Content -->
+    <section class="sitemap-page">
+        <div class="container">
+            <h1>Sitemap</h1>
+            <p>Complete navigation of all pages on EcoSustainable.co.uk</p>
+            
+            <div class="sitemap-grid">
+                <div class="sitemap-section">
+                    <h2>Main Pages</h2>
+                    <a href="/">Home</a>
+                    <a href="/about-us">About Us</a>
+                    <a href="/contact-us">Contact Us</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                </div>
+                
+                <div class="sitemap-section">
+                    <h2>Categories</h2>
+                    <a href="/categories">All Categories</a>
+                    <a href="/health-beauty-category">Health & Beauty</a>
+                    <a href="/products-retail-category">Products & Retail</a>
+                    <a href="/transport-travel-category">Transport & Travel</a>
+                    <a href="/services-professional-category">Services & Professional</a>
+                    <a href="/energy-utilities-category">Energy & Utilities</a>
+                    <a href="/recycling-waste-category">Recycling & Waste</a>
+                    <a href="/education-nonprofits-category">Education & Nonprofits</a>
+                </div>
+                
+                <div class="sitemap-section">
+                    <h2>Cities</h2>
+                    <a href="/cities">All Cities</a>
+                    <div class="cities-sitemap-grid">
+                        <div class="region-sitemap">
+                            <h3>England</h3>
+                            <div class="cities-list" id="englandCitiesSitemap">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Scotland</h3>
+                            <div class="cities-list" id="scotlandCitiesSitemap">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Wales</h3>
+                            <div class="cities-list" id="walesCitiesSitemap">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="region-sitemap">
+                            <h3>Northern Ireland</h3>
+                            <div class="cities-list" id="northernIrelandCitiesSitemap">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <script src="components.js"></script>
+    <script src="canonical-urls.js"></script>
+    <script src="canonical-urls.js"></script>
+    <script src="sitemap-generator.js"></script>
 </body>
 </html>
