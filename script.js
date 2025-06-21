@@ -348,34 +348,22 @@ function populateTopBusinesses() {
 }
 
 // Search functionality
-function performSearchBasic() {
-    if (searchInput && searchInput.value) {
-        const searchTerm = searchInput.value.toLowerCase();
-        alert(`Searching for: "${searchTerm}"`);
-        // You can implement actual search logic here
+function performSearch() {
+    const searchInput = searchInput.value.toLowerCase();
+    const selectedCity = cityFilter.value;
+
+    if (searchTerm || selectedCity) {
+        alert(`Searching for: "${searchTerm}" in ${selectedCity || 'all cities'}`);
     } else {
-        alert('Please enter a search term');
+        alert('Please enter a search term or select a city');
     }
 }
 
-// Initialize search event listeners after DOM loads
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        const searchBtnElement = document.getElementById('searchBtn') || document.querySelector('.search-btn');
-        const searchInputElement = document.getElementById('searchInput') || document.querySelector('.search-input');
-        
-        if (searchBtnElement && searchInputElement) {
-            searchBtn = searchBtnElement;
-            searchInput = searchInputElement;
-            
-            searchBtn.addEventListener('click', performSearchBasic);
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    performSearchBasic();
-                }
-            });
-        }
-    }, 1500);
+searchBtn.addEventListener('click', performSearch);
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        performSearch();
+    }
 });
 
 // Show all businesses function
@@ -491,96 +479,35 @@ const lazyLoadObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Global variables and initialization
-let currentCity = '';
-let currentCategory = '';
-let currentBusinesses = [];
-let filteredBusinesses = [];
-let searchBtn = null;
-let searchInput = null;
-
-// Initialize when DOM is loaded
+// Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-
-    // Initialize search button reference
-    searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
-
-    // Add search functionality if search elements exist
-    const searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', function() {
-            performSearch(searchInput.value);
-        });
-
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch(searchInput.value);
-            }
-        });
+    // Initialize search functionality
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
     }
-});
 
-function initializeApp() {
-    console.log('Initializing EcoSustainable app...');
-
-    // Load components first
-    loadComponents().then(() => {
-        // Initialize page-specific functionality
-        initializePageSpecific();
-
-        // Setup global event listeners
-        setupGlobalEventListeners();
-
-        // Initialize newsletter form
-        initializeNewsletterForm();
-
-        // Initialize contact form
-        initializeContactForm();
-
-        // Initialize search functionality
-        initializeSearch();
-    });
-}
-
-function initializeSearch() {
-    // Wait for DOM to be fully loaded
-    setTimeout(() => {
-        searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
-        searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
-
-        if (searchBtn && searchInput) {
-            searchBtn.addEventListener('click', function() {
-                performSearch(searchInput.value);
-            });
-
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch(searchInput.value);
-                }
-            });
+    // Handle search function
+    function handleSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput && searchInput.value.trim()) {
+            // Redirect to search results or handle search
+            window.location.href = `cities.html?search=${encodeURIComponent(searchInput.value)}`;
         }
-    }, 1000);
-}
-
-function performSearch(query) {
-    if (!query || query.trim() === '') {
-        return;
     }
 
-    console.log('Performing search for:', query);
+    // Lazy load sections when they come into view
+    const sections = ['businessesGrid', 'categoriesGrid', 'citiesGrid'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            lazyLoadObserver.observe(element);
+        }
+    });
 
-    // Simple search implementation - filter current businesses if available
-    if (currentBusinesses && currentBusinesses.length > 0) {
-        const filtered = currentBusinesses.filter(business => 
-            business.name.toLowerCase().includes(query.toLowerCase()) ||
-            business.category.toLowerCase().includes(query.toLowerCase()) ||
-            business.description.toLowerCase().includes(query.toLowerCase())
-        );
-
-        displayBusinesses(filtered);
-    }
-}
+    animateOnScroll();
+    animateCounters();
+});
 
 // Add loading states for dynamic content
 function showLoading(element) {

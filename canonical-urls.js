@@ -2,8 +2,7 @@
 // Canonical URL Management for EcoSustainable.co.uk
 // Ensures proper URL structure for SEO optimization
 
-// Initialize CANONICAL_STRATEGIES only once
-window.CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES || {
+const CANONICAL_STRATEGIES = {
     homePage: () => 'https://ecosustainable.co.uk/',
     cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
     categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
@@ -287,14 +286,7 @@ class CanonicalManager {
     }
 }
 
-// Initialize canonical management when DOM is ready with error handling
+// Initialize canonical management when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        if (typeof window.CanonicalManager === 'undefined') {
-            window.CanonicalManager = CanonicalManager;
-            new CanonicalManager();
-        }
-    } catch (error) {
-        console.warn('Canonical Manager initialization failed:', error);
-    }
+    new CanonicalManager();
 });
