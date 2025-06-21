@@ -18,7 +18,9 @@ function createHeader() {
                         <ul>
                             <li><a href="index.html" class="nav-link">Home</a></li>
                             <li><a href="cities.html" class="nav-link">Browse Cities</a></li>
-                            <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                            <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+                            <li><a href="sustainability-report.html" class="nav-link">Sustainability</a></li>
+                            <li><a href="about-us.html" class="nav-link">About</a></li>
                             <li><a href="contact-us.html" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>

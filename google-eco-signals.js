@@ -34,28 +34,9 @@ class GoogleEcoOptimizer {
     }
 
     createSustainabilityIndicators(metrics) {
-        const sustainabilityBanner = document.createElement('div');
-        sustainabilityBanner.className = 'sustainability-banner';
-        sustainabilityBanner.innerHTML = `
-            <div class="eco-badge">
-                <i class="fas fa-leaf"></i>
-                <span>100% Renewable Energy Powered</span>
-            </div>
-            <div class="eco-badge">
-                <i class="fas fa-recycle"></i>
-                <span>Carbon Neutral Operations</span>
-            </div>
-            <div class="eco-badge">
-                <i class="fas fa-globe-americas"></i>
-                <span>Supporting Climate Action</span>
-            </div>
-        `;
-
-        // Add to page header
-        const header = document.querySelector('header') || document.querySelector('.hero');
-        if (header) {
-            header.appendChild(sustainabilityBanner);
-        }
+        // Environmental indicators are now displayed in footer only
+        // No longer adding to header to keep it clean and compact
+        return;
     }
 
     // Implement Google's Green Web Vitals
