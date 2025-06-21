@@ -1,4 +1,3 @@
-
 // Enhanced Places API for EcoSustainable.co.uk
 // Provides real business data from Google Places API (New) with fallbacks
 
@@ -41,11 +40,11 @@ class PlacesAPI {
             this.rateLimit.calls = 0;
             this.rateLimit.resetTime = now + 60000; // Reset every minute
         }
-        
+
         if (this.rateLimit.calls >= 50) { // Limit to 50 calls per minute
             throw new Error('Rate limit exceeded. Please wait before making more requests.');
         }
-        
+
         this.rateLimit.calls++;
     }
 
@@ -136,7 +135,7 @@ class PlacesAPI {
             try {
                 const businesses = await this.performTextSearch(query);
                 allBusinesses = allBusinesses.concat(businesses);
-                
+
                 // Add delay to respect rate limits
                 await this.delay(100);
             } catch (error) {
@@ -162,7 +161,7 @@ class PlacesAPI {
             try {
                 const businesses = await this.performTextSearch(query);
                 allBusinesses = allBusinesses.concat(businesses);
-                
+
                 // Add delay to respect rate limits
                 await this.delay(100);
             } catch (error) {
@@ -178,7 +177,7 @@ class PlacesAPI {
     // Perform actual text search using Google Places API (New)
     async performTextSearch(textQuery) {
         const url = `${this.baseUrl}:searchText`;
-        
+
         const requestBody = {
             textQuery: textQuery,
             pageSize: 10,
@@ -207,7 +206,7 @@ class PlacesAPI {
         }
 
         const data = await response.json();
-        
+
         if (data.places && data.places.length > 0) {
             return data.places.map(place => this.transformPlaceData(place));
         }
@@ -319,12 +318,12 @@ class PlacesAPI {
     // Generate features from types
     generateFeaturesFromTypes(types) {
         const features = ['Eco-Friendly', 'Sustainable'];
-        
+
         if (types.includes('organic')) features.push('Organic');
         if (types.includes('restaurant')) features.push('Local Sourcing');
         if (types.includes('spa')) features.push('Natural Products');
         if (types.includes('store')) features.push('Zero Waste');
-        
+
         return features;
     }
 
