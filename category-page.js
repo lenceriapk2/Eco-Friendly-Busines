@@ -299,86 +299,38 @@ function displayCategoryBusinesses() {
 function createBusinessCard(business) {
     return `
         <div class="business-card" data-business-id="${business.id}">
-            <div class="business-card-header">
-                <div class="business-logo">
-                    ${getBusinessIcon(business.category)}
+            <div class="business-image">
+                <img src="${business.image}" alt="${business.name}" loading="lazy">
+                <div class="business-category">${business.subcategory}</div>
+            </div>
+            <div class="business-info">
+                <h3 class="business-name">${business.name}</h3>
+                <div class="business-rating">
+                    <div class="stars">${generateStars(business.rating)}</div>
+                    <span class="rating-text">${business.rating.toFixed(1)} (${business.reviewCount} reviews)</span>
                 </div>
-                <div class="business-info">
-                    <h3 class="business-name">${business.name}</h3>
-                    <div class="business-category">${business.subcategory}</div>
-                    <div class="business-rating">
-                        <div class="stars">${generateStars(business.rating)}</div>
-                        <span class="rating-text">${business.rating.toFixed(1)} (${business.reviewCount} reviews)</span>
+                <p class="business-description">${business.description}</p>
+                <div class="business-features">
+                    ${business.features.slice(0, 3).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                </div>
+                <div class="business-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${business.address}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>${business.phone}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>${business.website}</span>
                     </div>
                 </div>
-            </div>
-            
-            <p class="business-description">${business.description}</p>
-            
-            <div class="business-features">
-                ${business.features.slice(0, 4).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-            </div>
-            
-            <div class="business-contact">
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span title="${business.address}">${business.address}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span title="${business.phone}">${business.phone}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-globe"></i>
-                    <span title="${business.website}">${business.website}</span>
-                </div>
-            </div>
-            
-            <div class="business-actions">
-                <button class="action-btn call-btn" onclick="callBusiness('${business.phone}')" type="button">
-                    <i class="fas fa-phone"></i> Call Now
-                </button>
-                <button class="action-btn website-btn" onclick="openBusinessWebsite('${business.website}')" type="button">
-                    <i class="fas fa-external-link-alt"></i> Visit Site
-                </button>
-                <button class="action-btn directions-btn" onclick="getDirections('${business.address}')" type="button">
-                    <i class="fas fa-route"></i> Get Directions
-                </button>
             </div>
         </div>
     `;
 }
-
-// Get business icon based on category
-function getBusinessIcon(categoryKey) {
-    const icons = {
-        'health-beauty': '💄',
-        'energy-utilities': '⚡',
-        'education-nonprofits': '📚',
-        'transport-travel': '🚗',
-        'services-professional': '💼',
-        'recycling-waste': '♻️',
-        'products-retail': '🛍️'
-    };
-    return icons[categoryKey] || '🏢';
-}
-
-// Action button functions
-window.callBusiness = function(phone) {
-    window.open(`tel:${phone}`, '_self');
-};
-
-window.openBusinessWebsite = function(website) {
-    if (!website.startsWith('http')) {
-        website = 'https://' + website;
-    }
-    window.open(website, '_blank');
-};
-
-window.getDirections = function(address) {
-    const encodedAddress = encodeURIComponent(address);
-    window.open(`https://www.google.com/maps/search/${encodedAddress}`, '_blank');
-};
 
 // Generate star rating HTML
 function generateStars(rating) {
@@ -444,277 +396,15 @@ function generateSEOContent() {
     
     if (seoSection) {
         seoSection.innerHTML = `
-            <!-- Why Choose Section -->
-            <section class="why-choose-section seo-section">
+            <section class="seo-content">
                 <div class="container">
                     <h2>Why Choose ${categoryName} Businesses in ${currentCityName}?</h2>
-                    <div class="why-choose-grid">
-                        ${generateWhyChooseItems(currentCategoryKey, currentCityName)}
-                    </div>
-                </div>
-            </section>
-
-            <!-- Selection Criteria Section -->
-            <section class="criteria-section seo-section">
-                <div class="container">
-                    <h2>Our Selection Criteria for ${categoryName} Businesses</h2>
-                    <div class="criteria-content">
-                        <div class="criteria-text">
-                            <p>We carefully evaluate each ${categoryName.toLowerCase()} business in ${currentCityName} based on strict sustainability and quality criteria. Our selection process ensures you connect with the most environmentally responsible and reliable service providers.</p>
-                            
-                            <h3>What We Look For:</h3>
-                            <ul class="criteria-list">
-                                ${generateCriteriaList(currentCategoryKey)}
-                            </ul>
-                            
-                            <p>Every business listed in our ${currentCityName} ${categoryName.toLowerCase()} directory has been personally reviewed and meets our high standards for environmental responsibility, customer service, and business integrity.</p>
-                        </div>
-                        <div class="criteria-stats">
-                            <div class="stat-box">
-                                <span class="stat-number">${categoryBusinesses.length}</span>
-                                <span class="stat-label">Verified Businesses</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-number">4.7</span>
-                                <span class="stat-label">Average Rating</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-number">98%</span>
-                                <span class="stat-label">Customer Satisfaction</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- FAQ Section -->
-            <section class="faq-section seo-section">
-                <div class="container">
-                    <h2>Frequently Asked Questions - ${categoryName} in ${currentCityName}</h2>
-                    <div class="faq-grid">
-                        ${generateFAQItems(currentCategoryKey, currentCityName)}
-                    </div>
-                </div>
-            </section>
-
-            <!-- Local Areas Section -->
-            <section class="areas-section seo-section">
-                <div class="container">
-                    <h2>${categoryName} Services Across ${currentCityName}</h2>
-                    <div class="areas-grid">
-                        ${generateLocalAreas(currentCityName)}
-                    </div>
-                </div>
-            </section>
-
-            <!-- Benefits Section -->
-            <section class="benefits-section seo-section">
-                <div class="container">
-                    <h2>Benefits of Choosing Sustainable ${categoryName} Businesses</h2>
-                    <div class="benefits-content">
-                        <p>Choosing eco-friendly ${categoryName.toLowerCase()} businesses in ${currentCityName} provides numerous advantages for both consumers and the environment. These forward-thinking companies prioritize sustainability while delivering exceptional service quality.</p>
-                        
-                        <ul class="benefits-list">
-                            ${generateBenefitsList(currentCategoryKey)}
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tips Section -->
-            <section class="tips-section seo-section">
-                <div class="container">
-                    <h2>Tips for Choosing the Right ${categoryName} Business in ${currentCityName}</h2>
-                    <div class="tips-grid">
-                        ${generateTipsCards(currentCategoryKey)}
-                    </div>
-                </div>
-            </section>
-
-            <!-- Related Categories Section -->
-            <section class="related-section seo-section">
-                <div class="container">
-                    <h2>Related Sustainable Business Categories in ${currentCityName}</h2>
-                    <div class="related-grid">
-                        ${generateRelatedCategories(currentCategoryKey, currentCityName)}
-                    </div>
+                    <p>Our curated selection of ${categoryName.toLowerCase()} businesses in ${currentCityName} represents the finest sustainable companies committed to environmental responsibility. Each business has been thoroughly vetted for their green practices, quality of service, and positive community impact.</p>
+                    
+                    <h3>Sustainable ${categoryName} Services in ${currentCityName}</h3>
+                    <p>The ${categoryName.toLowerCase()} businesses featured in our ${currentCityName} directory offer innovative, eco-friendly solutions that benefit both customers and the environment. From organic products to renewable energy services, these companies are leading the way in sustainable business practices.</p>
                 </div>
             </section>
         `;
     }
 }
-
-// Helper functions for SEO content generation
-function generateWhyChooseItems(categoryKey, cityName) {
-    const items = {
-        'health-beauty': [
-            { icon: 'fa-leaf', title: 'Natural & Organic', text: 'All products are certified organic and free from harmful chemicals' },
-            { icon: 'fa-heart', title: 'Cruelty-Free', text: 'No animal testing and ethically sourced ingredients' },
-            { icon: 'fa-recycle', title: 'Sustainable Packaging', text: 'Eco-friendly packaging that reduces environmental impact' },
-            { icon: 'fa-star', title: 'Expert Care', text: 'Professional beauticians trained in sustainable practices' }
-        ],
-        'energy-utilities': [
-            { icon: 'fa-solar-panel', title: 'Renewable Sources', text: 'Clean energy from solar, wind, and sustainable sources' },
-            { icon: 'fa-piggy-bank', title: 'Cost Savings', text: 'Reduce energy bills with efficient green technology' },
-            { icon: 'fa-globe', title: 'Environmental Impact', text: 'Significantly reduce your carbon footprint' },
-            { icon: 'fa-tools', title: 'Professional Installation', text: 'Expert installation and maintenance services' }
-        ],
-        'education-nonprofits': [
-            { icon: 'fa-graduation-cap', title: 'Expert Education', text: 'Learn from environmental education specialists' },
-            { icon: 'fa-users', title: 'Community Impact', text: 'Programs that benefit the entire community' },
-            { icon: 'fa-seedling', title: 'Practical Skills', text: 'Hands-on learning about sustainable living' },
-            { icon: 'fa-award', title: 'Certified Programs', text: 'Accredited courses and recognized qualifications' }
-        ]
-    };
-    
-    const categoryItems = items[categoryKey] || items['energy-utilities'];
-    return categoryItems.map(item => `
-        <div class="why-item">
-            <div class="why-icon">
-                <i class="fas ${item.icon}"></i>
-            </div>
-            <h3>${item.title}</h3>
-            <p>${item.text}</p>
-        </div>
-    `).join('');
-}
-
-function generateCriteriaList(categoryKey) {
-    const criteria = {
-        'health-beauty': [
-            'Organic and natural ingredient certification',
-            'Cruelty-free product testing policies',
-            'Sustainable and recyclable packaging',
-            'Professional staff training and qualifications',
-            'Positive customer reviews and testimonials'
-        ],
-        'energy-utilities': [
-            'Renewable energy source verification',
-            'Energy efficiency certifications',
-            'Professional installation standards',
-            'Customer service excellence',
-            'Transparent pricing and warranties'
-        ],
-        'education-nonprofits': [
-            'Educational program accreditation',
-            'Environmental impact measurement',
-            'Community engagement levels',
-            'Professional staff qualifications',
-            'Transparent financial reporting'
-        ]
-    };
-    
-    const categoryList = criteria[categoryKey] || criteria['energy-utilities'];
-    return categoryList.map(item => `<li>${item}</li>`).join('');
-}
-
-function generateFAQItems(categoryKey, cityName) {
-    const faqs = [
-        {
-            question: `What makes a ${categoryKey.replace('-', ' ')} business sustainable?`,
-            answer: `Sustainable businesses prioritize environmental responsibility through eco-friendly practices, ethical sourcing, and community impact.`
-        },
-        {
-            question: `How do you verify businesses in ${cityName}?`,
-            answer: `We conduct thorough reviews including site visits, certification checks, customer feedback analysis, and sustainability practice verification.`
-        },
-        {
-            question: `Are these businesses more expensive than traditional options?`,
-            answer: `While some sustainable options may have higher upfront costs, they often provide better long-term value and environmental benefits.`
-        },
-        {
-            question: `How often is your business directory updated?`,
-            answer: `Our directory is updated monthly with new businesses, reviews, and verification status to ensure accuracy and relevance.`
-        }
-    ];
-    
-    return faqs.map((faq, index) => `
-        <div class="faq-item" data-index="${index}">
-            <button class="faq-question" onclick="toggleFAQ(${index})">
-                ${faq.question}
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="faq-answer" id="faq-${index}">
-                <p>${faq.answer}</p>
-            </div>
-        </div>
-    `).join('');
-}
-
-function generateLocalAreas(cityName) {
-    const areas = [
-        `${cityName} City Centre`,
-        `North ${cityName}`,
-        `South ${cityName}`,
-        `East ${cityName}`,
-        `West ${cityName}`,
-        `Greater ${cityName} Area`
-    ];
-    
-    return areas.map(area => `
-        <div class="area-card">
-            <h3>${area}</h3>
-            <p>Sustainable businesses serving the ${area} community with eco-friendly solutions and professional service.</p>
-        </div>
-    `).join('');
-}
-
-function generateBenefitsList(categoryKey) {
-    const benefits = [
-        'Supporting local environmental initiatives',
-        'Reducing your personal carbon footprint',
-        'Contributing to sustainable economic growth',
-        'Accessing innovative eco-friendly solutions',
-        'Joining a community of environmentally conscious consumers',
-        'Supporting businesses that prioritize social responsibility'
-    ];
-    
-    return benefits.map(benefit => `<li>${benefit}</li>`).join('');
-}
-
-function generateTipsCards(categoryKey) {
-    const tips = [
-        { title: 'Research Certifications', text: 'Look for recognized environmental certifications and standards' },
-        { title: 'Read Reviews', text: 'Check customer reviews and testimonials for honest feedback' },
-        { title: 'Ask Questions', text: 'Inquire about their sustainability practices and environmental policies' },
-        { title: 'Compare Options', text: 'Compare multiple businesses to find the best sustainable solution' }
-    ];
-    
-    return tips.map(tip => `
-        <div class="tip-card">
-            <h3>${tip.title}</h3>
-            <p>${tip.text}</p>
-        </div>
-    `).join('');
-}
-
-function generateRelatedCategories(categoryKey, cityName) {
-    const categories = [
-        { key: 'health-beauty', name: 'Health & Beauty', desc: 'Natural wellness and beauty services' },
-        { key: 'energy-utilities', name: 'Energy & Utilities', desc: 'Renewable energy solutions' },
-        { key: 'transport-travel', name: 'Transport & Travel', desc: 'Sustainable transport options' },
-        { key: 'services-professional', name: 'Professional Services', desc: 'Green business consulting' }
-    ];
-    
-    return categories.filter(cat => cat.key !== categoryKey).slice(0, 3).map(cat => `
-        <a href="${cityName.toLowerCase()}-${cat.key}.html" class="related-card">
-            <h3>${cat.name}</h3>
-            <p>${cat.desc}</p>
-        </a>
-    `).join('');
-}
-
-// FAQ toggle function
-window.toggleFAQ = function(index) {
-    const answer = document.getElementById(`faq-${index}`);
-    const question = answer.previousElementSibling;
-    const icon = question.querySelector('i');
-    
-    if (answer.style.maxHeight) {
-        answer.style.maxHeight = null;
-        icon.style.transform = 'rotate(0deg)';
-    } else {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        icon.style.transform = 'rotate(180deg)';
-    }
-};
