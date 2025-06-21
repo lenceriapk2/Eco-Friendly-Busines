@@ -30,6 +30,7 @@ class PlacesAPI {
         }
 
         this.initialized = true;
+        this.isInitialized = true; // Add this for better compatibility
         return this;
     }
 
@@ -595,6 +596,10 @@ const placesAPI = new PlacesAPI();
 placesAPI.initialize('AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE').then(() => {
     console.log('Places API initialized successfully with real Google Places API');
     console.log('Now fetching real business data from Google Maps');
+    
+    // Make sure initialization status is properly set
+    placesAPI.isInitialized = true;
+    window.PlacesAPI.isInitialized = true;
 });
 
 // Export for global use

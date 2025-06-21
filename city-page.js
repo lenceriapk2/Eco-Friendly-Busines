@@ -6,7 +6,10 @@ let currentCityName = '';
 // Initialize city page with unique data for each city
 async function initializeCityPage(cityName) {
     currentCityName = cityName;
-    console.log(`Initializing ${cityName} page with unique business data`);
+    console.log(`Initializing ${cityName} page with real API data`);
+
+    // Show loading state
+    showCityLoadingState();
 
     await loadCityBusinesses(cityName);
     displayCityBusinesses();
@@ -14,26 +17,64 @@ async function initializeCityPage(cityName) {
     populateCategories();
 }
 
+// Show loading state for city pages
+function showCityLoadingState() {
+    const grid = document.getElementById('londonBusinessesGrid') || 
+                 document.getElementById('businessesGrid') ||
+                 document.getElementById('cityBusinessesGrid');
+    
+    if (grid) {
+        grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #666;">
+                <i class="fas fa-spinner fa-spin fa-3x" style="color: #4CAF50; margin-bottom: 20px;"></i>
+                <h3>Loading Real Business Data...</h3>
+                <p>Fetching the latest eco-friendly businesses in ${currentCityName} from Google Places API</p>
+            </div>
+        `;
+    }
+}
+
 // Load unique businesses for the specific city
 async function loadCityBusinesses(cityName) {
     try {
+        // Wait for API to be ready
+        let apiReady = false;
+        let attempts = 0;
+
+        while (!apiReady && attempts < 100) {
+            if (window.PlacesAPI && window.PlacesAPI.initialized) {
+                apiReady = true;
+                console.log('API is ready for city page, loading businesses...');
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+        }
+
         // Try to load from API first
         if (window.PlacesAPI && window.PlacesAPI.fetchAllBusinessesForCity) {
+            console.log(`Attempting to load real businesses from Google Places API for ${cityName}`);
             const apiBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName);
+            
             if (apiBusinesses && apiBusinesses.length > 0) {
                 cityBusinesses = apiBusinesses;
-                console.log(`Loaded ${apiBusinesses.length} businesses from API for ${cityName}`);
+                console.log(`✓ Loaded ${apiBusinesses.length} real businesses from Google Places API for ${cityName}`);
                 return;
+            } else {
+                console.log(`No businesses returned from API for ${cityName}, using fallback data`);
             }
+        } else {
+            console.log('Places API not available, using fallback data');
         }
 
         // Generate unique fallback data for this city
         cityBusinesses = generateCityBusinessData(cityName);
-        console.log(`Generated unique data for ${cityName}: ${cityBusinesses.length} businesses`);
+        console.log(`Generated ${cityBusinesses.length} fallback businesses for ${cityName}`);
 
     } catch (error) {
         console.error(`Error loading businesses for ${cityName}:`, error);
         cityBusinesses = generateCityBusinessData(cityName);
+        console.log(`Using fallback data due to error for ${cityName}`);
     }
 }
 
@@ -195,7 +236,7 @@ function createBusinessCard(business) {
     const card = document.createElement('div');
     card.className = 'london-business-card';
 
-    // Ensure we have required data
+    // Handle both API and fallback data
     const name = business.name || 'Business Name';
     const category = business.subcategory || business.category || 'Business';
     const rating = parseFloat(business.rating) || 4.5;
@@ -205,6 +246,21 @@ function createBusinessCard(business) {
     const address = business.address || generateAddress(currentCityName);
     const phone = business.phone || generatePhoneNumber();
     const website = business.website || generateWebsite('business', currentCityName);
+
+    // Handle API images vs fallback icons
+    let imageOrIcon = '';
+    if (business.image && business.image.startsWith('http')) {
+        // Real API image
+        imageOrIcon = `<img src="${business.image}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                       <div class="fallback-icon" style="display: none; background: linear-gradient(135deg, #4caf50, #2d8f47); width: 100%; height: 100%; align-items: center; justify-content: center; color: white; font-size: 2rem; border-radius: 8px;">
+                           <i class="${getCategoryIcon(business.category)}"></i>
+                       </div>`;
+    } else {
+        // Fallback icon
+        imageOrIcon = `<div class="business-icon" style="background: linear-gradient(135deg, #4caf50, #2d8f47); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; border-radius: 8px;">
+                           <i class="${getCategoryIcon(business.category)}"></i>
+                       </div>`;
+    }
 
     // Create business logo/icon based on category
     const categoryIcons = {
@@ -224,11 +280,12 @@ function createBusinessCard(business) {
 
     card.innerHTML = `
         <div class="business-card-header">
-            <div class="business-rank">1</div>
+            <div class="business-rank">#${Math.floor(Math.random() * 10) + 1}</div>
+            ${business.businessStatus === 'OPERATIONAL' ? '<div class="status-badge verified">✓ Verified</div>' : ''}
         </div>
         <div class="business-image-container">
-            <div class="business-main-image" style="background: linear-gradient(135deg, #4caf50, #2d8f47); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
-                <i class="${logoIcon}"></i>
+            <div class="business-main-image">
+                ${imageOrIcon}
             </div>
         </div>
         <div class="business-content">
@@ -316,15 +373,22 @@ function populateCategories() {
     const categoriesGrid = document.getElementById('categoriesGrid');
     if (!categoriesGrid) return;
 
+    // Count businesses by category from real API data
+    const categoryCounts = {};
+    cityBusinesses.forEach(business => {
+        const category = business.category || 'services-professional';
+        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+    });
+
     const categories = [
-        { key: 'health-beauty', name: 'Health & Beauty', icon: '💄', count: cityBusinesses.filter(b => b.category === 'health-beauty').length },
-        { key: 'food-beverage', name: 'Food & Beverage', icon: '🍽️', count: cityBusinesses.filter(b => b.category === 'food-beverage').length },
-        { key: 'transport-travel', name: 'Transport & Travel', icon: '🚗', count: cityBusinesses.filter(b => b.category === 'transport-travel').length },
-        { key: 'services-professional', name: 'Professional Services', icon: '💼', count: cityBusinesses.filter(b => b.category === 'services-professional').length },
-        { key: 'products-retail', name: 'Products & Retail', icon: '🛍️', count: cityBusinesses.filter(b => b.category === 'products-retail').length },
-        { key: 'energy-utilities', name: 'Energy & Utilities', icon: '⚡', count: cityBusinesses.filter(b => b.category === 'energy-utilities').length },
-        { key: 'recycling-waste', name: 'Recycling & Waste', icon: '♻️', count: cityBusinesses.filter(b => b.category === 'recycling-waste').length },
-        { key: 'education-nonprofits', name: 'Education & Nonprofits', icon: '📚', count: cityBusinesses.filter(b => b.category === 'education-nonprofits').length }
+        { key: 'health-beauty', name: 'Health & Beauty', icon: '💄', count: categoryCounts['health-beauty'] || 0 },
+        { key: 'food-beverage', name: 'Food & Beverage', icon: '🍽️', count: categoryCounts['food-beverage'] || 0 },
+        { key: 'transport-travel', name: 'Transport & Travel', icon: '🚗', count: categoryCounts['transport-travel'] || 0 },
+        { key: 'services-professional', name: 'Professional Services', icon: '💼', count: categoryCounts['services-professional'] || 0 },
+        { key: 'products-retail', name: 'Products & Retail', icon: '🛍️', count: categoryCounts['products-retail'] || 0 },
+        { key: 'energy-utilities', name: 'Energy & Utilities', icon: '⚡', count: categoryCounts['energy-utilities'] || 0 },
+        { key: 'recycling-waste', name: 'Recycling & Waste', icon: '♻️', count: categoryCounts['recycling-waste'] || 0 },
+        { key: 'education-nonprofits', name: 'Education & Nonprofits', icon: '📚', count: categoryCounts['education-nonprofits'] || 0 }
     ];
 
     categoriesGrid.innerHTML = '';
@@ -364,6 +428,23 @@ function displayFilteredBusinesses(businesses) {
         const businessCard = createBusinessCard(business);
         grid.appendChild(businessCard);
     });
+}
+
+// Get category icon for business cards
+function getCategoryIcon(category) {
+    const categoryIcons = {
+        'home-living': 'fas fa-home',
+        'fashion-accessories': 'fas fa-tshirt',
+        'food-beverage': 'fas fa-utensils',
+        'health-beauty': 'fas fa-spa',
+        'products-retail': 'fas fa-shopping-bag',
+        'transport-travel': 'fas fa-car',
+        'services-professional': 'fas fa-briefcase',
+        'energy-utilities': 'fas fa-bolt',
+        'recycling-waste': 'fas fa-recycle',
+        'education-nonprofits': 'fas fa-graduation-cap'
+    };
+    return categoryIcons[category] || 'fas fa-leaf';
 }
 
 // Utility functions
