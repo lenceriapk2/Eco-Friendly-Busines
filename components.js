@@ -61,33 +61,31 @@ function createFooter() {
                         <h4>Quick Links</h4>
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li><a href="/cities">Cities</a></li>
-                            <li><a href="/categories">Categories</a></li>
+                            <li><a href="/cities">Browse Cities</a></li>
                             <li><a href="/about-us">About Us</a></li>
-                            <li><a href="/how-it-works">How It Works</a></li>
+                            <li><a href="/contact-us">Contact</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                      
-                    <div class="footer-section">
-                        <h4>Support</h4>
+                        <h4>Popular Cities</h4>
                         <ul>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/list-your-business">List Your Business</a></li>
-                            <li><a href="/advertise">Advertise With Us</a></li>
-                            <li><a href="/help">Help Center</a></li>
+                            <li><a href="/london">London</a></li>
+                            <li><a href="/manchester">Manchester</a></li>
+                            <li><a href="/birmingham">Birmingham</a></li>
+                            <li><a href="/edinburgh">Edinburgh</a></li>
+                            <li><a href="/bristol">Bristol</a></li>
+                            <li><a href="/glasgow">Glasgow</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
                         <h4>Legal</h4>
                         <ul>
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms-of-service">Terms of Service</a></li>
-                            <li><a href="/cookie-policy">Cookie Policy</a></li>
+                            <li><a href="#privacy">Privacy Policy</a></li>
+                            <li><a href="#terms">Terms of Service</a></li>
+                            <li><a href="#cookies">Cookie Policy</a></li>
                         </ul>
-                        <p class="legal-date">Updated: December 6, 2025</p>
                     </div>
                 </div>
 
