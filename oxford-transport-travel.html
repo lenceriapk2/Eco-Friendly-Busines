@@ -3,288 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transport & Travel Businesses in Oxford | EcoSustainable.co.uk</title>
-    <meta name="description" content="Discover sustainable transport & travel businesses in Oxford. Find eco-friendly companies committed to environmental responsibility.">
+    <title>Top 10 Transport & Travel Businesses in Oxford | EcoSustainable.co.uk</title>
+    <meta name="description" content="Discover the top 10 sustainable transport & travel businesses in Oxford. Find eco-friendly, certified sustainable companies committed to environmental responsibility.">
+    <meta name="keywords" content="transport & travel Oxford, sustainable transport & travel, eco-friendly transport & travel, green businesses Oxford, sustainable Oxford">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Top 10 Transport & Travel Businesses in Oxford">
+    <meta property="og:description" content="Discover sustainable transport & travel businesses in Oxford that prioritize environmental responsibility.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ecosustainable.co.uk/oxford-transport-travel.html">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Top 10 Transport & Travel Businesses in Oxford",
+        "description": "Directory of sustainable transport & travel businesses in Oxford",
+        "url": "https://ecosustainable.co.uk/oxford-transport-travel.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Top Transport & Travel Businesses in Oxford",
+            "description": "Curated list of eco-friendly transport & travel businesses"
+        }
+    }
+    </script>
+
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="canonical" href="https://ecosustainable.co.uk/oxford-transport-travel.html">
 </head>
 <body>
     <!-- Header Component -->
     <div id="header-component"></div>
 
-    <!-- City Hero Section -->
-    <section class="city-hero">
+    <!-- Category Hero Section -->
+    <section class="category-hero">
         <div class="container">
             <nav class="breadcrumb">
-                <a href="index.html">Home</a> > <span>Oxford</span>
+                <a href="index.html">Home</a> > 
+                <a href="oxford.html">Oxford</a> > 
+                <span>Transport & Travel</span>
             </nav>
 
-            <h1>Top 10 Eco-Friendly Businesses in Oxford</h1>
-            <p class="hero-description">Discover Oxford's leading sustainable businesses committed to environmental responsibility and ethical practices.</p>
+            <h1>Top 10 Transport & Travel Businesses in Oxford</h1>
+            <p class="category-description">
+                Discover Oxford's leading sustainable transport & travel businesses. Our carefully curated selection features companies committed to environmental responsibility, ethical practices, and exceptional service quality.
+            </p>
 
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search businesses in Oxford...">
-                <select id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <option value="home-living">Home & Living</option>
-                    <option value="fashion-accessories">Fashion & Accessories</option>
-                    <option value="food-beverage">Food & Beverage</option>
-                    <option value="health-beauty">Health & Beauty</option>
-                    <option value="products-retail">Products & Retail</option>
-                    <option value="transport-travel">Transport & Travel</option>
-                    <option value="services-professional">Services & Professional</option>
-                    <option value="energy-utilities">Energy & Utilities</option>
-                    <option value="recycling-waste">Recycling & Waste</option>
-                    <option value="education-nonprofits">Education & Nonprofits</option>
-                </select>
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Stats -->
-    <section class="quick-stats">
-        <div class="container">
-            <div class="stats-row">
-                <div class="stat-item">
-                    <span class="stat-number" id="businessCount">50+</span>
-                    <span class="stat-label">Eco Businesses</span>
+            <div class="category-stats">
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Featured Businesses</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">10</span>
-                    <span class="stat-label">Categories</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">4.8</span>
-                    <span class="stat-label">Avg Rating</span>
-                </div>
-                <div class="stat-item">
+                <div class="stat">
                     <span class="stat-number">95%</span>
-                    <span class="stat-label">Satisfaction</span>
+                    <span class="stat-label">Customer Satisfaction</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Sustainability Verified</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Category Filter Section -->
-    <section class="category-filter-section">
+    <!-- Category Businesses Section -->
+    <section class="category-businesses">
         <div class="container">
-            <div class="category-filter-container">
-                <div class="filter-group">
-                    <label for="sortBy">Sort by:</label>
-                    <select id="sortBy">
-                        <option value="rating">Highest Rated</option>
-                        <option value="reviews">Most Reviewed</option>
-                        <option value="name">Name A-Z</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="categorySelect">Category:</label>
-                    <select id="categorySelect">
-                        <option value="">All Categories</option>
-                        <option value="home-living">Home & Living</option>
-                        <option value="fashion-accessories">Fashion & Accessories</option>
-                        <option value="food-beverage">Food & Beverage</option>
-                        <option value="health-beauty">Health & Beauty</option>
-                        <option value="products-retail">Products & Retail</option>
-                        <option value="transport-travel">Transport & Travel</option>
-                        <option value="services-professional">Services & Professional</option>
-                        <option value="energy-utilities">Energy & Utilities</option>
-                        <option value="recycling-waste">Recycling & Waste</option>
-                        <option value="education-nonprofits">Education & Nonprofits</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h2 id="businessesTitle">Top Transport & Travel Businesses in Oxford</h2>
+            <p class="section-description">
+                Each business listed here has been thoroughly vetted for their commitment to sustainability, quality of service, and positive environmental impact.
+            </p>
 
-    <!-- Top Businesses Section -->
-    <section class="london-businesses">
-        <div class="container">
-            <div class="businesses-header">
-                <h2>Top Rated Sustainable Businesses in Oxford</h2>
-                <p class="businesses-description">Each business has been carefully vetted for their environmental practices, sustainability certifications, and commitment to ethical operations.</p>
-            </div>
-
-            <div class="london-businesses-grid" id="cityBusinessesGrid">
+            <div class="businesses-grid" id="categoryBusinessesGrid">
                 <!-- Businesses will be populated by JavaScript -->
             </div>
         </div>
     </section>
 
+    <!-- SEO Content Sections -->
+    <div id="seoSections">
+        <!-- Dynamic SEO content will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Call to Action Section -->
+
     <!-- Footer Component -->
     <div id="footer-component"></div>
 
     <script src="components.js"></script>
+    <script src="canonical-urls.js"></script>
+    <script src="canonical-urls.js"></script>
     <script src="places-api.js"></script>
     <script src="category-page.js"></script>
     <script>
-        // Initialize category page for this city
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Extract category from filename or use a mapping
-            const categoryKey = 'transport-travel';
-            const cityName = 'Oxford';
-
-            try {
-                // Try to load businesses for this category and city
-                let categoryBusinesses = [];
-
-                if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
-                    categoryBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, 10);
-                }
-
-                // If no API data, use fallback
-                if (!categoryBusinesses || categoryBusinesses.length === 0) {
-                    categoryBusinesses = generateCityFallbackData(categoryKey, cityName);
-                }
-
-                displayCityBusinesses(categoryBusinesses, cityName, categoryKey);
-
-            } catch (error) {
-                console.error('Error loading category businesses:', error);
-                const fallbackData = generateCityFallbackData(categoryKey, cityName);
-                displayCityBusinesses(fallbackData, cityName, categoryKey);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCategoryPage('transport-travel', 'Oxford');
         });
-
-        function generateCityFallbackData(category, cityName) {
-            const businessTemplates = {
-                'home-living': [
-                    { name: 'GreenSpace Furniture', subcategory: 'Sustainable Furniture', description: 'Premium sustainable furniture crafted from FSC-certified wood and recycled materials.' },
-                    { name: 'EcoHome Decor', subcategory: 'Eco Home Decor', description: 'Beautiful home decor made from recycled and sustainable materials.' },
-                    { name: 'Organic Sleep Co', subcategory: 'Organic Bedding', description: 'Luxury organic bedding and mattresses for healthy sleep.' }
-                ],
-                'fashion-accessories': [
-                    { name: 'EthicalThreads', subcategory: 'Sustainable Clothing', description: 'Contemporary sustainable fashion using organic and recycled materials.' },
-                    { name: 'Green Fashion Co', subcategory: 'Eco Fashion', description: 'Stylish clothing made with environmentally friendly practices.' },
-                    { name: 'Conscious Closet', subcategory: 'Ethical Fashion', description: 'Fashion-forward clothing with ethical production methods.' }
-                ],
-                'food-beverage': [
-                    { name: 'PlantHub Market', subcategory: 'Organic Grocery', description: 'Premium organic grocery store featuring locally sourced produce.' },
-                    { name: 'Green Cafe', subcategory: 'Sustainable Dining', description: 'Farm-to-table restaurant with zero-waste practices.' },
-                    { name: 'Eco Eats', subcategory: 'Plant-Based Restaurant', description: 'Delicious plant-based meals with sustainable ingredients.' }
-                ]
-            };
-
-            const templates = businessTemplates[category] || businessTemplates['home-living'];
-
-            return templates.map((template, index) => ({
-                id: index + 1,
-                name: `${template.name} ${cityName}`,
-                category: category,
-                subcategory: template.subcategory,
-                rating: 4.5 + Math.random() * 0.4,
-                reviewCount: Math.floor(Math.random() * 200) + 50,
-                description: template.description,
-                address: `${(index + 1) * 10} High Street, ${cityName}`,
-                phone: `+44 ${Math.floor(Math.random() * 90) + 10} ${Math.floor(Math.random() * 9000) + 1000} ${Math.floor(Math.random() * 9000) + 1000}`,
-                website: `www.${template.name.toLowerCase().replace(' ', '')}${cityName.toLowerCase()}.co.uk`,
-                features: ['Eco-Friendly', 'Sustainable', 'Local', 'Certified']
-            }));
-        }
-
-        function displayCityBusinesses(businesses, cityName, categoryKey) {
-            const grid = document.getElementById('cityBusinessesGrid');
-            if (!grid || !businesses) return;
-
-            grid.innerHTML = '';
-
-            businesses.forEach((business, index) => {
-                const businessCard = createBusinessCard(business, index + 1, cityName);
-                grid.appendChild(businessCard);
-            });
-
-            // Update business count
-            const businessCount = document.getElementById('businessCount');
-            if (businessCount) {
-                businessCount.textContent = businesses.length + '+';
-            }
-
-            // Update title to include category
-            const categoryName = getCategoryDisplayName(categoryKey);
-            const title = document.querySelector('h1');
-            if (title) {
-                title.textContent = `Top ${categoryName} Businesses in ${cityName}`;
-            }
-        }
-
-        function createBusinessCard(business, rank, cityName) {
-            const card = document.createElement('div');
-            card.className = 'london-business-card';
-
-            card.innerHTML = `
-                <div class="business-card-header">
-                    <div class="business-rank">#${rank}</div>
-                </div>
-
-                <div class="business-content">
-                    <div class="business-main-info">
-                        <h3>${business.name}</h3>
-                        <p class="business-subcategory">${business.subcategory}</p>
-                        <div class="business-rating">
-                            <div class="stars">
-                                ${'★'.repeat(Math.floor(business.rating))}${'☆'.repeat(5 - Math.floor(business.rating))}
-                            </div>
-                            <span class="rating-text">${business.rating.toFixed(1)} (${business.reviewCount} reviews)</span>
-                        </div>
-                    </div>
-
-                    <div class="business-description">
-                        <p>${business.description}</p>
-                    </div>
-
-                    <div class="business-features">
-                        ${business.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                    </div>
-
-                    <div class="business-contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>${business.address}</span>
-                        </div>
-                    </div>
-
-                    <div class="business-actions">
-                        <a href="tel:${business.phone}" class="action-btn call-btn">
-                            <i class="fas fa-phone"></i>
-                            Call
-                        </a>
-                        <a href="https://${business.website}" target="_blank" class="action-btn website-btn">
-                            <i class="fas fa-globe"></i>
-                            Website
-                        </a>
-                        <button class="action-btn directions-btn" onclick="openDirections('${business.address}')">
-                            <i class="fas fa-directions"></i>
-                            Directions
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            return card;
-        }
-
-        function getCategoryDisplayName(category) {
-            const categoryMap = {
-                'home-living': 'Home & Living',
-                'fashion-accessories': 'Fashion & Accessories',
-                'food-beverage': 'Food & Beverage',
-                'health-beauty': 'Health & Beauty',
-                'products-retail': 'Products & Retail',
-                'transport-travel': 'Transport & Travel',
-                'services-professional': 'Services & Professional',
-                'energy-utilities': 'Energy & Utilities',
-                'recycling-waste': 'Recycling & Waste',
-                'education-nonprofits': 'Education & Nonprofits'
-            };
-            return categoryMap[category] || 'Sustainable';
-        }
-
-        function openDirections(address) {
-            const encodedAddress = encodeURIComponent(address);
-            window.open(`https://www.google.com/maps/search/${encodedAddress}`, '_blank');
-        }
     </script>
 </body>
 </html>

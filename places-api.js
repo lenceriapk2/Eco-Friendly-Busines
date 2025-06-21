@@ -1,4 +1,3 @@
-
 // Google Places API Service
 
 const API_KEY = 'AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE';
@@ -202,7 +201,7 @@ function transformPlaceToBusinessFormat(place, category, subcategory) {
     const features = generateFeatures(place, category);
     const randomImageIndex = Math.floor(Math.random() * (categoryImages[category]?.length || 1));
     const defaultImage = 'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=400&h=300&fit=crop&crop=center';
-    
+
     return {
         id: place.id,
         name: place.displayName?.text || 'Business Name',
@@ -272,14 +271,14 @@ async function fetchBusinessesForCategory(category, limit = 10) {
         if (businesses.length >= limit) break;
 
         const places = await searchPlaces(query);
-        
+
         for (const place of places) {
             if (businesses.length >= limit) break;
             if (seenIds.has(place.id)) continue;
             if (place.businessStatus !== 'OPERATIONAL') continue;
 
             seenIds.add(place.id);
-            
+
             const subcategory = window.EcoComponents.businessCategories[category]?.subcategories?.[0] || 'General';
             const business = transformPlaceToBusinessFormat(place, category, subcategory);
             businesses.push(business);
@@ -301,7 +300,7 @@ async function fetchAllLondonBusinesses() {
         console.log(`Fetching businesses for ${category}...`);
         const businesses = await fetchBusinessesForCategory(category, 10);
         allBusinesses.push(...businesses);
-        
+
         // Add delay between categories
         await new Promise(resolve => setTimeout(resolve, 200));
     }
@@ -309,6 +308,78 @@ async function fetchAllLondonBusinesses() {
     return allBusinesses;
 }
 
+// Mock Google Places API for demonstration
+// In production, you would use real Google Places API
+
+class PlacesAPI {
+    constructor() {
+        this.cache = new Map();
+        this.isLoading = false;
+        this.requestQueue = new Map();
+    }
+
+    async searchBusinesses(query, location = 'London', category = null) {
+        const cacheKey = `${category || 'general'}-${location}`;
+
+        // Return cached data if available
+        if (this.cache.has(cacheKey)) {
+            console.log(`Loading businesses from cache for: ${cacheKey}`);
+            return this.cache.get(cacheKey);
+        }
+
+        // Prevent duplicate requests
+        if (this.requestQueue.has(cacheKey)) {
+            return this.requestQueue.get(cacheKey);
+        }
+
+        console.log(`Loading businesses for category: ${category || 'general'}${location ? ' in ' + location : ''}`);
+
+        const requestPromise = this.fetchBusinesses(category, location);
+        this.requestQueue.set(cacheKey, requestPromise);
+
+        try {
+            const businesses = await requestPromise;
+            this.cache.set(cacheKey, businesses);
+            this.requestQueue.delete(cacheKey);
+            console.log(`Loaded ${businesses.length} businesses from API${location ? ' for ' + location : ''}`);
+            return businesses;
+        } catch (error) {
+            this.requestQueue.delete(cacheKey);
+            throw error;
+        }
+    }
+
+    async fetchBusinesses(category, location) {
+        // Simulate API delay - reduced for better performance
+        await this.delay(Math.random() * 200 + 100);
+        return this.generateMockBusinesses(10, category, location);
+    }
+
+    async delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    generateMockBusinesses(count, category, location) {
+        const businesses = [];
+        for (let i = 0; i < count; i++) {
+            businesses.push({
+                name: `Mock Business ${i + 1}`,
+                category: category || 'general',
+                location: location || 'London',
+                rating: Math.random() * 5,
+                reviewCount: Math.floor(Math.random() * 100),
+                description: 'A mock business for demonstration purposes.',
+                address: '123 Mock Street, London',
+                phone: '+44 20 1234 5678',
+                website: 'www.example.com',
+                image: 'https://via.placeholder.com/150',
+                features: ['Mock Feature 1', 'Mock Feature 2'],
+                businessStatus: 'OPERATIONAL'
+            });
+        }
+        return businesses;
+    }
+}
 // Export functions
 window.PlacesAPI = {
     searchPlaces,
