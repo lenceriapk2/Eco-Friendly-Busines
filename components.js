@@ -25,9 +25,9 @@ function createHeader() {
 
                     <div class="header-actions">
                         <button class="mobile-menu-toggle hamburger" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span class="hamburger-bar"></span>
+                            <span class="hamburger-bar"></span>
+                            <span class="hamburger-bar"></span>
                         </button>
                     </div>
                 </div>
@@ -106,23 +106,36 @@ function initializeMobileNav() {
     const navMenu = document.querySelector('.nav-menu');
 
     if (hamburger && navMenu) {
-        // Remove any existing event listeners
-        hamburger.removeEventListener('click', toggleMobileMenu);
+        // Clear any existing event listeners
+        const newHamburger = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(newHamburger, hamburger);
 
-        // Add new event listener
-        hamburger.addEventListener('click', toggleMobileMenu);
+        // Add click event to hamburger
+        newHamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
 
         // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.removeEventListener('click', closeMobileMenu);
             link.addEventListener('click', closeMobileMenu);
         });
 
-        // Close menu when clicking outside
+        // Close menu when clicking outside (except hamburger)
         document.addEventListener('click', function(event) {
-            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+            const hamburgerElement = document.querySelector('.hamburger');
+            if (!hamburgerElement.contains(event.target) && 
+                !navMenu.contains(event.target) && 
+                navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMobileMenu();
             }
         });
     }
@@ -131,20 +144,32 @@ function initializeMobileNav() {
 function toggleMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
 
     if (hamburger && navMenu) {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+        const isActive = hamburger.classList.contains('active');
+        
+        if (isActive) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            body.style.overflow = '';
+        } else {
+            hamburger.classList.add('active');
+            navMenu.classList.add('active');
+            body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
     }
 }
 
 function closeMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
 
     if (hamburger && navMenu) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        body.style.overflow = '';
     }
 }
 
