@@ -39,12 +39,30 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
     try {
         console.log(`Attempting to load businesses from API for ${categoryKey} in ${cityName}`);
         
-        // Try to load from API first
-        if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
-            const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName.toLowerCase());
+        // Try multiple API methods to get real data
+        if (window.PlacesAPI) {
+            let apiBusinesses = null;
+            
+            // Try category-specific API first
+            if (window.PlacesAPI.fetchBusinessesForCategory) {
+                apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName.toLowerCase());
+            }
+            
+            // If no results, try general city search and filter
+            if (!apiBusinesses || apiBusinesses.length === 0) {
+                if (window.PlacesAPI.fetchAllBusinessesForCity) {
+                    const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName.toLowerCase());
+                    if (allBusinesses && allBusinesses.length > 0) {
+                        // Filter by category keywords
+                        apiBusinesses = filterBusinessesByCategory(allBusinesses, categoryKey);
+                    }
+                }
+            }
+            
+            // If we have API data, use it
             if (apiBusinesses && apiBusinesses.length > 0) {
                 categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
-                console.log(`Loaded ${categoryBusinesses.length} businesses from API for ${cityName}`);
+                console.log(`Loaded ${categoryBusinesses.length} businesses from API for ${categoryKey} in ${cityName}`);
                 return;
             }
         }
@@ -58,6 +76,26 @@ async function loadCategoryBusinesses(categoryKey, cityName) {
         console.error(`Error loading businesses for ${categoryKey} in ${cityName}:`, error);
         categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
     }
+}
+
+// Filter businesses by category keywords
+function filterBusinessesByCategory(businesses, categoryKey) {
+    const categoryKeywords = {
+        'health-beauty': ['spa', 'beauty', 'salon', 'wellness', 'health', 'organic', 'natural'],
+        'energy-utilities': ['solar', 'energy', 'renewable', 'electric', 'power', 'utility'],
+        'education-nonprofits': ['school', 'education', 'training', 'nonprofit', 'charity', 'foundation'],
+        'transport-travel': ['transport', 'travel', 'taxi', 'bus', 'car', 'bike', 'delivery'],
+        'services-professional': ['consultant', 'service', 'professional', 'business', 'legal', 'finance'],
+        'recycling-waste': ['recycling', 'waste', 'disposal', 'cleaning', 'environmental'],
+        'products-retail': ['shop', 'store', 'retail', 'market', 'products', 'goods']
+    };
+    
+    const keywords = categoryKeywords[categoryKey] || [];
+    
+    return businesses.filter(business => {
+        const searchText = `${business.name} ${business.description || ''} ${business.category || ''}`.toLowerCase();
+        return keywords.some(keyword => searchText.includes(keyword));
+    }).slice(0, 12);
 }
 
 // Generate unique business data for each category and city
