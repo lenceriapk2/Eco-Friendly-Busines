@@ -215,20 +215,6 @@
         <priority>0.6</priority>
     </url>
     
-    <url>
-        <loc>https://ecosustainable.co.uk/lisburn.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://ecosustainable.co.uk/armagh.html</loc>
-        <lastmod>2024-01-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
     <!-- Category Pages for Major Cities -->
     <url>
         <loc>https://ecosustainable.co.uk/london-health-beauty.html</loc>
