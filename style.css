@@ -2047,43 +2047,46 @@ html {
     margin: 0 auto;
 }
 
-/* Business Cards - Unified styling for both city and category pages */
+/* Enhanced Business Cards for Category Pages */
 .business-card, .category-business-card {
     background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
-    border: 1px solid #f0f0f0;
+    border: 2px solid #f0f8f0;
     height: auto;
     display: flex;
     flex-direction: column;
 }
 
 .business-card:hover, .category-business-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-    border-color: #e8f5e8;
+    transform: translateY(-12px);
+    box-shadow: 0 20px 50px rgba(45, 143, 71, 0.15);
+    border-color: #4caf50;
 }
 
 .business-card-header {
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 2rem 2rem 1rem;
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f8f0 100%);
 }
 
 .business-logo {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(135deg, #2d8f47, #4caf50);
-    border-radius: 12px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    color: white;
     flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(45, 143, 71, 0.3);
 }
 
 .business-info {
@@ -2092,43 +2095,49 @@ html {
 }
 
 .business-info h3 {
-    color: #2d8f47;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    color: #1e5f30;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.8rem 0;
     line-height: 1.3;
 }
 
 .business-category {
-    color: #666;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+    background: #e8f5e8;
+    color: #2d8f47;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
 }
 
 .business-rating {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 .stars {
-    color: #ffc107;
-    font-size: 1rem;
-    letter-spacing: 1px;
+    color: #ffa726;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
 }
 
 .rating-text {
-    color: #777;
-    font-size: 0.85rem;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .business-description {
-    padding: 0 1.5rem;
+    padding: 0 2rem;
     color: #555;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -2136,82 +2145,122 @@ html {
 }
 
 .business-features {
-    padding: 0 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.8rem;
 }
 
 .feature-tag {
-    background: #e8f5e8;
-    color: #2d8f47;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    color: #1e5f30;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #c8e6c9;
 }
 
 .business-contact {
-    padding: 0 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+    background: #fafffe;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 12px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #666;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
 }
 
 .contact-item i {
-    color: #2d8f47;
-    width: 16px;
+    color: #4caf50;
+    width: 20px;
     text-align: center;
+    font-size: 1.1rem;
+}
+
+.contact-item span {
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .business-actions {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 2rem 2rem;
     margin-top: auto;
-    display: flex;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
 
-.business-actions .btn-primary {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    background: #2d8f47;
-    color: white;
+.action-btn {
+    padding: 1rem 1.5rem;
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    text-align: center;
 }
 
-.business-actions .btn-primary:hover {
-    background: #1e5f30;
-}
-
-.business-actions .btn-secondary {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    background: transparent;
-    color: #2d8f47;
-    border: 2px solid #2d8f47;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.business-actions .btn-secondary:hover {
-    background: #2d8f47;
+.call-btn {
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
     color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.call-btn:hover {
+    background: linear-gradient(135deg, #388e3c, #4caf50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.website-btn {
+    background: linear-gradient(135deg, #2196f3, #42a5f5);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.website-btn:hover {
+    background: linear-gradient(135deg, #1976d2, #2196f3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.directions-btn {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.directions-btn:hover {
+    background: linear-gradient(135deg, #f57c00, #ff9800);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
 }
 
 /* Grid layouts */
