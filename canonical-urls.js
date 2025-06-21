@@ -34,7 +34,7 @@ const CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES;
 // Function to determine canonical URL for current page
 function getCanonicalUrl() {
     let currentPath = window.location.pathname.split('/').pop();
-
+    
     // Handle root path
     if (!currentPath || currentPath === '') {
         return 'https://ecosustainable.co.uk/';
