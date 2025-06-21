@@ -3493,6 +3493,148 @@ html {
     overflow: hidden;
 }
 
+/* Performance optimizations */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* Core Web Vitals optimization */
+.above-fold {
+    contain: layout style paint;
+}
+
+.below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
+}
+
+/* Critical CSS for mobile */
+@media (max-width: 768px) {
+    .criteria-section {
+        padding: 2rem 0;
+    }
+    
+    .criteria-section .container {
+        padding: 0 0.75rem;
+    }
+    
+    .criteria-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        hyphens: auto;
+        word-break: break-word;
+    }
+    
+    .criteria-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .criteria-text {
+        order: 1;
+    }
+    
+    .criteria-stats {
+        order: 2;
+        justify-self: center;
+        max-width: 100%;
+    }
+    
+    .criteria-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .criteria-text h3 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 1rem 0;
+    }
+    
+    .criteria-list {
+        padding-left: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .criteria-list li {
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    .criteria-section {
+        padding: 1.5rem 0;
+    }
+    
+    .criteria-section .container {
+        padding: 0 0.5rem;
+    }
+    
+    .criteria-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+        text-align: left;
+    }
+    
+    .criteria-content {
+        gap: 1.5rem;
+    }
+    
+    .criteria-text p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .criteria-text h3 {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.75rem 0;
+    }
+    
+    .criteria-list li {
+        font-size: 0.85rem;
+        margin-bottom: 0.6rem;
+    }
+}
+
+/* SEO and Accessibility enhancements */
+.criteria-section {
+    scroll-margin-top: 80px; /* For anchor links */
+}
+
+.criteria-section h2 {
+    scroll-margin-top: 100px;
+}
+
+/* Focus indicators for accessibility */
+.criteria-section a:focus,
+.criteria-section button:focus {
+    outline: 2px solid #2d8f47;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .criteria-section {
+        background: white !important;
+        padding: 1rem 0;
+    }
+    
+    .criteria-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+}
+
 .criteria-text p {
     color: #666;
     line-height: 1.7;
