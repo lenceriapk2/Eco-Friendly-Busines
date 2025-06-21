@@ -40,14 +40,21 @@
     
     # Force HTTPS (when available)
     RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     
-    # Remove .html extension from URLs
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^([^\.]+)$ $1.html [L]
+    # Redirect .html URLs to clean URLs (but exclude files that don't exist without .html)
+    RewriteCond %{THE_REQUEST} \s/+([^?\s]*?)\.html[\s?] [NC]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ /%1? [R=301,L]
     
-    # Redirect .html URLs to clean URLs
-    RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
-    RewriteRule ^ /%1? [NC,L,R=301]
+    # Serve .html files for clean URLs (if the file exists)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+    
+    # Handle index.html specially - redirect to root
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+    RewriteRule ^ /? [R=301,L]
 </IfModule>
