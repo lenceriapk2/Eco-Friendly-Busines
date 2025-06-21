@@ -228,25 +228,24 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Wait for components to load
     setTimeout(() => {
-        const searchBtn = document.getElementById('searchBtn');
+        const searchForm = document.getElementById('searchForm');
         const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
 
-        if (searchBtn && searchInput) {
-            searchBtn.addEventListener('click', function() {
+        if (searchForm && searchInput) {
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 const query = searchInput.value.trim();
                 if (query) {
-                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                    // Simple search redirect - could be enhanced
+                    window.location.href = `/?search=${encodeURIComponent(query)}`;
                 }
             });
+        }
 
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    const query = searchInput.value.trim();
-                    if (query) {
-                        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-                    }
-                }
-            });
+        // Make searchBtn available globally to prevent errors
+        if (searchBtn) {
+            window.searchBtn = searchBtn;
         }
     }, 100);
 });

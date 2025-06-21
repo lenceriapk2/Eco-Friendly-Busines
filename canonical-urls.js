@@ -2,7 +2,7 @@
 // Manages SEO-friendly URL structure and canonical links
 
 // Define CANONICAL_STRATEGIES only once if not already defined
-if (!window.CANONICAL_STRATEGIES) {
+if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
     window.CANONICAL_STRATEGIES = {
         // City pages - canonical to main city page
         cityPages: {
