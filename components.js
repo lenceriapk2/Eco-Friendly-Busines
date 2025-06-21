@@ -51,10 +51,10 @@ function createHeader() {
                             </div>
                         </li>
                         <li class="nav-item nav-dropdown">
-                            <a href="categories.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="categories.html" class="nav-link">Categories <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content mega-menu">
                                 <div class="mega-menu-section">
-                                    <h3>Popular Services</h3>
+                                    <h3>Popular Categories</h3>
                                     <a href="health-beauty-category.html">Health & Beauty</a>
                                     <a href="products-retail-category.html">Products & Retail</a>
                                     <a href="transport-travel-category.html">Transport & Travel</a>
@@ -117,7 +117,7 @@ function createFooter() {
                         <ul>
                             <li><a href="index.html">Home</a></li>
                             <li><a href="cities.html">Browse Cities</a></li>
-                            <li><a href="categories.html">All Services</a></li>
+                            <li><a href="categories.html">All Categories</a></li>
                             <li><a href="about-us.html">About Us</a></li>
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
@@ -134,7 +134,7 @@ function createFooter() {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Services</h4>
+                        <h4>Categories</h4>
                         <ul>
                             <li><a href="health-beauty-category.html">Health & Beauty</a></li>
                             <li><a href="products-retail-category.html">Products & Retail</a></li>
