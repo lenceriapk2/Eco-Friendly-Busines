@@ -1,28 +1,30 @@
 // Canonical URL Management System for EcoSustainable.co.uk
 // Manages SEO-friendly URL structure and canonical links
 
-// Define CANONICAL_STRATEGIES only once
-window.CANONICAL_STRATEGIES = {
-    // City pages - canonical to main city page
-    cityPages: {
-        pattern: /^([a-z-]+)\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
-    },
+// Define CANONICAL_STRATEGIES only once (prevent redeclaration)
+if (!window.CANONICAL_STRATEGIES) {
+    window.CANONICAL_STRATEGIES = {
+        // City pages - canonical to main city page
+        cityPages: {
+            pattern: /^([a-z-]+)\.html$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
+        },
 
-    // Category pages - canonical to category overview
-    categoryPages: {
-        pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
-        getCanonical: (match) => {
-            const [, city, category] = match;
-            // For category pages, canonical points to the main category page
-            return `https://ecosustainable.co.uk/${category}-category.html`;
+        // Category pages - canonical to category overview
+        categoryPages: {
+            pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
+            getCanonical: (match) => {
+                const [, city, category] = match;
+                // For category pages, canonical points to the main category page
+                return `https://ecosustainable.co.uk/${category}-category.html`;
+            }
+        },
+
+        // Main category overview pages
+        categoryOverview: {
+            pattern: /^([a-z-]+)-category\.html$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
         }
-    },
-
-    // Main category overview pages
-    categoryOverview: {
-        pattern: /^([a-z-]+)-category\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
     }
 }
 
@@ -109,15 +111,24 @@ function getCategoryDisplayName(categoryKey) {
     return names[categoryKey] || 'Business Services';
 }
 
-// Initialize canonical URL system
-document.addEventListener('DOMContentLoaded', function() {
-    setCanonicalUrl();
-    addStructuredData();
-});
+// Initialize canonical URL system (prevent multiple initializations)
+if (!window.CanonicalSystemInitialized) {
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            setCanonicalUrl();
+            addStructuredData();
+            window.CanonicalSystemInitialized = true;
+        } catch (error) {
+            console.error('Error initializing canonical system:', error);
+        }
+    });
+}
 
 // Export functions for global use
-window.CanonicalSystem = {
-    setCanonicalUrl,
-    getCanonicalUrl,
-    addStructuredData
-};
+if (!window.CanonicalSystem) {
+    window.CanonicalSystem = {
+        setCanonicalUrl,
+        getCanonicalUrl,
+        addStructuredData
+    };
+}
