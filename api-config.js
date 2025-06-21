@@ -1,5 +1,5 @@
 
-// API Configuration for server-side environment variables
+// API Configuration for Google Places API
 class APIConfig {
     static getGooglePlacesAPIKey() {
         // Return your actual API key
@@ -7,9 +7,11 @@ class APIConfig {
     }
 
     static async initializePlacesAPI() {
+        console.log('Starting Places API initialization...');
+        
         // Wait for PlacesAPI to be available
         let attempts = 0;
-        while (!window.PlacesAPI && attempts < 50) {
+        while (!window.PlacesAPI && attempts < 100) {
             await new Promise(resolve => setTimeout(resolve, 100));
             attempts++;
         }
@@ -20,17 +22,22 @@ class APIConfig {
         }
 
         const apiKey = this.getGooglePlacesAPIKey();
+        
         try {
+            console.log('Initializing Places API with key...');
             await window.PlacesAPI.initialize(apiKey);
-            if (apiKey && apiKey !== '' && !apiKey.startsWith('YOUR_')) {
-                console.log('Real Google Places API initialized with key:', apiKey.substring(0, 10) + '...');
+            
+            // Verify initialization
+            if (window.PlacesAPI.isInitialized && window.PlacesAPI.isInitialized()) {
+                console.log('✅ Google Places API successfully initialized with real API key');
+                console.log('API Key:', apiKey.substring(0, 10) + '...');
+                return true;
             } else {
-                console.log('Places API initialized in demo mode - no valid API key');
-                console.log('Add GOOGLE_PLACES_API_KEY to Replit Secrets for real data');
+                console.warn('⚠️ Places API initialization may have failed');
+                return false;
             }
-            return true;
         } catch (error) {
-            console.error('Failed to initialize Places API:', error);
+            console.error('❌ Failed to initialize Places API:', error);
             return false;
         }
     }
