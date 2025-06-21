@@ -2,9 +2,8 @@
 // API Configuration for server-side environment variables
 class APIConfig {
     static getGooglePlacesAPIKey() {
-        // For client-side applications in Replit, check if API key is available
-        // This would be injected server-side in a real application
-        return null; // Will be handled by Places API fallback system
+        // Return your actual API key
+        return 'AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE';
     }
 
     static async initializePlacesAPI() {

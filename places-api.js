@@ -373,23 +373,88 @@ class PlacesAPI {
     // Generate a single mock business (fallback)
     generateMockBusiness(categoryKey, cityName, index) {
         const businessNames = this.getBusinessNames(categoryKey);
-        const name = businessNames[index % businessNames.length];
-
+        
+        // Create unique seed based on city and category for consistent but different data
+        const seed = this.generateSeed(cityName, categoryKey, index);
+        const seededRandom = this.seededRandom(seed);
+        
+        // Use seeded random for consistent but unique data per location
+        const nameIndex = Math.floor(seededRandom() * businessNames.length);
+        const baseName = businessNames[nameIndex];
+        const uniqueSuffix = this.generateUniqueSuffix(cityName, seededRandom);
+        
         return {
             id: `mock_${categoryKey}_${cityName.toLowerCase().replace(/\s+/g, '_')}_${index}`,
-            name: `${name}${index >= businessNames.length ? ` ${Math.floor(index / businessNames.length) + 1}` : ''}`,
+            name: `${baseName} ${uniqueSuffix}`,
             category: categoryKey,
             subcategory: this.getCategorySubcategory(categoryKey),
-            rating: 4.0 + (Math.random() * 1.0),
-            reviewCount: Math.floor(Math.random() * 150) + 25,
-            description: this.generateBusinessDescription(categoryKey, cityName, name),
-            address: this.generateAddress(cityName),
-            phone: this.generatePhoneNumber(),
-            website: this.generateWebsite(name),
-            image: this.getCategoryImage(categoryKey, index),
+            rating: 4.0 + (seededRandom() * 1.0),
+            reviewCount: Math.floor(seededRandom() * 150) + 25,
+            description: this.generateBusinessDescription(categoryKey, cityName, baseName),
+            address: this.generateUniqueAddress(cityName, seededRandom),
+            phone: this.generateUniquePhoneNumber(cityName, seededRandom),
+            website: this.generateWebsite(baseName),
+            image: this.getCategoryImage(categoryKey, Math.floor(seededRandom() * 3)),
             features: this.getCategoryFeatures(categoryKey),
             businessStatus: 'OPERATIONAL'
         };
+    }
+
+    // Generate a seed for consistent randomness
+    generateSeed(cityName, categoryKey, index) {
+        let hash = 0;
+        const str = `${cityName}_${categoryKey}_${index}`;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32-bit integer
+        }
+        return Math.abs(hash);
+    }
+
+    // Seeded random number generator
+    seededRandom(seed) {
+        let state = seed;
+        return function() {
+            state = (state * 1664525 + 1013904223) % 4294967296;
+            return state / 4294967296;
+        };
+    }
+
+    // Generate unique suffix for business names
+    generateUniqueSuffix(cityName, seededRandom) {
+        const suffixes = ['Ltd', 'Co', 'Solutions', 'Services', 'Group', 'Centre', 'Hub'];
+        const cityPrefix = cityName.charAt(0).toUpperCase() + cityName.slice(1, 3).toLowerCase();
+        const suffix = suffixes[Math.floor(seededRandom() * suffixes.length)];
+        return `${cityPrefix} ${suffix}`;
+    }
+
+    // Generate unique address for city
+    generateUniqueAddress(cityName, seededRandom) {
+        const streetNumbers = Math.floor(seededRandom() * 200) + 1;
+        const streets = ['High Street', 'Main Road', 'Green Lane', 'Church Street', 'Market Square', 'Park Avenue', 'Victoria Street', 'Mill Lane', 'King Street', 'Queen Street'];
+        const street = streets[Math.floor(seededRandom() * streets.length)];
+        return `${streetNumbers} ${street}, ${cityName}, UK`;
+    }
+
+    // Generate unique phone number for city
+    generateUniquePhoneNumber(cityName, seededRandom) {
+        const areaCodes = {
+            'London': '020',
+            'Birmingham': '0121',
+            'Manchester': '0161',
+            'Glasgow': '0141',
+            'Edinburgh': '0131',
+            'Liverpool': '0151',
+            'Bristol': '0117',
+            'Sheffield': '0114',
+            'Leeds': '0113',
+            'Newcastle': '0191'
+        };
+        
+        const areaCode = areaCodes[cityName] || '01' + Math.floor(seededRandom() * 900 + 100);
+        const number = Math.floor(seededRandom() * 9000000 + 1000000);
+        return `${areaCode} ${number}`;
     }
 
     // Helper methods for mock data
@@ -526,10 +591,10 @@ class PlacesAPI {
 // Initialize and export the Places API
 const placesAPI = new PlacesAPI();
 
-// Auto-initialize
-placesAPI.initialize().then(() => {
-    console.log('Places API initialized successfully');
-    console.log('To use real Google Places data, add your API key to Replit Secrets as GOOGLE_PLACES_API_KEY');
+// Auto-initialize with API key
+placesAPI.initialize('AIzaSyBI8EyLj0eptyl6WcdhgiFaHdnWes-6NKE').then(() => {
+    console.log('Places API initialized successfully with real Google Places API');
+    console.log('Now fetching real business data from Google Maps');
 });
 
 // Export for global use

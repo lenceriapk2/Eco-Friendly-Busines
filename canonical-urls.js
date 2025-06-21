@@ -1,34 +1,29 @@
 // Canonical URL Management System for EcoSustainable.co.uk
 // Manages SEO-friendly URL structure and canonical links
 
-// Check if CANONICAL_STRATEGIES is already defined to prevent duplicate declarations
-if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
-    window.CANONICAL_STRATEGIES = {
-        // City pages - canonical to main city page
-        cityPages: {
-            pattern: /^([a-z-]+)\.html$/,
-            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
-        },
+// Define CANONICAL_STRATEGIES only once
+window.CANONICAL_STRATEGIES = {
+    // City pages - canonical to main city page
+    cityPages: {
+        pattern: /^([a-z-]+)\.html$/,
+        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
+    },
 
-        // Category pages - canonical to category overview
-        categoryPages: {
-            pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
-            getCanonical: (match) => {
-                const [, city, category] = match;
-                // For category pages, canonical points to the main category page
-                return `https://ecosustainable.co.uk/${category}-category.html`;
-            }
-        },
-
-        // Main category overview pages
-        categoryOverview: {
-            pattern: /^([a-z-]+)-category\.html$/,
-            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
+    // Category pages - canonical to category overview
+    categoryPages: {
+        pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
+        getCanonical: (match) => {
+            const [, city, category] = match;
+            // For category pages, canonical points to the main category page
+            return `https://ecosustainable.co.uk/${category}-category.html`;
         }
+    },
+
+    // Main category overview pages
+    categoryOverview: {
+        pattern: /^([a-z-]+)-category\.html$/,
+        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
     }
-} else {
-    // Use existing CANONICAL_STRATEGIES if already defined
-    console.log('CANONICAL_STRATEGIES already defined, using existing configuration');
 }
 
 // Access CANONICAL_STRATEGIES from window object
