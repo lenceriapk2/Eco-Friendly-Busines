@@ -4,17 +4,6 @@ Allow: /
 # Sitemap location
 Sitemap: https://ecosustainable.co.uk/sitemap.xml
 
-# Prioritize eco-friendly and sustainability content for Google
-Allow: /sustainability-report.html
-Allow: /environmental-policy.html
-Allow: /*.html
-
-# Special directives for Google's environmental crawlers
-User-agent: Googlebot
-Allow: /sustainability-report.html
-Allow: /environmental-policy.html
-Crawl-delay: 0.5
-
 # Allow all business and city pages
 Allow: /*.html
 
@@ -27,7 +16,3 @@ Disallow: /attached_assets/
 
 # Crawl delay
 Crawl-delay: 1
-
-# Additional eco-friendly signals for search engines
-# Climate: carbon-neutral, renewable-energy, sustainable
-# Environment: eco-friendly, green-business, environmental-protection

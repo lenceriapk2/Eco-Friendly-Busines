@@ -7,7 +7,7 @@ function createHeader() {
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="/">
+                        <a href="index.html">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="logo-image">
@@ -16,12 +16,10 @@ function createHeader() {
 
                     <nav class="nav-menu" id="navMenu">
                         <ul>
-                            <li><a href="/" class="nav-link">Home</a></li>
-                            <li><a href="/cities" class="nav-link">Browse Cities</a></li>
-                            <li><a href="/how-it-works" class="nav-link">How It Works</a></li>
-                            <li><a href="/sustainability-report" class="nav-link">Sustainability</a></li>
-                            <li><a href="/about-us" class="nav-link">About</a></li>
-                            <li><a href="/contact-us" class="nav-link">Contact</a></li>
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="cities.html" class="nav-link">Browse Cities</a></li>
+                            <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                            <li><a href="contact-us.html" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>
 
@@ -45,28 +43,12 @@ function createFooter() {
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section footer-brand">
-                        <a href="/" class="footer-logo">
+                        <a href="index.html" class="footer-logo">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="footer-logo-image">
                         </a>
                         <p>Your trusted directory for sustainable businesses across the UK. Connecting you with eco-friendly companies that care about our planet.</p>
-
-                        <div class="eco-credentials">
-                            <div class="credential-item">
-                                <i class="fas fa-leaf"></i>
-                                <span>Carbon Neutral Platform</span>
-                            </div>
-                            <div class="credential-item">
-                                <i class="fas fa-solar-panel"></i>
-                                <span>100% Renewable Energy</span>
-                            </div>
-                            <div class="credential-item">
-                                <i class="fas fa-recycle"></i>
-                                <span>Zero Waste Operations</span>
-                            </div>
-                        </div>
-
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -78,49 +60,39 @@ function createFooter() {
                     <div class="footer-section">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/cities">Browse Cities</a></li>
-                            <li><a href="/about-us">About Us</a></li>
-                            <li><a href="/contact-us">Contact</a></li>
-                            <li><a href="/how-it-works">How It Works</a></li>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="cities.html">Browse Cities</a></li>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
                         <h4>Popular Cities</h4>
                         <ul>
-                            <li><a href="/london">London</a></li>
-                            <li><a href="/manchester">Manchester</a></li>
-                            <li><a href="/birmingham">Birmingham</a></li>
-                            <li><a href="/edinburgh">Edinburgh</a></li>
-                            <li><a href="/bristol">Bristol</a></li>
-                            <li><a href="/glasgow">Glasgow</a></li>
+                            <li><a href="london.html">London</a></li>
+                            <li><a href="manchester.html">Manchester</a></li>
+                            <li><a href="birmingham.html">Birmingham</a></li>
+                            <li><a href="edinburgh.html">Edinburgh</a></li>
+                            <li><a href="bristol.html">Bristol</a></li>
+                            <li><a href="glasgow.html">Glasgow</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                        <h4>Environmental</h4>
+                        <h4>Legal</h4>
                         <ul>
-                            <li><a href="/environmental-policy">Environmental Policy</a></li>
-                            <li><a href="/sustainability-report">Sustainability Report</a></li>
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms-of-service">Terms of Service</a></li>
-                            <li><a href="/cookie-policy">Cookie Policy</a></li>
-                            <li><a href="/sitemap">Sitemap</a></li>
+                            <li><a href="#privacy">Privacy Policy</a></li>
+                            <li><a href="#terms">Terms of Service</a></li>
+                            <li><a href="#cookies">Cookie Policy</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="footer-bottom">
                     <div class="footer-bottom-content">
-                        <div class="footer-left">
-                            <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
-                            <p>🌱 Committed to Environmental Protection & Climate Action</p>
-                        </div>
-                        <div class="footer-right">
-                            <p>🌍 Promoting Sustainable Development Goals</p>
-                            <p>♻️ Supporting UK's Net Zero Carbon Target 2050</p>
-                        </div>
+                        <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
+                        <p>Promoting sustainable businesses across the United Kingdom</p>
                     </div>
                 </div>
             </div>
@@ -176,7 +148,7 @@ function toggleMobileMenu() {
 
     if (hamburger && navMenu) {
         const isActive = hamburger.classList.contains('active');
-
+        
         if (isActive) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');

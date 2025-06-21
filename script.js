@@ -349,15 +349,22 @@ function populateTopBusinesses() {
 
 // Search functionality
 function performSearch() {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm) {
-            // Redirect to search results
-            window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
-        }
+    const searchInput = searchInput.value.toLowerCase();
+    const selectedCity = cityFilter.value;
+
+    if (searchTerm || selectedCity) {
+        alert(`Searching for: "${searchTerm}" in ${selectedCity || 'all cities'}`);
+    } else {
+        alert('Please enter a search term or select a city');
     }
 }
+
+searchBtn.addEventListener('click', performSearch);
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        performSearch();
+    }
+});
 
 // Show all businesses function
 function showAllBusinesses() {
@@ -475,117 +482,32 @@ const lazyLoadObserver = new IntersectionObserver((entries) => {
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize search functionality
-    initializeSearch();
-
-    // Initialize page-specific features
-    if (window.location.pathname.includes('cities')) {
-        initializeCitiesPage();
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
     }
 
-    // Initialize categories
-    if (document.getElementById('categoriesGrid')) {
-        loadCategories();
+    // Handle search function
+    function handleSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput && searchInput.value.trim()) {
+            // Redirect to search results or handle search
+            window.location.href = `cities.html?search=${encodeURIComponent(searchInput.value)}`;
+        }
     }
 
-    // Initialize cities grid
-    if (document.getElementById('citiesGrid')) {
-        loadCities();
-    }
-
-    // Initialize featured businesses
-    if (document.getElementById('businessesGrid')) {
-        loadFeaturedBusinesses();
-    }
+    // Lazy load sections when they come into view
+    const sections = ['businessesGrid', 'categoriesGrid', 'citiesGrid'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            lazyLoadObserver.observe(element);
+        }
+    });
 
     animateOnScroll();
     animateCounters();
 });
-
-function initializeSearch() {
-    // Create search functionality if search elements exist
-    const searchBtn = document.getElementById('searchBtn');
-    const searchInput = document.getElementById('searchInput');
-
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-    }
-}
-
-function initializeCitiesPage() {
-    // Cities page specific functionality
-    console.log('Cities page initialized');
-}
-
-function loadCategories() {
-    const categoriesGrid = document.getElementById('categoriesGrid');
-    if (!categoriesGrid) return;
-
-    const categories = [
-        { name: 'Health & Beauty', url: '/categories/health-beauty', icon: 'fas fa-heart' },
-        { name: 'Energy & Utilities', url: '/categories/energy-utilities', icon: 'fas fa-bolt' },
-        { name: 'Education & Nonprofits', url: '/categories/education-nonprofits', icon: 'fas fa-graduation-cap' },
-        { name: 'Transport & Travel', url: '/categories/transport-travel', icon: 'fas fa-car' },
-        { name: 'Professional Services', url: '/categories/services-professional', icon: 'fas fa-briefcase' },
-        { name: 'Recycling & Waste', url: '/categories/recycling-waste', icon: 'fas fa-recycle' },
-        { name: 'Products & Retail', url: '/categories/products-retail', icon: 'fas fa-shopping-cart' }
-    ];
-
-    categoriesGrid.innerHTML = categories.map(category => `
-        <div class="category-card">
-            <div class="category-icon">
-                <i class="${category.icon}"></i>
-            </div>
-            <h3>${category.name}</h3>
-            <a href="${category.url}" class="category-link">Explore</a>
-        </div>
-    `).join('');
-}
-
-function loadCities() {
-    const citiesGrid = document.getElementById('citiesGrid');
-    if (!citiesGrid) return;
-
-    const featuredCities = [
-        'London', 'Manchester', 'Birmingham', 'Edinburgh', 'Bristol', 'Glasgow', 'Leeds', 'Liverpool'
-    ];
-
-    citiesGrid.innerHTML = featuredCities.map(city => `
-        <div class="city-card">
-            <h3>${city}</h3>
-            <p>Discover eco-friendly businesses</p>
-            <a href="/${city.toLowerCase()}" class="city-link">Explore ${city}</a>
-        </div>
-    `).join('');
-}
-
-function loadFeaturedBusinesses() {
-    const businessesGrid = document.getElementById('businessesGrid');
-    if (!businessesGrid) return;
-
-    const featuredBusinesses = [
-        { name: 'Green Energy Solutions', category: 'Energy', city: 'London', rating: 4.8 },
-        { name: 'Eco Beauty Co.', category: 'Health & Beauty', city: 'Manchester', rating: 4.9 },
-        { name: 'Sustainable Transport Ltd', category: 'Transport', city: 'Birmingham', rating: 4.7 },
-        { name: 'Zero Waste Store', category: 'Retail', city: 'Bristol', rating: 4.8 }
-    ];
-
-    businessesGrid.innerHTML = featuredBusinesses.map(business => `
-        <div class="business-card">
-            <h4>${business.name}</h4>
-            <p class="business-category">${business.category}</p>
-            <p class="business-location">${business.city}</p>
-            <div class="business-rating">
-                <span class="stars">${'★'.repeat(Math.floor(business.rating))}</span>
-                <span class="rating-value">${business.rating}</span>
-            </div>
-        </div>
-    `).join('');
-}
 
 // Add loading states for dynamic content
 function showLoading(element) {
