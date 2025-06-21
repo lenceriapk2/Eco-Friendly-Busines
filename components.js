@@ -81,17 +81,6 @@ function createFooter() {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="health-beauty-category.html">Health & Beauty</a></li>
-                            <li><a href="products-retail-category.html">Products & Retail</a></li>
-                            <li><a href="transport-travel-category.html">Transport & Travel</a></li>
-                            <li><a href="energy-utilities-category.html">Energy & Utilities</a></li>
-                            <li><a href="recycling-waste-category.html">Recycling & Waste</a></li>
-                            <li><a href="education-nonprofits-category.html">Education & Nonprofits</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
                         <h4>Legal & Support</h4>
                         <ul>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -102,16 +91,6 @@ function createFooter() {
                         <div class="footer-contact">
                             <p><i class="fas fa-envelope"></i> info@ecosustainable.co.uk</p>
                             <p><i class="fas fa-phone"></i> +44 20 1234 5678</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="footer-bottom-content">
-                        <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
-                        <div class="footer-links">
-                            <a href="privacy-policy.html">Privacy</a>
-                            <a href="terms-of-service.html">Terms</a>
-                            <a href="sitemap.html">Sitemap</a>
                         </div>
                     </div>
                 </div>
