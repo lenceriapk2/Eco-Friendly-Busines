@@ -49,6 +49,22 @@ function createFooter() {
                                  class="footer-logo-image">
                         </a>
                         <p>Your trusted directory for sustainable businesses across the UK. Connecting you with eco-friendly companies that care about our planet.</p>
+                        
+                        <div class="eco-credentials">
+                            <div class="credential-item">
+                                <i class="fas fa-leaf"></i>
+                                <span>Carbon Neutral Platform</span>
+                            </div>
+                            <div class="credential-item">
+                                <i class="fas fa-solar-panel"></i>
+                                <span>100% Renewable Energy</span>
+                            </div>
+                            <div class="credential-item">
+                                <i class="fas fa-recycle"></i>
+                                <span>Zero Waste Operations</span>
+                            </div>
+                        </div>
+                        
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -58,21 +74,17 @@ function createFooter() {
                     </div>
 
                     <div class="footer-section">
-                        <h4>Navigation</h4>
+                        <h4>Quick Links</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
                             <li><a href="cities.html">Browse Cities</a></li>
-                            <li><a href="categories.html">Categories</a></li>
                             <li><a href="about-us.html">About Us</a></li>
                             <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="how-it-works.html">How It Works</a></li>
-                            <li><a href="list-your-business.html">List Your Business</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                        <h4>Major Cities</h4>
+                        <h4>Popular Cities</h4>
                         <ul>
                             <li><a href="london.html">London</a></li>
                             <li><a href="manchester.html">Manchester</a></li>
@@ -80,61 +92,40 @@ function createFooter() {
                             <li><a href="edinburgh.html">Edinburgh</a></li>
                             <li><a href="bristol.html">Bristol</a></li>
                             <li><a href="glasgow.html">Glasgow</a></li>
-                            <li><a href="liverpool.html">Liverpool</a></li>
-                            <li><a href="leeds.html">Leeds</a></li>
-                            <li><a href="cardiff.html">Cardiff</a></li>
-                            <li><a href="belfast.html">Belfast</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                        <h4>More Cities</h4>
+                        <h4>Sustainability</h4>
                         <ul>
-                            <li><a href="cambridge.html">Cambridge</a></li>
-                            <li><a href="oxford.html">Oxford</a></li>
-                            <li><a href="bath.html">Bath</a></li>
-                            <li><a href="york.html">York</a></li>
-                            <li><a href="brighton-hove.html">Brighton & Hove</a></li>
-                            <li><a href="canterbury.html">Canterbury</a></li>
-                            <li><a href="st-albans.html">St Albans</a></li>
-                            <li><a href="winchester.html">Winchester</a></li>
-                            <li><a href="colchester.html">Colchester</a></li>
-                            <li><a href="kingston-upon-hull.html">Hull</a></li>
+                            <li><a href="environmental-policy.html">Environmental Policy</a></li>
+                            <li><a href="sustainability-report.html">Sustainability Report</a></li>
+                            <li><a href="how-it-works.html">How It Works</a></li>
+                            <li><a href="about-us.html">Our Mission</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
-                        <h4>Business Categories</h4>
-                        <ul>
-                            <li><a href="london-food-beverage.html">Food & Beverage</a></li>
-                            <li><a href="london-health-beauty.html">Health & Beauty</a></li>
-                            <li><a href="london-home-living.html">Home & Living</a></li>
-                            <li><a href="london-fashion-accessories.html">Fashion & Accessories</a></li>
-                            <li><a href="london-energy-utilities.html">Energy & Utilities</a></li>
-                            <li><a href="london-transport-travel.html">Transport & Travel</a></li>
-                            <li><a href="london-services-professional.html">Professional Services</a></li>
-                            <li><a href="london-recycling-waste.html">Recycling & Waste</a></li>
-                            <li><a href="london-education-nonprofits.html">Education & Nonprofits</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Legal & Info</h4>
+                        <h4>Legal & Policies</h4>
                         <ul>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="terms-of-service.html">Terms of Service</a></li>
                             <li><a href="cookie-policy.html">Cookie Policy</a></li>
-                            <li><a href="disclaimer.html">Disclaimer</a></li>
-                            <li><a href="accessibility-statement.html">Accessibility</a></li>
-                            <li><a href="help-support.html">Help & Support</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="footer-bottom">
                     <div class="footer-bottom-content">
-                        <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
-                        <p>Promoting sustainable businesses across the United Kingdom | Supporting Google's eco-friendly initiatives</p>
+                        <div class="footer-left">
+                            <p>&copy; 2024 EcoSustainable.co.uk. All rights reserved.</p>
+                            <p>🌱 Committed to Environmental Protection & Climate Action</p>
+                        </div>
+                        <div class="footer-right">
+                            <p>🌍 Promoting Sustainable Development Goals</p>
+                            <p>♻️ Supporting UK's Net Zero Carbon Target 2050</p>
+                        </div>
                     </div>
                 </div>
             </div>
