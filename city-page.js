@@ -223,12 +223,89 @@ function displayCityBusinesses() {
         return;
     }
 
-    cityBusinesses.slice(0, 12).forEach((business, index) => {
+    // Display top businesses (limit to 12 for main city page)
+    const displayBusinesses = cityBusinesses.slice(0, 12);
+    displayBusinesses.forEach((business, index) => {
         const businessCard = createBusinessCard(business);
         grid.appendChild(businessCard);
     });
 
-    console.log(`Displayed ${Math.min(cityBusinesses.length, 12)} businesses in ${currentCityName}`);
+    console.log(`Displayed ${displayBusinesses.length} businesses in ${currentCityName}`);
+    
+    // Also populate the category businesses section if it exists
+    populateTopCategoriesList();
+}
+
+// Populate top categories businesses list on city pages
+function populateTopCategoriesList() {
+    const topCategoriesSection = document.getElementById('topCategoriesBusinesses');
+    if (!topCategoriesSection) return;
+
+    const categories = [
+        'health-beauty', 'transport-travel', 'services-professional', 
+        'products-retail', 'energy-utilities', 'recycling-waste',
+        'education-nonprofits', 'food-beverage'
+    ];
+
+    const categoryNames = {
+        'health-beauty': 'Health & Beauty',
+        'transport-travel': 'Transport & Travel', 
+        'services-professional': 'Professional Services',
+        'products-retail': 'Products & Retail',
+        'energy-utilities': 'Energy & Utilities',
+        'recycling-waste': 'Recycling & Waste',
+        'education-nonprofits': 'Education & Nonprofits',
+        'food-beverage': 'Food & Beverage'
+    };
+
+    const categoryIcons = {
+        'health-beauty': '💄',
+        'transport-travel': '🚗',
+        'services-professional': '💼',
+        'products-retail': '🛍️',
+        'energy-utilities': '⚡',
+        'recycling-waste': '♻️',
+        'education-nonprofits': '📚',
+        'food-beverage': '🍽️'
+    };
+
+    let categoriesHTML = '';
+    const citySlug = sanitizeCityName(currentCityName);
+
+    categories.forEach(categoryKey => {
+        const categoryBusinesses = cityBusinesses.filter(b => b.category === categoryKey);
+        const count = Math.max(categoryBusinesses.length, 3); // Show minimum 3
+        const topBusiness = categoryBusinesses[0];
+
+        categoriesHTML += `
+            <div class="category-section" onclick="window.location.href='${citySlug}-${categoryKey}.html'" style="cursor: pointer;">
+                <div class="category-header">
+                    <div class="category-icon">${categoryIcons[categoryKey]}</div>
+                    <div class="category-title">
+                        <h3>${categoryNames[categoryKey]} in ${currentCityName}</h3>
+                        <p>${count}+ verified sustainable businesses</p>
+                    </div>
+                    <div class="view-all-btn">
+                        <span>View All →</span>
+                    </div>
+                </div>
+                ${topBusiness ? `
+                    <div class="featured-business">
+                        <div class="business-preview">
+                            <h4>${topBusiness.name}</h4>
+                            <p class="business-desc">${topBusiness.description.substring(0, 120)}...</p>
+                            <div class="business-rating">
+                                <span class="stars">${'★'.repeat(Math.floor(topBusiness.rating))}${'☆'.repeat(5-Math.floor(topBusiness.rating))}</span>
+                                <span>${topBusiness.rating.toFixed(1)} (${topBusiness.reviewCount} reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    });
+
+    topCategoriesSection.innerHTML = categoriesHTML;
 }
 
 // Create business card for city pages
@@ -396,19 +473,55 @@ function populateCategories() {
     categories.forEach(category => {
         const citySlug = sanitizeCityName(currentCityName);
         const categoryCard = document.createElement('div');
-        categoryCard.className = 'category-card';
+        categoryCard.className = 'category-card clickable';
+        categoryCard.style.cursor = 'pointer';
         categoryCard.onclick = () => {
             window.location.href = `${citySlug}-${category.key}.html`;
         };
 
+        // Show actual count or minimum 3 for better UX
+        const displayCount = Math.max(category.count, 3);
+
         categoryCard.innerHTML = `
             <div class="category-icon">${category.icon}</div>
             <h3>${category.name}</h3>
-            <p>${category.count} businesses</p>
+            <p>${displayCount}+ businesses</p>
+            <div class="category-preview">
+                ${getCategoryPreview(category.key)}
+            </div>
         `;
 
         categoriesGrid.appendChild(categoryCard);
     });
+}
+
+// Show preview of businesses in each category
+function getCategoryPreview(categoryKey) {
+    const categoryBusinesses = cityBusinesses.filter(business => business.category === categoryKey);
+    
+    if (categoryBusinesses.length === 0) {
+        // Show sample business names for empty categories
+        const sampleNames = getSampleBusinessNames(categoryKey);
+        return `<small class="preview-text">Including: ${sampleNames.slice(0, 2).join(', ')}</small>`;
+    }
+    
+    const businessNames = categoryBusinesses.slice(0, 2).map(b => b.name);
+    return `<small class="preview-text">Including: ${businessNames.join(', ')}</small>`;
+}
+
+// Get sample business names for categories without real data
+function getSampleBusinessNames(categoryKey) {
+    const samples = {
+        'health-beauty': ['EcoGlow Spa', 'Natural Beauty Hub', 'Green Wellness Centre'],
+        'food-beverage': ['Organic Kitchen', 'Green Table', 'Sustainable Eats'],
+        'transport-travel': ['EcoRides', 'Green Transport', 'Clean Journeys'],
+        'services-professional': ['Green Consulting', 'EcoSolutions', 'Sustainable Services'],
+        'products-retail': ['EcoStore', 'Green Market', 'Sustainable Goods'],
+        'energy-utilities': ['Solar Solutions', 'Green Energy Co', 'Renewable Power'],
+        'recycling-waste': ['EcoRecycle', 'Green Waste Solutions', 'Circular Services'],
+        'education-nonprofits': ['Green Academy', 'EcoLearn Centre', 'Environmental Trust']
+    };
+    return samples[categoryKey] || samples['services-professional'];
 }
 
 // Filter businesses by category

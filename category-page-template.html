@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{CATEGORY_NAME}} Businesses in {{CITY_NAME}} | EcoSustainable Directory</title>
+    <meta name="description" content="Discover the top sustainable {{CATEGORY_NAME}} businesses in {{CITY_NAME}}. Verified eco-friendly companies committed to environmental responsibility and quality service.">
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="{{CATEGORY_NAME}} Businesses in {{CITY_NAME}} | EcoSustainable">
+    <meta property="og:description" content="Find verified sustainable {{CATEGORY_NAME}} businesses in {{CITY_NAME}}. Quality eco-friendly services with environmental responsibility.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ecosustainable.co.uk/{{CITY_SLUG}}-{{CATEGORY_KEY}}.html">
+    
+    <link rel="canonical" href="https://ecosustainable.co.uk/{{CITY_SLUG}}-{{CATEGORY_KEY}}.html">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "{{CATEGORY_NAME}} Businesses in {{CITY_NAME}}",
+        "description": "Directory of sustainable {{CATEGORY_NAME}} businesses in {{CITY_NAME}}",
+        "url": "https://ecosustainable.co.uk/{{CITY_SLUG}}-{{CATEGORY_KEY}}.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "{{CATEGORY_NAME}} Businesses",
+            "description": "Curated list of eco-friendly {{CATEGORY_NAME}} businesses in {{CITY_NAME}}"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://ecosustainable.co.uk/"
+                },
+                {
+                    "@type": "ListItem", 
+                    "position": 2,
+                    "name": "{{CITY_NAME}}",
+                    "item": "https://ecosustainable.co.uk/{{CITY_SLUG}}.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "{{CATEGORY_NAME}}",
+                    "item": "https://ecosustainable.co.uk/{{CITY_SLUG}}-{{CATEGORY_KEY}}.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <!-- Header content will be loaded by components.js -->
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a href="cities.html">Cities</a></li>
+                <li><a href="{{CITY_SLUG}}.html">{{CITY_NAME}}</a></li>
+                <li class="active">{{CATEGORY_NAME}}</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="container">
+            <h1>Top {{CATEGORY_NAME}} Businesses in {{CITY_NAME}}</h1>
+            <p class="category-description">
+                Discover {{CITY_NAME}}'s leading sustainable {{CATEGORY_NAME}} businesses. Our carefully curated selection features companies committed to environmental responsibility, ethical practices, and exceptional service quality.
+            </p>
+
+            <div class="category-stats">
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Featured Businesses</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Customer Satisfaction</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Sustainability Verified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Businesses Section -->
+    <section class="category-businesses">
+        <div class="container">
+            <h2 id="businessesTitle">Top {{CATEGORY_NAME}} Businesses in {{CITY_NAME}}</h2>
+            <p class="section-description">
+                Each business listed here has been thoroughly vetted for their commitment to sustainability, quality of service, and positive environmental impact.
+            </p>
+
+            <!-- Business Grid -->
+            <div id="categoryBusinessesGrid" class="businesses-grid">
+                <!-- Businesses will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Sections -->
+    <div id="seoSections">
+        <!-- SEO content will be generated dynamically -->
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <!-- Footer content will be loaded by components.js -->
+    </footer>
+
+    <!-- Scripts -->
+    <script src="components.js"></script>
+    <script src="places-api.js"></script>
+    <script src="category-page.js"></script>
+    <script src="seo-enhancements.js"></script>
+
+    <script>
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header and footer
+            loadHeader();
+            loadFooter();
+            
+            // Initialize category page with proper parameters
+            const categoryKey = '{{CATEGORY_KEY}}';
+            const cityName = '{{CITY_NAME}}';
+            
+            // Wait a bit for API to initialize, then load the page
+            setTimeout(() => {
+                initializeCategoryPage(categoryKey, cityName);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

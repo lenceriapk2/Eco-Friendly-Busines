@@ -722,15 +722,19 @@ window.toggleFAQ = function(index) {
 async function initializeCategoryPage(categoryKey, cityName) {
     currentCategoryKey = categoryKey;
     currentCityName = cityName;
+    console.log(`🔄 Initializing ${categoryKey} page for ${cityName}`);
+
+    // Show loading state immediately
+    showLoadingState();
 
     // Wait for API to be ready and properly initialized
     let apiReady = false;
     let attempts = 0;
 
-    while (!apiReady && attempts < 100) {
-        if (window.PlacesAPI && window.PlacesAPI.isInitialized) {
+    while (!apiReady && attempts < 150) { // Increased timeout
+        if (window.PlacesAPI && (window.PlacesAPI.isInitialized || window.PlacesAPI.initialized)) {
             apiReady = true;
-            console.log('API is ready, loading businesses...');
+            console.log('✅ API is ready, loading businesses...');
         } else {
             await new Promise(resolve => setTimeout(resolve, 100));
             attempts++;
@@ -738,10 +742,24 @@ async function initializeCategoryPage(categoryKey, cityName) {
     }
 
     if (!apiReady) {
-        console.warn('API not ready after timeout, proceeding with fallback data');
+        console.warn('⚠️ API not ready after timeout, proceeding with fallback data');
     }
 
-    await loadCategoryBusinesses(categoryKey, cityName);
-    displayCategoryBusinesses();
-    generateSEOContent();
+    try {
+        await loadCategoryBusinesses(categoryKey, cityName);
+        displayCategoryBusinesses();
+        updatePageContent();
+        generateSEOContent();
+        console.log(`✅ Category page initialized successfully: ${categoryKey} in ${cityName}`);
+    } catch (error) {
+        console.error(`❌ Error initializing category page:`, error);
+        // Try with fallback data
+        categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
+        displayCategoryBusinesses();
+        updatePageContent();
+        generateSEOContent();
+    }
 }
+
+// Global initialization function for category pages
+window.initializeCategoryPage = initializeCategoryPage;
