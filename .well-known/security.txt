@@ -1,0 +1,9 @@
+
+Contact: mailto:security@ecosustainable.co.uk
+Contact: https://ecosustainable.co.uk/security-contact
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://ecosustainable.co.uk/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://ecosustainable.co.uk/.well-known/security.txt
+Policy: https://ecosustainable.co.uk/security-policy
+Acknowledgments: https://ecosustainable.co.uk/security-acknowledgments

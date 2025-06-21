@@ -3,17 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="xt_sYmlkQ6enm-5s_bIApb-KNKByGx2NzxS4BLehHVQ">
+
+    <!-- Primary SEO Meta Tags -->
     <title>EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory</title>
-    <meta name="description" content="Discover top eco-friendly businesses across UK cities. Find sustainable services, green products, and environmentally conscious companies near you.">
+    <meta name="title" content="EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory">
+    <meta name="description" content="Discover 500+ verified eco-friendly businesses across 79 UK cities. Find sustainable services, green products & environmentally conscious companies. Expert-curated directory of responsible businesses.">
+    <meta name="keywords" content="eco-friendly businesses UK, sustainable companies, green business directory, environmental businesses, eco services, sustainable products, green companies UK, eco-friendly directory, sustainable UK businesses, green directory">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="en-GB">
+    <meta name="author" content="EcoSustainable.co.uk">
+    <meta name="publisher" content="EcoSustainable.co.uk">
+    <meta name="copyright" content="© 2024 EcoSustainable.co.uk">
+    
+    <!-- Geo-targeting -->
+    <meta name="geo.region" content="GB">
+    <meta name="geo.country" content="UK">
+    <meta name="ICBM" content="54.7023545,-3.2765753">
+    <meta name="geo.position" content="54.7023545;-3.2765753">
+    
+    <!-- Additional SEO -->
+    <meta name="rating" content="general">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="7 days">
+    <meta name="format-detection" content="telephone=yes">
+    
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="preload" href="/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ecosustainable.co.uk/">
+    <meta property="og:title" content="EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory">
+    <meta property="og:description" content="Discover top eco-friendly businesses across UK cities. Find sustainable services, green products, and environmentally conscious companies near you.">
+    <meta property="og:image" content="https://ecosustainable.co.uk/images/ecosustainable-og-image.jpg">
+    <meta property="og:site_name" content="EcoSustainable.co.uk">
+    <meta property="og:locale" content="en_GB">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ecosustainable.co.uk/">
+    <meta property="twitter:title" content="EcoSustainable.co.uk - UK's Premier Eco-Friendly Business Directory">
+    <meta property="twitter:description" content="Discover top eco-friendly businesses across UK cities. Find sustainable services, green products, and environmentally conscious companies near you.">
+    <meta property="twitter:image" content="https://ecosustainable.co.uk/images/ecosustainable-twitter-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/attached_assets/Screenshot_23.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/attached_assets/Screenshot_23.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/attached_assets/Screenshot_23.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/attached_assets/Screenshot_23.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ecosustainable.co.uk/">
+
+    <!-- Stylesheets -->
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "EcoSustainable.co.uk",
+        "alternateName": "Eco Sustainable UK",
+        "url": "https://ecosustainable.co.uk",
+        "description": "UK's premier directory of eco-friendly and sustainable businesses across all major cities",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://ecosustainable.co.uk/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "EcoSustainable.co.uk",
+            "url": "https://ecosustainable.co.uk",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://ecosustainable.co.uk/images/logo.png"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Header Component -->
     <div id="header-component"></div>
 
     <!-- Hero Section -->
+    <main id="main-content">
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -22,7 +110,7 @@
 
                 <!-- Quick Actions -->
                 <div class="quick-actions">
-                    <a href="cities.html" class="quick-action-btn primary-cta">
+                    <a href="/cities" class="quick-action-btn primary-cta">
                         <i class="fas fa-map-marker-alt"></i>
                         Find Eco Businesses Near You
                     </a>
@@ -99,11 +187,11 @@
                 <h2>Browse Eco-Friendly Categories</h2>
                 <p>Discover sustainable businesses across different sectors</p>
             </div>
-            <div class="categories-grid" id="categoriesGrid">
+            <div class="categories-grid responsive-grid" id="categoriesGrid">
                 <!-- Categories will be populated by JavaScript -->
             </div>
             <div class="view-all-center">
-                <a href="categories.html" class="btn-secondary">View All Categories</a>
+                <a href="/categories" class="btn-secondary">View All Categories</a>
             </div>
         </div>
     </section>
@@ -115,11 +203,11 @@
                 <h2>Explore UK Cities</h2>
                 <p>Find eco-friendly businesses in major UK cities</p>
             </div>
-            <div class="cities-grid" id="citiesGrid">
+            <div class="cities-grid responsive-grid" id="citiesGrid">
                 <!-- Cities will be populated by JavaScript -->
             </div>
             <div class="view-all-center">
-                <a href="cities.html" class="btn-secondary">View All 79 Cities</a>
+                <a href="/cities" class="btn-secondary">View All 79 Cities</a>
             </div>
         </div>
     </section>
@@ -241,14 +329,20 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer Component -->
     <div id="footer-component"></div>
 
+    <!-- Accessibility skip link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <script src="error-handler.js"></script>
     <script src="components.js"></script>
     <script src="places-api.js"></script>
     <script src="api-config.js"></script>
     <script src="canonical-urls.js"></script>
+    <script src="seo-enhancements.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

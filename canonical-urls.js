@@ -1,28 +1,30 @@
 // Canonical URL Management System for EcoSustainable.co.uk
 // Manages SEO-friendly URL structure and canonical links
 
-// Define CANONICAL_STRATEGIES only once
-window.CANONICAL_STRATEGIES = {
-    // City pages - canonical to main city page
-    cityPages: {
-        pattern: /^([a-z-]+)\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
-    },
+// Define CANONICAL_STRATEGIES only once if not already defined
+if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
+    window.CANONICAL_STRATEGIES = {
+        // City pages - canonical to main city page
+        cityPages: {
+            pattern: /^([a-z-]+)(?:\.html)?$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}`
+        },
 
-    // Category pages - canonical to category overview
-    categoryPages: {
-        pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
-        getCanonical: (match) => {
-            const [, city, category] = match;
-            // For category pages, canonical points to the main category page
-            return `https://ecosustainable.co.uk/${category}-category.html`;
+        // Category pages - canonical to category overview
+        categoryPages: {
+            pattern: /^([a-z-]+)-([a-z-]+)(?:\.html)?$/,
+            getCanonical: (match) => {
+                const [, city, category] = match;
+                // For category pages, canonical points to the main category page
+                return `https://ecosustainable.co.uk/${city}-${category}`;
+            }
+        },
+
+        // Main category overview pages
+        categoryOverview: {
+            pattern: /^([a-z-]+)-category(?:\.html)?$/,
+            getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category`
         }
-    },
-
-    // Main category overview pages
-    categoryOverview: {
-        pattern: /^([a-z-]+)-category\.html$/,
-        getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}-category.html`
     }
 }
 
@@ -31,7 +33,15 @@ const CANONICAL_STRATEGIES = window.CANONICAL_STRATEGIES;
 
 // Function to determine canonical URL for current page
 function getCanonicalUrl() {
-    const currentPath = window.location.pathname.split('/').pop();
+    let currentPath = window.location.pathname;
+    
+    // Handle root path
+    if (!currentPath || currentPath === '/' || currentPath === '/index.html') {
+        return 'https://ecosustainable.co.uk/';
+    }
+    
+    // Remove leading slash and get the actual file name
+    currentPath = currentPath.split('/').pop();
 
     // Check each strategy
     for (const [strategyName, strategy] of Object.entries(CANONICAL_STRATEGIES)) {
@@ -41,8 +51,9 @@ function getCanonicalUrl() {
         }
     }
 
-    // Default to current URL if no strategy matches
-    return window.location.href;
+    // Default to clean URL without .html extension
+    const cleanPath = currentPath.replace(/\.html$/, '');
+    return `https://ecosustainable.co.uk/${cleanPath}`;
 }
 
 // Function to set canonical URL
