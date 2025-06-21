@@ -1,15 +1,18 @@
-
-# Robots.txt for EcoSustainable.co.uk
 User-agent: *
 Allow: /
-
-# Priority pages for crawling
-Allow: /cities.html
-Allow: /categories.html
-Allow: /*.html
 
 # Sitemap location
 Sitemap: https://ecosustainable.co.uk/sitemap.xml
 
-# Crawl delay (optional)
+# Allow all business and city pages
+Allow: /*.html
+
+# Block unnecessary files
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /admin/
+Disallow: /private/
+Disallow: /attached_assets/
+
+# Crawl delay
 Crawl-delay: 1
