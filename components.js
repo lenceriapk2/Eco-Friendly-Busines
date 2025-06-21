@@ -15,59 +15,6 @@ function createHeader() {
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item nav-dropdown">
-                            <a href="cities.html" class="nav-link">Cities <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-content mega-menu">
-                                <div class="mega-menu-section">
-                                    <h3>Major Cities</h3>
-                                    <a href="london.html">London</a>
-                                    <a href="manchester.html">Manchester</a>
-                                    <a href="birmingham.html">Birmingham</a>
-                                    <a href="edinburgh.html">Edinburgh</a>
-                                    <a href="bristol.html">Bristol</a>
-                                    <a href="glasgow.html">Glasgow</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h3>Scotland</h3>
-                                    <a href="aberdeen.html">Aberdeen</a>
-                                    <a href="dundee.html">Dundee</a>
-                                    <a href="stirling.html">Stirling</a>
-                                    <a href="inverness.html">Inverness</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h3>Wales</h3>
-                                    <a href="cardiff.html">Cardiff</a>
-                                    <a href="swansea.html">Swansea</a>
-                                    <a href="newport.html">Newport</a>
-                                    <a href="wrexham.html">Wrexham</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h3>Northern Ireland</h3>
-                                    <a href="belfast.html">Belfast</a>
-                                    <a href="londonderry.html">Londonderry</a>
-                                    <a href="armagh.html">Armagh</a>
-                                    <a href="bangor.html">Bangor</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item nav-dropdown">
-                            <a href="categories.html" class="nav-link">Categories <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-content mega-menu">
-                                <div class="mega-menu-section">
-                                    <h3>Popular Categories</h3>
-                                    <a href="health-beauty-category.html">Health & Beauty</a>
-                                    <a href="products-retail-category.html">Products & Retail</a>
-                                    <a href="transport-travel-category.html">Transport & Travel</a>
-                                    <a href="services-professional-category.html">Professional Services</a>
-                                </div>
-                                <div class="mega-menu-section">
-                                    <h3>Sustainability</h3>
-                                    <a href="energy-utilities-category.html">Energy & Utilities</a>
-                                    <a href="recycling-waste-category.html">Recycling & Waste</a>
-                                    <a href="education-nonprofits-category.html">Education & Nonprofits</a>
-                                </div>
-                            </div>
-                        </li>
                         <li class="nav-item">
                             <a href="about-us.html" class="nav-link">About</a>
                         </li>
