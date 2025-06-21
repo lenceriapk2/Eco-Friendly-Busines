@@ -479,35 +479,92 @@ const lazyLoadObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Initialize the application
+// Global variables and initialization
+let currentCity = '';
+let currentCategory = '';
+let currentBusinesses = [];
+let filteredBusinesses = [];
+let searchBtn = null;
+
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize search functionality
-    const searchBtn = document.getElementById('searchBtn');
-    if (searchBtn) {
-        searchBtn.addEventListener('click', handleSearch);
+    initializeApp();
+
+    // Initialize search button reference
+    searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
+
+    // Add search functionality if search elements exist
+    const searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', function() {
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(searchInput.value);
+            }
+        });
     }
-
-    // Handle search function
-    function handleSearch() {
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput && searchInput.value.trim()) {
-            // Redirect to search results or handle search
-            window.location.href = `cities.html?search=${encodeURIComponent(searchInput.value)}`;
-        }
-    }
-
-    // Lazy load sections when they come into view
-    const sections = ['businessesGrid', 'categoriesGrid', 'citiesGrid'];
-    sections.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            lazyLoadObserver.observe(element);
-        }
-    });
-
-    animateOnScroll();
-    animateCounters();
 });
+
+function initializeApp() {
+    console.log('Initializing EcoSustainable app...');
+
+    // Load components first
+    loadComponents().then(() => {
+        // Initialize page-specific functionality
+        initializePageSpecific();
+
+        // Setup global event listeners
+        setupGlobalEventListeners();
+
+        // Initialize newsletter form
+        initializeNewsletterForm();
+
+        // Initialize contact form
+        initializeContactForm();
+
+        // Initialize search functionality
+        initializeSearch();
+    });
+}
+
+function initializeSearch() {
+    const searchInput = document.getElementById('searchInput') || document.querySelector('.search-input');
+    const searchBtn = document.getElementById('searchBtn') || document.querySelector('.search-btn');
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', function() {
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(searchInput.value);
+            }
+        });
+    }
+}
+
+function performSearch(query) {
+    if (!query || query.trim() === '') {
+        return;
+    }
+
+    console.log('Performing search for:', query);
+
+    // Simple search implementation - filter current businesses if available
+    if (currentBusinesses && currentBusinesses.length > 0) {
+        const filtered = currentBusinesses.filter(business => 
+            business.name.toLowerCase().includes(query.toLowerCase()) ||
+            business.category.toLowerCase().includes(query.toLowerCase()) ||
+            business.description.toLowerCase().includes(query.toLowerCase())
+        );
+
+        displayBusinesses(filtered);
+    }
+}
 
 // Add loading states for dynamic content
 function showLoading(element) {

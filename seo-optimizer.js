@@ -468,10 +468,14 @@ class SEOOptimizer {
     }
 }
 
-// Initialize SEO optimizer when DOM is ready
+// Initialize SEO optimizer when DOM is ready with error handling
 document.addEventListener('DOMContentLoaded', () => {
-    new SEOOptimizer();
+    try {
+        if (typeof window.SEOOptimizer === 'undefined') {
+            window.SEOOptimizer = SEOOptimizer;
+            new SEOOptimizer();
+        }
+    } catch (error) {
+        console.warn('SEO Optimizer initialization failed:', error);
+    }
 });
-
-// Export for use in other modules
-window.SEOOptimizer = SEOOptimizer;

@@ -2,14 +2,17 @@
 // Canonical URL Management for EcoSustainable.co.uk
 // Ensures proper URL structure for SEO optimization
 
-const CANONICAL_STRATEGIES = {
-    homePage: () => 'https://ecosustainable.co.uk/',
-    cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
-    categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
-    aboutPage: () => 'https://ecosustainable.co.uk/about',
-    categoriesPage: () => 'https://ecosustainable.co.uk/categories',
-    citiesPage: () => 'https://ecosustainable.co.uk/cities'
-};
+// Check if CANONICAL_STRATEGIES is already defined to prevent conflicts
+if (typeof window.CANONICAL_STRATEGIES === 'undefined') {
+    window.CANONICAL_STRATEGIES = {
+        homePage: () => 'https://ecosustainable.co.uk/',
+        cityPage: (city) => `https://ecosustainable.co.uk/${city}`,
+        categoryPage: (city, category) => `https://ecosustainable.co.uk/${city}-${category}`,
+        aboutPage: () => 'https://ecosustainable.co.uk/about',
+        categoriesPage: () => 'https://ecosustainable.co.uk/categories',
+        citiesPage: () => 'https://ecosustainable.co.uk/cities'
+    };
+}
 
 class CanonicalManager {
     constructor() {
@@ -286,7 +289,14 @@ class CanonicalManager {
     }
 }
 
-// Initialize canonical management when DOM is ready
+// Initialize canonical management when DOM is ready with error handling
 document.addEventListener('DOMContentLoaded', () => {
-    new CanonicalManager();
+    try {
+        if (typeof window.CanonicalManager === 'undefined') {
+            window.CanonicalManager = CanonicalManager;
+            new CanonicalManager();
+        }
+    } catch (error) {
+        console.warn('Canonical Manager initialization failed:', error);
+    }
 });
