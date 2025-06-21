@@ -360,20 +360,22 @@ function performSearch() {
 }
 
 // Check if search elements exist before adding event listeners
-const searchBtn = document.getElementById('searchBtn');
-const searchInput = document.getElementById('searchInput');
+document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
 
-if (searchBtn) {
-    searchBtn.addEventListener('click', performSearch);
-}
+    if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
+    }
 
-if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
-    });
-}
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+});
 
 // Show all businesses function
 function showAllBusinesses() {
