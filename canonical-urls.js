@@ -32,8 +32,12 @@ class CanonicalManager {
     }
 
     generateCanonicalURL(path) {
-        // Remove any trailing slashes and ensure clean URLs
-        const cleanPath = path.replace(/\/+$/, '') || '/';
+        // Remove any trailing slashes and .html extensions for clean URLs
+        let cleanPath = path.replace(/\/+$/, '').replace(/\.html$/, '') || '/';
+        // Ensure we don't double up slashes
+        if (cleanPath !== '/' && !cleanPath.startsWith('/')) {
+            cleanPath = '/' + cleanPath;
+        }
         return `${this.baseURL}${cleanPath}`;
     }
 

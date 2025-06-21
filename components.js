@@ -7,7 +7,7 @@ function createHeader() {
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="logo-image">
@@ -16,12 +16,12 @@ function createHeader() {
 
                     <nav class="nav-menu" id="navMenu">
                         <ul>
-                            <li><a href="index.html" class="nav-link">Home</a></li>
-                            <li><a href="cities.html" class="nav-link">Browse Cities</a></li>
-                            <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-                            <li><a href="sustainability-report.html" class="nav-link">Sustainability</a></li>
-                            <li><a href="about-us.html" class="nav-link">About</a></li>
-                            <li><a href="contact-us.html" class="nav-link">Contact</a></li>
+                            <li><a href="/" class="nav-link">Home</a></li>
+                            <li><a href="/cities" class="nav-link">Browse Cities</a></li>
+                            <li><a href="/how-it-works" class="nav-link">How It Works</a></li>
+                            <li><a href="/sustainability-report" class="nav-link">Sustainability</a></li>
+                            <li><a href="/about-us" class="nav-link">About</a></li>
+                            <li><a href="/contact-us" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>
 
@@ -45,13 +45,13 @@ function createFooter() {
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section footer-brand">
-                        <a href="index.html" class="footer-logo">
+                        <a href="/" class="footer-logo">
                             <img src="attached_assets/www.ecosustainable.co.uk_version_1-removebg-preview.png" 
                                  alt="EcoSustainable.co.uk" 
                                  class="footer-logo-image">
                         </a>
                         <p>Your trusted directory for sustainable businesses across the UK. Connecting you with eco-friendly companies that care about our planet.</p>
-                        
+
                         <div class="eco-credentials">
                             <div class="credential-item">
                                 <i class="fas fa-leaf"></i>
@@ -66,7 +66,7 @@ function createFooter() {
                                 <span>Zero Waste Operations</span>
                             </div>
                         </div>
-                        
+
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -78,35 +78,35 @@ function createFooter() {
                     <div class="footer-section">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="cities.html">Browse Cities</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="how-it-works.html">How It Works</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/cities">Browse Cities</a></li>
+                            <li><a href="/about-us">About Us</a></li>
+                            <li><a href="/contact-us">Contact</a></li>
+                            <li><a href="/how-it-works">How It Works</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
                         <h4>Popular Cities</h4>
                         <ul>
-                            <li><a href="london.html">London</a></li>
-                            <li><a href="manchester.html">Manchester</a></li>
-                            <li><a href="birmingham.html">Birmingham</a></li>
-                            <li><a href="edinburgh.html">Edinburgh</a></li>
-                            <li><a href="bristol.html">Bristol</a></li>
-                            <li><a href="glasgow.html">Glasgow</a></li>
+                            <li><a href="/london">London</a></li>
+                            <li><a href="/manchester">Manchester</a></li>
+                            <li><a href="/birmingham">Birmingham</a></li>
+                            <li><a href="/edinburgh">Edinburgh</a></li>
+                            <li><a href="/bristol">Bristol</a></li>
+                            <li><a href="/glasgow">Glasgow</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-section">
                         <h4>Environmental</h4>
                         <ul>
-                            <li><a href="environmental-policy.html">Environmental Policy</a></li>
-                            <li><a href="sustainability-report.html">Sustainability Report</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="terms-of-service.html">Terms of Service</a></li>
-                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="/environmental-policy">Environmental Policy</a></li>
+                            <li><a href="/sustainability-report">Sustainability Report</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="/terms-of-service">Terms of Service</a></li>
+                            <li><a href="/cookie-policy">Cookie Policy</a></li>
+                            <li><a href="/sitemap">Sitemap</a></li>
                         </ul>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ function toggleMobileMenu() {
 
     if (hamburger && navMenu) {
         const isActive = hamburger.classList.contains('active');
-        
+
         if (isActive) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
