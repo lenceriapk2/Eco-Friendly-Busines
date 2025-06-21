@@ -1,66 +1,22 @@
-// Category Page JavaScript Handler - Loads real businesses from Google Places API
+// Category Page JavaScript Handler - Generates unique data for each category in each city
 
 let categoryBusinesses = [];
 let currentCategoryKey = '';
 let currentCityName = '';
 
-// Initialize category page with real data from Google Places API
+// Initialize category page with unique data for each city and category
 async function initializeCategoryPage(categoryKey, cityName) {
     currentCategoryKey = categoryKey;
     currentCityName = cityName;
-    console.log(`🚀 Initializing category page for: ${categoryKey} in ${cityName}`);
+    console.log(`Loading businesses for category: ${categoryKey} in ${cityName}`);
 
     // Show loading state
     showLoadingState();
 
-    try {
-        // Ensure Places API is properly initialized
-        if (window.APIConfig) {
-            console.log('Initializing Places API...');
-            try {
-                await window.APIConfig.initializePlacesAPI();
-            } catch (apiInitError) {
-                console.warn('API initialization failed:', apiInitError);
-            }
-        }
-        
-        // Wait for API to be ready (but don't block if it fails)
-        let apiReady = false;
-        try {
-            apiReady = await waitForAPI();
-            console.log('API Ready Status:', apiReady);
-        } catch (waitError) {
-            console.warn('API wait failed:', waitError);
-        }
-        
-        // Load businesses from Google Places API or fallback to mock data
-        categoryBusinesses = await loadCategoryBusinesses(categoryKey, cityName);
-        console.log(`Loaded ${categoryBusinesses ? categoryBusinesses.length : 0} businesses for category`);
-        
-        // Ensure we have businesses to display
-        if (!categoryBusinesses || categoryBusinesses.length === 0) {
-            console.warn('No businesses loaded, creating emergency fallback');
-            categoryBusinesses = createEmergencyFallbackBusinesses(categoryKey, cityName);
-        }
-        
-        // Display the loaded businesses
-        displayCategoryBusinesses();
-        
-        // Update page content
-        updatePageContent();
-        
-        // Generate SEO content
-        generateSEOContent();
-        
-        console.log(`✅ Successfully initialized category page for ${categoryKey} in ${cityName} with ${categoryBusinesses.length} businesses`);
-    } catch (error) {
-        console.error('❌ Error initializing category page:', error);
-        // Ensure we always show some content
-        categoryBusinesses = createEmergencyFallbackBusinesses(categoryKey, cityName);
-        displayCategoryBusinesses();
-        updatePageContent();
-        generateSEOContent();
-    }
+    await loadCategoryBusinesses(categoryKey, cityName);
+    displayCategoryBusinesses();
+    updatePageContent();
+    generateSEOContent();
 }
 
 // Show loading state while data loads
@@ -77,73 +33,48 @@ function showLoadingState() {
     }
 }
 
-// Load businesses for the specific category and city from Google Places API
+// Load unique businesses for the specific category and city
 async function loadCategoryBusinesses(categoryKey, cityName) {
-    console.log(`🔍 Loading businesses for ${categoryKey} in ${cityName}`);
-
     try {
-        // Check if PlacesAPI is available and properly initialized
-        if (window.PlacesAPI && (window.PlacesAPI.initialized || window.PlacesAPI.isInitialized())) {
-            console.log('PlacesAPI is available and initialized');
-            
-            // First try the category-specific API method
+        console.log(`Attempting to load businesses from API for ${categoryKey} in ${cityName}`);
+
+        // Try multiple API methods to get real data
+        if (window.PlacesAPI) {
+            let apiBusinesses = null;
+
+            // Try category-specific API first
             if (window.PlacesAPI.fetchBusinessesForCategory) {
-                console.log('📱 Using category-specific API method');
-                try {
-                    const apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName);
-                    
-                    if (apiBusinesses && apiBusinesses.length > 0) {
-                        console.log(`✅ Successfully loaded ${apiBusinesses.length} real businesses from category API`);
-                        return apiBusinesses.slice(0, 12);
-                    } else {
-                        console.log('⚠️ Category API returned no results, trying text search');
+                apiBusinesses = await window.PlacesAPI.fetchBusinessesForCategory(categoryKey, cityName.toLowerCase());
+            }
+
+            // If no results, try general city search and filter
+            if (!apiBusinesses || apiBusinesses.length === 0) {
+                if (window.PlacesAPI.fetchAllBusinessesForCity) {
+                    const allBusinesses = await window.PlacesAPI.fetchAllBusinessesForCity(cityName.toLowerCase());
+                    if (allBusinesses && allBusinesses.length > 0) {
+                        // Filter by category keywords
+                        apiBusinesses = filterBusinessesByCategory(allBusinesses, categoryKey);
                     }
-                } catch (apiError) {
-                    console.warn('❌ Category API call failed:', apiError);
                 }
             }
 
-            // Fallback to general search using performTextSearch
-            if (window.PlacesAPI.performTextSearch) {
-                console.log('🔍 Trying direct text search');
-                try {
-                    const searchTerm = getCategorySearchTerm(categoryKey);
-                    const query = `${searchTerm} in ${cityName} UK`;
-                    console.log(`🔎 Searching with query: ${query}`);
-                    
-                    const apiBusinesses = await window.PlacesAPI.performTextSearch(query);
-                    console.log(`🔍 Text search returned ${apiBusinesses ? apiBusinesses.length : 0} businesses`);
-                    
-                    if (apiBusinesses && apiBusinesses.length > 0) {
-                        // Filter results by category relevance and ensure we have the right format
-                        const filteredBusinesses = filterBusinessesByCategory(apiBusinesses, categoryKey);
-                        console.log(`✅ Successfully loaded ${filteredBusinesses.length} real businesses from text search`);
-                        return filteredBusinesses.slice(0, 12);
-                    }
-                } catch (searchError) {
-                    console.warn('❌ Text search API call failed:', searchError);
-                }
+            // If we have API data, use it
+            if (apiBusinesses && apiBusinesses.length > 0) {
+                categoryBusinesses = apiBusinesses.slice(0, 12); // Limit to 12 businesses
+                console.log(`Loaded ${categoryBusinesses.length} businesses from API for ${categoryKey} in ${cityName}`);
+                return;
             }
-
-            console.log('⚠️ No real businesses found via API, falling back to mock data');
-        } else {
-            console.log('❌ PlacesAPI not available or not initialized, using mock data');
         }
-    } catch (error) {
-        console.error(`❌ Error during API calls for ${categoryKey} in ${cityName}:`, error);
-    }
 
-    // Always fallback to mock data if API fails or no results
-    console.log(`📝 Generating mock businesses for ${categoryKey} in ${cityName}`);
-    const mockBusinesses = generateCategoryBusinessData(categoryKey, cityName);
-    console.log(`📝 Generated ${mockBusinesses.length} mock businesses`);
-    
-    if (!mockBusinesses || mockBusinesses.length === 0) {
-        console.error('❌ Mock data generation failed, creating emergency fallback');
-        return createEmergencyFallbackBusinesses(categoryKey, cityName);
+        // If API fails or returns no results, generate unique fallback data
+        console.log(`API failed or returned no results, generating fallback data for ${categoryKey} in ${cityName}`);
+        categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
+        console.log(`Generated unique data for ${categoryKey} in ${cityName}: ${categoryBusinesses.length} businesses`);
+
+    } catch (error) {
+        console.error(`Error loading businesses for ${categoryKey} in ${cityName}:`, error);
+        categoryBusinesses = generateCategoryBusinessData(categoryKey, cityName);
     }
-    
-    return mockBusinesses;
 }
 
 // Filter businesses by category keywords
@@ -355,56 +286,12 @@ function getCategoryFeatures(categoryKey) {
 // Display category businesses
 function displayCategoryBusinesses() {
     const grid = document.getElementById('categoryBusinessesGrid');
-    if (!grid) {
-        console.error('categoryBusinessesGrid element not found');
-        return;
-    }
+    if (!grid || !categoryBusinesses.length) return;
 
-    console.log(`📊 Displaying businesses: ${categoryBusinesses ? categoryBusinesses.length : 0} available`);
+    const businessCards = categoryBusinesses.map(business => createBusinessCard(business)).join('');
+    grid.innerHTML = businessCards;
 
-    // Check if we have businesses to display
-    if (!categoryBusinesses || categoryBusinesses.length === 0) {
-        console.warn('No businesses to display, generating emergency fallback data');
-        // Generate fallback data if none exists
-        categoryBusinesses = createEmergencyFallbackBusinesses(currentCategoryKey, currentCityName);
-    }
-
-    // Clear the grid first
-    grid.innerHTML = '';
-
-    // Ensure we have valid businesses before attempting to display
-    if (!categoryBusinesses || categoryBusinesses.length === 0) {
-        console.error('❌ Still no businesses after fallback generation');
-        grid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #666;">
-                <i class="fas fa-exclamation-triangle fa-3x" style="color: #ff6b6b; margin-bottom: 20px;"></i>
-                <h3>Unable to Load Businesses</h3>
-                <p>We're having trouble loading businesses for this category. Please try refreshing the page.</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Create business cards
-    categoryBusinesses.forEach((business, index) => {
-        try {
-            const businessCardHTML = createBusinessCard(business);
-            const businessElement = document.createElement('div');
-            businessElement.innerHTML = businessCardHTML;
-            
-            // Add the business card to the grid
-            if (businessElement.firstElementChild) {
-                grid.appendChild(businessElement.firstElementChild);
-            }
-        } catch (error) {
-            console.error('Error creating business card:', error, business);
-            // Create a simple fallback card
-            const fallbackCard = createFallbackBusinessCard(business, index);
-            grid.appendChild(fallbackCard);
-        }
-    });
-
-    console.log(`✅ Displayed ${categoryBusinesses.length} businesses for ${currentCategoryKey} in ${currentCityName}`);
+    console.log(`Displayed ${categoryBusinesses.length} businesses for ${currentCategoryKey} in ${currentCityName}`);
 }
 
 // Create business card HTML
@@ -491,51 +378,6 @@ window.getDirections = function(address) {
     const encodedAddress = encodeURIComponent(address);
     window.open(`https://www.google.com/maps/search/${encodedAddress}`, '_blank');
 };
-
-// Create emergency fallback businesses when all else fails
-function createEmergencyFallbackBusinesses(categoryKey, cityName) {
-    console.log(`🚨 Creating emergency fallback businesses for ${categoryKey} in ${cityName}`);
-    
-    const businesses = [];
-    const categoryName = getCategoryDisplayName(categoryKey);
-    
-    for (let i = 0; i < 8; i++) {
-        businesses.push({
-            id: `emergency_${categoryKey}_${cityName}_${i}`,
-            name: `${categoryName} Business ${i + 1}`,
-            category: categoryKey,
-            subcategory: getCategorySubcategory(categoryKey),
-            rating: 4.2 + (Math.random() * 0.6),
-            reviewCount: Math.floor(Math.random() * 80) + 20,
-            description: `Professional ${categoryName.toLowerCase()} services in ${cityName}. Committed to sustainable practices and excellent customer service.`,
-            address: `${10 + i * 12} High Street, ${cityName}, UK`,
-            phone: `01${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900000 + 100000)}`,
-            website: `www.business${i + 1}.co.uk`,
-            image: getCategoryImage(categoryKey, i % 3),
-            features: getCategoryFeatures(categoryKey).slice(0, 3),
-            businessStatus: 'OPERATIONAL'
-        });
-    }
-    
-    console.log(`🚨 Generated ${businesses.length} emergency fallback businesses`);
-    return businesses;
-}
-
-// Create a simple fallback business card when createBusinessCard fails
-function createFallbackBusinessCard(business, index) {
-    const card = document.createElement('div');
-    card.className = 'business-card';
-    card.innerHTML = `
-        <div style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px;">
-            <h3>${business.name || `Business ${index + 1}`}</h3>
-            <p>Rating: ${(business.rating || 4.0).toFixed(1)} ⭐</p>
-            <p>${business.description || 'Professional services available'}</p>
-            <p>📍 ${business.address || 'Location available'}</p>
-            <p>📞 ${business.phone || 'Phone available'}</p>
-        </div>
-    `;
-    return card;
-}
 
 // Generate star rating HTML
 function generateStars(rating) {
@@ -876,62 +718,6 @@ window.toggleFAQ = function(index) {
     }
 };
 
-// Add searchBusinesses method for backwards compatibility
-if (window.PlacesAPI && !window.PlacesAPI.searchBusinesses && window.PlacesAPI.performTextSearch) {
-    window.PlacesAPI.searchBusinesses = async function(query, limit = 12) {
-        try {
-            console.log(`🔍 Searching businesses with query: ${query}`);
-            const results = await this.performTextSearch(query);
-            return results ? results.slice(0, limit) : [];
-        } catch (error) {
-            console.warn('Search businesses failed:', error);
-            return [];
-        }
-    };
-}
-
-// Helper function to wait for API to be ready
-async function waitForAPI() {
-    console.log('⏳ Waiting for PlacesAPI to be ready...');
-    let attempts = 0;
-    const maxAttempts = 100; // Increased timeout for better reliability
-    
-    while (attempts < maxAttempts) {
-        if (window.PlacesAPI) {
-            console.log('✅ PlacesAPI object found');
-            
-            // Check if initialized property exists
-            if (window.PlacesAPI.initialized === true) {
-                console.log('✅ PlacesAPI is initialized');
-                return true;
-            }
-            
-            // Check if isInitialized is a function or boolean
-            if (typeof window.PlacesAPI.isInitialized === 'function') {
-                if (window.PlacesAPI.isInitialized()) {
-                    console.log('✅ PlacesAPI is ready (function check)');
-                    return true;
-                }
-            } else if (window.PlacesAPI.isInitialized === true) {
-                console.log('✅ PlacesAPI is ready (boolean check)');
-                return true;
-            }
-            
-            // Also check if the API has the required methods
-            if (window.PlacesAPI.performTextSearch || window.PlacesAPI.fetchBusinessesForCategory) {
-                console.log('✅ PlacesAPI methods available');
-                return true;
-            }
-        }
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
-        attempts++;
-    }
-    
-    console.warn('⚠️ PlacesAPI not ready after timeout, proceeding anyway');
-    return false;
-}
-
 // Add comprehensive directory content to category pages
 function addComprehensiveDirectorySection() {
     const comprehensiveSection = `
@@ -994,271 +780,16 @@ function addComprehensiveDirectorySection() {
     }
 }
 
-// Get search terms for each category to find relevant businesses
-function getCategorySearchTerm(categorySlug) {
-    const searchTerms = {
-        'health-beauty': 'organic beauty salon spa wellness natural skincare massage therapy',
-        'energy-utilities': 'solar panel installation renewable energy utility company electric',
-        'education-nonprofits': 'environmental education nonprofit charity foundation school',
-        'transport-travel': 'electric vehicle taxi sustainable transport travel bike car rental',
-        'services-professional': 'environmental consulting green business services professional',
-        'recycling-waste': 'recycling center waste management environmental services disposal',
-        'products-retail': 'organic shop eco products sustainable retail store market'
-    };
-    return searchTerms[categorySlug] || 'sustainable eco friendly business services';
-}
+// Initialize category page
+function initializeCategoryPage(categoryKey, cityName) {
+    currentCategoryKey = categoryKey;
+    currentCityName = cityName;
 
-// Make search term function globally available
-window.getCategorySearchTerm = getCategorySearchTerm;
-
-// Make search term function globally available
-window.getCategorySearchTerm = getCategorySearchTerm;
-
-function getCategoryDisplayName(categorySlug) {
-    const categoryNames = {
-        'health-beauty': 'Health & Beauty',
-        'energy-utilities': 'Energy & Utilities',
-        'education-nonprofits': 'Education & Nonprofits',
-        'transport-travel': 'Transport & Travel',
-        'services-professional': 'Services & Professional',
-        'recycling-waste': 'Recycling & Waste',
-        'products-retail': 'Products & Retail'
-    };
-    return categoryNames[categorySlug] || 'Business';
-}
-
-function generateMockBusinesses(categorySlug, cityName) {
-    const businesses = [];
-    const cityCode = generateCityCode(cityName);
-    const categoryCode = generateCategoryCode(categorySlug);
-
-    // Business name templates based on category
-    const businessNameTemplates = {
-        'health-beauty': [
-            'Natural Glow', 'Pure Beauty', 'Organic Wellness', 'Green Spa', 'Eco Beauty',
-            'Natural Elements', 'Pure Radiance', 'Green Garden', 'Eco Essence', 'Natural Care',
-            'Organic Touch', 'Pure Nature'
-        ],
-        'energy-utilities': [
-            'Solar Solutions', 'Green Energy', 'Renewable Power', 'Eco Energy', 'Solar Tech',
-            'Clean Power', 'Green Grid', 'Renewable Solutions', 'Eco Power', 'Solar Systems',
-            'Green Utilities', 'Clean Energy'
-        ],
-        'education-nonprofits': [
-            'Green Learning', 'Eco Education', 'Sustainable Future', 'Environmental Trust', 'Green Foundation',
-            'Eco Academy', 'Climate Action', 'Green Initiative', 'Sustainable Society', 'Environmental Care',
-            'Green Community', 'Eco Alliance'
-        ],
-        'transport-travel': [
-            'Green Travel', 'Eco Transport', 'Sustainable Journeys', 'Clean Rides', 'Green Routes',
-            'Eco Mobility', 'Green Fleet', 'Sustainable Transport', 'Clean Travel', 'Eco Tours',
-            'Green Adventures', 'Sustainable Rides'
-        ],
-        'services-professional': [
-            'Green Solutions', 'Eco Services', 'Sustainable Consulting', 'Green Professional', 'Eco Experts',
-            'Green Advisors', 'Sustainable Services', 'Eco Solutions', 'Green Consulting', 'Environmental Services',
-            'Green Tech', 'Eco Professional'
-        ],
-        'recycling-waste': [
-            'Recycle Plus', 'Waste Solutions', 'Green Recycling', 'Eco Waste', 'Clean Solutions',
-            'Green Disposal', 'Eco Recycling', 'Waste Wise', 'Green Waste', 'Recycling Solutions',
-            'Eco Management', 'Green Recovery'
-        ],
-        'products-retail': [
-            'Green Store', 'Eco Products', 'Sustainable Goods', 'Green Market', 'Eco Shop',
-            'Natural Products', 'Green Retail', 'Eco Essentials', 'Sustainable Store', 'Green Goods',
-            'Eco Marketplace', 'Natural Store'
-        ]
-    };
-
-    const templates = businessNameTemplates[categorySlug] || businessNameTemplates['services-professional'];
-
-    for (let i = 0; i < 12; i++) {
-        const templateIndex = i % templates.length;
-        const nameVariation = i < templates.length ? '' : ` ${Math.floor(i / templates.length) + 1}`;
-
-        businesses.push({
-            id: `${categoryCode}_${cityCode}_${i + 1}`,
-            name: `${templates[templateIndex]}${nameVariation}`,
-            category: categorySlug,
-            subcategory: getCategorySubcategory(categorySlug),
-            rating: 4.0 + (Math.random() * 1.0),
-            reviewCount: Math.floor(Math.random() * 150) + 25,
-            description: generateBusinessDescription(categorySlug, cityName),
-            address: generateAddress(cityName),
-            phone: generatePhoneNumber(),
-            website: generateWebsite(templates[templateIndex].toLowerCase().replace(/\s+/g, '')),
-            image: getCategoryImage(categorySlug, i),
-            features: getCategoryFeatures(categorySlug),
-            businessStatus: 'OPERATIONAL'
-        });
-    }
-
-    return businesses;
-}
-
-function updatePageMetadata(categorySlug, cityName) {
-    const categoryName = getCategoryDisplayName(categorySlug);
-    document.title = `Top 10 ${categoryName} Businesses in ${cityName} | EcoSustainable.co.uk`;
-    
-    // Update meta description
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.name = 'description';
-        document.head.appendChild(metaDesc);
-    }
-    metaDesc.content = `Discover the best ${categoryName.toLowerCase()} businesses in ${cityName}. Verified sustainable companies with excellent ratings and eco-friendly practices.`;
-}
-
-// Show fallback content when API fails
-function showFallbackContent(categorySlug, cityName) {
-    console.log('🔄 Showing fallback content for', categorySlug, cityName);
-    
-    // Generate mock businesses as fallback
-    categoryBusinesses = generateCategoryBusinessData(categorySlug, cityName);
-    
-    // Display the businesses
+    console.log(`Loading businesses for category: ${categoryKey} in ${cityName}`);
+    showLoadingState();
+    loadCategoryBusinesses(categoryKey, cityName);
     displayCategoryBusinesses();
-    
-    // Update page content
     updatePageContent();
-    
-    // Generate SEO content
     generateSEOContent();
-    
-    // Update page metadata
-    updatePageMetadata(categorySlug, cityName);
-}
-
-// Initialize category page with proper API loading
-window.initializeCategoryPage = async function(categorySlug, cityName) {
-    try {
-        console.log('🚀 Initializing category page:', categorySlug, cityName);
-        
-        currentCategoryKey = categorySlug;
-        currentCityName = cityName;
-
-        // Show loading state
-        showLoadingState();
-
-        // Ensure API is initialized first
-        if (window.APIConfig) {
-            console.log('Ensuring Places API is initialized...');
-            await window.APIConfig.initializePlacesAPI();
-        }
-
-        // Wait for API to be ready
-        const apiReady = await waitForAPI();
-        console.log('API ready status:', apiReady);
-
-        // Load businesses for this category and city
-        categoryBusinesses = await loadCategoryBusinesses(categorySlug, cityName);
-        console.log('Loaded businesses:', categoryBusinesses.length);
-
-        // Display businesses
-        displayCategoryBusinesses();
-
-        // Update page content
-        updatePageContent();
-
-        // Generate SEO content
-        generateSEOContent();
-
-        // Update page metadata
-        updatePageMetadata(categorySlug, cityName);
-
-        console.log('✅ Category page initialized successfully');
-
-    } catch (error) {
-        console.error('❌ Error initializing category page:', error);
-        // Show fallback content
-        showFallbackContent(categorySlug, cityName);
-    }
-};
-// Helper functions
-async function waitForAPI() {
-    // Wait for PlacesAPI to be available
-    let attempts = 0;
-    while (!window.PlacesAPI && attempts < 50) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        attempts++;
-    }
-
-    if (!window.PlacesAPI) {
-        console.warn('PlacesAPI not available, using mock data');
-        return false;
-    }
-    return true;
-}
-
-function showFallbackContent(categorySlug, cityName) {
-    const grid = document.getElementById('categoryBusinessesGrid');
-    if (grid) {
-        // Generate mock businesses as fallback
-        const mockBusinesses = generateMockBusinesses(categorySlug, cityName);
-        displayCategoryBusinesses(mockBusinesses, categorySlug, cityName);
-    }
-}
-// Load businesses for category
-async function loadCategoryBusinesses(categorySlug, cityName) {
-    try {
-        console.log('Loading businesses for:', categorySlug, cityName);
-
-        if (window.PlacesAPI && window.PlacesAPI.isInitialized()) {
-            // Try to get real data from Google Places API
-            const query = `${getCategorySearchTerm(categorySlug)} in ${cityName} UK`;
-            console.log('Searching with query:', query);
-            const results = await window.PlacesAPI.searchBusinesses(query, 12);
-
-            if (results && results.length > 0) {
-                console.log('Found real businesses:', results.length);
-                return results.map(business => ({
-                    ...business,
-                    category: categorySlug,
-                    subcategory: getCategorySubcategory(categorySlug)
-                }));
-            }
-        }
-    } catch (error) {
-        console.warn('Error loading real business data:', error);
-    }
-
-    // Fallback to mock data
-    console.log('Using mock data for:', categorySlug, cityName);
-    return generateMockBusinesses(categorySlug, cityName);
-}
-// Display businesses in grid
-function displayCategoryBusinesses(businesses, categorySlug, cityName) {
-    const grid = document.getElementById('categoryBusinessesGrid');
-    const title = document.getElementById('businessesTitle');
-
-    if (!grid) {
-        console.error('categoryBusinessesGrid element not found');
-        return;
-    }
-
-    // Update title
-    if (title) {
-        const categoryName = getCategoryDisplayName(categorySlug);
-        title.textContent = `Top ${categoryName} Businesses in ${cityName}`;
-    }
-
-    // Clear grid
-    grid.innerHTML = '';
-
-    if (!businesses || businesses.length === 0) {
-        grid.innerHTML = '<div class="no-results">No businesses found for this category.</div>';
-        return;
-    }
-
-    console.log('Displaying', businesses.length, 'businesses');
-
-    // Display businesses
-    businesses.slice(0, 12).forEach((business, index) => {
-        const businessCard = document.createElement('div');
-        businessCard.innerHTML = createBusinessCard(business);
-        businessCard.className = 'business-card';
-        grid.appendChild(businessCard.firstElementChild);
-    });
+    addComprehensiveDirectorySection();
 }
