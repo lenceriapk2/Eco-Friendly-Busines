@@ -1,4 +1,3 @@
-
 // Canonical URL Management System
 // Prevents duplicate content issues by implementing proper canonical tags
 
@@ -8,7 +7,7 @@ const CANONICAL_STRATEGIES = {
         pattern: /^([a-z-]+)\.html$/,
         getCanonical: (match) => `https://ecosustainable.co.uk/${match[1]}.html`
     },
-    
+
     // Category pages - canonical to category overview
     categoryPages: {
         pattern: /^([a-z-]+)-([a-z-]+)\.html$/,
@@ -18,7 +17,7 @@ const CANONICAL_STRATEGIES = {
             return `https://ecosustainable.co.uk/${category}-category.html`;
         }
     },
-    
+
     // Main category overview pages
     categoryOverview: {
         pattern: /^([a-z-]+)-category\.html$/,
@@ -29,7 +28,7 @@ const CANONICAL_STRATEGIES = {
 // Function to determine canonical URL for current page
 function getCanonicalUrl() {
     const currentPath = window.location.pathname.split('/').pop();
-    
+
     // Check each strategy
     for (const [strategyName, strategy] of Object.entries(CANONICAL_STRATEGIES)) {
         const match = currentPath.match(strategy.pattern);
@@ -37,7 +36,7 @@ function getCanonicalUrl() {
             return strategy.getCanonical(match);
         }
     }
-    
+
     // Default to current URL if no strategy matches
     return window.location.href;
 }
@@ -45,13 +44,13 @@ function getCanonicalUrl() {
 // Function to set canonical URL
 function setCanonicalUrl() {
     const canonicalUrl = getCanonicalUrl();
-    
+
     // Remove existing canonical tag if present
     const existingCanonical = document.querySelector('link[rel="canonical"]');
     if (existingCanonical) {
         existingCanonical.remove();
     }
-    
+
     // Add new canonical tag
     const canonicalTag = document.createElement('link');
     canonicalTag.rel = 'canonical';
@@ -62,7 +61,7 @@ function setCanonicalUrl() {
 // Function to add structured data for better SEO
 function addStructuredData() {
     const currentPath = window.location.pathname.split('/').pop();
-    
+
     // Check if it's a category page
     const categoryMatch = currentPath.match(/^([a-z-]+)-([a-z-]+)\.html$/);
     if (categoryMatch) {
@@ -84,7 +83,7 @@ function addStructuredData() {
                 "description": `Directory of eco-friendly ${getCategoryDisplayName(category).toLowerCase()} businesses`
             }
         };
-        
+
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify(structuredData);

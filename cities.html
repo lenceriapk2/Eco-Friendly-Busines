@@ -549,26 +549,111 @@
             `;
         }
 
-        function populateCities() {
-            // Populate England cities
+        async function populateCities() {
+            // Show loading state
+            showLoadingState();
+            
+            try {
+                // Load business data for each region to get accurate counts
+                await loadCityBusinessData();
+                
+                // Populate England cities
+                const englandGrid = document.getElementById('englandCities');
+                if (englandGrid) {
+                    englandGrid.innerHTML = cityData.england.map(createCityCard).join('');
+                }
+
+                // Populate Scotland cities
+                const scotlandGrid = document.getElementById('scotlandCities');
+                if (scotlandGrid) {
+                    scotlandGrid.innerHTML = cityData.scotland.map(createCityCard).join('');
+                }
+
+                // Populate Wales cities
+                const walesGrid = document.getElementById('walesCities');
+                if (walesGrid) {
+                    walesGrid.innerHTML = cityData.wales.map(createCityCard).join('');
+                }
+
+                // Populate Northern Ireland cities
+                const northernIrelandGrid = document.getElementById('northernIrelandCities');
+                if (northernIrelandGrid) {
+                    northernIrelandGrid.innerHTML = cityData.northernIreland.map(createCityCard).join('');
+                }
+            } catch (error) {
+                console.error('Error loading cities:', error);
+                // Fall back to static data if API fails
+                populateStaticCities();
+            }
+        }
+
+        function showLoadingState() {
+            const grids = ['englandCities', 'scotlandCities', 'walesCities', 'northernIrelandCities'];
+            grids.forEach(gridId => {
+                const grid = document.getElementById(gridId);
+                if (grid) {
+                    grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;"><i class="fas fa-spinner fa-spin fa-2x"></i><br><br>Loading cities...</div>';
+                }
+            });
+        }
+
+        async function loadCityBusinessData() {
+            // Use PlacesAPI to get business counts for major cities
+            if (window.PlacesAPI && window.PlacesAPI.fetchBusinessesForCategory) {
+                const promises = [];
+                
+                // Sample a few cities to get business counts
+                const sampleCities = ['London', 'Birmingham', 'Manchester', 'Edinburgh', 'Cardiff', 'Belfast'];
+                
+                for (const cityName of sampleCities) {
+                    promises.push(
+                        window.PlacesAPI.fetchBusinessesForCategory('general', cityName.toLowerCase())
+                            .then(businesses => ({
+                                city: cityName,
+                                count: businesses.length
+                            }))
+                            .catch(() => ({ city: cityName, count: 0 }))
+                    );
+                }
+                
+                const results = await Promise.all(promises);
+                
+                // Update city data with actual business counts
+                results.forEach(result => {
+                    updateCityBusinessCount(result.city, result.count);
+                });
+            }
+        }
+
+        function updateCityBusinessCount(cityName, count) {
+            const allRegions = [cityData.england, cityData.scotland, cityData.wales, cityData.northernIreland];
+            
+            for (const region of allRegions) {
+                const city = region.find(c => c.name === cityName);
+                if (city) {
+                    city.businesses = count > 0 ? `${count}+` : city.businesses;
+                    break;
+                }
+            }
+        }
+
+        function populateStaticCities() {
+            // Fallback to original static population
             const englandGrid = document.getElementById('englandCities');
             if (englandGrid) {
                 englandGrid.innerHTML = cityData.england.map(createCityCard).join('');
             }
 
-            // Populate Scotland cities
             const scotlandGrid = document.getElementById('scotlandCities');
             if (scotlandGrid) {
                 scotlandGrid.innerHTML = cityData.scotland.map(createCityCard).join('');
             }
 
-            // Populate Wales cities
             const walesGrid = document.getElementById('walesCities');
             if (walesGrid) {
                 walesGrid.innerHTML = cityData.wales.map(createCityCard).join('');
             }
 
-            // Populate Northern Ireland cities
             const northernIrelandGrid = document.getElementById('northernIrelandCities');
             if (northernIrelandGrid) {
                 northernIrelandGrid.innerHTML = cityData.northernIreland.map(createCityCard).join('');
@@ -594,8 +679,8 @@
         }
 
         // Add enter key support for search
-        document.addEventListener('DOMContentLoaded', function() {
-            populateCities();
+        document.addEventListener('DOMContentLoaded', async function() {
+            await populateCities();
             
             const searchInput = document.getElementById('citySearch');
             if (searchInput) {
